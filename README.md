@@ -16,3 +16,6 @@ Navigate to the project folder and open it
 
 After each time the game code is changed, the executable is created by utilizing the build function in the unity editor.
 
+# Authors
+
+Ian McDowell (mcdoweli@email.sc.edu)
