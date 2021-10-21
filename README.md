@@ -31,3 +31,4 @@ We will be implementing tests in CSCE 492
 # Authors
 
 Ian McDowell (mcdoweli@email.sc.edu)
+Lance Kevin  (lkevin@email.sc.edu)
