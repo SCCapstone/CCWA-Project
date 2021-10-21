@@ -16,6 +16,10 @@ Navigate to the project folder and open it
 
 After each time the game code is changed, the executable is created by utilizing the build function in the unity editor.
 
+## Running Tests
+
+We will be implementing tests in CSCE 492
+
 # Authors
 
 Ian McDowell (mcdoweli@email.sc.edu)
