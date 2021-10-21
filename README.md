@@ -16,3 +16,11 @@ Navigate to the project folder and open it
 
 After each time the game code is changed, the executable is created by utilizing the build function in the unity editor.
 
+# Testing
+
+We will be writing tests in CSCE 492.
+
+## Testing Technology
+
+We have identified the testing framework we will be using as NUnit/XUnit through the Unity Test Framework.
+
