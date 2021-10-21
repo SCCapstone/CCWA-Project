@@ -12,7 +12,7 @@ Clone the repository or download the zip file
 Open Unity
 Navigate to the project folder and open it
 
-# Deployment
+## Deployment
 
 After each time the game code is changed, the executable is created by utilizing the build function in the unity editor.
 
