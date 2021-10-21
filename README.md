@@ -24,3 +24,10 @@ We will be writing tests in CSCE 492.
 
 We have identified the testing framework we will be using as NUnit/XUnit through the Unity Test Framework.
 
+## Running Tests
+
+We will be implementing tests in CSCE 492
+
+# Authors
+
+Ian McDowell (mcdoweli@email.sc.edu)
