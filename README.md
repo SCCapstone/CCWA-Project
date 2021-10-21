@@ -32,6 +32,7 @@ We will be implementing tests in CSCE 492
 
 # Authors
 
-Ian McDowell (mcdoweli@email.sc.edu)
-Lance Kevin  (lkevin@email.sc.edu)
-Miles Littlejohn (mjl6@email.sc.edu)
+- Ian McDowell (mcdoweli@email.sc.edu)
+- Lance Kevin  (lkevin@email.sc.edu)
+- Miles Littlejohn (mjl6@email.sc.edu)
+- Jonathan Terry (jonathanterry935@gmail.com)
