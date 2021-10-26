@@ -1,6 +1,6 @@
 # Bootymeat
 ## Project Name
-Our project is a game 1-2 player game called Charlie’s and Charlinda’s Wacky Adventure (name in progress)  that we are all creating in Unity using C# scripts to handle user input, enemy ai, character interactions, etc.The layout of each floor and room will be procedurally generated so that the player has a new experience each time they play the game through from the beginning to end. The player will  have access to various options that will allow them to have a unique customized experience, such as changing the difficulty of their game and entering a speedrun mode. The game will also have three save file slots that will keep track of top runs and achievements for each file. 
+Our project is a game 1-2 player game called Charlie and Charlinda’s Wacky Adventure (name in progress)  that we are all creating in Unity using C# scripts to handle user input, enemy ai, character interactions, etc.The layout of each floor and room will be procedurally generated so that the player has a new experience each time they play the game through from the beginning to end. The player will  have access to various options that will allow them to have a unique customized experience, such as changing the difficulty of their game and entering a speedrun mode. The game will also have three save file slots that will keep track of top runs and achievements for each file. 
 ## External Requirements
 
 In order to build this project you need to install: * [Unity](https://unity.com/)
