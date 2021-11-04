@@ -10,17 +10,11 @@ public class FileManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var address = new Address
-        {
-            street = "123 Tornado Alley\nSuite 16",
-            city = "East Westville",
-            state = "KS"
-        };
-
-        StreamWriter streamWriter = new StreamWriter("Test.txt");
-        Serializer serializer = new Serializer();
-        serializer.Serialize(streamWriter, address);
-        streamWriter.Close();
+        
+        // StreamWriter streamWriter = new StreamWriter("Test.txt");
+        // Serializer serializer = new Serializer();
+        // serializer.Serialize(streamWriter, address);
+        // streamWriter.Close();
     }
 
     // Update is called once per frame
@@ -37,13 +31,13 @@ public class FileData
     public int NumRuns { get; private set; }
     public int NumWins { get; private set; }
     public string[] UnlockedAchievements { get; private set; }
-    public boolean InRun { get; private set; }
+    public bool InRun { get; private set; }
     public GameState CurrRun { get; private set; }
 
     public FileData(int filenum, int fastesttime,
                     int numruns, int numwins,
                     string[] unlockedachievements,
-                    boolean inrun, GameState currrun)
+                    bool inrun, GameState currrun)
     {
         FileNum = filenum;
         FastestTime = fastesttime;
@@ -57,4 +51,12 @@ public class FileData
 }
 
 // Add GameState and PlayerState class
+public class GameState
+{
 
+}
+
+public class PlayerState
+{
+
+}
