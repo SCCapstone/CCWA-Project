@@ -5,6 +5,11 @@ using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 using UnityEngine;
 
+public const int MAX_HEALTH = 100;
+public const int MAX_STAMINA = 100;
+public const int MAX_FLOOR_NUM = 10;
+public const string[] PLAYER_CLASSES = {"warrior","mage","rogue"};
+
 public class FileManager : MonoBehaviour
 {
     // Declare instance variables
@@ -44,23 +49,49 @@ public class FileManager : MonoBehaviour
 
 }
 
+/*
+ * Defines the file data for a save file
+ * Instance Variables:
+ *  int FileNum: The number associated with this file's data
+ *  int FastestTime: The number of seconds of this file's fastest run completion
+ *  int NumRuns: The total number of runs attempted on this file
+ *  int NumWins: The total number of runs completed successfully on this file
+ *  string[] UnlockedAchievements: List of titles of achievements unlocked on this file
+ *  bool InRun: Whether or not the user is in the middle of a run on this file
+ *  GameState CurrRun: The game state of the current run on this file (Null if InRun is false)
+ *
+ * Methods:
+ *  FileData(int filenum): Default Constructor
+ *  FileData(int filenum, int fastesttime, int numruns,
+                    int numwins, string[] unlockedachievements,
+                    bool inrun, GameState currrun): Full Constructor
+ *  ConvertToYAML(): Converts the file's data to a YAML file
+ *  LoadFromYAML(): Loads the file's data from a YAML file
+ */
 public class FileData
 {
-    public int FileNum { get; private set; }
-    public int FastestTime { get; private set; }
-    public int NumRuns { get; private set; }
-    public int NumWins { get; private set; }
-    public string[] UnlockedAchievements { get; private set; }
-    public bool InRun { get; private set; }
-    public GameState CurrRun { get; private set; }
+    public int FileNum;
+    public int FastestTime;
+    public int NumRuns;
+    public int NumWins;
+    public string[] UnlockedAchievements;
+    public bool InRun;
+    public GameState CurrRun;
 
+    //Default Constructor
     public FileData(int filenum) {
         //TODO make default constructor
+        FileNum = filenum;
+        FastestTime = 9999999999;
+        NumRuns = 0;
+        NumWins = 0;
+        UnlockedAchievements = new string[];
+        InRun = false;
+        CurrRun = null;
     }
-
-    public FileData(int filenum, int fastesttime,
-                    int numruns, int numwins,
-                    string[] unlockedachievements,
+    //Full Constructor
+    public FileData(int filenum, int fastesttime, int numruns,
+                    int numwins, string[] unlockedachievements,
                     bool inrun, GameState currrun)
     {
         FileNum = filenum;
@@ -84,31 +115,108 @@ public class FileData
     }
 }
 
-public class GameState
+/*
+ * Defines a current game state
+ * Fields:
+ *  PlayerState PlayerState: The current state of the player in the game
+ *  int FloorNum: The number of the current floor
+ *  int FloorSeed: The seed of the current floor
+ *
+ * Methods:
+ *  GameState(): Default Constructor
+ *  GameState(int playerhealth, int playerstamina, string playerclass,
+            string playerclass, int floornum, int floorseed): Full Constructor
+ */
+public struct GameState
 {
-    public PlayerState PlayerState { get; private set; }
-    public int FloorNum { get; private set; }
-    public int FloorSeed { get; private set; }
-    public GameState(PlayerState playerstate, int floornum, int floorseed)
+    //Field Variables
+    public PlayerState PlayerState;
+    public int FloorNum;
+    public int FloorSeed;
+
+    //Default Constructor
+    public GameState()
     {
-        PlayerState = playerstate;
-        FloorNum = floornum;
+        PlayerState = new PlayerState();
+        FloorNum = 0;
+        FloorSeed = 0;
+    }
+    //Full Constructor
+    public GameState(int playerhealth, int playerstamina,
+                    string playerclass, int floornum, int floorseed)
+    {
+        //Validation done in PlayerState class
+        PlayerState = new PlayerState(playerhealth,playerstamina,playerclass);
+        
+        //Defaults to 0 if not valid
+        if(floornum >= 0 && floornum <= MAX_FLOOR_NUM)
+        {
+            FloorNum = floornum;
+        } else
+        {
+            FloorNum = 0;
+        }
+
+        //Any int seed should work so no validation needed
         FloorSeed = floorseed;
     }
-    //TODO Add input validation
 }
 
-public class PlayerState
+/*
+ * Defines a current player state
+ * Fields:
+ *  int Health: The player's current health
+ *  int Stamina: The player's current stamina
+ *  string PlayerClass: The player's class
+ *
+ * Methods:
+ *  PlayerState(): Default Constructor
+ *  PlayerState(int health, int stamina, string playerclass): Full Constructor
+ */
+public struct PlayerState
 {
-    public int Health { get; private set; }
-    public int Stamina { get; private set; }
-    public string PlayerClass { get; private set; }
+    //Field Variables
+    public int Health;
+    public int Stamina;
+    public string PlayerClass;
 
+    //Default Constructor
+    public PlayerState()
+    {
+        Health = MAX_HEALTH;
+        Stamina = MAX_STAMINA;
+        PlayerClass = PLAYER_CLASSES[0];
+    }
+    //Full Constructor
     public PlayerState(int health, int stamina, string playerclass)
     {
-        Health = health;
-        Stamina = stamina;
-        PlayerClass = playerclass;
+        //Defaults to MAX_HEALTH if not valid
+        if(health >= 0 && health <= MAX_HEALTH)
+        {
+            Health = health;
+        } else
+        {
+            Health = MAX_HEALTH;
+        }
+
+        //Defaults to MAX_STAMINA if not valid
+        if(stamina >= 0 && stamina <= MAX_STAMINA)
+        {
+            Stamina = stamina;
+        } else
+        {
+            Stamina = MAX_STAMINA;
+        }
+        
+        //Defaults to the first class in PLAYER_CLASSES if not valid
+        classIndex = Array.IndexOf(PLAYER_CLASSES,playerclass);
+        if(classIndex > -1)
+        {
+            PlayerClass = playerclass;
+        } else
+        {
+            PlayerClass = PLAYER_CLASSES[0];
+        }
+        
     }
-    //TODO Add input validation
 }
