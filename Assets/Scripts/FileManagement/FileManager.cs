@@ -1,17 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
+using YamlDotNet.RepresentationModel;
 using UnityEngine;
 
-public const int MAX_HEALTH = 100;
-public const int MAX_STAMINA = 100;
-public const int MAX_FLOOR_NUM = 10;
-public const string[] PLAYER_CLASSES = {"warrior","mage","rogue"};
 
 public class FileManager : MonoBehaviour
 {
+    string SAVE_DIRECTORY = Constants.SAVE_DIRECTORY;
     // Declare instance variables
     private FileData[] Files = new FileData[3];
     public int CurrFile = 1;
@@ -19,17 +18,22 @@ public class FileManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        // StreamWriter streamWriter = new StreamWriter("Test.txt");
-        // Serializer serializer = new Serializer();
-        // serializer.Serialize(streamWriter, address);
-        // streamWriter.Close();
+        //Create saves directory if it doesnt already exist
+        if(!System.IO.Directory.Exists(SAVE_DIRECTORY))
+        {
+            System.IO.Directory.CreateDirectory(SAVE_DIRECTORY);
+        }        
     }
 
     // Loads the file associated with the filenum
     public bool LoadFile(int filenum) //TODO Add input validation
     {
         CurrFile = filenum;
+        FileData fd = new FileData(CurrFile);
+        FileData newfd = fd.LoadFromYAML();
+        Files[CurrFile] = new FileData(CurrFile,newfd.FastestTime,newfd.NumRuns,
+                                    newfd.NumWins,newfd.UnlockedAchievements,
+                                    newfd.InRun,newfd.CurrRun);
         return true; //TODO return successful file load
     }
 
@@ -61,7 +65,8 @@ public class FileManager : MonoBehaviour
  *  GameState CurrRun: The game state of the current run on this file (Null if InRun is false)
  *
  * Methods:
- *  FileData(int filenum): Default Constructor
+ *  FileData(): Default Constructor
+ *  FileData(int filenum): Load Constructor used in FileManager
  *  FileData(int filenum, int fastesttime, int numruns,
                     int numwins, string[] unlockedachievements,
                     bool inrun, GameState currrun): Full Constructor
@@ -70,6 +75,10 @@ public class FileManager : MonoBehaviour
  */
 public class FileData
 {
+    //Load Global Constants
+    string SAVE_DIRECTORY = Constants.SAVE_DIRECTORY;
+    string SAVE_FILE_BASE_NAME = Constants.SAVE_FILE_BASE_NAME;
+
     public int FileNum;
     public int FastestTime;
     public int NumRuns;
@@ -78,14 +87,23 @@ public class FileData
     public bool InRun;
     public GameState CurrRun;
 
-    //Default Constructor
-    public FileData(int filenum) {
-        //TODO make default constructor
-        FileNum = filenum;
-        FastestTime = 9999999999;
+    //Default Constructor for YAML Deserializing (used in FileData only)
+    public FileData() {
+        FileNum = 0;
+        FastestTime = int.MaxValue;
         NumRuns = 0;
         NumWins = 0;
-        UnlockedAchievements = new string[];
+        UnlockedAchievements = new string[1];
+        InRun = false;
+        CurrRun = null;
+    }
+    //Load Constructor for loading from YAML (used in FileManager)
+    public FileData(int filenum) {
+        FileNum = filenum;
+        FastestTime = int.MaxValue;
+        NumRuns = 0;
+        NumWins = 0;
+        UnlockedAchievements = new string[1];
         InRun = false;
         CurrRun = null;
     }
@@ -106,18 +124,24 @@ public class FileData
 
     public void ConvertToYAML()
     {
-        //TODO save as YAML
+        //Saves File data as YAML
+        StreamWriter streamWriter = new StreamWriter(SAVE_DIRECTORY+SAVE_FILE_BASE_NAME+FileNum+".yml");
+        Serializer serializer = new Serializer();
+        serializer.Serialize(streamWriter, this);
+        streamWriter.Close();
     }
 
-    public void LoadFromYAML()
+    public FileData LoadFromYAML()
     {
-        //Loads based on FileNum
+        //Loads based on FileNum and returns file data
+        Deserializer deserializer = new Deserializer();
+        return deserializer.Deserialize<FileData>(File.OpenText(SAVE_DIRECTORY+SAVE_FILE_BASE_NAME+FileNum+".yml"));
     }
 }
 
 /*
  * Defines a current game state
- * Fields:
+ * Instance Variables:
  *  PlayerState PlayerState: The current state of the player in the game
  *  int FloorNum: The number of the current floor
  *  int FloorSeed: The seed of the current floor
@@ -127,9 +151,12 @@ public class FileData
  *  GameState(int playerhealth, int playerstamina, string playerclass,
             string playerclass, int floornum, int floorseed): Full Constructor
  */
-public struct GameState
+public class GameState
 {
-    //Field Variables
+    //Load Global Constants
+    int MAX_FLOOR_NUM = Constants.MAX_FLOOR_NUM;
+
+    //Instance Variables
     public PlayerState PlayerState;
     public int FloorNum;
     public int FloorSeed;
@@ -164,7 +191,7 @@ public struct GameState
 
 /*
  * Defines a current player state
- * Fields:
+ * Instance Variables:
  *  int Health: The player's current health
  *  int Stamina: The player's current stamina
  *  string PlayerClass: The player's class
@@ -173,9 +200,14 @@ public struct GameState
  *  PlayerState(): Default Constructor
  *  PlayerState(int health, int stamina, string playerclass): Full Constructor
  */
-public struct PlayerState
+public class PlayerState
 {
-    //Field Variables
+    //Load Global Constants
+    int MAX_HEALTH = Constants.MAX_HEALTH;
+    int MAX_STAMINA = Constants.MAX_STAMINA;
+    string[] PLAYER_CLASSES = Constants.PLAYER_CLASSES;
+
+    //Instance Variables
     public int Health;
     public int Stamina;
     public string PlayerClass;
@@ -209,7 +241,7 @@ public struct PlayerState
         }
         
         //Defaults to the first class in PLAYER_CLASSES if not valid
-        classIndex = Array.IndexOf(PLAYER_CLASSES,playerclass);
+        int classIndex = Array.IndexOf(PLAYER_CLASSES,playerclass);
         if(classIndex > -1)
         {
             PlayerClass = playerclass;
