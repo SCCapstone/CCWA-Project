@@ -10,6 +10,7 @@ public class Room : MonoBehaviour
     int[,] map;
     int width;
     int height;
+    string seed;
 
     // These variables are assigned in Unity using tile assets
     public Tilemap tilemap;
@@ -24,12 +25,14 @@ public class Room : MonoBehaviour
         this.width = 0;
         this.height = 0;
         this.map = new int[width,height];
+        this.seed = "none";
     }
 
-    public Room(int width, int height, int[,] map) {
+    public Room(int width, int height, int[,] map, string seed) {
         this.width = width;
         this.height = height;
         this.map = map;
+        this.seed = seed;
     }
 
     // End Constructors************************************************************************************************

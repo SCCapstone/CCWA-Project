@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class RoomGenerator : MonoBehaviour {
-    // Begin variable statements***************************************************************************************
+    // Begin Variable statements***************************************************************************************
     int width;
     int height;
     int numRooms;
+
+    string seed;
+    bool useSeed;
    
     // End Variable Statements*****************************************************************************************
 
@@ -39,9 +42,38 @@ public class RoomGenerator : MonoBehaviour {
         return i1+i2+i3+i4;
     }
 
-    Room GenerateRoom() {
+    int[,] FillRoomMap() {
+        seed = Time.time.ToString();
         int[,] map = InitMap();
+        int fillChance = 0.20;
+        Random random= new Random(seed.GetHashCode());
+
         for(int i=0; i<height; i++) {
+            for(int j=0; j<width; j++) {
+                //Enclose the room with walls
+                if(x == 0 || x = width || y == 0 || y = height) {
+                    map[i,j] = 1;
+                }
+                //Randomly add walls in the room based on a fill chance
+                else {
+                    int val = random.Next(0,100);
+                    switch(val) {
+                        case val < fillChance:
+                            map[i,j] = 1;
+                            break;
+                        case val > fillChance:
+                            map[i,j] = 0;
+                            break;
+                    }
+                }
+            }
+         }
+         return map;
+    }
+
+    Room GenerateRoom() {
+        int[,] map = FillRoomMap();
+         for(int i=0; i<height; i++) {
             for(int j=0; j<width; j++) {
                 int numNeighbors = CalcNeighbors(map[i-1, j], map[i+1, j], map[i, j-1], map[i, j+1]);
                 if(numNeighbors <=1) {
@@ -53,10 +85,9 @@ public class RoomGenerator : MonoBehaviour {
                 else {
                     map[i,j] = 0;
                 }
-            }
+            }  
         }
-       return new Room(width, height, map);
-
+        return new Room(width, height, map, seed);
     }
 
     Room[] GenerateRoomsForFloor() {
@@ -101,16 +132,15 @@ public class RoomGenerator : MonoBehaviour {
     // but leaving them commented just in case
 
     // Start is called before the first frame update
-    // void Start()
-    // {
+    void Start()
+    {
        
-    // }
+    }
 
-    // // Update is called once per frame
-    // void Update()
-    // {
+    // Update is called once per frame
+    void Update()
+    {
     
-    // }
-
+    }
     // End Unity Init/Looping Functions********************************************************************************
 }
