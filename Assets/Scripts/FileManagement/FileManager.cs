@@ -11,6 +11,7 @@ using UnityEngine;
 public class FileManager : MonoBehaviour
 {
     string SAVE_DIRECTORY = Constants.SAVE_DIRECTORY;
+    string SAVE_FILE_BASE_NAME = Constants.SAVE_FILE_BASE_NAME;
     // Declare instance variables
     private FileData[] Files = new FileData[3];
     public int CurrFile = 1;
@@ -22,7 +23,21 @@ public class FileManager : MonoBehaviour
         if(!System.IO.Directory.Exists(SAVE_DIRECTORY))
         {
             System.IO.Directory.CreateDirectory(SAVE_DIRECTORY);
-        }        
+        }
+
+        //Gets all existing saves and creates default files for empty files
+        for(int i = 1; i < 4; i++)
+        {
+            FileData file = new FileData(i);
+            if(!System.IO.File.Exists(SAVE_DIRECTORY+SAVE_FILE_BASE_NAME+i+".yml"))
+            {
+                Files[i-1] = file;
+                Files[i-1].ConvertToYAML();
+            } else
+            {
+                Files[i-1] = file.LoadFromYAML();
+            }
+        } 
     }
 
     // Loads the file associated with the filenum
