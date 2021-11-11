@@ -10,7 +10,7 @@ public class RoomGenerator : MonoBehaviour {
     int numRooms;
 
     string seed;
-    bool useSeed;
+    bool useSeed = false;
    
     // End Variable Statements*****************************************************************************************
 
@@ -23,6 +23,17 @@ public class RoomGenerator : MonoBehaviour {
     }
 
     // End Constructors************************************************************************************************
+
+    // Start getters/setters*******************************************************************************************
+    void setSeed(string seed) {
+        this.seed = seed;
+    }
+
+    void setUseSeed(bool useSeed) {
+        this.useSeed = useSeed;
+    }
+
+    // End getters/setters*********************************************************************************************
 
     // Begin room generation functions*********************************************************************************
 
@@ -42,28 +53,31 @@ public class RoomGenerator : MonoBehaviour {
         return i1+i2+i3+i4;
     }
 
-    int[,] FillRoomMap() {
-        seed = Time.time.ToString();
+    int[,] FillRoomMap(string seed) {
+        if(!useSeed || seed == null || seed == "") {
+            setSeed(Time.time.ToString());
+        }
+        else {
+            setSeed(seed);
+        }
         int[,] map = InitMap();
-        int fillChance = 0.20;
-        Random random= new Random(seed.GetHashCode());
+        float fillChance = 0.2f;
+        System.Random random= new System.Random(seed.GetHashCode());
 
         for(int i=0; i<height; i++) {
             for(int j=0; j<width; j++) {
                 //Enclose the room with walls
-                if(x == 0 || x = width || y == 0 || y = height) {
+                if(i == 0 || i == width || j == 0 || j == height) {
                     map[i,j] = 1;
                 }
                 //Randomly add walls in the room based on a fill chance
                 else {
                     int val = random.Next(0,100);
-                    switch(val) {
-                        case val < fillChance:
-                            map[i,j] = 1;
-                            break;
-                        case val > fillChance:
-                            map[i,j] = 0;
-                            break;
+                    if(val <= fillChance) {
+                        map[i,j] = 1;
+                    }
+                    else if(val > fillChance) {
+                        map[i,j] = 0;
                     }
                 }
             }
@@ -72,7 +86,7 @@ public class RoomGenerator : MonoBehaviour {
     }
 
     Room GenerateRoom() {
-        int[,] map = FillRoomMap();
+        int[,] map = FillRoomMap(seed);
          for(int i=0; i<height; i++) {
             for(int j=0; j<width; j++) {
                 int numNeighbors = CalcNeighbors(map[i-1, j], map[i+1, j], map[i, j-1], map[i, j+1]);
