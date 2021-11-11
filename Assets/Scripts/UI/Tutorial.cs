@@ -44,7 +44,7 @@ public class Tutorial : MonoBehaviour
     }
     
     public void mainBackBtn() {
-        SceneManager.LoadScene("Title Screen");
+        SceneManager.LoadScene("Settings");
     }
 }
 
