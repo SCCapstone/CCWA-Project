@@ -4,66 +4,120 @@ using System.Collections.Generic;
 using System.IO;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
-using YamlDotNet.RepresentationModel;
 using UnityEngine;
 
-
+//TODO Make Tests for FileManager
+/*
+ * Defines the file manager for the game
+ * Instance Variables:
+ *  FileData[] Files: All the current save files for the game
+ *  int CurrFile: The file number of the currently playing file
+ *
+ * Methods:
+ *  Start(): Startup operations (Creates save directory/files if needed)
+ *  LoadFile(int filenum): Loads the file associated with filenum; Returns load success
+ *  SaveFile(int filenum, FileData data): Saves data to file associated with file number; Returns save success
+ *  DeleteFile(int filenum): Deletes file data associated with file number; Returns delete success
+ */
 public class FileManager : MonoBehaviour
 {
+    //Load Global Constants
     string SAVE_DIRECTORY = Constants.SAVE_DIRECTORY;
     string SAVE_FILE_BASE_NAME = Constants.SAVE_FILE_BASE_NAME;
-    // Declare instance variables
-    private FileData[] Files = new FileData[3];
-    public int CurrFile = 1;
+    int[] VALID_FILE_NUMS = Constants.VALID_FILE_NUMS;
+    string valid_nums = "["; //Local constant based on VALID_FILE_NUMS
 
-    // Start is called before the first frame update
+    //Declare instance variables
+    int files_length;
+    private FileData[] Files;
+    public int CurrFile;
+
+    //Start is called before the first frame update
     void Start()
     {
+        //Initialize instance variables
+        int files_length = VALID_FILE_NUMS.Length;
+        FileData[] Files = new FileData[VALID_FILE_NUMS.Length];
+        int CurrFile = VALID_FILE_NUMS[0];
+
         //Create saves directory if it doesnt already exist
         if(!System.IO.Directory.Exists(SAVE_DIRECTORY))
         {
             System.IO.Directory.CreateDirectory(SAVE_DIRECTORY);
         }
 
+        //Get string with valid file numbers for error messages
+        for(int i = 0; i < VALID_FILE_NUMS.Length; i++) {
+            valid_nums += i+",";
+        }
+        valid_nums.TrimEnd(',');
+        valid_nums += "]";
+
         //Gets all existing saves and creates default files for empty files
-        for(int i = 1; i < 4; i++)
+        for(int i = 0; i < VALID_FILE_NUMS.Length; i++)
         {
-            FileData file = new FileData(i);
-            if(!System.IO.File.Exists(SAVE_DIRECTORY+SAVE_FILE_BASE_NAME+i+".yml"))
+            FileData file = new FileData(VALID_FILE_NUMS[i]);
+            if(!System.IO.File.Exists(SAVE_DIRECTORY+SAVE_FILE_BASE_NAME+VALID_FILE_NUMS[i]+".yml"))
             {
-                Files[i-1] = file;
-                Files[i-1].ConvertToYAML();
+                Files[i] = file;
+                Files[i].ConvertToYAML();
             } else
             {
-                Files[i-1] = file.LoadFromYAML();
+                Files[i] = file.LoadFromYAML();
             }
-        } 
+        }
     }
 
-    // Loads the file associated with the filenum
-    public bool LoadFile(int filenum) //TODO Add input validation
+    //Loads the file associated with the filenum
+    public bool LoadFile(int filenum)
     {
-        CurrFile = filenum;
-        FileData fd = new FileData(CurrFile);
-        FileData newfd = fd.LoadFromYAML();
-        Files[CurrFile] = new FileData(CurrFile,newfd.FastestTime,newfd.NumRuns,
-                                    newfd.NumWins,newfd.UnlockedAchievements,
-                                    newfd.InRun,newfd.CurrRun);
-        return true; //TODO return successful file load
+        //Checks for valid file number
+        if(Array.IndexOf(VALID_FILE_NUMS,filenum) > -1)
+        {
+            CurrFile = filenum;
+            FileData fd = new FileData(CurrFile);
+            FileData newfd = fd.LoadFromYAML();
+            Files[CurrFile] = new FileData(CurrFile,newfd.FastestTime,newfd.NumRuns,
+                                        newfd.NumWins,newfd.UnlockedAchievements,
+                                        newfd.InRun,newfd.CurrRun);
+            return true; //TODO return successful file load
+        } else
+        {
+            Debug.Log("Invalid file number: " + filenum + 
+                ". File not loaded. Valid file numbers are: "+valid_nums);
+            return false;
+        }
     }
 
-    // Saves data to the file associated with the filenum (doubles as overwrite function)
-    public bool SaveFile(int filenum, FileData data) //TODO Add input validation
+    //Saves data to the file associated with the filenum (doubles as overwrite function)
+    public bool SaveFile(int filenum, FileData data)
     {
-        Files[filenum] = data;
-        Files[filenum].ConvertToYAML();
-        return true; //TODO return successful file save
+        //Checks for valid file number
+        if(Array.IndexOf(VALID_FILE_NUMS,filenum) > -1)
+        {
+            Files[filenum] = data;
+            return Files[filenum].ConvertToYAML();
+        } else
+        {
+            Debug.Log("Invalid file number: " + filenum + 
+                ". File not saved. Valid file numbers are: "+valid_nums);
+            return false;
+        }
     }
 
-    // Deletes file associated with the filenum
-    public bool DeleteFile(int filenum) //TODO Add input validation
+    //Deletes file associated with the filenum
+    public bool DeleteFile(int filenum)
     {
-        return SaveFile(filenum, new FileData(filenum)); //Returns successful delete
+        //Checks for valid file number
+        if(Array.IndexOf(VALID_FILE_NUMS,filenum) > -1)
+        {
+            return SaveFile(filenum, new FileData(filenum)); //Returns successful delete
+        } else
+        {
+            Debug.Log("Invalid file number: " + filenum + 
+                ". File not deleted. Valid file numbers are: "+valid_nums);
+            return false;
+        }
     }
 
 }
@@ -85,15 +139,18 @@ public class FileManager : MonoBehaviour
  *  FileData(int filenum, int fastesttime, int numruns,
                     int numwins, string[] unlockedachievements,
                     bool inrun, GameState currrun): Full Constructor
- *  ConvertToYAML(): Converts the file's data to a YAML file
- *  LoadFromYAML(): Loads the file's data from a YAML file
+ *  ConvertToYAML(): Converts the file's data to a YAML file; Returns success of saving file
+ *  LoadFromYAML(): Loads the file's data from a YAML file; Returns loaded data as FileData
  */
 public class FileData
 {
     //Load Global Constants
+    string[] ALL_ACHIEVEMENTS = Constants.ALL_ACHIEVEMENTS;
     string SAVE_DIRECTORY = Constants.SAVE_DIRECTORY;
     string SAVE_FILE_BASE_NAME = Constants.SAVE_FILE_BASE_NAME;
+    int[] VALID_FILE_NUMS = Constants.VALID_FILE_NUMS;
 
+    //Declare instance Variables
     public int FileNum;
     public int FastestTime;
     public int NumRuns;
@@ -112,9 +169,17 @@ public class FileData
         InRun = false;
         CurrRun = null;
     }
+
     //Load Constructor for loading from YAML (used in FileManager)
     public FileData(int filenum) {
-        FileNum = filenum;
+        //Checks for valid file number
+        if(Array.IndexOf(VALID_FILE_NUMS,filenum) > -1)
+        {
+            FileNum = filenum;
+        } else
+        {
+            FileNum = 1;
+        }
         FastestTime = int.MaxValue;
         NumRuns = 0;
         NumWins = 0;
@@ -122,28 +187,81 @@ public class FileData
         InRun = false;
         CurrRun = null;
     }
+
     //Full Constructor
     public FileData(int filenum, int fastesttime, int numruns,
                     int numwins, string[] unlockedachievements,
                     bool inrun, GameState currrun)
     {
-        FileNum = filenum;
-        FastestTime = fastesttime;
-        NumRuns = numruns;
-        NumWins = numwins;
-        UnlockedAchievements = unlockedachievements;
-        InRun = inrun;
-        CurrRun = currrun;
-    }
-    //TODO Add input validation
+        //Checks for valid file number
+        if(Array.IndexOf(VALID_FILE_NUMS,filenum) > -1)
+        {
+            FileNum = filenum;
+        } else
+        {
+            FileNum = 1;
+        }
 
-    public void ConvertToYAML()
+        //Checks for valid fastest time
+        if(fastesttime < 0)
+        {
+            FastestTime = int.MaxValue;
+        } else
+        {
+            FastestTime = fastesttime;
+        }
+
+        //Checks for valid number of runs
+        if(numruns < 0)
+        {
+            NumRuns = 0;
+        } else
+        {
+            NumRuns = numruns;
+        }
+        //Checks for valid number of wins
+        if(numwins < 0)
+        {
+            NumWins = 0;
+        } else if(numwins > numruns)
+        {
+            NumWins = numruns;
+        } else
+        {
+            NumWins = numwins;
+        }
+        
+        //Checks for valid unlocked achievements
+        List<int> valid_achievement_idx = new List<int>();
+        for(int i = 0; i < unlockedachievements.Length; i++)
+        {
+            if(Array.IndexOf(ALL_ACHIEVEMENTS,unlockedachievements[i]) > -1)
+            {
+                valid_achievement_idx.Add(i);
+            }
+        }
+        UnlockedAchievements = new string[valid_achievement_idx.Count];
+        for(int i = 0; i < valid_achievement_idx.Count; i++)
+        {
+            UnlockedAchievements[i] = unlockedachievements[valid_achievement_idx[i]];
+        }
+
+        if(inrun) {
+            CurrRun = currrun; //Validation done in GameState constructor
+        } else
+        {
+            CurrRun = null;
+        }
+    }
+
+    public bool ConvertToYAML()
     {
         //Saves File data as YAML
         StreamWriter streamWriter = new StreamWriter(SAVE_DIRECTORY+SAVE_FILE_BASE_NAME+FileNum+".yml");
         Serializer serializer = new Serializer();
         serializer.Serialize(streamWriter, this);
         streamWriter.Close();
+        return true;
     }
 
     public FileData LoadFromYAML()
@@ -171,7 +289,7 @@ public class GameState
     //Load Global Constants
     int MAX_FLOOR_NUM = Constants.MAX_FLOOR_NUM;
 
-    //Instance Variables
+    //Declare instance Variables
     public PlayerState PlayerState;
     public int FloorNum;
     public int FloorSeed;
@@ -222,7 +340,7 @@ public class PlayerState
     int MAX_STAMINA = Constants.MAX_STAMINA;
     string[] PLAYER_CLASSES = Constants.PLAYER_CLASSES;
 
-    //Instance Variables
+    //Declare instance Variables
     public int Health;
     public int Stamina;
     public string PlayerClass;
