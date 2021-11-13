@@ -9,14 +9,17 @@ public class Character : MonoBehaviour
     //Variables for characters
     public int health, maxHealth = 6;
     public double stamina, maxStamina = 6.0;
+    public float staminaRegenTime = .2f;
     public int attackDmg;
     public int defense;
     public string name;
     public bool isEnhanced = false;
+    public float moveSpeed;
+    public float baseMoveSpeed = 7f;
     public List<bool> statuses;
 
-    //Timers for enhanced mode and stamina regen
     
+
      
     void Start()
     {
@@ -33,13 +36,37 @@ public class Character : MonoBehaviour
     public virtual void Attack() {}
 
     //Recovers the health of the character by a amount of points
-    public void HealHealth (int a){}
+    //Virtual for the health bar
+    public virtual void HealHealth (int a){
+        health += a;
+    }
 
-    //Recovers the stamina periodically by a amount of points
-    public void StaminaRecover (double a){}
+    //Damages the health of the character by a amount of points
+    //Virtual for the health bar
+    public void DamageHealth (int a) {
+        health -= a;
+    }
+
+    //Recovers the stamina by a amount of points
+    //Virtual for the stamina bar
+    public void StaminaRecover (double a) {
+        stamina += a;
+    }
+
+    //Function to periodically regenerate stamina. Implement with StartCoroutine("RegenStamina")
+    //Virtual for the stamina bar
+    public IEnumerator RegenStamina() {
+        while (stamina < maxStamina) {
+            StaminaRecover(.25);
+
+            //Delays the stamina Regeneration
+            yield return new WaitForSeconds(staminaRegenTime);
+        }
+    }
 
     //Drains the stamina based on a amount of points
-    public void StaminaDrain (double a){}
+    //Virtual for the stamina bar
+    public virtual void StaminaDrain (double a){}
 
     //Toggles the character's special state if they have one
     public void ToggleEnhanced() {
@@ -47,7 +74,8 @@ public class Character : MonoBehaviour
     }
 
     //Deals with the character running out of health
-    public void Die() {} 
+    //Virtual because multiple things die differently
+    public virtual void Die() {} 
     
     
 }
