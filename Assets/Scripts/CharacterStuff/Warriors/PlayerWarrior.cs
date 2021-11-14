@@ -48,5 +48,16 @@ public class PlayerWarrior : Warrior
         
     }
 
-    
+    //puts out a damaging hitbox in front of the player
+    public override void Attack()
+    {
+        if (collision.tag == "Enemy") {
+            //Gets the enemies health value
+            int enemyHealth = collision.GetCompnent<health>();
+            if (health > 0) {
+                //Applies the damage of the character
+                enemyHealth = DamageHealth(attackDmg);
+            }
+        }
+    }
 }

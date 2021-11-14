@@ -17,9 +17,6 @@ public class Character : MonoBehaviour
     public float moveSpeed;
     public float baseMoveSpeed = 7f;
     public List<bool> statuses;
-
-    
-
      
     void Start()
     {
