@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 
 
-
+//This class handles the inputs for the tutorial screen
 public class Tutorial : MonoBehaviour
 {
     //Will eventually be the texts we actually use in game
@@ -43,8 +43,9 @@ public class Tutorial : MonoBehaviour
         } 
     }
     
+    //Takes you back to the settings screen
     public void mainBackBtn() {
-        SceneManager.LoadScene("Title Screen");
+        SceneManager.LoadScene("Settings");
     }
 }
 
