@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -96,8 +97,11 @@ public class PlayerWarrior : Warrior
             //Gets the instance of the enemy
             var enemy = collision.GetComponent<Character>();
             
+            //calculating the damage done to the enemy done via stuff
+            int damage = attackDmg - enemy.defense;
+            
             //Damages the enemy's health via the player's attackDMg value
-            enemy.DamageHealth(attackDmg);
+            enemy.DamageHealth(Math.Abs(damage));
 
             //Kills the enemy if their health is less 0
             if (enemy.health < 0) {
