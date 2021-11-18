@@ -6,7 +6,7 @@ using UnityEngine;
 public class Warrior : Character
 {
     // Start is called before the first frame update
-    void Awake()
+    public void Awake()
     {
     //Setting base warrior stats
     health = 8;
