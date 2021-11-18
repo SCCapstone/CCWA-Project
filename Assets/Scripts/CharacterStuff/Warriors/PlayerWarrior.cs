@@ -109,6 +109,6 @@ public class PlayerWarrior : Warrior
     }
 
     public override void Die() {
-        SceneManger.LoadScene("Game Over");
+        SceneManager.LoadScene("Game Over");
     }
 }
