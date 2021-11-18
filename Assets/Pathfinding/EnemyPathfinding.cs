@@ -16,15 +16,19 @@ public class EnemyPathfinding : MonoBehaviour
     {
         
     }
-
+    /*
 
     private void StopMoving()
     {
-        pathVectorList = null;
+        //TODO
+        //pathVectorList = null;
     }
 
     public Vector3 GetPostion()
     {
-        return transform.position;
+        //TODO
+        //return transform.position;
     }
+    */
+
 }
