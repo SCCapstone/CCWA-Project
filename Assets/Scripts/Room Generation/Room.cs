@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Room : MonoBehaviour
+public class Room
 {
     // Start Variables*************************************************************************************************
 
-    int[,] map;
-    int width;
-    int height;
-    string seed;
+    public int[,] map;
+    public int width;
+    public int height;
+    public string seed;
 
-    // These variables are assigned in Unity using tile assets
     public Tilemap tilemap;
     public TileBase floorTile;
     public TileBase wallTile;
@@ -37,9 +36,11 @@ public class Room : MonoBehaviour
 
     // End Constructors************************************************************************************************
 
-    // Start Generation functions**************************************************************************************
+
+    // Start Render Functions******************************************************************************************
 
      void RenderRoom() {
+        tilemap.ClearAllTiles();
         for(int i=0; i<height; i++) {
             for(int j=0; j<width; j++) {
                 switch(map[i,j]) {
@@ -55,23 +56,5 @@ public class Room : MonoBehaviour
         }
     }
 
-    // End Generation Functions****************************************************************************************
-
-    // Start Unity Looping Functions***********************************************************************************
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    // Assign the Room to a Tilemap and respective Tiles for the walls/floors
-    // This should handle it from there
-    void Update()
-    {
-        RenderRoom();
-    }
-
-    // End Unity Looping Functions*************************************************************************************
+    // End Render Functions********************************************************************************************
 }
