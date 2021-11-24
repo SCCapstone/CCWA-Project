@@ -12,9 +12,7 @@ public class Room
     public int height;
     public string seed;
 
-    public Tilemap tilemap;
-    public TileBase floorTile;
-    public TileBase wallTile;
+    public Location exitLocation;
 
     // End Variables***************************************************************************************************
 
@@ -27,34 +25,58 @@ public class Room
         this.seed = "none";
     }
 
-    public Room(int width, int height, int[,] map, string seed) {
+    public Room(int width, int height, int[,] map, string seed, Location exitLocation) {
         this.width = width;
         this.height = height;
         this.map = map;
         this.seed = seed;
+        this.exitLocation = exitLocation;
     }
 
     // End Constructors************************************************************************************************
 
 
-    // Start Render Functions******************************************************************************************
+    // Start Getter/Setter Functions***********************************************************************************
 
-     void RenderRoom() {
-        tilemap.ClearAllTiles();
-        for(int i=0; i<height; i++) {
-            for(int j=0; j<width; j++) {
-                switch(map[i,j]) {
-                    case 0:
-                        tilemap.SetTile(new Vector3Int(i,j,0), wallTile);
-                        break;
-
-                    case 1:
-                        tilemap.SetTile(new Vector3Int(i,j,0), floorTile);
-                        break;
-                }
-            }
-        }
+    int getWidth() {
+        return this.width;
     }
 
-    // End Render Functions********************************************************************************************
+    int getHeight() {
+        return this.height;
+    }
+
+    int[,] getMap() {
+        return this.map;
+    }
+
+    string getSeed() {
+        return this.seed;
+    }
+
+    Location getLocation() {
+        return this.exitLocation;
+    }
+
+    void setWidth(int newWidth) {
+        this.width = newWidth;
+    }
+
+    void setHeight(int newHeight) {
+        this.height = newHeight;
+    }
+
+    void setMap(int[,] newMap) {
+        this.map = newMap;
+    }
+
+    void setSeed(string newSeed) {
+        this.seed = newSeed;
+    }
+
+    void setLocation(Location newExitLocation) {
+        this.exitLocation = newExitLocation;
+    }
+
+    // End Getter/Setter Functions*************************************************************************************
 }
