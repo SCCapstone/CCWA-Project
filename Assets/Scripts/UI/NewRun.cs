@@ -7,21 +7,11 @@ using UnityEngine.UI;
 //This class handles the inputs for the file select screen
 public class NewRun : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+     
 
     //Takes you back to the file select screen
     public void mainBackBtn() {
-        SceneManager.LoadScene("FileSelect");
+        SceneManager.LoadScene("TestingMovement");
     }
 
     public void selectMage() {
