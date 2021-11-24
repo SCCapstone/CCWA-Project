@@ -15,7 +15,7 @@ public class Achievements : MonoBehaviour
     public int currentActiveAchievementIndex;
     public TextMeshProUGUI currAchievementText;
 
-    public string[] nonAchievementButtonNames = new string[] {"BackBtn"};
+    public string[] nonAchievementButtonNames = new string[] {"BackBtn", "NavRightBtn", "NavLeftBtn"};
 
     void Awake()
     {
