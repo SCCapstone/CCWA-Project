@@ -7,16 +7,12 @@ using UnityEngine.SceneManagement;
 * ----INPUTS----- 
 * w a s d = movement
 * j = attack
-* u = BERSERK MODE
+* u = SHADOW MODE
 *
 *----------------
 */
-public class PlayerWarrior : Warrior
+public class RogueCharacter : Rogue
 {
-    //Timer for beserk mode and it's maximum time
-    public float berserkMax = 10f;
-    public float berserkTimer;
-
     //Rigidbody for the player character and vector for movement directions
     private Rigidbody2D rigidB;
     private Vector2 moveDirection;
@@ -24,7 +20,7 @@ public class PlayerWarrior : Warrior
     //Animator and sprite renderer for sprite animations
     private Animator animator;
     private SpriteRenderer sRenderer;
-
+   
     // Start is called before the first frame update
     void Awake()
     {
@@ -33,43 +29,23 @@ public class PlayerWarrior : Warrior
         animator = GetComponent<Animator>();
         sRenderer = GetComponent<SpriteRenderer>();
         moveSpeed = baseMoveSpeed;
-        berserkTimer = berserkMax;
     }
 
     // Update is called once per frame
     void Update()
     {
-        AssignWASD();
-
-        //Enters the player character into berserk mode
         if (Input.GetKeyDown("u")) {
             ToggleEnhanced();
-            Berserk();
+            Shadow();
         }
 
-        if(isEnhanced) {
-
-            if (berserkTimer > 0) {
-                berserkTimer -= Time.deltaTime;
-            } else {
-                //Set back to false
-                ToggleEnhanced();
-                //Set back to base stats
-                Berserk();
-                //reset the timer
-                berserkTimer = berserkMax;
-            }
-        }
-
-        //Let's the player character attack
-        if (Input.GetKeyDown("j")) {
-            
+        if (isEnhanced) {
+            //do shadow mode stuff
         }
     }
 
-    void FixedUpdate() {
+     void FixedUpdate() {
         Move();
-       
     }
 
     //Getting and setting the user inputs for movement
@@ -99,7 +75,7 @@ public class PlayerWarrior : Warrior
     public override void Attack(Collider2D collision)
     {
         if (collision.tag == "Enemy" || collision.tag == "Boss") {
-            //Gets the instance of the enemy or boss 
+            //Gets the instance of the enemy or boss
             var enemy = collision.GetComponent<Character>();
             
             //calculating the damage done to the enemy
