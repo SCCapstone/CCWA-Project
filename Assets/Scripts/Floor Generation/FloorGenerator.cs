@@ -25,7 +25,7 @@ public class FloorGenerator : MonoBehaviour
         }
     }
 
-    public void GenerateFloor(string seed)
+    private int[,] GenerateFloorLayout(string seed)
     {
         int[,] floorLayout = new int[this.numRooms, this.numRooms];
 
@@ -67,8 +67,55 @@ public class FloorGenerator : MonoBehaviour
             floorLayout[newRoomCoords[0], newRoomCoords[1]] = this.numRooms - roomsLeft + 1;
             roomsLeft--;
         }
+        
+        //Find the bounds of the floor in order to minimize the size of the floor layout
+        int[] bounds = { this.numRooms, this.numRooms, 0, 0 };//Default max bounds order of left, top, right, bottom
+        for (int i = 0; i < this.numRooms; i++)
+        {
+            for (int j = 0; j < numRooms; j++)
+            {
+                if (floorLayout[i, j] != 0)
+                {
+                    if (j < bounds[0]) //Is it more left
+                    {
+                        bounds[0] = j;
+                    }
+                    if (j > bounds[2]) //Is it more right
+                    {
+                        bounds[2] = j;
+                    }
+                    if (i < bounds[1]) //Is it higher
+                    {
+                        bounds[1] = i;
+                    }
+                    if (i > bounds[3]) //Is it lower
+                    {
+                        bounds[3] = i;
+                    }
+                }
+            }
+        }
 
-        //TODO Minimize floorLayout size then generate rooms for each one on the layout
+        int[,] newFloorLayout = new int[bounds[3] + 1 - bounds[1], bounds[2] + 1 - bounds[0]]; //Make new map with minimal spaces
+        for (int i = 0; i < bounds[3] + 1; i++)
+        {
+            for (int j = 0; j < bounds[2] + 1; j++)
+            {
+                if (floorLayout[i, j] != 0)
+                {
+                    newFloorLayout[i - bounds[1], j - bounds[0]] = floorLayout[i, j]; //Adjust position by bounds
+                }
+            }
+        }
+
+        return newFloorLayout;
+    }
+
+    public void GenerateFloor(string seed)
+    {
+        int[,] floorLayout = GenerateFloorLayout(seed);
+        //TODO get needed room types (# of and location of exits)
+        //TODO generate rooms based on floor layout and room types
     }
 
     // Start is called before the first frame update
