@@ -25,9 +25,12 @@ public class PlayerWarrior : Warrior
     private Animator animator;
     private SpriteRenderer sRenderer;
 
-    // Start is called before the first frame update
-    void Awake()
-    {
+    //Counters for the attacking frames
+    public float attackTime = .25f;
+    public float maxAttackTime = .25f; 
+
+    
+    void Awake() {
         base.Awake();
         rigidB = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -36,15 +39,15 @@ public class PlayerWarrior : Warrior
         berserkTimer = berserkMax;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    
+    void Update() {
         AssignWASD();
 
         //Enters the player character into berserk mode
         if (Input.GetKeyDown("u")) {
             ToggleEnhanced();
             Berserk();
+            berserkTimer = berserkMax;
         }
 
         if(isEnhanced) {
@@ -61,15 +64,13 @@ public class PlayerWarrior : Warrior
             }
         }
 
-        //Let's the player character attack
-        if (Input.GetKeyDown("j")) {
-            
-        }
+        //Stamina regeneration
+        //RegenStamina();
     }
 
     void FixedUpdate() {
         Move();
-       
+        callAttack();
     }
 
     //Getting and setting the user inputs for movement
@@ -95,9 +96,8 @@ public class PlayerWarrior : Warrior
         }
     }
 
-    //puts out a damaging hitbox in front of the player
-    public override void Attack(Collider2D collision)
-    {
+    //deals the damage for the attack
+    public override void Attack(Collider2D collision){
         if (collision.tag == "Enemy" || collision.tag == "Boss") {
             //Gets the instance of the enemy or boss 
             var enemy = collision.GetComponent<Character>();
@@ -118,8 +118,26 @@ public class PlayerWarrior : Warrior
                 enemy.Die();
             }
         }
+    }
 
-        //assign the hitboxes to animations or something
+    //Lets the player character attack
+    public void callAttack() {
+        //only allows attack if stamina is above 0
+        if (Input.GetKeyDown("j") && stamina >= 2) {
+            animator.SetBool("attacking", true);
+            attackTime = maxAttackTime;
+            stamina -= 2.0;
+
+            //FIX STAMINA REGENERATION
+        }
+
+        //Ends the attack animation after a short period of time
+        if (animator.GetBool("attacking")) {
+            attackTime -= Time.deltaTime;
+            if (attackTime <= 0) {
+                animator.SetBool("attacking", false);
+            }
+        } 
     }
 
     public override void Die() {
