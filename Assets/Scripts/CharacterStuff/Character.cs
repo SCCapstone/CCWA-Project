@@ -57,10 +57,9 @@ public class Character : MonoBehaviour
     }
 
     //Function to periodically regenerate stamina. Implement with StartCoroutine("RegenStamina")
-    //Virtual for the stamina bar
     public IEnumerator RegenStamina() {
         while (stamina < maxStamina) {
-            StaminaRecover(.25);
+            StaminaRecover(.5);
 
             //Delays the stamina Regeneration
             yield return new WaitForSeconds(staminaRegenTime);
