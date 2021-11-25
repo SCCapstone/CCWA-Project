@@ -19,11 +19,15 @@ public class Grid <T>{
         this.cellSize = cellSize;
         gridArray = new T[width, height];
         this.originPosition = originPosition;
+        //LayerMask Unwalkable = LayerMask.GetMask("Unwalkable");
 
         for (int x= 0; x<gridArray.GetLength(0); x++)
         {
             for (int y=0; y<gridArray.GetLength(1); y++)
             {
+                //TODO CHECK FOR WALKABILITY AND MARK THOSE NODES BY CHECKING FOR OBJECTS WITHIN THE FOR IT TO BE UNWALKABLE
+                //Vector3 gridObjectPosition = new Vector3(x, y, 0);
+                //bool walkable = !(Physics.CheckSphere(GrPosition,))
                 gridArray[x, y] = createGridObject(this, x, y);
             }
         }
