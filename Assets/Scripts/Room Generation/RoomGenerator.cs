@@ -44,11 +44,11 @@ public class RoomGenerator : MonoBehaviour {
         return new Room(width, height, map, seed, exitLocation);
     }
 
-    void setSeed(string newSeed) {
+    public void setSeed(string newSeed) {
         this.seed = newSeed;
     }
 
-    void setUseSeed(bool useSeed) {
+    public void setUseSeed(bool useSeed) {
         this.useSeed = useSeed;
     }
 
