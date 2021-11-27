@@ -6,6 +6,9 @@ TagManager:
   tags:
   - InformationText
   - Counter
+  - Hearts
+  - redheart
+  - blackheart
   layers:
   - Default
   - TransparentFX
