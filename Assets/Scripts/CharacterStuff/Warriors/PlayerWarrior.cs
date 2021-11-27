@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /*Class for the player character warrior
 * ----INPUTS----- 
@@ -25,6 +26,11 @@ public class PlayerWarrior : Warrior
     private Animator animator;
     private SpriteRenderer sRenderer;
 
+    //Heart counter
+    public Image[] hearts;
+    public GameObject redHeart;
+    public GameObject blackHeart;
+
     //Counters for the attacking frames
     public float attackTime = .25f;
     public float maxAttackTime = .25f; 
@@ -38,7 +44,6 @@ public class PlayerWarrior : Warrior
         moveSpeed = baseMoveSpeed;
         berserkTimer = berserkMax;
     }
-
     
     void Update() {
         AssignWASD();
@@ -64,13 +69,19 @@ public class PlayerWarrior : Warrior
             }
         }
 
+        //Allows the user to attack
+        callAttack();
+
         //Stamina regeneration
-        //RegenStamina();
+        StartCoroutine("RegenStamina");
+
+        //loading the amount of hearts
+        loadHearts();
     }
 
     void FixedUpdate() {
         Move();
-        callAttack();
+        
     }
 
     //Getting and setting the user inputs for movement
@@ -96,7 +107,7 @@ public class PlayerWarrior : Warrior
         }
     }
 
-    //deals the damage for the attack
+    //Calculates the damage for the attack
     public override void Attack(Collider2D collision){
         if (collision.tag == "Enemy" || collision.tag == "Boss") {
             //Gets the instance of the enemy or boss 
@@ -126,9 +137,8 @@ public class PlayerWarrior : Warrior
         if (Input.GetKeyDown("j") && stamina >= 2) {
             animator.SetBool("attacking", true);
             attackTime = maxAttackTime;
-            stamina -= 2.0;
+            StaminaDrain(2);
 
-            //FIX STAMINA REGENERATION
         }
 
         //Ends the attack animation after a short period of time
@@ -138,6 +148,43 @@ public class PlayerWarrior : Warrior
                 animator.SetBool("attacking", false);
             }
         } 
+    }
+
+    public void loadHearts () {
+        //Getting the heart objects from the charUIcanvas
+        GameObject[] heartHolder = GameObject.FindGameObjectsWithTag("Hearts");
+        redHeart = GameObject.FindWithTag("redheart");
+        blackHeart = GameObject.FindWithTag("blackheart");
+
+
+        //sets the heart image array length
+        hearts = new Image[maxHealth];
+        
+        //looping through to get the amount of hearts needed for the character
+        for (int i = 0; i < hearts.Length; ++i) {
+            hearts[i] = heartHolder[i].GetComponent<Image>();
+        }
+
+        //loading the hearts in relation to how much health you have
+        for (int i = 0; i < hearts.Length; ++i) {
+            Debug.Log(redHeart.GetComponent<SpriteRenderer>().sprite);
+            
+            //Enables the amount of hearts for current health
+            if (i < health) {
+                hearts[i].sprite = redHeart.GetComponent<SpriteRenderer>().sprite;
+            } else {
+                //Everything greater than health's value is an empty heart
+                hearts[i].sprite = blackHeart.GetComponent<SpriteRenderer>().sprite;
+            }
+            
+            //Enables the amount of hearts needed for max health
+            if (i < maxHealth) {
+                hearts[i].enabled = true;
+            } else {
+                hearts[i].enabled = false;
+            }
+        }
+
     }
 
     public override void Die() {

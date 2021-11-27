@@ -9,7 +9,6 @@ public class Character : MonoBehaviour
     //Variables for characters
     public int health, maxHealth = 6;
     public double stamina, maxStamina = 6.0;
-    public float staminaRegenTime = .2f;
     public int attackDmg;
     public int defense;
     public string name;
@@ -36,8 +35,7 @@ public class Character : MonoBehaviour
     //Virtual for the health bar
     public virtual void HealHealth (int a){
         health += a;
-
-        //Makes sure that health doesn't go over the max
+        //check that health doesn't go over the max
         if (health > maxHealth) {
             health = maxHealth;
         }
@@ -52,23 +50,27 @@ public class Character : MonoBehaviour
     //Recovers the stamina by a amount of points
     //Virtual for the stamina bar
     public void StaminaRecover (double a) {
-        //TODO check if stamina recover doesn't go over max
         stamina += a;
+        //check that stamina recover doesn't go over max
+        if (stamina > maxStamina) {
+            stamina  = maxStamina;
+        }
     }
 
     //Function to periodically regenerate stamina. Implement with StartCoroutine("RegenStamina")
     public IEnumerator RegenStamina() {
         while (stamina < maxStamina) {
-            StaminaRecover(.5);
+            StaminaRecover(.005f);
 
             //Delays the stamina Regeneration
-            yield return new WaitForSeconds(staminaRegenTime);
+            yield return new WaitForSeconds(Time.deltaTime);
         }
     }
 
     //Drains the stamina based on a amount of points
-    //Virtual for the stamina bar
-    public virtual void StaminaDrain (double a){}
+    public void StaminaDrain (double a){
+        stamina -= a;
+    }
 
     //Toggles the character's special state if they have one
     public void ToggleEnhanced() {
