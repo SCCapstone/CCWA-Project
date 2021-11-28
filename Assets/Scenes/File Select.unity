@@ -674,7 +674,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: File 1
+  m_Text: File 2
 --- !u!222 &145224986
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1198,9 +1198,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 219397283}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ce6ce5923c8e0e4db5aa11a5841b899, type: 3}
+  m_Script: {fileID: 11500000, guid: 31eb5805328493e4a8315552cc6fc522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrFile: 0
 --- !u!1 &222265423
 GameObject:
   m_ObjectHideFlags: 0
@@ -3305,6 +3306,7 @@ GameObject:
   - component: {fileID: 838510139}
   - component: {fileID: 838510138}
   - component: {fileID: 838510137}
+  - component: {fileID: 838510141}
   m_Layer: 5
   m_Name: File1Btn
   m_TagString: Untagged
@@ -3396,7 +3398,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 838510139}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 838510141}
+        m_TargetAssemblyTypeName: FileSelectBtn, Assembly-CSharp
+        m_MethodName: loadFile
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &838510139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3435,6 +3449,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838510135}
   m_CullTransparentMesh: 1
+--- !u!114 &838510141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838510135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 094dff6c2ce245a46a731349cd502470, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filenum: 1
 --- !u!1 &839510368
 GameObject:
   m_ObjectHideFlags: 0
@@ -3856,7 +3883,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: File 1
+  m_Text: File 3
 --- !u!222 &895948719
 CanvasRenderer:
   m_ObjectHideFlags: 0
