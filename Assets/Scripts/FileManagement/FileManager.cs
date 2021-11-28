@@ -18,6 +18,7 @@ using UnityEngine;
  *  LoadFile(int filenum): Loads the file associated with filenum; Returns load success
  *  SaveFile(int filenum, FileData data): Saves data to file associated with file number; Returns save success
  *  DeleteFile(int filenum): Deletes file data associated with file number; Returns delete success
+ *  GetFileData(int filenum): Gets the file data associated with file number; Returns FileData
  */
 public class FileManager : MonoBehaviour
 {
@@ -37,7 +38,7 @@ public class FileManager : MonoBehaviour
     {
         //Initialize instance variables
         int files_length = VALID_FILE_NUMS.Length;
-        FileData[] Files = new FileData[VALID_FILE_NUMS.Length];
+        Files = new FileData[VALID_FILE_NUMS.Length];
         int CurrFile = VALID_FILE_NUMS[0];
 
         //Create saves directory if it doesnt already exist
@@ -74,11 +75,12 @@ public class FileManager : MonoBehaviour
         //Checks for valid file number
         if(Array.IndexOf(VALID_FILE_NUMS,filenum) > -1)
         {
-            CurrFile = filenum;
-            FileData fd = new FileData(CurrFile);
+            CurrFile = Array.IndexOf(VALID_FILE_NUMS,filenum);
+            FileData fd = new FileData(filenum);
             FileData newfd = fd.LoadFromYAML();
-            Files[CurrFile] = new FileData(CurrFile,newfd.FastestTime,newfd.NumRuns,
-                                        newfd.NumWins,newfd.UnlockedAchievements,
+            Debug.Log(CurrFile);
+            Files[CurrFile] = new FileData(CurrFile,newfd.TotalTime,newfd.FastestTime,
+                                        newfd.NumRuns,newfd.NumWins,newfd.UnlockedAchievements,
                                         newfd.InRun,newfd.CurrRun);
             return true; //TODO return successful file load
         } else
@@ -95,8 +97,9 @@ public class FileManager : MonoBehaviour
         //Checks for valid file number
         if(Array.IndexOf(VALID_FILE_NUMS,filenum) > -1)
         {
-            Files[filenum] = data;
-            return Files[filenum].ConvertToYAML();
+            int fn = Array.IndexOf(VALID_FILE_NUMS,filenum);
+            Files[fn] = data;
+            return Files[fn].ConvertToYAML();
         } else
         {
             Debug.Log("Invalid file number: " + filenum + 
@@ -120,12 +123,29 @@ public class FileManager : MonoBehaviour
         }
     }
 
+    //Returns the file data associated with the filenum
+    public FileData GetFileData(int filenum)
+    {
+        //Checks for valid file number
+        if(Array.IndexOf(VALID_FILE_NUMS,filenum) > -1)
+        {
+            int fn = Array.IndexOf(VALID_FILE_NUMS,filenum);
+            return Files[fn]; //Returns the file data
+        } else
+        {
+            Debug.Log("Invalid file number: " + filenum + 
+                ". File not returned. Valid file numbers are: "+valid_nums);
+            return null;
+        }
+    }
+
 }
 
 /*
  * Defines the file data for a save file
  * Instance Variables:
  *  int FileNum: The number associated with this file's data
+ *  int TotalTime: The number of seconds in runs of this file
  *  int FastestTime: The number of seconds of this file's fastest run completion
  *  int NumRuns: The total number of runs attempted on this file
  *  int NumWins: The total number of runs completed successfully on this file
@@ -136,7 +156,7 @@ public class FileManager : MonoBehaviour
  * Methods:
  *  FileData(): Default Constructor
  *  FileData(int filenum): Load Constructor used in FileManager
- *  FileData(int filenum, int fastesttime, int numruns,
+ *  FileData(int filenum, int totaltime, int fastesttime, int numruns,
                     int numwins, string[] unlockedachievements,
                     bool inrun, GameState currrun): Full Constructor
  *  ConvertToYAML(): Converts the file's data to a YAML file; Returns success of saving file
@@ -152,6 +172,7 @@ public class FileData
 
     //Declare instance Variables
     public int FileNum;
+    public int TotalTime;
     public int FastestTime;
     public int NumRuns;
     public int NumWins;
@@ -180,6 +201,7 @@ public class FileData
         {
             FileNum = 1;
         }
+        TotalTime = 0;
         FastestTime = int.MaxValue;
         NumRuns = 0;
         NumWins = 0;
@@ -189,7 +211,7 @@ public class FileData
     }
 
     //Full Constructor
-    public FileData(int filenum, int fastesttime, int numruns,
+    public FileData(int filenum, int totaltime, int fastesttime, int numruns,
                     int numwins, string[] unlockedachievements,
                     bool inrun, GameState currrun)
     {
@@ -200,6 +222,15 @@ public class FileData
         } else
         {
             FileNum = 1;
+        }
+
+        //Checks for valid total time
+        if(totaltime < 0)
+        {
+            TotalTime = 0;
+        } else
+        {
+            TotalTime = totaltime;
         }
 
         //Checks for valid fastest time
