@@ -9,6 +9,9 @@ TagManager:
   - Hearts
   - redheart
   - blackheart
+  - staminapotion
+  - staminaicon
+  - emptypotion
   layers:
   - Default
   - TransparentFX
