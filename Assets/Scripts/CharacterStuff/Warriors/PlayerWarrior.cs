@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -30,6 +31,11 @@ public class PlayerWarrior : Warrior
     public Image[] hearts;
     public GameObject redHeart;
     public GameObject blackHeart;
+
+    //Stamina counter
+    public Image[] staminaIcons;
+    public GameObject staminaBottle;
+    public GameObject emptystaminaBottle;
 
     //Counters for the attacking frames
     public float attackTime = .25f;
@@ -75,8 +81,11 @@ public class PlayerWarrior : Warrior
         //Stamina regeneration
         StartCoroutine("RegenStamina");
 
-        //loading the amount of hearts
+        //loading the amount of hearts a player has
         loadHearts();
+
+        //loading the amount of stamina a player has
+        loadStamina();
     }
 
     void FixedUpdate() {
@@ -150,12 +159,12 @@ public class PlayerWarrior : Warrior
         } 
     }
 
-    public void loadHearts () {
+    //Loads the health of the character re  of a character
+    public void loadHearts() {
         //Getting the heart objects from the charUIcanvas
         GameObject[] heartHolder = GameObject.FindGameObjectsWithTag("Hearts");
         redHeart = GameObject.FindWithTag("redheart");
         blackHeart = GameObject.FindWithTag("blackheart");
-
 
         //sets the heart image array length
         hearts = new Image[maxHealth];
@@ -165,10 +174,14 @@ public class PlayerWarrior : Warrior
             hearts[i] = heartHolder[i].GetComponent<Image>();
         }
 
-        //loading the hearts in relation to how much health you have
-        for (int i = 0; i < hearts.Length; ++i) {
-            Debug.Log(redHeart.GetComponent<SpriteRenderer>().sprite);
-            
+        //loading the hearts in relation to max health
+        for (int i = 0; i < hearts.Length; ++i) {   
+
+            //Enables the amount of hearts needed for max health
+            if (i < maxHealth) {
+                hearts[i].enabled = true;
+            }
+
             //Enables the amount of hearts for current health
             if (i < health) {
                 hearts[i].sprite = redHeart.GetComponent<SpriteRenderer>().sprite;
@@ -176,15 +189,49 @@ public class PlayerWarrior : Warrior
                 //Everything greater than health's value is an empty heart
                 hearts[i].sprite = blackHeart.GetComponent<SpriteRenderer>().sprite;
             }
-            
-            //Enables the amount of hearts needed for max health
-            if (i < maxHealth) {
-                hearts[i].enabled = true;
+        }
+
+        //clears any remaining hearts after the max
+        for (int i = maxHealth; i < heartHolder.Length; ++i) {
+            heartHolder[i].SetActive(false);
+        }
+    }
+
+    public void loadStamina() {
+        //Getting the stamina objects from the charUIcanvas
+        GameObject[] staminaHolder = GameObject.FindGameObjectsWithTag("staminaicon");
+        
+        staminaBottle = GameObject.FindWithTag("staminapotion");
+        emptystaminaBottle = GameObject.FindWithTag("emptypotion");
+
+        //Sets the icon image array length
+        staminaIcons = new Image[Convert.ToInt32(maxStamina)];
+        
+        //Looping through to get the amount of stamina icons needed for the character
+        for (int i = 0; i < staminaIcons.Length; ++i) {
+            staminaIcons[i] = staminaHolder[i].GetComponent<Image>();
+        }
+
+        //Loading the icons in relation to max stamina 
+        for (int i = 0; i < staminaIcons.Length; ++i) {
+             //Enables the amount of icons needed for max stamina
+            if (i < maxStamina) {
+                staminaIcons[i].enabled = true;
+            }
+
+            //Enables the amount of icons for current stamina
+            if (i < stamina) {
+                staminaIcons[i].sprite = staminaBottle.GetComponent<SpriteRenderer>().sprite;
             } else {
-                hearts[i].enabled = false;
+                //Everything greater than health's value is an empty heart
+                staminaIcons[i].sprite = emptystaminaBottle.GetComponent<SpriteRenderer>().sprite;
             }
         }
 
+        //Clears any remaining icons above the max
+        for (int i = Convert.ToInt32(maxStamina); i < staminaHolder.Length; ++i) {
+            staminaHolder[i].SetActive(false);
+        }
     }
 
     public override void Die() {

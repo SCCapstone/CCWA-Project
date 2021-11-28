@@ -32,8 +32,7 @@ public class Character : MonoBehaviour
     public virtual void Attack(Collider2D collision) {}
 
     //Recovers the health of the character by a amount of points
-    //Virtual for the health bar
-    public virtual void HealHealth (int a){
+    public void HealHealth (int a){
         health += a;
         //check that health doesn't go over the max
         if (health > maxHealth) {
@@ -42,13 +41,11 @@ public class Character : MonoBehaviour
     }
 
     //Damages the health of the character by a amount of points
-    //Virtual for the health bar
     public void DamageHealth (int a) {
         health -= a;
     }
 
     //Recovers the stamina by a amount of points
-    //Virtual for the stamina bar
     public void StaminaRecover (double a) {
         stamina += a;
         //check that stamina recover doesn't go over max
@@ -60,7 +57,7 @@ public class Character : MonoBehaviour
     //Function to periodically regenerate stamina. Implement with StartCoroutine("RegenStamina")
     public IEnumerator RegenStamina() {
         while (stamina < maxStamina) {
-            StaminaRecover(.005f);
+            StaminaRecover(.00001f);
 
             //Delays the stamina Regeneration
             yield return new WaitForSeconds(Time.deltaTime);
