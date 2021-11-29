@@ -11,7 +11,7 @@ using UnityEngine;
  * Defines the file manager for the game
  * Instance Variables:
  *  FileData[] Files: All the current save files for the game
- *  int CurrFile: The file number of the currently playing file
+ *  int CurrFile: The index number of the currently playing file
  *
  * Methods:
  *  Start(): Startup operations (Creates save directory/files if needed)
@@ -67,6 +67,11 @@ public class FileManager : MonoBehaviour
                 Files[i] = file.LoadFromYAML();
             }
         }
+
+        //Display the current loaded files on file select screen
+        GameObject fileSelect = GameObject.Find("FileSelect");
+        FileDisplayer fileDisplayer = fileSelect.GetComponent<FileDisplayer>();
+        fileDisplayer.DisplayFiles();
     }
 
     //Loads the file associated with the filenum
@@ -78,8 +83,7 @@ public class FileManager : MonoBehaviour
             CurrFile = Array.IndexOf(VALID_FILE_NUMS,filenum);
             FileData fd = new FileData(filenum);
             FileData newfd = fd.LoadFromYAML();
-            Debug.Log(CurrFile);
-            Files[CurrFile] = new FileData(CurrFile,newfd.TotalTime,newfd.FastestTime,
+            Files[CurrFile] = new FileData(CurrFile,newfd.DateCreated,newfd.TotalTime,newfd.FastestTime,
                                         newfd.NumRuns,newfd.NumWins,newfd.UnlockedAchievements,
                                         newfd.InRun,newfd.CurrRun);
             return true; //TODO return successful file load
@@ -145,6 +149,7 @@ public class FileManager : MonoBehaviour
  * Defines the file data for a save file
  * Instance Variables:
  *  int FileNum: The number associated with this file's data
+ *  string DateCreated: Date this file was created
  *  int TotalTime: The number of seconds in runs of this file
  *  int FastestTime: The number of seconds of this file's fastest run completion
  *  int NumRuns: The total number of runs attempted on this file
@@ -172,6 +177,7 @@ public class FileData
 
     //Declare instance Variables
     public int FileNum;
+    public string DateCreated;
     public int TotalTime;
     public int FastestTime;
     public int NumRuns;
@@ -183,7 +189,8 @@ public class FileData
     //Default Constructor for YAML Deserializing (used in FileData only)
     public FileData() {
         FileNum = 0;
-        FastestTime = int.MaxValue;
+        DateCreated = "00/00/0000";
+        FastestTime = 359999; //Fastest time of 99:59:59
         NumRuns = 0;
         NumWins = 0;
         UnlockedAchievements = new string[1];
@@ -202,7 +209,8 @@ public class FileData
             FileNum = 1;
         }
         TotalTime = 0;
-        FastestTime = int.MaxValue;
+        DateCreated = "00/00/0000";
+        FastestTime = 359999; //Fastest time of 99:59:59
         NumRuns = 0;
         NumWins = 0;
         UnlockedAchievements = new string[1];
@@ -211,8 +219,8 @@ public class FileData
     }
 
     //Full Constructor
-    public FileData(int filenum, int totaltime, int fastesttime, int numruns,
-                    int numwins, string[] unlockedachievements,
+    public FileData(int filenum, string datecreated, int totaltime, int fastesttime,
+                    int numruns, int numwins, string[] unlockedachievements,
                     bool inrun, GameState currrun)
     {
         //Checks for valid file number
@@ -223,6 +231,9 @@ public class FileData
         {
             FileNum = 1;
         }
+
+        //TODO input validation for date created
+        DateCreated = datecreated;
 
         //Checks for valid total time
         if(totaltime < 0)
@@ -297,9 +308,12 @@ public class FileData
 
     public FileData LoadFromYAML()
     {
-        //Loads based on FileNum and returns file data
+        //Loads based on FileNum and returns file data after checking its validity
         Deserializer deserializer = new Deserializer();
-        return deserializer.Deserialize<FileData>(File.OpenText(SAVE_DIRECTORY+SAVE_FILE_BASE_NAME+FileNum+".yml"));
+        FileData preCheck = deserializer.Deserialize<FileData>(File.OpenText(SAVE_DIRECTORY+SAVE_FILE_BASE_NAME+FileNum+".yml"));
+        return new FileData(preCheck.FileNum,preCheck.DateCreated,preCheck.TotalTime,preCheck.FastestTime,
+                            preCheck.NumRuns,preCheck.NumWins,preCheck.UnlockedAchievements,
+                            preCheck.InRun,preCheck.CurrRun);
     }
 }
 
