@@ -1153,6 +1153,7 @@ GameObject:
   m_Component:
   - component: {fileID: 219397284}
   - component: {fileID: 219397285}
+  - component: {fileID: 219397286}
   m_Layer: 5
   m_Name: FileSelect
   m_TagString: Untagged
@@ -1202,6 +1203,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrFile: 0
+--- !u!114 &219397286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219397283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d02644e84409a54d948c02c2525abc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &222265423
 GameObject:
   m_ObjectHideFlags: 0
@@ -2168,6 +2181,7 @@ GameObject:
   - component: {fileID: 514977304}
   - component: {fileID: 514977303}
   - component: {fileID: 514977302}
+  - component: {fileID: 514977305}
   m_Layer: 5
   m_Name: DeleteFile3Btn
   m_TagString: Untagged
@@ -2239,7 +2253,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 514977303}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 514977305}
+        m_TargetAssemblyTypeName: FileDeleteBtn, Assembly-CSharp
+        m_MethodName: DeleteFile
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &514977303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2278,6 +2304,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 514977300}
   m_CullTransparentMesh: 1
+--- !u!114 &514977305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514977300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d881d1d95523fda4b92e206b537c036c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filenum: 3
 --- !u!1 &527757827
 GameObject:
   m_ObjectHideFlags: 0
@@ -2832,6 +2871,7 @@ GameObject:
   - component: {fileID: 634917865}
   - component: {fileID: 634917864}
   - component: {fileID: 634917863}
+  - component: {fileID: 634917867}
   m_Layer: 5
   m_Name: File2Btn
   m_TagString: Untagged
@@ -2923,7 +2963,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 634917865}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 634917867}
+        m_TargetAssemblyTypeName: FileSelectBtn, Assembly-CSharp
+        m_MethodName: LoadFile
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &634917865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2962,6 +3014,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 634917861}
   m_CullTransparentMesh: 1
+--- !u!114 &634917867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634917861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 094dff6c2ce245a46a731349cd502470, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filenum: 2
 --- !u!1 &636855077
 GameObject:
   m_ObjectHideFlags: 0
@@ -3050,6 +3115,7 @@ GameObject:
   - component: {fileID: 640698562}
   - component: {fileID: 640698561}
   - component: {fileID: 640698560}
+  - component: {fileID: 640698564}
   m_Layer: 5
   m_Name: File3Btn
   m_TagString: Untagged
@@ -3141,7 +3207,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 640698562}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 640698564}
+        m_TargetAssemblyTypeName: FileSelectBtn, Assembly-CSharp
+        m_MethodName: LoadFile
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &640698562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3180,6 +3258,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 640698558}
   m_CullTransparentMesh: 1
+--- !u!114 &640698564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640698558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 094dff6c2ce245a46a731349cd502470, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filenum: 3
 --- !u!1 &719401410
 GameObject:
   m_ObjectHideFlags: 0
@@ -3401,7 +3492,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 838510141}
         m_TargetAssemblyTypeName: FileSelectBtn, Assembly-CSharp
-        m_MethodName: loadFile
+        m_MethodName: LoadFile
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3624,6 +3715,7 @@ GameObject:
   - component: {fileID: 870054355}
   - component: {fileID: 870054354}
   - component: {fileID: 870054353}
+  - component: {fileID: 870054356}
   m_Layer: 5
   m_Name: DeleteFile1Btn
   m_TagString: Untagged
@@ -3695,7 +3787,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 870054354}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 870054356}
+        m_TargetAssemblyTypeName: FileDeleteBtn, Assembly-CSharp
+        m_MethodName: DeleteFile
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &870054354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3734,6 +3838,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 870054351}
   m_CullTransparentMesh: 1
+--- !u!114 &870054356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870054351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d881d1d95523fda4b92e206b537c036c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filenum: 1
 --- !u!1 &876094799
 GameObject:
   m_ObjectHideFlags: 0
@@ -3804,7 +3921,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Fastest Run: \t\t99:99:99"
+  m_Text: "Fastest Run:\t\t99:99:99"
 --- !u!222 &876094802
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6899,6 +7016,7 @@ GameObject:
   - component: {fileID: 1876491327}
   - component: {fileID: 1876491326}
   - component: {fileID: 1876491325}
+  - component: {fileID: 1876491328}
   m_Layer: 5
   m_Name: DeleteFile2Btn
   m_TagString: Untagged
@@ -6970,7 +7088,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1876491326}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1876491328}
+        m_TargetAssemblyTypeName: FileDeleteBtn, Assembly-CSharp
+        m_MethodName: DeleteFile
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1876491326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7009,6 +7139,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1876491323}
   m_CullTransparentMesh: 1
+--- !u!114 &1876491328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876491323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d881d1d95523fda4b92e206b537c036c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filenum: 2
 --- !u!1 &1897797400
 GameObject:
   m_ObjectHideFlags: 0
