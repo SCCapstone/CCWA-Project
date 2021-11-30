@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
 public class RoomGenerator : MonoBehaviour {
     // Begin Variable statements***************************************************************************************
@@ -16,13 +17,17 @@ public class RoomGenerator : MonoBehaviour {
 
     public Location exitLocation;
 
+    public int numEnemies;
+    public int numItems;
+
     public Tilemap tilemap;
     public TileBase floorTile;
     public TileBase wallTile;
 
     public TileBase exitTile;
 
-    private static string[] exitLocations = new string[4];
+    private static string[] exitLocationChoices = new string[4];
+    public Location[] exitLocations; 
 
     public List<Room> rooms = new List<Room>();
       
@@ -78,13 +83,16 @@ public class RoomGenerator : MonoBehaviour {
     }
 
     // Randomly fills the map with points
-    int[,] FillRoomMap(int width, int height) {
-        if(!useSeed) {
-            seed = Time.time.ToString();
-        }
-        System.Random rand = new System.Random(seed.GetHashCode());
-        int[,] m = new int[height,width];
+    int[,] FillRoomMap(int width, int height, string seed) {
         string tempSeed;
+        if(!useSeed) {
+            tempSeed = Time.time.ToString();
+        }
+        else {
+            tempSeed = seed;
+        }
+        System.Random rand = new System.Random(tempSeed.GetHashCode());
+        int[,] m = new int[height,width];
         float fillChance = 20.0f;
         for(int i=0; i<height; i++) {
             for(int j=0; j<width; j++) {
@@ -135,89 +143,134 @@ public class RoomGenerator : MonoBehaviour {
 
     // End Room Generation Functions***********************************************************************************
 
+    // Begin Room saving/loading Functions*****************************************************************************
+
+    // Adds a room to the list of rooms held by this room generator
+    List<Room> addRoomToRoomList(Room saveRoom) {
+        rooms.Add(saveRoom);
+        return rooms;
+    }
+
+    // Loads a room to the scene
+    // This is accomplished by setting the seed
+    // in this generator, then reloading the scene
+    void loadRoomFromSeed(string searchSeed) {
+        for(int i=0; i<rooms.Count; i++) {
+            if(rooms[i].seed == searchSeed) {
+                this.setSeed(searchSeed);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                return;
+            }
+        }
+    }
+
+    // End Room saving/loading Functions*******************************************************************************
+
     // Begin Spawn Location Generation Functions***********************************************************************
 
     // Empty for now. Will be used to generate random spawning points on 
     // the room floor
     // NOTE: My thought was to use a second tilemap over the floor map
     // to hold the starting points of enemies
-    void GenerateSpawnLocations(int[,] map, Tilemap tilemap, TileBase exitTile) {
-        GenerateEnemySpawns();
-        GenerateLootSpawns();
-        GenerateExitSpawn(map, tilemap, exitTile);
+    void GenerateSpawnLocations(int[,] map, Tilemap tilemap, TileBase exitTile, int numEnemies, int numItems) {
+        GenerateEnemySpawns(numEnemies);
+        GenerateLootSpawns(numItems);
+        //GenerateExitSpawns(map, tilemap, exitTile);
     }
 
     // Need to instantiate enemy objects at (x,y) coordinates here
-    void GenerateEnemySpawns() {
+    void GenerateEnemySpawns(int numEnemies) {
+        for(int i = height-3; i>height-7; i--) {
+            for(int j=10; j<width-10; j++) {
+                if(map[i,j] == 0 && numEnemies > 0) {
+                    // Instantiate enemy here
+                    numEnemies--;
+                }
+                if(numEnemies == 0) {
+                    return;
+                }
+            }
+        }
 
     }
 
     // These could be represented as a special tile,
     // but can also be a game object instantiated at (x,y) coordinates
-    void GenerateLootSpawns() {
+    void GenerateLootSpawns(int numItems) {
+        for(int i = height-3; i>height-7; i--) {
+            for(int j=10; j<width-10; j++) {
+                if(map[i,j] == 0 && numItems > 0) {
+                    // Instantiate Items here
+                    numItems--;
+                }
+                if(numItems == 0) {
+                    return;
+                }
+            }
+        }
 
     }
 
     // This will be a special tile
     // When the player passes over it, it will take them to the next room
     Location GenerateExitSpawn(int[,] map, Tilemap tilemap, TileBase exitTile) {
-       exitLocations[0] = "top";
-       exitLocations[1] = "bottom";
-       exitLocations[2] = "left";
-       exitLocations[3] = "right";
-       int choice = Random.Range(0,3);
-       string location = exitLocations[choice];
-       print(location);
-       switch(location) {
-           case "top":
-                for(int i = height- 3; i>height-7; i--) {
-                    for(int j=10; j<width-10; j++) {
-                        if(map[i,j] == 0) {
-                            if(Random.Range(1,10) < 6) {
-                                tilemap.SetTile(new Vector3Int(i,j,0), exitTile);
-                                return new Location(location, i, j);
+       exitLocationChoices[0] = "top";
+       exitLocationChoices[1] = "bottom";
+       exitLocationChoices[2] = "left";
+       exitLocationChoices[3] = "right";
+
+        string location = exitLocationChoices[Random.Range(0,3)];
+        switch(location) {
+            case "top":
+                    for(int i = height- 3; i>height-7; i--) {
+                        for(int j=10; j<width-10; j++) {
+                            if(map[i,j] == 0) {
+                                if(Random.Range(1,10) < 9) {
+                                    tilemap.SetTile(new Vector3Int(i,j,0), exitTile);
+                                    return new Location(location, i, j);
+                                }
                             }
                         }
                     }
-                }
-                break;
-           case "bottom":
-                for(int i = 3; i<7; i++) {
-                    for(int j=10; j<width-10; j++) {
-                        if(map[i,j] == 0) {
-                             if(Random.Range(1,10) < 2) {
-                                tilemap.SetTile(new Vector3Int(i,j,0), exitTile);
-                                return new Location(location, i, j);
+                    break;
+            case "bottom":
+                    for(int i = 3; i<7; i++) {
+                        for(int j=10; j<width-10; j++) {
+                            if(map[i,j] == 0) {
+                                if(Random.Range(1,10) < 9) {
+                                    tilemap.SetTile(new Vector3Int(i,j,0), exitTile);
+                                    return new Location(location, i, j);
+                                }
                             }
                         }
                     }
-                }
-                break;
-           case "left":
-                for(int i = 10; i<height-10; i++) {
-                    for(int j=3; j<7; j++) {
-                        if(map[i,j] == 0) {
-                             if(Random.Range(1,10) < 2) {
-                                tilemap.SetTile(new Vector3Int(i,j,0), exitTile);
-                                return new Location(location, i, j);
+                    break;
+            case "left":
+                    for(int i = 10; i<height-10; i++) {
+                        for(int j=3; j<7; j++) {
+                            if(map[i,j] == 0) {
+                                if(Random.Range(1,10) < 9) {
+                                    tilemap.SetTile(new Vector3Int(i,j,0), exitTile);
+                                    return new Location(location, i, j);
+                                }
                             }
                         }
                     }
-                }
-                break;
-           case "right":
-                for(int i = 10; i<height-10; i++) {
-                    for(int j=width-3; j>width-7; j--) {
-                        if(map[i,j] == 0) {
-                             if(Random.Range(1,10) < 2) {
-                                tilemap.SetTile(new Vector3Int(i,j,0), exitTile);
-                                return new Location(location, i, j);
+                    break;
+            case "right":
+                    for(int i = 10; i<height-10; i++) {
+                        for(int j=width-3; j>width-7; j--) {
+                            if(map[i,j] == 0) {
+                                if(Random.Range(1,10) < 9) {
+                                    tilemap.SetTile(new Vector3Int(i,j,0), exitTile);
+                                    return new Location(location, i, j);
+                                    
+                                }
                             }
                         }
                     }
-                }
-                break;
-       }
+                    break;
+        }
         return new Location();
     }
 
@@ -227,17 +280,19 @@ public class RoomGenerator : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-       map = FillRoomMap(width, height);
+        // Need input for a seed 
+        string seed = "10010010101";
+       map = FillRoomMap(width, height, seed);
        for(int i=0; i<iterations; i++) {
            GenerateRoom(seed);
        }
        RenderRoom(map, tilemap, wallTile, floorTile);
-       exitLocation = GenerateExitSpawn(map, tilemap, exitTile);
+       int numLocations = Random.Range(1,4);
+       exitLocations = new Location[numLocations];
+       print(numLocations);
+       for(int i=0; i<numLocations; i++) {
+           exitLocations[i] = GenerateExitSpawn(map, tilemap, exitTile);
+       }
     }
-
-    // Update is called once per frame
-    // void Update() {
-        
-    // }
     // End Unity Init/Looping Functions********************************************************************************
 }
