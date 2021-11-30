@@ -30,24 +30,7 @@ public class RoomGenerator {
     // Begin Constructors**********************************************************************************************
 
     //Construct a RoomGenerator capabale of generating rooms of HeightxWidth size
-    public RoomGenerator(int width, int height) {
-        this.width = width;
-        this.height = height;
-    }
-
-    // End Constructors************************************************************************************************
-
-    // Start getters/setters*******************************************************************************************
-
-    Room getRoom() {
-        return new Room(width, height, map, seed, exitLocation);
-    }
-
-    public void setSeed(string newSeed) {
-        this.seed = newSeed;
-    }
-
-    public void setUseSeed(bool useSeed) {
+    public RoomGenerator(bool useSeed) {
         this.useSeed = useSeed;
     }
 
