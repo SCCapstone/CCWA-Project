@@ -19,12 +19,12 @@ public class Settings : MonoBehaviour
         
     }
 
-    void tutorialBtn()
+    public void tutorialBtn()
     {
         SceneManager.LoadScene("Tutorial");
     }
 
-    void mainBackBtn()
+    public void mainBackBtn()
     {
         SceneManager.LoadScene("Title Screen");
     }
