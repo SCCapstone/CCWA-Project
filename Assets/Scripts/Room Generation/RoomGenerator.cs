@@ -1,65 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
-public class RoomGenerator : MonoBehaviour {
+// The purpose of the RoomGenerator is to be able to generate a single Room.
+// A Room will contain a map of its floors and walls, an array of exitLocations, 
+// A number of enemies, and a number of items
+
+public class RoomGenerator {
     // Begin Variable statements***************************************************************************************
-    public int width = 25;
-    public int height = 25;
+    public static int width = 25;
+    public static int height = 25;
 
-    public int iterations = 5;
-    private int[,] map;
+    public static int iterations = 5;
+    private int[,] map = new int[height,width];
 
     public string seed = "";
     public bool useSeed = false;
 
-    public Location exitLocation;
+    public int numEnemies = 0;
+    public int numItems = 0;
 
-    public Tilemap tilemap;
-    public TileBase floorTile;
-    public TileBase wallTile;
+    public Location[] exitLocations; 
 
-    public TileBase exitTile;
-
-    private static string[] exitLocations = new string[4];
-
-    public List<Room> rooms = new List<Room>();
+    public Room storedRoom = new Room();
       
     // End Variable Statements*****************************************************************************************
 
     // Begin Constructors**********************************************************************************************
 
     //Construct a RoomGenerator capabale of generating rooms of HeightxWidth size
-    public RoomGenerator(int width, int height) {
-        this.width = width;
-        this.height = height;
+    public RoomGenerator(bool useSeed) {
+        this.useSeed = useSeed;
     }
 
     // End Constructors************************************************************************************************
 
-    // Start getters/setters*******************************************************************************************
-
-    Room getRoom() {
-        return new Room(width, height, map, seed, exitLocation);
-    }
-
-    void setSeed(string newSeed) {
-        this.seed = newSeed;
-    }
-
-    void setUseSeed(bool useSeed) {
-        this.useSeed = useSeed;
-    }
-
-    // End getters/setters*********************************************************************************************
-
     // Begin room generation functions*********************************************************************************
 
-    // To calculate the neighbors of a cell, I am assuming von Neumann
-    // neighborhoods (4 neighbors one in each cardinal direction)
-    // I'm also assuming that all 4 args will have a max value of 1, so max
-    // return of this function is 4
+    // This method takes the coordinates of a given cell in the map and calculates how many neighbors it has.
+    // It utilizes von Neumann style neighborhoods, meaning a neighbor can exist only in a cardinal direction (not adjacent)
+    // It returns an integer, the number of neighbors the cell at [i,j] has
+
     int CalcNeighbors(int i, int j) {
         int walls = 0;
         for(int x = i-1; x <= i+1; x++) {
@@ -77,14 +59,21 @@ public class RoomGenerator : MonoBehaviour {
         return walls;
     }
 
-    // Randomly fills the map with points
-    int[,] FillRoomMap(int width, int height) {
-        if(!useSeed) {
-            seed = Time.time.ToString();
-        }
-        System.Random rand = new System.Random(seed.GetHashCode());
-        int[,] m = new int[height,width];
+    // This method takes a width, height (int) and a seed (string)
+    // This method fills the map with random 0s and 1s
+    // This is used as a way to populate the map before iterating to finalize the room shape
+    // This method utilizes a seed, so the same Room can be generated repeatedly if needed
+    // This method returns the int[,] map of the room
+    int[,] FillRoomMap(string seed) {
         string tempSeed;
+        if(!useSeed) {
+            tempSeed = Time.time.ToString();
+        }
+        else {
+            tempSeed = seed;
+        }
+        System.Random rand = new System.Random(tempSeed.GetHashCode());
+        int[,] m = new int[height,width];
         float fillChance = 20.0f;
         for(int i=0; i<height; i++) {
             for(int j=0; j<width; j++) {
@@ -101,143 +90,139 @@ public class RoomGenerator : MonoBehaviour {
          return m;
     }
 
-    //
-    void GenerateRoom(string seed) {
-         for(int i=1; i<height; i++) {
-            for(int j=1; j<width; j++) {
+    // This method iterates over a room and applies certain rules to change the room's shape
+    // 
+    int[,] IterateOverRoom(int[,] newMap) {
+         for(int i=0; i<height; i++) {
+            for(int j=0; j<width; j++) {
                 int numNeighbors = CalcNeighbors(i,j);
-                if(numNeighbors < 4) {
-                    map[i,j] = 0;
+                if(numNeighbors <= 2) {
+                    newMap[i,j] = 0;
                 }
-                else if(numNeighbors > 4) {
-                    map[i,j] = 1;
+                else if(numNeighbors > 2) {
+                    newMap[i,j] = 1;
                 }
             }  
         }
+        return newMap;
     }
 
-     void RenderRoom(int[,] map, Tilemap tilemap, TileBase wallTile, TileBase floorTile) {
-        tilemap.ClearAllTiles();
-        for(int i=0; i<height; i++) {
-            for(int j=0; j<width; j++) {
-                switch(map[i,j]) {
-                    case 0:
-                        tilemap.SetTile(new Vector3Int(i,j,0), floorTile);
-                        break;
+    public Room GenerateRoom(string seed, int numEnemies, int numItems, string[] directions) {
+        // Generate a randomly filled Room map
+        // Iterate over map to create a Room
+        //int[,] newRoomMap = IterateOverRoom(FillRoomMap(seed));
+        int[,] newRoomMap = FillRoomMap(seed);
+        //int [,] finalMap = IterateOverRoom(newRoomMap);
+        // Generate multiple exit locations for the room, given an array of directions
+        Location[] exitLocations = GenerateMultipleExits(directions.Length, directions, newRoomMap);
+        // Generate a Room object with the newly created map
+        return new Room(width, height, newRoomMap, seed, exitLocations, numEnemies, numItems);
 
-                    case 1:
-                        tilemap.SetTile(new Vector3Int(i,j,0), wallTile);
-                        break;
-                }
-            }
-        }
+
     }
 
     // End Room Generation Functions***********************************************************************************
 
     // Begin Spawn Location Generation Functions***********************************************************************
-
-    // Empty for now. Will be used to generate random spawning points on 
-    // the room floor
-    // NOTE: My thought was to use a second tilemap over the floor map
-    // to hold the starting points of enemies
-    void GenerateSpawnLocations(int[,] map, Tilemap tilemap, TileBase exitTile) {
-        GenerateEnemySpawns();
-        GenerateLootSpawns();
-        GenerateExitSpawn(map, tilemap, exitTile);
+    void GenerateSpawnLocations(Room room) {
+        GenerateEnemySpawns(room.numEnemies);
+        GenerateLootSpawns(room.numItems);
+        //GenerateExitSpawns(map, tilemap, exitTile);
     }
 
     // Need to instantiate enemy objects at (x,y) coordinates here
-    void GenerateEnemySpawns() {
+    void GenerateEnemySpawns(int numEnemies) {
+        for(int i = height-3; i>height-7; i--) {
+            for(int j=10; j<width-10; j++) {
+                if(map[i,j] == 0 && numEnemies > 0) {
+                    // Instantiate enemy here
+                    numEnemies--;
+                }
+                if(numEnemies == 0) {
+                    return;
+                }
+            }
+        }
 
     }
 
     // These could be represented as a special tile,
     // but can also be a game object instantiated at (x,y) coordinates
-    void GenerateLootSpawns() {
+    void GenerateLootSpawns(int numItems) {
+        for(int i = height-3; i>height-7; i--) {
+            for(int j=10; j<width-10; j++) {
+                if(map[i,j] == 0 && numItems > 0) {
+                    // Instantiate Items here
+                    numItems--;
+                }
+                if(numItems == 0) {
+                    return;
+                }
+            }
+        }
 
     }
 
-    // This will be a special tile
-    // When the player passes over it, it will take them to the next room
-    Location GenerateExitSpawn(int[,] map, Tilemap tilemap, TileBase exitTile) {
-       exitLocations[0] = "top";
-       exitLocations[1] = "bottom";
-       exitLocations[2] = "left";
-       exitLocations[3] = "right";
-       int choice = Random.Range(0,3);
-       string location = exitLocations[choice];
-       print(location);
-       switch(location) {
-           case "top":
-                for(int i = height- 3; i>height-7; i--) {
-                    for(int j=10; j<width-10; j++) {
-                        if(map[i,j] == 0) {
-                            if(Random.Range(1,10) < 6) {
-                                tilemap.SetTile(new Vector3Int(i,j,0), exitTile);
-                                return new Location(location, i, j);
+    // This method generates a single exit location in a room
+    // It takes a direction (north, south, etc.) as a parameter, and returns a Location
+    Location GenerateExitSpawn(string direction, int[,] map) {
+        switch(direction) {
+            case "east":
+                    for(int i = height- 3; i>height-7; i--) {
+                        for(int j=10; j<width-10; j++) {
+                            if(map[i,j] == 0) {
+                                if(Random.Range(1,10) < 9) {
+                                    return new Location(direction, i, j);
+                                }
                             }
                         }
                     }
-                }
-                break;
-           case "bottom":
-                for(int i = 3; i<7; i++) {
-                    for(int j=10; j<width-10; j++) {
-                        if(map[i,j] == 0) {
-                             if(Random.Range(1,10) < 2) {
-                                tilemap.SetTile(new Vector3Int(i,j,0), exitTile);
-                                return new Location(location, i, j);
+                    break;
+            case "west":
+                    for(int i = 3; i<7; i++) {
+                        for(int j=10; j<width-10; j++) {
+                            if(map[i,j] == 0) {
+                                if(Random.Range(1,10) < 9) {
+                                    return new Location(direction, i, j);
+                                }
                             }
                         }
                     }
-                }
-                break;
-           case "left":
-                for(int i = 10; i<height-10; i++) {
-                    for(int j=3; j<7; j++) {
-                        if(map[i,j] == 0) {
-                             if(Random.Range(1,10) < 2) {
-                                tilemap.SetTile(new Vector3Int(i,j,0), exitTile);
-                                return new Location(location, i, j);
+                    break;
+            case "south":
+                    for(int i = 10; i<height-10; i++) {
+                        for(int j=3; j<7; j++) {
+                            if(map[i,j] == 0) {
+                                if(Random.Range(1,10) < 9) {
+                                    return new Location(direction, i, j);
+                                }
                             }
                         }
                     }
-                }
-                break;
-           case "right":
-                for(int i = 10; i<height-10; i++) {
-                    for(int j=width-3; j>width-7; j--) {
-                        if(map[i,j] == 0) {
-                             if(Random.Range(1,10) < 2) {
-                                tilemap.SetTile(new Vector3Int(i,j,0), exitTile);
-                                return new Location(location, i, j);
+                    break;
+            case "north":
+                    for(int i = 10; i<height-10; i++) {
+                        for(int j=width-3; j>width-7; j--) {
+                            if(map[i,j] == 0) {
+                                if(Random.Range(1,10) < 9) {
+                                    return new Location(direction, i, j);
+                                    
+                                }
                             }
                         }
                     }
-                }
-                break;
-       }
+                    break;
+        }
         return new Location();
     }
 
-    // End Spawn Location Generation Functions*************************************************************************
-
-    // Begin Unity Init/Looping Functions******************************************************************************
-
-    // Start is called before the first frame update
-    void Start() {
-       map = FillRoomMap(width, height);
-       for(int i=0; i<iterations; i++) {
-           GenerateRoom(seed);
-       }
-       RenderRoom(map, tilemap, wallTile, floorTile);
-       exitLocation = GenerateExitSpawn(map, tilemap, exitTile);
+    Location[] GenerateMultipleExits(int numOfLocations, string[] directions, int[,] map) {
+        Location[] newLocations = new Location[numOfLocations];
+        for(int i=0; i<directions.Length; i++) {
+            newLocations[i] = GenerateExitSpawn(directions[i], map);
+        }
+        return newLocations;
     }
 
-    // Update is called once per frame
-    // void Update() {
-        
-    // }
-    // End Unity Init/Looping Functions********************************************************************************
+    // End Spawn Location Generation Functions*************************************************************************
 }
