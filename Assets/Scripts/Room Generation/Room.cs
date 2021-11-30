@@ -12,12 +12,16 @@ public class Room
     public int height;
     public string seed;
 
-    public Location exitLocation;
+    public int numEnemies;
+    public int numItems;
+
+    public Location[] exitLocations;
 
     // End Variables***************************************************************************************************
 
     // Start Constructors**********************************************************************************************
 
+    //Default Constructor: Builds a "blank" room object
     public Room() {
         this.width = 0;
         this.height = 0;
@@ -25,12 +29,24 @@ public class Room
         this.seed = "none";
     }
 
-    public Room(int width, int height, int[,] map, string seed, Location exitLocation) {
+    // Fully parameterized constructor:
+    //Builds a room with all parameters specified.
+    public Room(
+        int width, 
+        int height, 
+        int[,] map, 
+        string seed, 
+        Location[] exitLocations,
+        int numEnemies,
+        int numItems
+        ) {
         this.width = width;
         this.height = height;
         this.map = map;
         this.seed = seed;
-        this.exitLocation = exitLocation;
+        this.exitLocations = exitLocations;
+        this.numEnemies = numEnemies;
+        this.numItems = numItems;
     }
 
     // End Constructors************************************************************************************************
@@ -54,8 +70,8 @@ public class Room
         return this.seed;
     }
 
-    Location getLocation() {
-        return this.exitLocation;
+    Location[] getLocations() {
+        return this.exitLocations;
     }
 
     void setWidth(int newWidth) {
@@ -74,8 +90,8 @@ public class Room
         this.seed = newSeed;
     }
 
-    void setLocation(Location newExitLocation) {
-        this.exitLocation = newExitLocation;
+    void setLocations(Location[] newExitLocations) {
+        this.exitLocations = newExitLocations;
     }
 
     // End Getter/Setter Functions*************************************************************************************
