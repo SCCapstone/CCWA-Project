@@ -18,6 +18,8 @@ public class Pathfinding
 
     }
 
+    // <params>  are the XY coordinates of both the end goal and the start
+    // <returns>  list of path nodes that are in order from start to finish
     private List<PathNode> FindPath(int startX, int startY, int endX, int endY)
     {
         PathNode startNode = grid.GetNode(startX, startY);
@@ -82,6 +84,8 @@ public class Pathfinding
         return null;
     }
 
+    // <params> vector3 of both the start and end position
+    // <returns>  list of path nodes that are in order from start to finish
     public List<Vector3> FindPath(Vector3 startWorldPosition, Vector3 endWorldPosition)
     {
         grid.GetXY(startWorldPosition, out int startX, out int startY);
@@ -102,6 +106,9 @@ public class Pathfinding
         }
     }
 
+    // generates a list of the adjacent nodes
+    // <params> the selected node
+    // <returns>  A pathnode list of the neighbors of the selected node
     private List<PathNode> GetNeighbourList(PathNode currentNode)
     {
         List<PathNode> neighbourList = new List<PathNode>();
@@ -172,6 +179,7 @@ public class Pathfinding
         return path;
     }
 
+    // calculates the cost of transitioning to from node a to node b
     private int CalculateDistanceCost(PathNode a, PathNode b)
     {
         int xDistance = Mathf.Abs(a.x - b.x);
@@ -180,6 +188,7 @@ public class Pathfinding
         return MOVE_DIAGONAL_COST * Mathf.Min(xDistance, yDistance) + MOVE_STRAIGHT_COST * remaining;
     }
 
+    // returns the pathnode with the lowest F cost from a list of pathnodes
     private PathNode GetLowestFCostNode(List<PathNode> pathNodeList)
     {
         PathNode lowestFCostNode = pathNodeList[0];
