@@ -23,7 +23,7 @@ public class RoomRenderer : MonoBehaviour
 
 
     // Begin Rendering methods*****************************************************************************************
-    void RenderRoom(Room room) {
+    public void RenderRoom(Room room) {
         // Clear the tilemap of any leftover tiles
         tilemap.ClearAllTiles();
         // Iterate over the map; place walls and floors
@@ -55,14 +55,14 @@ public class RoomRenderer : MonoBehaviour
         // be the final functionality of this renderer.
         // TODO: Find a way to load a Room from Floor and attach it to this script
 
-        RoomGenerator generator = new RoomGenerator(true);
+        // RoomGenerator generator = new RoomGenerator(true);
 
-        string[] testDirections = new string[] {
-            "south",
-            "east"
-        };
-        Room testRoom = generator.GenerateRoom("bootymeat", 3, 4, testDirections);
-        RenderRoom(testRoom);
+        // string[] testDirections = new string[] {
+        //     "south",
+        //     "east"
+        // };
+        // Room testRoom = generator.GenerateRoom("bootymeat", 3, 4, testDirections);
+        // RenderRoom(testRoom);
         
     }
 
