@@ -22,9 +22,9 @@ public class Rogue : Character
         
     }
 
-    public void Shadow() {
+    public void shadowMode() {
         if (isEnhanced) {
-            //Do the thing with the thing nickle
+            
         }
     }
 }

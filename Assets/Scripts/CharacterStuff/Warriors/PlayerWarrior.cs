@@ -10,7 +10,7 @@ using UnityEngine.UI;
 * w a s d = movement
 * j = attack
 * u = BERSERK MODE
-*
+* esc = pause
 *----------------
 */
 public class PlayerWarrior : Warrior
