@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Floor : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public string seed;
+    public int[,] floorLayout;
+    public Room[] rooms;
+
+    //Default Constructor
+    public Floor()
     {
-        
+        this.seed = "none";
+        this.floorLayout = new int[1,1];
+        this.rooms = new Room[1];
     }
 
-    // Update is called once per frame
-    void Update()
+    //Full Constructor
+    public Floor(string seed, int[,] floorLayout, Room[] rooms) //TODO add input validation
     {
-        
+        this.seed = seed;
+        this.floorLayout = floorLayout;
+        this.rooms = rooms;
     }
 }
