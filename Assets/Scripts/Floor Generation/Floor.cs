@@ -5,7 +5,6 @@ using UnityEngine;
 public class Floor : MonoBehaviour
 {
     public string seed;
-    public int numRooms;
     public int[,] floorLayout;
     public Room[] rooms;
 
@@ -13,17 +12,15 @@ public class Floor : MonoBehaviour
     public Floor()
     {
         this.seed = "none";
-        this.numRooms = 0;
-        this.floorLayout = new int[numRooms,numRooms];
-        this.rooms = new Room[numRooms];
+        this.floorLayout = new int[1,1];
+        this.rooms = new Room[1];
     }
 
     //Full Constructor
-    public Floor(int numRooms, int[,] floorLayout, string seed, Room[] rooms) //TODO add input validation
+    public Floor(string seed, int[,] floorLayout, Room[] rooms) //TODO add input validation
     {
         this.seed = seed;
-        this.numRooms = numRooms;
-        this.floorLayout = new int[numRooms,numRooms];
+        this.floorLayout = floorLayout;
         this.rooms = rooms;
     }
 }
