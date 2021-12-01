@@ -6,8 +6,8 @@ using UnityEngine;
 public class Location
 {
     private string location;
-    private int locX;
-    private int locY;
+    public int locX;
+    public int locY;
 
     public Location() {
         this.location = "";
@@ -45,4 +45,3 @@ public class Location
         this.locY = newLocY;
     }
 }
-
