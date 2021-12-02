@@ -3,24 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grid <T>{ 
+public class Grid { 
 
     private int width;
     private int height;
     private float cellSize;
-    private T[,] gridArray;
+    private PathNode[,] gridArray;
     private Vector3 originPosition;
 
 
-    private int[,] map = Room.getMap();
+    private int[,] map = GameObject.Find("Grid/Tilemap").GetComponent<FloorGenerator>().GetCurrRoom().getMap();
 
     //the grid is constructed with the width and height of the grid in mind, the position of the origin is also set
-    public Grid(int width, int height, float cellSize, Vector3 originPosition, Func<Grid<T>, int, int, T> createGridObject)
+    public Grid(int width, int height, float cellSize, Vector3 originPosition)
     {
         this.width = width;
         this.height = height;
         this.cellSize = cellSize;
-        gridArray = new T[width, height];
+        gridArray = new PathNode[width, height];
         this.originPosition = originPosition;
         //LayerMask Unwalkable = LayerMask.GetMask("Unwalkable");
 
@@ -28,16 +28,10 @@ public class Grid <T>{
         {
             for (int y=0; y<gridArray.GetLength(1); y++)
             {
-                
-               
-
-                gridArray[x, y] = createGridObject(this, x, y);
+                gridArray[x, y] = new PathNode(this, x, y);
                 if (map[x, y] == 1)
                 {
-                    if(T.GetType() == PathNode.GetType())
-                    {
                         gridArray[x, y].setWalkable(false);
-                    }
                 }
             }
         }
@@ -76,7 +70,7 @@ public class Grid <T>{
     }
 
     //Sets the value of a cell by its coordinates
-    public void SetNode(int x, int y, T value)
+    public void SetNode(int x, int y, PathNode value)
     {
         if (x >= 0 && y >= 0 && x < width && y < height)
         {
@@ -85,25 +79,25 @@ public class Grid <T>{
     }
 
     //Sets the value of a cell by its world position
-    public void SetNode(Vector3 worldPosition, T value)
+    public void SetNode(Vector3 worldPosition, PathNode value)
     {
         int x, y;
         GetXY(worldPosition, out x, out y);
         SetNode(x, y, value);
     }
 
-    public T GetNode(int x, int y)
+    public PathNode GetNode(int x, int y)
     {
         if (x >= 0 && y >= 0 && x < width && y < height)
         {
             return gridArray[x, y];
         } else
         {
-            return default(T);
+            return default(PathNode);
         }
     }
 
-    public T GetNode(Vector3 worldPosition)
+    public PathNode GetNode(Vector3 worldPosition)
     {
         int x, y;
         GetXY(worldPosition, out x, out y);

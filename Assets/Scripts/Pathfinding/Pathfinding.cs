@@ -8,13 +8,13 @@ public class Pathfinding
     private const int MOVE_DIAGONAL_COST = 14;
     private const float CELL_SIZE = 1f;
     
-    private Grid<PathNode> grid;
+    private Grid grid;
     private List<PathNode> openList;
     private List<PathNode> closedList;
 
     public Pathfinding(int width, int height)
     {
-        grid = new Grid<PathNode>(width, height, CELL_SIZE, Vector3.zero, (Grid<PathNode> g, int x, int y) => new PathNode(g, x, y));
+        grid = new Grid(width, height, CELL_SIZE, Vector3.zero);
 
     }
 
