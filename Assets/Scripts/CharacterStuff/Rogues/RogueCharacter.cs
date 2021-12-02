@@ -88,6 +88,10 @@ public class RogueCharacter : Rogue
 
         //loading the amount of stamina a player has
         loadStamina();
+
+        if(health <= 0) {
+            Die();
+        }
     }
 
     void FixedUpdate() {
@@ -119,10 +123,10 @@ public class RogueCharacter : Rogue
     }
 
     //Calculates the damage for the attack
-    public override void Attack(Collider2D collision){
-        if (collision.tag == "Enemy" || collision.tag == "Boss") {
+    public void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Boss") {
             //Gets the instance of the enemy or boss 
-            var enemy = collision.GetComponent<WarriorEnemy>();
+            var enemy = collision.gameObject.GetComponent<WarriorEnemy>();
             
             //calculating the damage done to the enemy
             int damage = attackDmg - enemy.defense;

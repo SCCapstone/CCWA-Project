@@ -19,9 +19,10 @@ public class Character : MonoBehaviour
     public Color spriteColor;
     public SpriteRenderer sRenderer;
      
-    void Start()
+    void Awake()
     {
-        
+        //freezes all characters when colliding
+        gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     
@@ -43,7 +44,7 @@ public class Character : MonoBehaviour
     }
 
     //Damages the health of the character by a amount of points
-    public void DamageHealth (int a) {
+    public virtual void DamageHealth (int a) {
         health -= a;
     }
 

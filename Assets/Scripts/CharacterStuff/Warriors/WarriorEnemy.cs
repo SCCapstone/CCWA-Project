@@ -6,6 +6,7 @@ public class WarriorEnemy : Warrior
 {
     void Awake() {
         base.Awake();
+        defense = 2;
     }
 
     // Update is called once per frame
@@ -18,5 +19,10 @@ public class WarriorEnemy : Warrior
     public override void Die()
     {
         Destroy(gameObject);
+    }
+
+    public override void DamageHealth(int collision)
+    {
+        base.DamageHealth(collision);
     }
 }
