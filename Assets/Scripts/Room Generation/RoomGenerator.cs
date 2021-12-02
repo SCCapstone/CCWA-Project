@@ -9,8 +9,8 @@ using UnityEngine.SceneManagement;
 
 public class RoomGenerator {
     // Begin Variable statements***************************************************************************************
-    public static int width = 25;
-    public static int height = 25;
+    public static int width = Constants.mapWidth;
+    public static int height = Constants.mapHeight;
 
     public static int iterations = 5;
     private int[,] map = new int[height,width];
