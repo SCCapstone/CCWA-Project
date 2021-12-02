@@ -26,6 +26,9 @@ public class RogueCharacter : Rogue
     //Animator for sprite animations
     private Animator animator;
 
+    //Audio Source for sound effects
+    private AudioSource audioSource;
+
     //Heart counter
     public Image[] hearts;
     public GameObject redHeart;
@@ -46,6 +49,7 @@ public class RogueCharacter : Rogue
         rigidB = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         moveSpeed = baseMoveSpeed;
         shadowTimer = shadowMax;
     }
@@ -143,6 +147,7 @@ public class RogueCharacter : Rogue
         //only allows attack if stamina is above 0
         if (Input.GetKeyDown("j") && stamina >= 2) {
             animator.SetBool("attacking", true);
+            audioSource.Play(0);
             attackTime = maxAttackTime;
             StaminaDrain(2);
 

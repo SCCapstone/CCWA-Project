@@ -30,16 +30,15 @@ public class Rogue : Character
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
         
 
+        ColorChange();
         if (allEnemies.Length != 0)
         {
             //disabling their pathfinding script
             if (isEnhanced) {
-                ColorChange();
                 for (int i = 0; i < allEnemies.Length; ++i) {
                     allEnemies[i].GetComponent<EnemyPathfinding>().enabled = false;
                 }
             } else {
-                ColorChange();
                 for (int i = 0; i < allEnemies.Length; ++i) {
                     allEnemies[i].GetComponent<EnemyPathfinding>().enabled = true;
                 }

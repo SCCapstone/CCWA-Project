@@ -27,6 +27,9 @@ public class PlayerWarrior : Warrior
     private Animator animator;
     //private SpriteRenderer sRenderer;
 
+    //Audio Source for sound effects
+    private AudioSource audioSource;
+
     //Heart counter
     public Image[] hearts;
     public GameObject redHeart;
@@ -47,6 +50,7 @@ public class PlayerWarrior : Warrior
         rigidB = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         moveSpeed = baseMoveSpeed;
         berserkTimer = berserkMax;
     }
@@ -144,6 +148,7 @@ public class PlayerWarrior : Warrior
         //only allows attack if stamina is above 0
         if (Input.GetKeyDown("j") && stamina >= 2) {
             animator.SetBool("attacking", true);
+            audioSource.Play(0);
             attackTime = maxAttackTime;
             StaminaDrain(2);
 
