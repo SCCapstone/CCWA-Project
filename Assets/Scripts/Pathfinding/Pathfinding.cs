@@ -6,7 +6,7 @@ public class Pathfinding
 {
     private const int MOVE_STRAIGHT_COST = 10;
     private const int MOVE_DIAGONAL_COST = 14;
-    private const float CELL_SIZE = 1f;
+
     
     private Grid grid;
     private List<PathNode> openList;
@@ -14,7 +14,7 @@ public class Pathfinding
 
     public Pathfinding(int width, int height)
     {
-        grid = new Grid(width, height, CELL_SIZE, Vector3.zero);
+        grid = new Grid(width, height, 10f, Vector3.zero);
 
     }
 
