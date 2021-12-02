@@ -13,18 +13,47 @@ public class Rogue : Character
         stamina = 6.0;
         maxStamina = 6.0;
         attackDmg = 6;
-        defense = 4;        
+        defense = 4;
+        baseMoveSpeed = 10f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
+    // Allows the user to enter a stealth mode. 
+    //Just disables their pathfinding scripts for the time being
     public void shadowMode() {
+        // getting all the enemies on the screen
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        
+
+        if (allEnemies.Length != 0)
+        {
+            //disabling their pathfinding script
+            if (isEnhanced) {
+                ColorChange();
+                for (int i = 0; i < allEnemies.Length; ++i) {
+                    allEnemies[i].GetComponent<EnemyPathfinding>().enabled = false;
+                }
+            } else {
+                ColorChange();
+                for (int i = 0; i < allEnemies.Length; ++i) {
+                    allEnemies[i].GetComponent<EnemyPathfinding>().enabled = true;
+                }
+            }
+        }
+    }
+
+    //changes the color to black for shadowy goodness
+    public override void ColorChange()
+    {
+        base.ColorChange();
         if (isEnhanced) {
-            
+            spriteColor = Color.black;
+            sRenderer.material.color = spriteColor;
         }
     }
 }

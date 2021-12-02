@@ -16,6 +16,8 @@ public class Character : MonoBehaviour
     public float moveSpeed;
     public float baseMoveSpeed = 7f;
     public List<bool> statuses;
+    public Color spriteColor;
+    public SpriteRenderer sRenderer;
      
     void Start()
     {
@@ -72,6 +74,15 @@ public class Character : MonoBehaviour
     //Toggles the character's special state if they have one
     public void ToggleEnhanced() {
         isEnhanced = !isEnhanced;
+    }
+
+    //changes the color of a sprite for status effects
+    public virtual void ColorChange() {
+
+        if (!isEnhanced) {
+            spriteColor = Color.white;
+            sRenderer.material.color = spriteColor;
+        } 
     }
 
     //Deals with the character running out of health

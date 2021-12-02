@@ -25,7 +25,7 @@ public class PlayerWarrior : Warrior
 
     //Animator and sprite renderer for sprite animations
     private Animator animator;
-    private SpriteRenderer sRenderer;
+    //private SpriteRenderer sRenderer;
 
     //Heart counter
     public Image[] hearts;
@@ -89,8 +89,7 @@ public class PlayerWarrior : Warrior
     }
 
     void FixedUpdate() {
-        Move();
-        
+        Move();  
     }
 
     //Getting and setting the user inputs for movement

@@ -23,9 +23,8 @@ public class RogueCharacter : Rogue
     private Rigidbody2D rigidB;
     private Vector2 moveDirection;
 
-    //Animator and sprite renderer for sprite animations
+    //Animator for sprite animations
     private Animator animator;
-    private SpriteRenderer sRenderer;
 
     //Heart counter
     public Image[] hearts;
@@ -62,13 +61,12 @@ public class RogueCharacter : Rogue
         }
 
         if(isEnhanced) {
-
             if (shadowTimer > 0) {
                 shadowTimer -= Time.deltaTime;
             } else {
                 //Set back to false
                 ToggleEnhanced();
-                //Set back to base stats
+                //Re-enable enemy pathfinding
                 shadowMode();
                 //reset the timer
                 shadowTimer = shadowMax;
