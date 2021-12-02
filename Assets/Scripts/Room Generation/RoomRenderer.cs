@@ -7,7 +7,8 @@ public class RoomRenderer : MonoBehaviour
 {
 
     // Begin Variables*************************************************************************************************
-    public Tilemap tilemap;
+    public Tilemap floorMap;
+    public Tilemap wallMap;
     public TileBase floorTile;
     public TileBase wallTile;
     public TileBase exitTile;
@@ -25,17 +26,18 @@ public class RoomRenderer : MonoBehaviour
     // Begin Rendering methods*****************************************************************************************
     public void RenderRoom(Room room) {
         // Clear the tilemap of any leftover tiles
-        tilemap.ClearAllTiles();
+        floorMap.ClearAllTiles();
+        wallMap.ClearAllTiles();
         // Iterate over the map; place walls and floors
         for(int i=0; i<room.height; i++) {
             for(int j=0; j<room.width; j++) {
                 switch(room.map[i,j]) {
                     case 0:
-                        tilemap.SetTile(new Vector3Int(i,j,0), floorTile);
+                        floorMap.SetTile(new Vector3Int(i,j,0), floorTile);
                         break;
 
                     case 1:
-                        tilemap.SetTile(new Vector3Int(i,j,0), wallTile);
+                        wallMap.SetTile(new Vector3Int(i,j,0), wallTile);
                         break;
                 }
             }
@@ -43,7 +45,7 @@ public class RoomRenderer : MonoBehaviour
         // Iterate again; place exit locations
         for(int i=0; i<room.exitLocations.Length; i++) {
             Location l = room.exitLocations[i];
-            tilemap.SetTile(new Vector3Int(l.locX, l.locY,0), exitTile);
+            floorMap.SetTile(new Vector3Int(l.locX, l.locY,0), exitTile);
         }
     }
     // End Rendering methdos*******************************************************************************************
