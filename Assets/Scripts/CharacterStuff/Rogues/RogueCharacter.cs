@@ -118,7 +118,7 @@ public class RogueCharacter : Rogue
     public override void Attack(Collider2D collision){
         if (collision.tag == "Enemy" || collision.tag == "Boss") {
             //Gets the instance of the enemy or boss 
-            var enemy = collision.GetComponent<Character>();
+            var enemy = collision.GetComponent<WarriorEnemy>();
             
             //calculating the damage done to the enemy
             int damage = attackDmg - enemy.defense;
@@ -132,7 +132,7 @@ public class RogueCharacter : Rogue
             }
             
             //Kills the enemy if their health is less 0
-            if (enemy.health < 0) {
+            if (enemy.health <= 0) {
                 enemy.Die();
             }
         }

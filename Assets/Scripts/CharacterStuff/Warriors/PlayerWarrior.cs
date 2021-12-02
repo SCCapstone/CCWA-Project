@@ -133,7 +133,7 @@ public class PlayerWarrior : Warrior
             }
             
             //Kills the enemy if their health is less 0
-            if (enemy.health < 0) {
+            if (enemy.health <= 0) {
                 enemy.Die();
             }
         }

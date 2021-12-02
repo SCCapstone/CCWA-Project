@@ -17,9 +17,6 @@ public class WarriorEnemy : Warrior
     //Kills the enemy
     public override void Die()
     {
-        if (health <= 0) {
-            Destroy(gameObject);
-        }
-
+        Destroy(gameObject);
     }
 }

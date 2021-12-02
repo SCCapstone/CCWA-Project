@@ -31,7 +31,7 @@ public class Character : MonoBehaviour
     }
 
     //Is the base form of attack for the character. Ready to be overriden
-    public virtual void Attack(Collider2D collision) {}
+    public virtual void Attack(BoxCollider2D collision) {}
 
     //Recovers the health of the character by a amount of points
     public void HealHealth (int a){
