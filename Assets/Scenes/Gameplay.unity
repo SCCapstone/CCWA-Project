@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 8465816}
   - component: {fileID: 8465815}
   - component: {fileID: 8465817}
+  - component: {fileID: 8465818}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -251,20 +252,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 8465813}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa6a3474d591a3646bf82461b14751ef, type: 3}
+  m_Script: {fileID: 11500000, guid: 34ea737afdb61d94f8e775ee1e44217c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 25
-  height: 25
-  iterations: 0
-  seed: 
-  useSeed: 0
-  numEnemies: 0
-  numItems: 0
   tilemap: {fileID: 8465816}
   floorTile: {fileID: 11400000, guid: ecb9f2eddc717444fa3d4b284af13e13, type: 2}
-  wallTile: {fileID: 11400000, guid: f6339619c52ae144d9a0b668f7507b17, type: 2}
-  exitTile: {fileID: 11400000, guid: 799d2081e6cd32a4b8d75dbdb5759b05, type: 2}
+  wallTile: {fileID: 11400000, guid: 799d2081e6cd32a4b8d75dbdb5759b05, type: 2}
+  exitTile: {fileID: 11400000, guid: 4506f97329841e84fb979fbd0b998824, type: 2}
+--- !u!114 &8465818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8465813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27eafab6d9045c34ea344fbdeaddd451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numRooms: 4
+  seed: Bootymeat
 --- !u!1 &683472129
 GameObject:
   m_ObjectHideFlags: 0

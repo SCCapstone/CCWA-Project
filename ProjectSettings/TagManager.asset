@@ -6,6 +6,13 @@ TagManager:
   tags:
   - InformationText
   - Counter
+  - Hearts
+  - redheart
+  - blackheart
+  - staminapotion
+  - staminaicon
+  - emptypotion
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -43,9 +50,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: New Layer
-    uniqueID: 1319908707
-    locked: 0
   - name: Background(text)
     uniqueID: 4046804341
+    locked: 0
+  - name: Player
+    uniqueID: 1319908707
     locked: 0

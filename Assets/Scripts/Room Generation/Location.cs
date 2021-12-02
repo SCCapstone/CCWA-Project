@@ -45,4 +45,3 @@ public class Location
         this.locY = newLocY;
     }
 }
-
