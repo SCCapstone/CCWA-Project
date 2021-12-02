@@ -32,7 +32,7 @@ public class EnemyPathfinding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!(pathVectorList.Count == 0) || (pathVectorList==null))
+        if(!(pathVectorList == null) && !(pathVectorList.Count == 0) )
         {
             float step = speed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, pathVectorList[0], step);
