@@ -11,6 +11,7 @@ public class Grid <T>{
     private T[,] gridArray;
     private Vector3 originPosition;
 
+
     private int[,] map = Room.getMap();
 
     //the grid is constructed with the width and height of the grid in mind, the position of the origin is also set
@@ -27,9 +28,8 @@ public class Grid <T>{
         {
             for (int y=0; y<gridArray.GetLength(1); y++)
             {
-                //TODO CHECK FOR WALKABILITY AND MARK THOSE NODES BY CHECKING FOR OBJECTS WITHIN THE FOR IT TO BE UNWALKABLE
-                //Vector3 gridObjectPosition = new Vector3(x, y, 0);
-                //bool walkable = !(Physics.CheckSphere(GrPosition,))
+                
+               
 
                 gridArray[x, y] = createGridObject(this, x, y);
                 if (map[x, y] == 1)
