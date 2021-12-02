@@ -5,8 +5,9 @@ using UnityEngine;
 public class EnemyPathfinding : MonoBehaviour
 {
     private Transform target;
-    public int WidthOfGrid;
-    public int HeightOfGrid;
+    private int WidthOfGrid = Constants.mapWidth;
+    private int HeightOfGrid = Constants.mapHeight;
+    
 
     public int speed;
     

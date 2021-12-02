@@ -45,6 +45,11 @@ public class PathNode
         fCost = gCost + hCost;
     }
 
+    public void setWalkable(bool walk)
+    {
+        isWalkable = walk;
+    }
+
     public override string ToString()
     {
         return x+","+y;
