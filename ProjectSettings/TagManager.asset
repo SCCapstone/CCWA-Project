@@ -12,6 +12,7 @@ TagManager:
   - staminapotion
   - staminaicon
   - emptypotion
+  - Enemy
   layers:
   - Default
   - TransparentFX
