@@ -29,12 +29,23 @@ public class Warrior : Character
         if (isEnhanced) {
             attackDmg = attackDmg*2;
             defense = defense/2;
+            ColorChange();
         } else {
             //reverting back to base stats
             attackDmg = 8;
             defense = 6;
+            ColorChange();
         }
-       
+    }
+
+    //change the color to a bright pink
+    public override void ColorChange()
+    {
+        base.ColorChange();
+        if (isEnhanced) {
+            spriteColor = Color.red;
+            sRenderer.material.color = spriteColor;
+        }
     }
 
 

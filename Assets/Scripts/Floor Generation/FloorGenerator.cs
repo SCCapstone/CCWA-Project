@@ -6,6 +6,8 @@ using UnityEngine;
 public class FloorGenerator : MonoBehaviour
 {
     public int numRooms = 10;
+    public int currRoomIdx = 0;
+    public Floor currFloor;
     public string seed = "";
     public System.Random rand;
     private RoomGenerator roomGenerator;
@@ -244,13 +246,23 @@ public class FloorGenerator : MonoBehaviour
         Debug.Log(lineString);
 	}
 
+    public Floor GetCurrFloor()
+    {
+        return this.currFloor;
+    }
+
+    public Room GetCurrRoom()
+    {
+        return this.GetCurrFloor().rooms[this.currRoomIdx];
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("start");
         RoomRenderer renderer = this.gameObject.GetComponent<RoomRenderer>();
-        Floor floor = GenerateFloor(this.seed);
-        printFloor(floor.floorLayout);
-        renderer.RenderRoom(floor.rooms[3]);
+        this.currFloor = GenerateFloor(this.seed);
+        printFloor(this.currFloor.floorLayout);
+        renderer.RenderRoom(this.GetCurrRoom());
     }
 }
