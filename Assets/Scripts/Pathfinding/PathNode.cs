@@ -11,10 +11,12 @@ public class PathNode
     public int gCost;
     public int hCost;
     public int fCost;
-
+    
     public bool isWalkable;
+    //keeps track of the node previously that was in transition
     public PathNode cameFromNode;
 
+   
     public PathNode(Grid<PathNode> grid, int x, int y)
     { 
         this.grid = grid;
@@ -23,6 +25,9 @@ public class PathNode
         isWalkable = true;
     }
 
+    // calculates the FCost which is the g Cost and h Cost summed togther
+    // g Cost is the distance to the start node
+    // h Cost is the distance to the end node
     public void CalculateFCost()
     {
         fCost = gCost + hCost;

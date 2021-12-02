@@ -47,14 +47,14 @@ public class Grid <T>{
     }
     
 
-
+    // gets the world postion of from the x y as a vector 3
     private Vector3 GetWorldPosition (int x, int y)
     {
         return new Vector3(x, y) * cellSize+ originPosition;
     }
     
 
-
+    //gets the x y coordinantes from a vector 3
     public void GetXY(Vector3 worldPosition, out int x, out int y)
     {
         x = Mathf.FloorToInt((worldPosition - originPosition).x/ cellSize);
