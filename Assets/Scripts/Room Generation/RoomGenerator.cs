@@ -96,10 +96,7 @@ public class RoomGenerator {
          for(int i=0; i<height; i++) {
             for(int j=0; j<width; j++) {
                 int numNeighbors = CalcNeighbors(i,j);
-                if(numNeighbors <= 2) {
-                    newMap[i,j] = 0;
-                }
-                else if(numNeighbors > 2) {
+                if(numNeighbors >= 2) {
                     newMap[i,j] = 1;
                 }
             }  
@@ -111,7 +108,7 @@ public class RoomGenerator {
         // Generate a randomly filled Room map
         // Iterate over map to create a Room
         //int[,] newRoomMap = IterateOverRoom(FillRoomMap(seed));
-        int[,] newRoomMap = FillRoomMap(seed);
+        int[,] newRoomMap = IterateOverRoom(FillRoomMap(seed));
         //int [,] finalMap = IterateOverRoom(newRoomMap);
         // Generate multiple exit locations for the room, given an array of directions
         Location[] exitLocations = GenerateMultipleExits(directions.Length, directions, newRoomMap);
