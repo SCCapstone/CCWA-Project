@@ -24,7 +24,7 @@ public class PathNode
         this.y = y;
         isWalkable = true;
     }
-<<<<<<< HEAD:Assets/Pathfinding/PathNode.cs
+
     /*
     public PathNode(Grid<PathNode> grid, int x, int y,bool isWalkable)
     {
@@ -34,12 +34,12 @@ public class PathNode
         this.isWalkable = isWalkable;
     }
     */
-=======
+
 
     // calculates the FCost which is the g Cost and h Cost summed togther
     // g Cost is the distance to the start node
     // h Cost is the distance to the end node
->>>>>>> main:Assets/Scripts/Pathfinding/PathNode.cs
+
     public void CalculateFCost()
     {
         fCost = gCost + hCost;
