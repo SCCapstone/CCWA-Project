@@ -62,7 +62,7 @@ public class Room
         return this.height;
     }
 
-    int[,] getMap() {
+    public int[,] getMap() {
         return this.map;
     }
 

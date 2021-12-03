@@ -6,6 +6,8 @@ using UnityEngine;
 //Holds all global constants needed to run the game
 public class Constants : ScriptableObject
 { 
+    public const int mapHeight = 25;
+    public const int mapWidth = 25;
     public const int MAX_HEALTH = 100;
     public const int MAX_STAMINA = 100;
     public const int MAX_FLOOR_NUM = 10;
