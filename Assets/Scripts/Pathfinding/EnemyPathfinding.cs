@@ -31,6 +31,7 @@ public class EnemyPathfinding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if(!(pathVectorList == null) && !(pathVectorList.Count == 0) )
         {
             float step = speed * Time.deltaTime;
