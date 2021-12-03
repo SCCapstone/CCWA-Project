@@ -80,8 +80,7 @@ public class PlayerWarrior : Warrior
         }
 
         //Allows the user to attack
-        callAttack();
-
+        attack();
 
         //Stamina regeneration
         StartCoroutine("RegenStamina");
@@ -121,7 +120,7 @@ public class PlayerWarrior : Warrior
     }
 
     //Calculates the damage for the attack
-    public void OnCollisionEnter2D(Collision2D collision){
+    /*public void OnCollisionEnter2D(Collision2D collision){
         if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Boss") {
             //Gets the instance of the enemy or boss 
             var enemy = collision.gameObject.GetComponent<WarriorEnemy>();
@@ -142,10 +141,10 @@ public class PlayerWarrior : Warrior
                 enemy.Die();
             }
         }
-    }
+    }*/
 
     //Lets the player character attack
-    public void callAttack() {
+    public void attack() {
         //only allows attack if stamina is above 0
         if (Input.GetKeyDown("j") && stamina >= 2) {
             animator.SetBool("attacking", true);
