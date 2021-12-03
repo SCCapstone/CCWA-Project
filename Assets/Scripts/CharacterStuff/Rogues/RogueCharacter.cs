@@ -56,6 +56,7 @@ public class RogueCharacter : Rogue
         pauseScreen.SetActive(false);
         moveSpeed = baseMoveSpeed;
         shadowTimer = shadowMax;
+        name = "rogue";
     }
     
     void Update() {
