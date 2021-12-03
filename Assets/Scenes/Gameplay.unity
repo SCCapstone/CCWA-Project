@@ -274,7 +274,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numRooms: 4
   currRoomIdx: 0
-  currFloor: {fileID: 0}
   seed: Bootymeat
 --- !u!1 &63937048
 GameObject:
@@ -320,7 +319,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &323040579
+--- !u!1001 &178099495
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -333,15 +332,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3407287002273714763, guid: d376c2a1f53ad7c4c86f8fe42d5d0d72, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3407287002273714763, guid: d376c2a1f53ad7c4c86f8fe42d5d0d72, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 1.3820755
       objectReference: {fileID: 0}
     - target: {fileID: 3407287002273714763, guid: d376c2a1f53ad7c4c86f8fe42d5d0d72, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: 2.193901
       objectReference: {fileID: 0}
     - target: {fileID: 3407287002273714763, guid: d376c2a1f53ad7c4c86f8fe42d5d0d72, type: 3}
       propertyPath: m_LocalPosition.z
@@ -517,7 +516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8784097646283919471, guid: d9f504a899db51b4e9e9229495f1bce8, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8784097646283919471, guid: d9f504a899db51b4e9e9229495f1bce8, type: 3}
       propertyPath: m_LocalPosition.x
