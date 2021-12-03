@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Variables:ScriptableObject
 {
-    public static bool wonGame = true;
+    public static bool wonGame = false;
     public static bool isPaused = false;
 
     //File Stuff
