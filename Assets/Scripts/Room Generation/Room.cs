@@ -67,6 +67,7 @@ public class Room
     }
 
     public int[,] getMap() {
+        Debug.Log("this.map");
         return this.map;
     }
 
