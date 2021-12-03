@@ -43,6 +43,9 @@ public class SwordAttacks : MonoBehaviour
             if (enemy.health <= 0) {
                 enemy.Die();
             }
+            
+            //updates enemy health bar
+            enemy.healthBar.transform.localScale = new Vector3((float)enemy.health / 10, enemy.healthBar.transform.localScale.y, enemy.healthBar.transform.localScale.x);
         }
     }
 }
