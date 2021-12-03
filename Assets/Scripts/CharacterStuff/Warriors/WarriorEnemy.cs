@@ -38,7 +38,7 @@ public class WarriorEnemy : Warrior
                 
               //  playerCharacter = collision.GetComponent<RogueCharacter>();
             }
-              
+            */
             //calculating the damage done to player
             int damage = attackDmg - playerCharacter.defense;
 
