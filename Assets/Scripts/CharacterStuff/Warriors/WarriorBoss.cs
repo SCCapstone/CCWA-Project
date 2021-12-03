@@ -32,7 +32,6 @@ public class WarriorBoss : WarriorEnemy
     public override void DamageHealth(int damage)
     {
         base.DamageHealth(damage);
-        bossUI.GetComponent<Slider>().value = health;
     }
 
     void BossDisplay()
