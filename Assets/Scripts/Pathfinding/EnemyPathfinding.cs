@@ -19,7 +19,6 @@ public class EnemyPathfinding : MonoBehaviour
         enemyAi = new Pathfinding(WidthOfGrid, HeightOfGrid);
         pathVectorList = null;
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        pathVectorList = enemyAi.FindPath(GetPostion(), GetTargetPosition());
         InvokeRepeating("Chasing", 2.0f, 0.3f);
 
     }

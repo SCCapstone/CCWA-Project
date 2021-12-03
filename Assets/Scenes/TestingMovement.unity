@@ -4513,6 +4513,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerRogueUpdated
       objectReference: {fileID: 0}
+    - target: {fileID: 4457663262648143239, guid: 3f22809e6a064784fbaa35ce8a5846ee, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4457663262648143242, guid: 3f22809e6a064784fbaa35ce8a5846ee, type: 3}
       propertyPath: m_RootOrder
       value: 3
