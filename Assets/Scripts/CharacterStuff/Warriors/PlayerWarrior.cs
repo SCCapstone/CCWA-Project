@@ -55,6 +55,7 @@ public class PlayerWarrior : Warrior
         pauseScreen.SetActive(false);
         moveSpeed = baseMoveSpeed;
         berserkTimer = berserkMax;
+        Variables.characterType = "warrior";
     }
     
     void Update() {

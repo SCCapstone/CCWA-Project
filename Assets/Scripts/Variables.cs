@@ -17,5 +17,7 @@ public class Variables:ScriptableObject
     public static string playerClass;
     public static int floorNum;
     public static string floorSeed;
+
+    public static string characterType;
     
 }
