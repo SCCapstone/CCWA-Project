@@ -15,6 +15,7 @@ public class RoomRenderer : MonoBehaviour
     public TileBase exitTile;
     public GameObject attackUp;
     public GameObject health;
+    public GameObject enemy;
     public Room currentRoom;
     // End Variables***************************************************************************************************
 
@@ -29,6 +30,7 @@ public class RoomRenderer : MonoBehaviour
     // Begin Rendering methods*****************************************************************************************
     public void RenderRoom(Room room) {
         // Clear the tilemap of any leftover tiles
+        Debug.Log(room.seed);
         floorMap.ClearAllTiles();
         wallMap.ClearAllTiles();
         itemMap.ClearAllTiles();
@@ -57,14 +59,19 @@ public class RoomRenderer : MonoBehaviour
             Location l = room.itemLocations[i];
             if(room.map[l.locX, l.locY] != 1) {
                 if(i%2 == 0) {  //health
-                    //itemMap.SetTile(new Vector3Int(l.locX, l.locY,0), healthTile);
                     Instantiate(health, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
                 }
                 else {  //attack up
-                    //itemMap.SetTile(new Vector3Int(l.locX, l.locY, 0), attackUpTile);
                     Instantiate(attackUp, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
                 }
             }
+        }
+        Debug.Log(room.enemyLocations);
+        //Iterate to generate enemy spawns
+        for(int i=0; i<room.enemyLocations.Length; i++) {
+            
+            Location l = room.enemyLocations[i];
+            Instantiate(enemy, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
         }
     }
     // End Rendering methdos*******************************************************************************************
