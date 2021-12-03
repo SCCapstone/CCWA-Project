@@ -228,4 +228,7 @@ public class RogueCharacter : Rogue
         SceneManager.LoadScene("GameOver");
     }
 
+    public void Pause() {
+        Time.timeScale = 0;
+    }
 }
