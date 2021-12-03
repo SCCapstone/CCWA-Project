@@ -77,10 +77,5 @@ public class Tutorial : MonoBehaviour
             
         }
     }
-    
-    //Takes you back to the settings screen
-    public void mainBackBtn() {
-        SceneManager.LoadScene("Settings");
-    }
 }
 
