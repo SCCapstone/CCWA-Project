@@ -219,6 +219,7 @@ public class RogueCharacter : Rogue
     }
 
     public override void Die() {
+        Variables.wonGame = false;
         SceneManager.LoadScene("GameOver");
     }
 

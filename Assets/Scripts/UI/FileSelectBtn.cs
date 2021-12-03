@@ -18,7 +18,7 @@ public class FileSelectBtn : MonoBehaviour
     public void LoadFile()
     {
         GameObject fileSelect = GameObject.Find("FileSelect");
-        FileManager fileManager = fileSelect.GetComponent<FileManager>();
+        FileManager fileManager = GameObject.Find("FileManager").GetComponent<FileManager>();
         bool success = fileManager.LoadFile(filenum);
         if(success)
         {
@@ -31,7 +31,11 @@ public class FileSelectBtn : MonoBehaviour
             //TODO load gameplay with stored run
         } else
         {
-            /*SceneManager.LoadScene("NewCharacter")*/
+            if(Variables.newGame)
+            {
+                SceneManager.LoadScene("Tutorial");
+            }
+            SceneManager.LoadScene("New Run");
         }
     }
 

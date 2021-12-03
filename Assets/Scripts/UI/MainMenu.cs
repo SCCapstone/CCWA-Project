@@ -9,12 +9,13 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public void NewGame() {
-        Debug.Log("this loads the new game scene");
-        /*SceneManager.LoadScene("NewCharacter")*/
+        Variables.newGame = true;
+        SceneManager.LoadScene("File Select");
     }
 
     public void LoadGame() {
-        /*SceneManager.LoadScene("FileSelect")*/
+        Variables.newGame = false;
+        SceneManager.LoadScene("File Select");
     }
 
     public void Settings() {
