@@ -29,12 +29,9 @@ public class FileSelectBtn : MonoBehaviour
         if(inRun)
         {
             //TODO load gameplay with stored run
+            SceneManager.LoadScene("Gameplay");
         } else
         {
-            if(Variables.newGame)
-            {
-                SceneManager.LoadScene("Tutorial");
-            }
             SceneManager.LoadScene("New Run");
         }
     }
