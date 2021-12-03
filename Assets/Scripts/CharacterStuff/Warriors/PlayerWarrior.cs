@@ -124,30 +124,6 @@ public class PlayerWarrior : Warrior
         }
     }
 
-    //Calculates the damage for the attack
-    /*public void OnCollisionEnter2D(Collision2D collision){
-        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Boss") {
-            //Gets the instance of the enemy or boss 
-            var enemy = collision.gameObject.GetComponent<WarriorEnemy>();
-            
-            //calculating the damage done to the enemy
-            int damage = attackDmg - enemy.defense;
-
-            //Damages the enemy's health via the player's attackDmg value
-            if (damage <= 0) {
-                //Always do at least one damage to an enemy
-                enemy.DamageHealth(1);
-            } else {
-                enemy.DamageHealth(damage);
-            }
-            
-            //Kills the enemy if their health is less 0
-            if (enemy.health <= 0) {
-                enemy.Die();
-            }
-        }
-    }*/
-
     //Lets the player character attack
     public void attack() {
         //only allows attack if stamina is above 0

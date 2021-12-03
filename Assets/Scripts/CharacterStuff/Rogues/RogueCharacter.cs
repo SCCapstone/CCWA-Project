@@ -43,7 +43,7 @@ public class RogueCharacter : Rogue
     public float attackTime = .35f;
     public float maxAttackTime = .35f; 
 
-    
+    //ABSTRACT SOME THINGS L8R  
     void Awake() {
         base.Awake();
         rigidB = GetComponent<Rigidbody2D>();
@@ -56,6 +56,11 @@ public class RogueCharacter : Rogue
     
     void Update() {
         AssignWASD();
+
+     if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Pause Screen");
+        }
 
         //Enters the player character into berserk mode
         if (Input.GetKeyDown("u")) {
@@ -223,4 +228,7 @@ public class RogueCharacter : Rogue
         SceneManager.LoadScene("GameOver");
     }
 
+    public void Pause() {
+        Time.timeScale = 0;
+    }
 }

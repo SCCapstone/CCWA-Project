@@ -11,12 +11,18 @@ using UnityEngine;
  */
 public class FileDisplayer : MonoBehaviour
 {
+
+    void Awake()
+    {
+        DisplayFiles();
+    }
+
     //Gets the file data for each file and displays it on the file select screen
     public void DisplayFiles()
     {
         int[] VALID_FILE_NUMS = Constants.VALID_FILE_NUMS;
         GameObject fileSelect = GameObject.Find("FileSelect");
-        FileManager fileManager = fileSelect.GetComponent<FileManager>();
+        FileManager fileManager = GameObject.Find("FileManager").GetComponent<FileManager>();
 
         for(int i = 0; i < VALID_FILE_NUMS.Length; i++)
         {

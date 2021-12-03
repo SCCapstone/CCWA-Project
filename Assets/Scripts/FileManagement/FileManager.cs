@@ -5,6 +5,7 @@ using System.IO;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //TODO Make Tests for FileManager
 /*
@@ -32,6 +33,12 @@ public class FileManager : MonoBehaviour
     int files_length;
     private FileData[] Files;
     public int CurrFile;
+
+    void Awake()
+    {
+        Debug.Log(SceneManager.GetActiveScene().name);
+        DontDestroyOnLoad(this);
+    }
 
     //Start is called before the first frame update
     void Start()
@@ -67,11 +74,11 @@ public class FileManager : MonoBehaviour
                 Files[i] = file.LoadFromYAML();
             }
         }
+    }
 
-        //Display the current loaded files on file select screen
-        GameObject fileSelect = GameObject.Find("FileSelect");
-        FileDisplayer fileDisplayer = fileSelect.GetComponent<FileDisplayer>();
-        fileDisplayer.DisplayFiles();
+    void Update()
+    {
+
     }
 
     //Loads the file associated with the filenum
