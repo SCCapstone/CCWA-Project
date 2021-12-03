@@ -505,21 +505,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 300118254}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc9119abaed594ff38c99b1aba31d9db, type: 3}
+  m_Script: {fileID: 11500000, guid: 082ea65f2ad874f30a457b03b11aa2b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  achievementDescriptions:
-  - Achievement 1 description
-  - Achievement 2 description
-  allButtons: []
-  achievementButtons: []
-  achievementNames: []
-  currentActiveAchievementIndex: 0
-  currAchievementText: {fileID: 0}
-  nonAchievementButtonNames:
-  - BackBtn
-  - NavRightBtn
-  - NavLeftBtn
+  victory: {fileID: 129191511}
+  failure: {fileID: 863184670}
 --- !u!1 &386846767
 GameObject:
   m_ObjectHideFlags: 0
@@ -2134,7 +2124,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 300118256}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Achievements, Assembly-CSharp
         m_MethodName: mainBackBtn
         m_Mode: 1
