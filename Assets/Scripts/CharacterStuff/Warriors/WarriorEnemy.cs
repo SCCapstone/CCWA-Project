@@ -29,21 +29,14 @@ public class WarriorEnemy : Warrior
         var collision = collidedWith.collider;
         if (collision.tag == "Player") {
             //Gets the instance of player
-            var playerCharacter = collision.GetComponent<PlayerWarrior>();
+            var playerCharacter = collision.GetComponent<RogueCharacter>();
             
             Debug.Log(playerCharacter);
             if (playerCharacter == null) {
                 
               //  playerCharacter = collision.GetComponent<RogueCharacter>();
             }
-            
-            
-            //Debug.Log(playerCharacter);
-            if (Variables.characterType == "warrior") 
-            {
-                var playerCharacter = collision.GetComponent<PlayerWarrior>();
-            }
-            */
+              
             //calculating the damage done to player
             int damage = attackDmg - playerCharacter.defense;
 
