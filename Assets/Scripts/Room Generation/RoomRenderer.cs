@@ -16,7 +16,7 @@ public class RoomRenderer : MonoBehaviour
     // End Variables***************************************************************************************************
 
     // Begin Setters***************************************************************************************************
-    void setCurrentRoom(Room newRoom) {
+    public void setCurrentRoom(Room newRoom) {
         this.currentRoom = newRoom;
     }
 

@@ -12,11 +12,21 @@ public class PathfindingGrid {
     private Vector3 originPosition;
 
 
-    private int[,] map = GameObject.Find("PathfindingGrid/Floor map").GetComponent<FloorGenerator>().GetCurrRoom().getMap();
+    private int[,] map;
 
     //the PathfindingGrid is constructed with the width and height of the PathfindingGrid in mind, the position of the origin is also set
     public PathfindingGrid(int width, int height, float cellSize, Vector3 originPosition)
     {
+        GameObject fm = GameObject.Find("Grid/Floor Map");
+        RoomRenderer rr = fm.GetComponent<RoomRenderer>();
+        Room cr = rr.currentRoom;
+        // while(cr is null)
+        // {
+        //     cr = rr.currentRoom;
+        //     Debug.Log("say something im giving up on you");
+        // }
+        Debug.Log(cr is null);
+        map = cr.getMap();
         this.width = width;
         this.height = height;
         this.cellSize = cellSize;

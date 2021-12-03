@@ -22,17 +22,6 @@ public class FloorGenerator : MonoBehaviour
         }
         rand = new System.Random(this.seed.GetHashCode());
     }
-
-    void Awake()
-    {
-        if(!string.IsNullOrEmpty(seed))
-        {
-            this.seed = seed;
-            roomGenerator = new RoomGenerator(true);
-        }
-        rand = new System.Random(this.seed.GetHashCode());
-    }
-
     private int[,] GenerateFloorLayout(string seed)
     {
         int[,] floorLayout = new int[this.numRooms, this.numRooms];
@@ -211,7 +200,7 @@ public class FloorGenerator : MonoBehaviour
             }
         }
 
-        printExitFloor(exitsLayout);
+        // printExitFloor(exitsLayout);
         
         //Makes the floor with the room and layout
         Floor floor = new Floor(seed, floorLayout, rooms);
@@ -257,12 +246,20 @@ public class FloorGenerator : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        Debug.Log("start");
+        if (!string.IsNullOrEmpty(seed))
+        {
+            this.seed = seed;
+            roomGenerator = new RoomGenerator(true);
+        }
+        rand = new System.Random(this.seed.GetHashCode());
+        
+        // Debug.Log("start");
         RoomRenderer renderer = this.gameObject.GetComponent<RoomRenderer>();
         this.currFloor = GenerateFloor(this.seed);
-        printFloor(this.currFloor.floorLayout);
+        // printFloor(this.currFloor.floorLayout);
+        renderer.setCurrentRoom(this.GetCurrRoom());
         renderer.RenderRoom(this.GetCurrRoom());
     }
 }
