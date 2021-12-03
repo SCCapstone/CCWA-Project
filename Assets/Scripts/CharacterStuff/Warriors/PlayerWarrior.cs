@@ -239,6 +239,7 @@ public class PlayerWarrior : Warrior
     }
 
     public override void Die() {
+        Variables.wonGame = false;
         SceneManager.LoadScene("Game Over");
     }
 }

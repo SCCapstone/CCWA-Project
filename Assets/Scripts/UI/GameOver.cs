@@ -13,7 +13,7 @@ public class GameOver : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        loadScreen(Variables.wonGame);
     }
 
     // Update is called once per frame
@@ -21,10 +21,10 @@ public class GameOver : MonoBehaviour
     {
         
     }
-    public void loadScreen(bool didWin)
+    public void loadScreen(bool wonGame)
     {
-        victory.SetActive(didWin);
-        failure.SetActive(!didWin);
+        victory.SetActive(wonGame);
+        failure.SetActive(!wonGame);
     }
 
     public void quitButton()
