@@ -19,14 +19,13 @@ public class Character : MonoBehaviour
     public Color spriteColor;
     public SpriteRenderer sRenderer;
      
-    void Awake()
+    public void Awake()
     {
         //freezes all characters when colliding
         gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
 
     }
-
-    
+ 
     void Update()
     {
 

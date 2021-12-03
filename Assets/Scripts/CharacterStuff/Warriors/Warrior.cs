@@ -9,6 +9,7 @@ public class Warrior : Character
     public void Awake()
     {
     //Setting base warrior stats
+    base.Awake();
     health = 8;
     maxHealth = 8;
     stamina = 3.0;
