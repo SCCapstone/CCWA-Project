@@ -3,35 +3,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grid { 
+public class PathfindingGrid { 
 
     private int width;
     private int height;
     private float cellSize;
-    private PathNode[,] gridArray;
+    private PathNode[,] PathfindingGridArray;
     private Vector3 originPosition;
 
 
-    private int[,] map = GameObject.Find("Grid/Tilemap").GetComponent<FloorGenerator>().GetCurrRoom().getMap();
+    private int[,] map = GameObject.Find("PathfindingGrid/Tilemap").GetComponent<FloorGenerator>().GetCurrRoom().getMap();
 
-    //the grid is constructed with the width and height of the grid in mind, the position of the origin is also set
-    public Grid(int width, int height, float cellSize, Vector3 originPosition)
+    //the PathfindingGrid is constructed with the width and height of the PathfindingGrid in mind, the position of the origin is also set
+    public PathfindingGrid(int width, int height, float cellSize, Vector3 originPosition)
     {
         this.width = width;
         this.height = height;
         this.cellSize = cellSize;
-        gridArray = new PathNode[width, height];
+        PathfindingGridArray = new PathNode[width, height];
         this.originPosition = originPosition;
         //LayerMask Unwalkable = LayerMask.GetMask("Unwalkable");
 
-        for (int x= 0; x<gridArray.GetLength(0); x++)
+        for (int x= 0; x<PathfindingGridArray.GetLength(0); x++)
         {
-            for (int y=0; y<gridArray.GetLength(1); y++)
+            for (int y=0; y<PathfindingGridArray.GetLength(1); y++)
             {
-                gridArray[x, y] = new PathNode(this, x, y);
+                PathfindingGridArray[x, y] = new PathNode(this, x, y);
                 if (map[x, y] == 1)
                 {
-                        gridArray[x, y].setWalkable(false);
+                        PathfindingGridArray[x, y].setWalkable(false);
                 }
             }
         }
@@ -74,7 +74,7 @@ public class Grid {
     {
         if (x >= 0 && y >= 0 && x < width && y < height)
         {
-            gridArray[x, y] = value;
+            PathfindingGridArray[x, y] = value;
         }
     }
 
@@ -90,7 +90,7 @@ public class Grid {
     {
         if (x >= 0 && y >= 0 && x < width && y < height)
         {
-            return gridArray[x, y];
+            return PathfindingGridArray[x, y];
         } else
         {
             return default(PathNode);

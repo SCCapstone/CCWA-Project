@@ -8,14 +8,13 @@ public class Pathfinding
     private const int MOVE_DIAGONAL_COST = 14;
 
     
-    private Grid grid;
+    private PathfindingGrid grid;
     private List<PathNode> openList;
     private List<PathNode> closedList;
 
     public Pathfinding(int width, int height)
     {
-        grid = new Grid(width, height, 10f, Vector3.zero);
-
+        grid = new PathfindingGrid(width, height, 1f, Vector3.zero);
     }
 
     // <params>  are the XY coordinates of both the end goal and the start
