@@ -32,7 +32,11 @@ public class WarriorBoss : WarriorEnemy
             Variables.wonGame = true;
         }
 
+        ++Variables.floorNum;
+
         base.Die();
+
+        //load next floor
     }
 
     public override void DamageHealth(int damage)
