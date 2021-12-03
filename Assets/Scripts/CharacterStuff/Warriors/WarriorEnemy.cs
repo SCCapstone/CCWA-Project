@@ -38,14 +38,7 @@ public class WarriorEnemy : Warrior
                 
               //  playerCharacter = collision.GetComponent<RogueCharacter>();
             }
-            
-            
-            //Debug.Log(playerCharacter);
-            if (Variables.characterType == "warrior") 
-            {
-                var playerCharacter = collision.GetComponent<PlayerWarrior>();
-            }
-            */
+              
             //calculating the damage done to player
             int damage = attackDmg - playerCharacter.defense;
 
