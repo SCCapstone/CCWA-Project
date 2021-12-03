@@ -9,9 +9,12 @@ public class RoomRenderer : MonoBehaviour
     // Begin Variables*************************************************************************************************
     public Tilemap floorMap;
     public Tilemap wallMap;
+    public Tilemap itemMap;
     public TileBase floorTile;
     public TileBase wallTile;
     public TileBase exitTile;
+    public TileBase attackUpTile;
+    public TileBase healthTile;
     public Room currentRoom;
     // End Variables***************************************************************************************************
 
@@ -28,6 +31,7 @@ public class RoomRenderer : MonoBehaviour
         // Clear the tilemap of any leftover tiles
         floorMap.ClearAllTiles();
         wallMap.ClearAllTiles();
+        itemMap.ClearAllTiles();
         // Iterate over the map; place walls and floors
         for(int i=0; i<room.height; i++) {
             for(int j=0; j<room.width; j++) {
@@ -46,6 +50,20 @@ public class RoomRenderer : MonoBehaviour
         for(int i=0; i<room.exitLocations.Length; i++) {
             Location l = room.exitLocations[i];
             floorMap.SetTile(new Vector3Int(l.locX, l.locY,0), exitTile);
+        }
+
+        // Iterate to place items in the room
+        for(int i=0; i<room.itemLocations.Length; i++) {
+            Location l = room.itemLocations[i];
+            if(room.map[l.locX, l.locY] != 1) {
+                if(i%2 == 0) {  //health
+                    itemMap.SetTile(new Vector3Int(l.locX, l.locY,0), healthTile);
+                }
+                else {  //attack up
+                    itemMap.SetTile(new Vector3Int(l.locX, l.locY, 0), attackUpTile);
+                }
+            }
+            
         }
     }
     // End Rendering methdos*******************************************************************************************

@@ -21,7 +21,8 @@ public class RoomGenerator {
     public int numEnemies = 0;
     public int numItems = 0;
 
-    public Location[] exitLocations; 
+    public Location[] exitLocations;
+    public Location[] itemLocations;
 
     public Room storedRoom = new Room();
       
@@ -33,7 +34,6 @@ public class RoomGenerator {
     public RoomGenerator(bool useSeed) {
         this.useSeed = useSeed;
     }
-
     // End Constructors************************************************************************************************
 
     // Begin room generation functions*********************************************************************************
@@ -112,8 +112,10 @@ public class RoomGenerator {
         //int [,] finalMap = IterateOverRoom(newRoomMap);
         // Generate multiple exit locations for the room, given an array of directions
         Location[] exitLocations = GenerateMultipleExits(directions.Length, directions, newRoomMap);
+        // Generate spawn locations for items
+        Location[] itemLocation = GenerateLootSpawns(numItems);
         // Generate a Room object with the newly created map
-        return new Room(width, height, newRoomMap, seed, exitLocations, numEnemies, numItems);
+        return new Room(width, height, newRoomMap, seed, exitLocations, itemLocations, numEnemies, numItems);
 
 
     }
@@ -145,18 +147,26 @@ public class RoomGenerator {
 
     // These could be represented as a special tile,
     // but can also be a game object instantiated at (x,y) coordinates
-    void GenerateLootSpawns(int numItems) {
+    Location[] GenerateLootSpawns(int numItems) {
+        Location[] newItemLocations = new Location[numItems];
+        int tempItemCounter = 0;
         for(int i = height-3; i>height-7; i--) {
+            if(tempItemCounter >= numItems) {
+                this.itemLocations = newItemLocations;
+                return newItemLocations;
+            }
             for(int j=10; j<width-10; j++) {
-                if(map[i,j] == 0 && numItems > 0) {
-                    // Instantiate Items here
-                    numItems--;
-                }
-                if(numItems == 0) {
-                    return;
+                if(map[i,j] == 0 && tempItemCounter < numItems) {
+                    if(Random.Range(1,10) >= 9) {
+                        newItemLocations[tempItemCounter] = new Location("", i, j);
+                        tempItemCounter++;
+                    }
+                   
                 }
             }
         }
+        this.itemLocations = newItemLocations;
+        return newItemLocations;
 
     }
 
