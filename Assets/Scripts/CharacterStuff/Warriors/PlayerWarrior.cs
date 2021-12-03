@@ -44,13 +44,15 @@ public class PlayerWarrior : Warrior
     public float attackTime = .25f;
     public float maxAttackTime = .25f; 
 
-    
+    public GameObject pauseScreen;
     void Awake() {
         base.Awake();
         rigidB = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
+        pauseScreen = GameObject.FindWithTag("paused");
+        pauseScreen.SetActive(false);
         moveSpeed = baseMoveSpeed;
         berserkTimer = berserkMax;
     }
@@ -60,7 +62,12 @@ public class PlayerWarrior : Warrior
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene("Pause Screen");
+            Variables.isPaused = !Variables.isPaused;
+            if (Variables.isPaused) {
+                Pause();
+            } else {
+                Resume();
+            }
         }
 
         //Enters the player character into berserk mode
@@ -222,5 +229,17 @@ public class PlayerWarrior : Warrior
     public override void Die() {
         Variables.wonGame = false;
         SceneManager.LoadScene("Game Over");
+    }
+
+    //Pauses the game
+    public void Pause() {
+        Time.timeScale = 0;
+        pauseScreen.SetActive(true);
+    }
+
+    //Resumes the game
+    public void Resume() {
+        Time.timeScale = 1;
+        pauseScreen.SetActive(false);
     }
 }

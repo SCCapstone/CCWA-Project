@@ -67,16 +67,8 @@ public class Achievements : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-    }
-
-    //Takes you back to the main menu, idk why i can't see it in my scene editor rn
-    public void mainBackBtn()
-    {
-        SceneManager.LoadScene("Settings");
-    }
-
+    void Update() {}
+    
     //connect this to On Click of each achievement button
     public void setActiveAchievement()
     {

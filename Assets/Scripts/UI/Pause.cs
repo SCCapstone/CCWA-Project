@@ -14,28 +14,5 @@ public class Pause : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void tutorialBtn()
-    {
-        SceneManager.LoadScene("Tutorial");
-    }
-
-    public void achievementsBtn()
-    {
-        SceneManager.LoadScene("Achievements");
-    }
-
-    public void settingsBtn()
-    {
-        SceneManager.LoadScene("Settings");
-    }
-
-    public void quitBtn()
-    {
-        SceneManager.LoadScene("Title Screen");
-    }
+    void Update() {}
 }

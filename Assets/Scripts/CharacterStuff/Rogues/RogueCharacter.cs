@@ -10,7 +10,7 @@ using UnityEngine.UI;
 * w a s d = movement
 * j = attack
 * u = SHADOW MODE
-*
+* esc = Pause
 *----------------
 */
 public class RogueCharacter : Rogue
@@ -41,7 +41,9 @@ public class RogueCharacter : Rogue
 
     //Counters for the attacking frames
     public float attackTime = .35f;
-    public float maxAttackTime = .35f; 
+    public float maxAttackTime = .35f;
+
+     public GameObject pauseScreen;
 
     //ABSTRACT SOME THINGS L8R  
     void Awake() {
@@ -50,6 +52,8 @@ public class RogueCharacter : Rogue
         animator = GetComponent<Animator>();
         sRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
+        pauseScreen = GameObject.FindWithTag("paused");
+        pauseScreen.SetActive(false);
         moveSpeed = baseMoveSpeed;
         shadowTimer = shadowMax;
     }
@@ -59,7 +63,12 @@ public class RogueCharacter : Rogue
 
      if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene("Pause Screen");
+            Variables.isPaused = !Variables.isPaused;
+            if (Variables.isPaused) {
+                Pause();
+            } else {
+                Resume();
+            }
         }
 
         //Enters the player character into berserk mode
@@ -100,8 +109,7 @@ public class RogueCharacter : Rogue
     }
 
     void FixedUpdate() {
-        Move();
-        
+        Move();    
     }
 
     //Getting and setting the user inputs for movement
@@ -228,7 +236,15 @@ public class RogueCharacter : Rogue
         SceneManager.LoadScene("GameOver");
     }
 
+    //Pauses the game
     public void Pause() {
         Time.timeScale = 0;
+        pauseScreen.SetActive(true);
+    }
+
+    //Resumes the game
+    public void Resume() {
+        Time.timeScale = 1;
+        pauseScreen.SetActive(false);
     }
 }
