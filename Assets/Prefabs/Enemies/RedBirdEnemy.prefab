@@ -241,6 +241,7 @@ GameObject:
   - component: {fileID: 8784097646283919376}
   - component: {fileID: 8784097646283919377}
   - component: {fileID: 8784097646283919378}
+  - component: {fileID: 4296605589904565123}
   m_Layer: 0
   m_Name: RedBirdEnemy
   m_TagString: Enemy
@@ -396,3 +397,16 @@ CircleCollider2D:
   m_Offset: {x: 0.020637512, y: -0.02579701}
   serializedVersion: 2
   m_Radius: 0.42336416
+--- !u!114 &4296605589904565123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8784097646283919468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef799e2eb861e8440ab653b904b67266, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 7
