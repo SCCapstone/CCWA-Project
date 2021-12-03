@@ -60,7 +60,7 @@ public class PlayerWarrior : Warrior
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene("Pause Screen");
+            Pause();
         }
 
         //Enters the player character into berserk mode
@@ -222,5 +222,15 @@ public class PlayerWarrior : Warrior
     public override void Die() {
         Variables.wonGame = false;
         SceneManager.LoadScene("Game Over");
+    }
+
+    //Pauses the game
+    public void Pause() {
+        Time.timeScale = 0;
+        
+    }
+
+    public void Resume() {
+        Time.timeScale = 1;
     }
 }
