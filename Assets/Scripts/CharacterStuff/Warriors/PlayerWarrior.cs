@@ -82,6 +82,7 @@ public class PlayerWarrior : Warrior
         //Allows the user to attack
         callAttack();
 
+
         //Stamina regeneration
         StartCoroutine("RegenStamina");
 
@@ -120,10 +121,10 @@ public class PlayerWarrior : Warrior
     }
 
     //Calculates the damage for the attack
-    public override void Attack(Collider2D collision){
-        if (collision.tag == "Enemy" || collision.tag == "Boss") {
+    public void OnCollisionEnter2D(Collision2D collision){
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Boss") {
             //Gets the instance of the enemy or boss 
-            var enemy = collision.GetComponent<Character>();
+            var enemy = collision.gameObject.GetComponent<WarriorEnemy>();
             
             //calculating the damage done to the enemy
             int damage = attackDmg - enemy.defense;
@@ -137,7 +138,7 @@ public class PlayerWarrior : Warrior
             }
             
             //Kills the enemy if their health is less 0
-            if (enemy.health < 0) {
+            if (enemy.health <= 0) {
                 enemy.Die();
             }
         }
