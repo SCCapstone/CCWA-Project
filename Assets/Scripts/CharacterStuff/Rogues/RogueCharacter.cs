@@ -10,7 +10,7 @@ using UnityEngine.UI;
 * w a s d = movement
 * j = attack
 * u = SHADOW MODE
-*
+* esc = Pause
 *----------------
 */
 public class RogueCharacter : Rogue
@@ -65,7 +65,6 @@ public class RogueCharacter : Rogue
         {
             Variables.isPaused = !Variables.isPaused;
             if (Variables.isPaused) {
-                
                 Pause();
             } else {
                 Resume();
@@ -243,6 +242,7 @@ public class RogueCharacter : Rogue
         pauseScreen.SetActive(true);
     }
 
+    //Resumes the game
     public void Resume() {
         Time.timeScale = 1;
         pauseScreen.SetActive(false);
