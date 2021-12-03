@@ -27,10 +27,12 @@ public class WarriorEnemy : Warrior
         Debug.Log("we caressed under the wonder truck");
 
         var collision = collidedWith.collider;
+        
         if (collision.tag == "Player") {
             //Gets the instance of player
-            var playerCharacter = collision.GetComponent<PlayerWarrior>();
+            var playerCharacter = collision.GetComponent<RogueCharacter>();
             
+            /*
             Debug.Log(playerCharacter);
             if (playerCharacter == null) {
                 
