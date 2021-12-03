@@ -58,6 +58,11 @@ public class PlayerWarrior : Warrior
     void Update() {
         AssignWASD();
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Pause Screen");
+        }
+
         //Enters the player character into berserk mode
         if (Input.GetKeyDown("u")) {
             ToggleEnhanced();
@@ -80,8 +85,7 @@ public class PlayerWarrior : Warrior
         }
 
         //Allows the user to attack
-        callAttack();
-
+        attack();
 
         //Stamina regeneration
         StartCoroutine("RegenStamina");
@@ -120,32 +124,8 @@ public class PlayerWarrior : Warrior
         }
     }
 
-    //Calculates the damage for the attack
-    public void OnCollisionEnter2D(Collision2D collision){
-        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Boss") {
-            //Gets the instance of the enemy or boss 
-            var enemy = collision.gameObject.GetComponent<WarriorEnemy>();
-            
-            //calculating the damage done to the enemy
-            int damage = attackDmg - enemy.defense;
-
-            //Damages the enemy's health via the player's attackDmg value
-            if (damage <= 0) {
-                //Always do at least one damage to an enemy
-                enemy.DamageHealth(1);
-            } else {
-                enemy.DamageHealth(damage);
-            }
-            
-            //Kills the enemy if their health is less 0
-            if (enemy.health <= 0) {
-                enemy.Die();
-            }
-        }
-    }
-
     //Lets the player character attack
-    public void callAttack() {
+    public void attack() {
         //only allows attack if stamina is above 0
         if (Input.GetKeyDown("j") && stamina >= 2) {
             animator.SetBool("attacking", true);
@@ -240,6 +220,7 @@ public class PlayerWarrior : Warrior
     }
 
     public override void Die() {
+        Variables.wonGame = false;
         SceneManager.LoadScene("Game Over");
     }
 }

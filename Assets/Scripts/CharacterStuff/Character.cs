@@ -19,20 +19,20 @@ public class Character : MonoBehaviour
     public Color spriteColor;
     public SpriteRenderer sRenderer;
      
-    void Awake()
+    public void Awake()
     {
         //freezes all characters when colliding
         gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-    }
 
-    
+    }
+ 
     void Update()
     {
 
     }
 
     //Is the base form of attack for the character. Ready to be overriden
-    public virtual void Attack(BoxCollider2D collision) {}
+    //public virtual void Attack(BoxCollider2D collision) {}
 
     //Recovers the health of the character by a amount of points
     public void HealHealth (int a){
@@ -72,6 +72,8 @@ public class Character : MonoBehaviour
         stamina -= a;
     }
 
+    //Allows the character to attack
+    public virtual void attack(){}
     //Toggles the character's special state if they have one
     public void ToggleEnhanced() {
         isEnhanced = !isEnhanced;
