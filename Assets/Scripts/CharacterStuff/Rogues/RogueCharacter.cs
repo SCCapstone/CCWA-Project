@@ -10,7 +10,7 @@ using UnityEngine.UI;
 * w a s d = movement
 * j = attack
 * u = SHADOW MODE
-*
+* esc = Pause
 *----------------
 */
 public class RogueCharacter : Rogue
@@ -40,22 +40,36 @@ public class RogueCharacter : Rogue
     public GameObject emptystaminaBottle;
 
     //Counters for the attacking frames
-    public float attackTime = .25f;
-    public float maxAttackTime = .25f; 
+    public float attackTime = .35f;
+    public float maxAttackTime = .35f;
 
-    
+     public GameObject pauseScreen;
+
+    //ABSTRACT SOME THINGS L8R  
     void Awake() {
         base.Awake();
         rigidB = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
+        pauseScreen = GameObject.FindWithTag("paused");
+        pauseScreen.SetActive(false);
         moveSpeed = baseMoveSpeed;
         shadowTimer = shadowMax;
     }
     
     void Update() {
         AssignWASD();
+
+     if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Variables.isPaused = !Variables.isPaused;
+            if (Variables.isPaused) {
+                Pause();
+            } else {
+                Resume();
+            }
+        }
 
         //Enters the player character into berserk mode
         if (Input.GetKeyDown("u")) {
@@ -78,7 +92,7 @@ public class RogueCharacter : Rogue
         }
 
         //Allows the user to attack
-        callAttack();
+        attack();
 
         //Stamina regeneration
         StartCoroutine("RegenStamina");
@@ -95,8 +109,7 @@ public class RogueCharacter : Rogue
     }
 
     void FixedUpdate() {
-        Move();
-        
+        Move();    
     }
 
     //Getting and setting the user inputs for movement
@@ -122,32 +135,8 @@ public class RogueCharacter : Rogue
         }
     }
 
-    //Calculates the damage for the attack
-    public void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Boss") {
-            //Gets the instance of the enemy or boss 
-            var enemy = collision.gameObject.GetComponent<WarriorEnemy>();
-            
-            //calculating the damage done to the enemy
-            int damage = attackDmg - enemy.defense;
-
-            //Damages the enemy's health via the player's attackDmg value
-            if (damage <= 0) {
-                //Always do at least one damage to an enemy
-                enemy.DamageHealth(1);
-            } else {
-                enemy.DamageHealth(damage);
-            }
-            
-            //Kills the enemy if their health is less 0
-            if (enemy.health <= 0) {
-                enemy.Die();
-            }
-        }
-    }
-
     //Lets the player character attack
-    public void callAttack() {
+    public override void attack() {
         //only allows attack if stamina is above 0
         if (Input.GetKeyDown("j") && stamina >= 2) {
             animator.SetBool("attacking", true);
@@ -166,7 +155,7 @@ public class RogueCharacter : Rogue
         } 
     }
 
-    //Loads the health of the character re  of a character
+    //Loads the visual element of the health
     public void loadHearts() {
         //Getting the heart objects from the charUIcanvas
         GameObject[] heartHolder = GameObject.FindGameObjectsWithTag("Hearts");
@@ -204,6 +193,7 @@ public class RogueCharacter : Rogue
         }
     }
 
+    //Loads the visual element of the stamina
     public void loadStamina() {
         //Getting the stamina objects from the charUIcanvas
         GameObject[] staminaHolder = GameObject.FindGameObjectsWithTag("staminaicon");
@@ -242,7 +232,19 @@ public class RogueCharacter : Rogue
     }
 
     public override void Die() {
-        SceneManager.LoadScene("Game Over");
+        Variables.wonGame = false;
+        SceneManager.LoadScene("GameOver");
     }
 
+    //Pauses the game
+    public void Pause() {
+        Time.timeScale = 0;
+        pauseScreen.SetActive(true);
+    }
+
+    //Resumes the game
+    public void Resume() {
+        Time.timeScale = 1;
+        pauseScreen.SetActive(false);
+    }
 }

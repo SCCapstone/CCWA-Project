@@ -7,6 +7,7 @@ public class Rogue : Character
     // Start is called before the first frame update
     public void Awake()
     {
+        base.Awake();
         //Setting base rogue stats
         health = 6;
         maxHealth = 6;

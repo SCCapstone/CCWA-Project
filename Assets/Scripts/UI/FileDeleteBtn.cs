@@ -18,7 +18,7 @@ public class FileDeleteBtn : MonoBehaviour
     public void DeleteFile() //TODO add user check for deleting files
     {
         GameObject fileSelect = GameObject.Find("FileSelect");
-        FileManager fileManager = fileSelect.GetComponent<FileManager>();
+        FileManager fileManager = GameObject.Find("FileManager").GetComponent<FileManager>();
         bool success = fileManager.DeleteFile(filenum);
         if(success)
         {

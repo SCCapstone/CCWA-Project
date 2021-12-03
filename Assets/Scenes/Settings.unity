@@ -503,9 +503,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1478761160}
-        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
-        m_MethodName: tutorialBtn
+      - m_Target: {fileID: 1478761161}
+        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
+        m_MethodName: TutorialButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5041,6 +5041,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1478761159}
   - component: {fileID: 1478761160}
+  - component: {fileID: 1478761161}
   m_Layer: 0
   m_Name: Settings
   m_TagString: Untagged
@@ -5078,6 +5079,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc9f2ec7a34a34272919d59180961c0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1478761161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478761158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7b51ad0022184132a0f7fecba3d04b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1494720954
@@ -6334,9 +6347,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1478761160}
-        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
-        m_MethodName: mainBackBtn
+      - m_Target: {fileID: 1478761161}
+        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
+        m_MethodName: MainMenuButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

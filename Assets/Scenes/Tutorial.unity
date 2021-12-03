@@ -654,6 +654,7 @@ GameObject:
   m_Component:
   - component: {fileID: 749687702}
   - component: {fileID: 749687703}
+  - component: {fileID: 749687704}
   m_Layer: 5
   m_Name: Tutorial
   m_TagString: Untagged
@@ -679,6 +680,7 @@ RectTransform:
   - {fileID: 70924165}
   - {fileID: 1812556611}
   - {fileID: 1239031643}
+  - {fileID: 1211583030}
   m_Father: {fileID: 1405769569}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -699,14 +701,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0a2712188710314392602b2216a86db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texts:
-  - This is the text for page 1.
-  - Undoubtably, the text for page 2.
-  - WOW! It's the text for page three.
+  spriteArray:
+  - {fileID: 5978898516894778253, guid: 17c558ddb31742c42894aa507b18c308, type: 3}
+  - {fileID: 7270778152439584896, guid: 5e0aa399db300624a81bd41ec10cbd1b, type: 3}
   iterator: 0
   pageCounter: 1
   infoText: {fileID: 0}
   pageCount: {fileID: 0}
+  enemy: {fileID: 0}
+  enemyDisplay: {fileID: 0}
+--- !u!114 &749687704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749687701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7b51ad0022184132a0f7fecba3d04b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &793396814
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,6 +871,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1025252554}
+  m_CullTransparentMesh: 1
+--- !u!1 &1211583029
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1211583030}
+  - component: {fileID: 1211583032}
+  - component: {fileID: 1211583031}
+  m_Layer: 5
+  m_Name: EnemyImage
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1211583030
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211583029}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 749687702}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 375, y: 53}
+  m_SizeDelta: {x: 160, y: 125.2}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1211583031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211583029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 5978898516894778253, guid: 17c558ddb31742c42894aa507b18c308, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1211583032
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211583029}
   m_CullTransparentMesh: 1
 --- !u!1 &1215540134
 GameObject:
@@ -1574,9 +1664,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 749687703}
-        m_TargetAssemblyTypeName: Tutorial, Assembly-CSharp
-        m_MethodName: mainBackBtn
+      - m_Target: {fileID: 749687704}
+        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
+        m_MethodName: NewRunButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1757,8 +1847,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is a game that can be used for gaming purposes such as girlbossing
-    and gatekeeping and most importantly gaslighting
+  m_text: This is the tutorial box for the game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
