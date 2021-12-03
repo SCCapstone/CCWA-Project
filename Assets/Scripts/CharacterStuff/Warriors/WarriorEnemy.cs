@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WarriorEnemy : Warrior
 {
+    public GameObject healthBar;
+    
     void Awake() {
         base.Awake();
         defense = 2;
