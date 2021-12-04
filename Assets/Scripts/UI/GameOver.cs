@@ -17,25 +17,10 @@ public class GameOver : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void Update() {}
     public void loadScreen(bool wonGame)
     {
         victory.SetActive(wonGame);
         failure.SetActive(!wonGame);
     }
-
-    public void quitButton()
-    {
-        Application.Quit();
-    }
-
-    public  void mainMenuButton()
-    {
-        SceneManager.LoadScene("Title Screen");
-    }
-
-    public  void retryButton(){}
 }

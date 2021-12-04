@@ -25,16 +25,21 @@ public class FileSelectBtn : MonoBehaviour
             Debug.Log("Successfully loaded file "+filenum);
         }
 
-        bool inRun = fileManager.GetFileData(filenum).InRun;
+        FileData fd = fileManager.GetFileData(filenum);
+        bool inRun = fd.InRun;
+        Debug.Log(fd.DateCreated + " " + fd.InRun);
         if(inRun)
         {
             //TODO load gameplay with stored run
+            GameState gs = fd.CurrRun;
+            Variables.inRun = true;
+            Variables.playerHealth = gs.PlayerState.Health;
+            Variables.playerStamina = gs.PlayerState.Stamina;
+            Variables.floorNum = gs.FloorNum;
+            Variables.floorSeed = gs.FloorSeed;
+            SceneManager.LoadScene("Gameplay");
         } else
         {
-            if(Variables.newGame)
-            {
-                SceneManager.LoadScene("Tutorial");
-            }
             SceneManager.LoadScene("New Run");
         }
     }

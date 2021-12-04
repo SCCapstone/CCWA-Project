@@ -9,9 +9,13 @@ public class RoomRenderer : MonoBehaviour
     // Begin Variables*************************************************************************************************
     public Tilemap floorMap;
     public Tilemap wallMap;
+    public Tilemap itemMap;
     public TileBase floorTile;
     public TileBase wallTile;
     public TileBase exitTile;
+    public GameObject attackUp;
+    public GameObject health;
+    public GameObject enemy;
     public Room currentRoom;
     // End Variables***************************************************************************************************
 
@@ -26,8 +30,10 @@ public class RoomRenderer : MonoBehaviour
     // Begin Rendering methods*****************************************************************************************
     public void RenderRoom(Room room) {
         // Clear the tilemap of any leftover tiles
+        Debug.Log(room.seed);
         floorMap.ClearAllTiles();
         wallMap.ClearAllTiles();
+        itemMap.ClearAllTiles();
         // Iterate over the map; place walls and floors
         for(int i=0; i<room.height; i++) {
             for(int j=0; j<room.width; j++) {
@@ -46,6 +52,28 @@ public class RoomRenderer : MonoBehaviour
         for(int i=0; i<room.exitLocations.Length; i++) {
             Location l = room.exitLocations[i];
             floorMap.SetTile(new Vector3Int(l.locX, l.locY,0), exitTile);
+        }
+
+        // Iterate to place items in the room
+        for(int i=0; i<room.itemLocations.Length; i++) {
+            Location l = room.itemLocations[i];
+            Debug.Log(l.locX + " " + l.locY);
+            Debug.Log(room);
+            if(room.map[l.locX, l.locY] != 1) {
+                if(i%2 == 0) {  //health
+                    Instantiate(health, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
+                }
+                else {  //attack up
+                    Instantiate(attackUp, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
+                }
+            }
+        }
+        Debug.Log(room.enemyLocations);
+        //Iterate to generate enemy spawns
+        for(int i=0; i<room.enemyLocations.Length; i++) {
+            
+            Location l = room.enemyLocations[i];
+            Instantiate(enemy, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
         }
     }
     // End Rendering methdos*******************************************************************************************

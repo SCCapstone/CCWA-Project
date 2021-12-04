@@ -23,8 +23,37 @@ public class WarriorEnemy : Warrior
         Destroy(gameObject);
     }
 
-    public override void DamageHealth(int collision)
-    {
-        base.DamageHealth(collision);
+    public void OnCollisionEnter2D(Collision2D collidedWith) {
+        Debug.Log("we caressed under the wonder truck");
+
+        var collision = collidedWith.collider;
+        Debug.Log(collision);
+        if (collision.tag == "Player") {
+            //Gets the instance of player
+            var playerCharacter = collision.GetComponent<RogueCharacter>();
+            
+            /*
+            Debug.Log(playerCharacter);
+            if (playerCharacter == null) {
+                
+              //  playerCharacter = collision.GetComponent<RogueCharacter>();
+            }
+            */
+            //calculating the damage done to player
+            int damage = attackDmg - playerCharacter.defense;
+
+            //Damages the player's health via the enemy's attackDmg value
+            if (damage <= 0) {
+                //Always do at least one damage to a player
+                playerCharacter.DamageHealth(1);
+            } else {
+                playerCharacter.DamageHealth(damage);
+            }
+            
+            //Kills the player if their health is less 0
+            if (playerCharacter.health <= 0) {
+                playerCharacter.Die();
+            }
+        }
     }
 }

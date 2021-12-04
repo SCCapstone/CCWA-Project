@@ -13,6 +13,8 @@ TagManager:
   - staminaicon
   - emptypotion
   - Enemy
+  - paused
+  - Boss
   layers:
   - Default
   - TransparentFX

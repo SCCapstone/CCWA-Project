@@ -16,6 +16,8 @@ public class Room
     public int numItems;
 
     public Location[] exitLocations;
+    public Location[] itemLocations;
+    public Location[] enemyLocations;
 
     // End Variables***************************************************************************************************
 
@@ -37,6 +39,8 @@ public class Room
         int[,] map, 
         string seed, 
         Location[] exitLocations,
+        Location[] itemLocations,
+        Location[] enemyLocations,
         int numEnemies,
         int numItems
         ) {
@@ -45,6 +49,8 @@ public class Room
         this.map = map;
         this.seed = seed;
         this.exitLocations = exitLocations;
+        this.itemLocations = itemLocations;
+        this.enemyLocations = enemyLocations;
         this.numEnemies = numEnemies;
         this.numItems = numItems;
     }
@@ -54,11 +60,11 @@ public class Room
 
     // Start Getter/Setter Functions***********************************************************************************
 
-    int getWidth() {
+    public int getWidth() {
         return this.width;
     }
 
-    int getHeight() {
+    public int getHeight() {
         return this.height;
     }
 
@@ -67,32 +73,48 @@ public class Room
         return this.map;
     }
 
-    string getSeed() {
+    public string getSeed() {
         return this.seed;
     }
 
-    Location[] getLocations() {
+    public Location[] getLocations() {
         return this.exitLocations;
     }
 
-    void setWidth(int newWidth) {
+    public Location[] getItemLocations() {
+        return this.itemLocations;
+    }
+
+    public Location[] getEnemyLocations() {
+        return this.enemyLocations;
+    }
+
+    public void setWidth(int newWidth) {
         this.width = newWidth;
     }
 
-    void setHeight(int newHeight) {
+    public void setHeight(int newHeight) {
         this.height = newHeight;
     }
 
-    void setMap(int[,] newMap) {
+    public void setMap(int[,] newMap) {
         this.map = newMap;
     }
 
-    void setSeed(string newSeed) {
+    public void setSeed(string newSeed) {
         this.seed = newSeed;
     }
 
-    void setLocations(Location[] newExitLocations) {
+    public void setLocations(Location[] newExitLocations) {
         this.exitLocations = newExitLocations;
+    }
+
+    public void setItemLocations(Location[] newItemLocations) {
+        this.itemLocations = newItemLocations;
+    }
+
+    public void setEnemyLocations(Location[] newEnemyLocations) {
+        this.enemyLocations = newEnemyLocations;
     }
 
     // End Getter/Setter Functions*************************************************************************************

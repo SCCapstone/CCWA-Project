@@ -34,6 +34,7 @@ public class EnemyPathfinding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         // Debug.Log("target pos "+target.position.x + " " + target.position.y + " " + target.position.z);
         if (!(pathVectorList == null) && !(pathVectorList.Count == 0))
         {
@@ -58,6 +59,7 @@ public class EnemyPathfinding : MonoBehaviour
 
     public Vector3 GetTargetPosition()
     {
+        Debug.Log("Position: " + target.position.x + " " + target.position.y);
         return target.position;
     }
     public Vector3 GetPostion()

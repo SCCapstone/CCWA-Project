@@ -17,17 +17,4 @@ public class MainMenu : MonoBehaviour
         Variables.newGame = false;
         SceneManager.LoadScene("File Select");
     }
-
-    public void Settings() {
-        SceneManager.LoadScene("Settings");
-    }
-
-    public void Credits() {
-        /*SceneManager.LoadScene("Credits")*/
-    }
-
-    public void Quit() {
-        Application.Quit();
-    }
-
 }

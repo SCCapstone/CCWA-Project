@@ -36,7 +36,6 @@ public class FileManager : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log(SceneManager.GetActiveScene().name);
         DontDestroyOnLoad(this);
     }
 
@@ -295,6 +294,8 @@ public class FileData
             UnlockedAchievements[i] = unlockedachievements[valid_achievement_idx[i]];
         }
 
+        InRun = inrun;
+
         if(inrun) {
             CurrRun = currrun; //Validation done in GameState constructor
         } else
@@ -344,18 +345,18 @@ public class GameState
     //Declare instance Variables
     public PlayerState PlayerState;
     public int FloorNum;
-    public int FloorSeed;
+    public string FloorSeed;
 
     //Default Constructor
     public GameState()
     {
         PlayerState = new PlayerState();
         FloorNum = 0;
-        FloorSeed = 0;
+        FloorSeed = "none";
     }
     //Full Constructor
     public GameState(int playerhealth, int playerstamina,
-                    string playerclass, int floornum, int floorseed)
+                    string playerclass, int floornum, string floorseed)
     {
         //Validation done in PlayerState class
         PlayerState = new PlayerState(playerhealth,playerstamina,playerclass);
@@ -369,7 +370,7 @@ public class GameState
             FloorNum = 0;
         }
 
-        //Any int seed should work so no validation needed
+        //Any string seed should work so no validation needed
         FloorSeed = floorseed;
     }
 }

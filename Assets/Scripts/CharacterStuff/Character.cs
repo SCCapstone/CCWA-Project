@@ -23,7 +23,6 @@ public class Character : MonoBehaviour
     {
         //freezes all characters when colliding
         gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-
     }
  
     void Update()

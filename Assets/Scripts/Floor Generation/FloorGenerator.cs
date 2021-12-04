@@ -245,6 +245,14 @@ public class FloorGenerator : MonoBehaviour
         return this.GetCurrFloor().rooms[this.currRoomIdx];
     }
 
+    public void NewFloor(int floorNum)
+    {
+        this.currFloor = GenerateFloor(floorNum + "" + this.seed);
+        RoomRenderer renderer = this.gameObject.GetComponent<RoomRenderer>();
+        renderer.setCurrentRoom(this.GetCurrRoom());
+        renderer.RenderRoom(this.GetCurrRoom());
+    }
+
     // Start is called before the first frame update
     void Awake()
     {

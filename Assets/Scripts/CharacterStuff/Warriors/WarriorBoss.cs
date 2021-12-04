@@ -26,7 +26,17 @@ public class WarriorBoss : WarriorEnemy
     public override void Die()
     {
         Destroy(GameObject.Find("CharUICanvas/BossUI"));
+
+        if(Variables.floorNum == Constants.MAX_FLOOR_NUM)
+        {
+            Variables.wonGame = true;
+        }
+
+        ++Variables.floorNum;
+
         base.Die();
+
+        //load next floor
     }
 
     public override void DamageHealth(int damage)
