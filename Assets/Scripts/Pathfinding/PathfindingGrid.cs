@@ -25,7 +25,7 @@ public class PathfindingGrid {
         //     cr = rr.currentRoom;
         //     Debug.Log("say something im giving up on you");
         // }
-        Debug.Log(cr is null);
+        // Debug.Log(cr is null);
         map = cr.getMap();
         this.width = width;
         this.height = height;

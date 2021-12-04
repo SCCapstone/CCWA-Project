@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class WarriorBoss : WarriorEnemy
 {
@@ -27,16 +28,40 @@ public class WarriorBoss : WarriorEnemy
     {
         Destroy(GameObject.Find("CharUICanvas/BossUI"));
 
-        if(Variables.floorNum == Constants.MAX_FLOOR_NUM)
+        FileManager fm = GameObject.Find("FileManager").GetComponent<FileManager>();
+        var player = GameObject.FindWithTag("Player");
+        Character character = player.GetComponent<Character>();
+
+        if(Variables.floorNum == Constants.MAX_FLOOR_NUM-1)
         {
             Variables.wonGame = true;
+            //Save file on new floor
+            FileData currentFile = fm.GetFileData(Constants.VALID_FILE_NUMS[fm.CurrFile]);
+            FileData fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, currentFile.FastestTime,
+                                            currentFile.NumRuns, currentFile.NumWins++, currentFile.UnlockedAchievements,
+                                            false, null); //TODO get wins saved
+            fm.SaveFile(Constants.VALID_FILE_NUMS[fm.CurrFile], fd);
+            SceneManager.LoadScene("GameOver");
+        }else
+        {
+            ++Variables.floorNum;
+            
+            //Save file on new floor
+            FileData currentFile = fm.GetFileData(Constants.VALID_FILE_NUMS[fm.CurrFile]);
+            GameState gs = new GameState(character.health,(int)character.stamina,Variables.playerClass,Variables.floorNum,Variables.floorSeed);
+            FileData fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, currentFile.FastestTime,
+                                            currentFile.NumRuns, currentFile.NumWins, currentFile.UnlockedAchievements,
+                                            true, gs);
+            fm.SaveFile(Constants.VALID_FILE_NUMS[fm.CurrFile],fd);
+
+            //load next floor
+            FloorGenerator fg = GameObject.Find("Grid/Floor Map").GetComponent<FloorGenerator>();
+            fg.NewFloor(Variables.floorNum);
         }
 
-        ++Variables.floorNum;
-
+        
         base.Die();
 
-        //load next floor
     }
 
     public override void DamageHealth(int damage)
