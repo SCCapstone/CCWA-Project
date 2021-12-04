@@ -23,6 +23,7 @@ public class RoomGenerator {
 
     public Location[] exitLocations;
     public Location[] itemLocations;
+    public Location[] enemyLocations;
 
     public Room storedRoom = new Room();
       
@@ -114,8 +115,10 @@ public class RoomGenerator {
         Location[] exitLocations = GenerateMultipleExits(directions.Length, directions, newRoomMap);
         // Generate spawn locations for items
         Location[] itemLocation = GenerateLootSpawns(numItems);
+        // Generate a list of enemy spawn locations
+        Location[] enemyLocations = GenerateEnemySpawns(numEnemies);
         // Generate a Room object with the newly created map
-        return new Room(width, height, newRoomMap, seed, exitLocations, itemLocations, numEnemies, numItems);
+        return new Room(width, height, newRoomMap, seed, exitLocations, itemLocations, enemyLocations, numEnemies, numItems);
 
 
     }
@@ -129,24 +132,27 @@ public class RoomGenerator {
         //GenerateExitSpawns(map, tilemap, exitTile);
     }
 
-    // Need to instantiate enemy objects at (x,y) coordinates here
-    void GenerateEnemySpawns(int numEnemies) {
+    Location[] GenerateEnemySpawns(int numEnemies) {
+        Location[] newEnemyLocations = new Location[numEnemies];
+        int tempEnemyCounter = 0;
         for(int i = height-3; i>height-7; i--) {
+            if(tempEnemyCounter >= numEnemies) {
+                this.enemyLocations = newEnemyLocations;
+                return newEnemyLocations;
+            }
             for(int j=10; j<width-10; j++) {
-                if(map[i,j] == 0 && numEnemies > 0) {
-                    // Instantiate enemy here
-                    numEnemies--;
-                }
-                if(numEnemies == 0) {
-                    return;
+                if(map[i,j] == 0 && tempEnemyCounter < numEnemies) {
+                    if(Random.Range(1,10) >= 1) {
+                        newEnemyLocations[tempEnemyCounter] = new Location("", i, j);
+                        tempEnemyCounter++;
+                    }
                 }
             }
         }
-
+        this.enemyLocations = newEnemyLocations;
+        return newEnemyLocations;
     }
 
-    // These could be represented as a special tile,
-    // but can also be a game object instantiated at (x,y) coordinates
     Location[] GenerateLootSpawns(int numItems) {
         Location[] newItemLocations = new Location[numItems];
         int tempItemCounter = 0;
@@ -157,7 +163,7 @@ public class RoomGenerator {
             }
             for(int j=10; j<width-10; j++) {
                 if(map[i,j] == 0 && tempItemCounter < numItems) {
-                    if(Random.Range(1,10) >= 9) {
+                    if(Random.Range(1,10) >= 1) {
                         newItemLocations[tempItemCounter] = new Location("", i, j);
                         tempItemCounter++;
                     }

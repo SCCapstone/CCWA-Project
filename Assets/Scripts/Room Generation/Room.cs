@@ -17,6 +17,7 @@ public class Room
 
     public Location[] exitLocations;
     public Location[] itemLocations;
+    public Location[] enemyLocations;
 
     // End Variables***************************************************************************************************
 
@@ -39,6 +40,7 @@ public class Room
         string seed, 
         Location[] exitLocations,
         Location[] itemLocations,
+        Location[] enemyLocations,
         int numEnemies,
         int numItems
         ) {
@@ -48,6 +50,7 @@ public class Room
         this.seed = seed;
         this.exitLocations = exitLocations;
         this.itemLocations = itemLocations;
+        this.enemyLocations = enemyLocations;
         this.numEnemies = numEnemies;
         this.numItems = numItems;
     }
@@ -82,6 +85,10 @@ public class Room
         return this.itemLocations;
     }
 
+    public Location[] getEnemyLocations() {
+        return this.enemyLocations;
+    }
+
     public void setWidth(int newWidth) {
         this.width = newWidth;
     }
@@ -104,6 +111,10 @@ public class Room
 
     public void setItemLocations(Location[] newItemLocations) {
         this.itemLocations = newItemLocations;
+    }
+
+    public void setEnemyLocations(Location[] newEnemyLocations) {
+        this.enemyLocations = newEnemyLocations;
     }
 
     // End Getter/Setter Functions*************************************************************************************
