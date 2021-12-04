@@ -284,7 +284,7 @@ public class FloorGenerator : MonoBehaviour
                 floorNum = Variables.floorNum;
             }else
             {
-                System.Random temp = new System.Random();
+                temp = new System.Random();
                 this.seed = temp.Next().ToString();
             }
 
