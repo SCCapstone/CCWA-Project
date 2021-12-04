@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using System;
 
 public class RoomRenderer : MonoBehaviour
 {
@@ -18,6 +20,11 @@ public class RoomRenderer : MonoBehaviour
     public GameObject enemy;
     public GameObject boss;
     public Room currentRoom;
+    public GameObject player;
+    public int playerX;
+    public int playerY;
+    public Floor currFloor;
+
     // End Variables***************************************************************************************************
 
     // Begin Setters***************************************************************************************************
@@ -69,10 +76,9 @@ public class RoomRenderer : MonoBehaviour
                 }
             }
         }
-        Debug.Log(room.enemyLocations);
         //Iterate to generate enemy spawns
+        Debug.Log("PLEASEEEEE: " + room.enemyLocations.Length);
         for(int i=0; i<room.enemyLocations.Length; i++) {
-            
             Location l = room.enemyLocations[i];
             Instantiate(enemy, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
         }
@@ -89,24 +95,49 @@ public class RoomRenderer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // The following code is a test block. It is not intended to 
-        // be the final functionality of this renderer.
-        // TODO: Find a way to load a Room from Floor and attach it to this script
-
-        // RoomGenerator generator = new RoomGenerator(true);
-
-        // string[] testDirections = new string[] {
-        //     "south",
-        //     "east"
-        // };
-        // Room testRoom = generator.GenerateRoom("bootymeat", 3, 4, testDirections);
-        // RenderRoom(testRoom);
-        
+        player = GameObject.FindGameObjectWithTag("Player"); 
+        currFloor = Variables.currFloor;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(currFloor != null) {
+            for(int i=0; i<currentRoom.exitLocations.Length; i++) {
+                Location l = currentRoom.exitLocations[i];
+                Debug.Log("Location: " + l.locX + " " + l.locY);
+                int x = (int)Math.Floor(player.transform.position.x);
+                int y = (int)Math.Floor(player.transform.position.y);
+                int pX = Math.Abs(x);
+                int pY = Math.Abs(y);
+                Debug.Log("Player: "+ pX + " " + pY + " " + l.locX + " " + l.locY);
+                //Debug.Log("Location: " + l.locX + " " + l.locY);
+
+                if(pX == l.locX && pY == l.locY) {
+                    Debug.Log("TRUE");
+                    string direction = l.location;
+                    for(int j=0; j<currFloor.rooms.Length; j++) {
+                        Room newRoom = currFloor.rooms[j];
+                        if(direction == "north" && Array.Exists(newRoom.exitLocations, l => l.location == "south")) {
+                            this.currentRoom = newRoom;
+                            Variables.currentRoom = newRoom;
+                            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                        } else if(direction == "south" && Array.Exists(newRoom.exitLocations, l => l.location =="north")) {
+                            this.currentRoom = newRoom;
+                            Variables.currentRoom = newRoom;
+                            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                        } else if(direction == "west" && Array.Exists(newRoom.exitLocations, l => l.location =="east")) {
+                            this.currentRoom = newRoom;
+                            Variables.currentRoom = newRoom;
+                            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                        } else if(direction == "east" && Array.Exists(newRoom.exitLocations, l => l.location =="west")) {
+                            this.currentRoom = newRoom;
+                            Variables.currentRoom = newRoom;
+                            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
