@@ -118,7 +118,7 @@ public class RoomGenerator {
         // Generate a list of enemy spawn locations
         Location[] enemyLocations = GenerateEnemySpawns(numEnemies);
         // Generate a Room object with the newly created map
-        return new Room(width, height, newRoomMap, seed, exitLocations, itemLocations, numEnemies, numItems);
+        return new Room(width, height, newRoomMap, seed, exitLocations, itemLocations, enemyLocations, numEnemies, numItems);
 
 
     }
@@ -142,7 +142,7 @@ public class RoomGenerator {
             }
             for(int j=10; j<width-10; j++) {
                 if(map[i,j] == 0 && tempEnemyCounter < numEnemies) {
-                    if(Random.Range(1,10) >= 9) {
+                    if(Random.Range(1,10) >= 1) {
                         newEnemyLocations[tempEnemyCounter] = new Location("", i, j);
                         tempEnemyCounter++;
                     }
@@ -150,9 +150,7 @@ public class RoomGenerator {
             }
         }
         this.enemyLocations = newEnemyLocations;
-        Debug.Log(newEnemyLocations.ToString());
         return newEnemyLocations;
-
     }
 
     Location[] GenerateLootSpawns(int numItems) {
@@ -165,7 +163,7 @@ public class RoomGenerator {
             }
             for(int j=10; j<width-10; j++) {
                 if(map[i,j] == 0 && tempItemCounter < numItems) {
-                    if(Random.Range(1,10) >= 9) {
+                    if(Random.Range(1,10) >= 1) {
                         newItemLocations[tempItemCounter] = new Location("", i, j);
                         tempItemCounter++;
                     }

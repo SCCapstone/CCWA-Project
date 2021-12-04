@@ -40,6 +40,7 @@ public class Room
         string seed, 
         Location[] exitLocations,
         Location[] itemLocations,
+        Location[] enemyLocations,
         int numEnemies,
         int numItems
         ) {
@@ -49,6 +50,7 @@ public class Room
         this.seed = seed;
         this.exitLocations = exitLocations;
         this.itemLocations = itemLocations;
+        this.enemyLocations = enemyLocations;
         this.numEnemies = numEnemies;
         this.numItems = numItems;
     }

@@ -57,6 +57,8 @@ public class RoomRenderer : MonoBehaviour
         // Iterate to place items in the room
         for(int i=0; i<room.itemLocations.Length; i++) {
             Location l = room.itemLocations[i];
+            Debug.Log(l.locX + " " + l.locY);
+            Debug.Log(room);
             if(room.map[l.locX, l.locY] != 1) {
                 if(i%2 == 0) {  //health
                     Instantiate(health, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
