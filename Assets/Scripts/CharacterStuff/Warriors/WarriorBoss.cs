@@ -41,6 +41,8 @@ public class WarriorBoss : WarriorEnemy
                                             currentFile.NumRuns, currentFile.NumWins++, currentFile.UnlockedAchievements,
                                             false, null); //TODO get wins saved
             fm.SaveFile(Constants.VALID_FILE_NUMS[fm.CurrFile], fd);
+            Variables.inRun = false;
+            Variables.newGame = false;
             SceneManager.LoadScene("GameOver");
         }else
         {
