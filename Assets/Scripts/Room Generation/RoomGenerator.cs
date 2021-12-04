@@ -127,7 +127,7 @@ public class RoomGenerator {
             bossLocation = new Location("", 0, 0);
         }
 
-        Debug.Log(bossLocation.locX + " " + bossLocation.locY);
+        // Debug.Log(bossLocation.locX + " " + bossLocation.locY);
         return new Room(width, height, newRoomMap, seed, exitLocations, itemLocations, enemyLocations, bossLocation, numEnemies, numItems);
 
 
