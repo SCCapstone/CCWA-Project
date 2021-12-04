@@ -16,7 +16,9 @@ public class NewRun : MonoBehaviour
 
     }
 
-    public void selectRogue() {
-        
+    public void selectRogue() 
+    {
+        Variables.characterType = "rouge";
+        SceneManager.LoadScene("Gameplay");
     }
 }
