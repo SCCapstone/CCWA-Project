@@ -16,6 +16,7 @@ public class RoomRenderer : MonoBehaviour
     public GameObject attackUp;
     public GameObject health;
     public GameObject enemy;
+    public GameObject boss;
     public Room currentRoom;
     // End Variables***************************************************************************************************
 
@@ -75,8 +76,15 @@ public class RoomRenderer : MonoBehaviour
             Location l = room.enemyLocations[i];
             Instantiate(enemy, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
         }
+        Debug.Log("here");
+        if (!(room.bossLocation == null)){
+            Debug.Log("up in here");
+            Location b = room.bossLocation;
+            Debug.Log("Boss spawning at: "+b.locX +" " + b.locY);
+            Instantiate(boss, new Vector3(b.locX, b.locY, -1), Quaternion.identity);
+        }
     }
-    // End Rendering methdos*******************************************************************************************
+    // End Rendering methods*******************************************************************************************
 
     // Start is called before the first frame update
     void Start()

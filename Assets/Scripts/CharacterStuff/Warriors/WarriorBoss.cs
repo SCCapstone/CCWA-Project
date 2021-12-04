@@ -14,7 +14,7 @@ public class WarriorBoss : WarriorEnemy
         defense = 3;
         maxHealth = 20;
         health = maxHealth;
-        BossDisplay();
+        //BossDisplay();
     }
 
     // Update is called once per frame

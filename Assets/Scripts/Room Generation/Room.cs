@@ -19,6 +19,8 @@ public class Room
     public Location[] itemLocations;
     public Location[] enemyLocations;
 
+    public Location bossLocation;
+
     // End Variables***************************************************************************************************
 
     // Start Constructors**********************************************************************************************
@@ -41,6 +43,7 @@ public class Room
         Location[] exitLocations,
         Location[] itemLocations,
         Location[] enemyLocations,
+        Location bossLocation,
         int numEnemies,
         int numItems
         ) {
@@ -53,6 +56,7 @@ public class Room
         this.enemyLocations = enemyLocations;
         this.numEnemies = numEnemies;
         this.numItems = numItems;
+        this.bossLocation = bossLocation;
     }
 
     // End Constructors************************************************************************************************
@@ -117,5 +121,20 @@ public class Room
         this.enemyLocations = newEnemyLocations;
     }
 
+    public Location getBossLocation() {
+        return this.bossLocation;
+    }
+
+    public void setBossLocation(Location newBossLocation) {
+        this.bossLocation = newBossLocation;
+    }
+
+    public bool isBossRoom() {
+        if (bossLocation == null)
+        {
+            return false;
+        }
+        return true;
+    }
     // End Getter/Setter Functions*************************************************************************************
 }

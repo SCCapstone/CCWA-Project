@@ -191,11 +191,16 @@ public class FloorGenerator : MonoBehaviour
             {
                 if(floorLayout[i,j] != 0)
                 {
+                    var bossRoom = false;
                     int numEnemies = rand.Next(2,6); //Between 2 and 5 enemies
                     int numItems = rand.Next(1,5); //Between 1 and 4 items
                     string dirs = exitsLayout[i,j];
                     string[] directions = GetDirectionsFromExitString(dirs);
-                    rooms[floorLayout[i,j]-1] = roomGenerator.GenerateRoom(seed,numEnemies,numItems,directions);
+                    if(floorLayout[i,j]-1 == rooms.Length-1)
+                    {
+                        bossRoom = true;
+                    }
+                    rooms[floorLayout[i,j]-1] = roomGenerator.GenerateRoom(seed,numEnemies,numItems,bossRoom,directions);
                 }
             }
         }

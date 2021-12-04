@@ -105,7 +105,7 @@ public class RoomGenerator {
         return newMap;
     }
 
-    public Room GenerateRoom(string seed, int numEnemies, int numItems, string[] directions) {
+    public Room GenerateRoom(string seed, int numEnemies, int numItems, bool bossRoom, string[] directions) {
         // Generate a randomly filled Room map
         // Iterate over map to create a Room
         //int[,] newRoomMap = IterateOverRoom(FillRoomMap(seed));
@@ -118,7 +118,17 @@ public class RoomGenerator {
         // Generate a list of enemy spawn locations
         Location[] enemyLocations = GenerateEnemySpawns(numEnemies);
         // Generate a Room object with the newly created map
-        return new Room(width, height, newRoomMap, seed, exitLocations, itemLocations, enemyLocations, numEnemies, numItems);
+
+        Location bossLocation = null;
+        Debug.Log("generating a boss room: "+bossRoom);
+        if (bossRoom)
+        {
+            Debug.Log("generating boss location");
+            bossLocation = new Location("", 0, 0);
+        }
+
+        Debug.Log(bossLocation.locX + " " + bossLocation.locY);
+        return new Room(width, height, newRoomMap, seed, exitLocations, itemLocations, enemyLocations, bossLocation, numEnemies, numItems);
 
 
     }
