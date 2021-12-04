@@ -5,7 +5,7 @@ using UnityEngine;
 // This class holds information about the location of each rooms exit location ("door")
 public class Location
 {
-    private string location;
+    public string location;
     public int locX;
     public int locY;
 

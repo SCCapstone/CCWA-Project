@@ -204,6 +204,7 @@ public class FloorGenerator : MonoBehaviour
         
         //Makes the floor with the room and layout
         Floor floor = new Floor(seed, floorLayout, rooms);
+        Variables.currFloor = floor;
         return floor;
     }
 
@@ -263,6 +264,11 @@ public class FloorGenerator : MonoBehaviour
             this.seed = seed;
         } else
         {
+
+            roomGenerator = new RoomGenerator(true);
+            System.Random temp = new System.Random();
+            this.seed = temp.Next().ToString();
+
             if(!Variables.newGame)
             {
                 this.seed = Variables.floorSeed;
@@ -276,6 +282,7 @@ public class FloorGenerator : MonoBehaviour
                 System.Random temp = new System.Random();
                 this.seed = temp.Next().ToString();
             }
+
         }
         rand = new System.Random(this.seed.GetHashCode());
         
