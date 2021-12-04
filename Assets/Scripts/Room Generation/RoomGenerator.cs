@@ -109,6 +109,7 @@ public class RoomGenerator {
         // Generate a randomly filled Room map
         // Iterate over map to create a Room
         //int[,] newRoomMap = IterateOverRoom(FillRoomMap(seed));
+        Debug.Log(numEnemies);
         int[,] newRoomMap = IterateOverRoom(FillRoomMap(seed));
         //int [,] finalMap = IterateOverRoom(newRoomMap);
         // Generate multiple exit locations for the room, given an array of directions

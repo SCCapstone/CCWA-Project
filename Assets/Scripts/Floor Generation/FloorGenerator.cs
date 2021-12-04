@@ -260,10 +260,15 @@ public class FloorGenerator : MonoBehaviour
         {
             this.seed = seed;
             roomGenerator = new RoomGenerator(true);
+        } else
+        {
+            roomGenerator = new RoomGenerator(false);
+            System.Random temp = new System.Random();
+            this.seed = temp.Next().ToString();
         }
         rand = new System.Random(this.seed.GetHashCode());
         
-        // Debug.Log("start");
+        // Debug.Log(this.seed);
         RoomRenderer renderer = this.gameObject.GetComponent<RoomRenderer>();
         this.currFloor = GenerateFloor(this.seed);
         // printFloor(this.currFloor.floorLayout);

@@ -263,6 +263,7 @@ MonoBehaviour:
   exitTile: {fileID: 11400000, guid: 799d2081e6cd32a4b8d75dbdb5759b05, type: 2}
   attackUp: {fileID: 5633774304611363470, guid: f800cb7e4cd02184593e1f3bbc9311c5, type: 3}
   health: {fileID: 5331933513703734510, guid: aa8bfc8fb4130814d8e78d852afb02c7, type: 3}
+  enemy: {fileID: 0}
 --- !u!114 &8465818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,7 +278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numRooms: 4
   currRoomIdx: 0
-  seed: Bootymeat
+  seed: 
 --- !u!1 &63937048
 GameObject:
   m_ObjectHideFlags: 0
