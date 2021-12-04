@@ -27,7 +27,7 @@ public class WarriorEnemy : Warrior
         Debug.Log("we caressed under the wonder truck");
 
         var collision = collidedWith.collider;
-        
+        Debug.Log(collision);
         if (collision.tag == "Player") {
             //Gets the instance of player
             var playerCharacter = collision.GetComponent<RogueCharacter>();
