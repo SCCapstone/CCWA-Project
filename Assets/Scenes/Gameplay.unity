@@ -330,6 +330,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerWarrior
       objectReference: {fileID: 0}
+    - target: {fileID: 3407287002273714759, guid: d376c2a1f53ad7c4c86f8fe42d5d0d72, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3407287002273714763, guid: d376c2a1f53ad7c4c86f8fe42d5d0d72, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -510,9 +514,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8784097646283919377, guid: d9f504a899db51b4e9e9229495f1bce8, type: 3}
+      propertyPath: m_Constraints
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8784097646283919468, guid: d9f504a899db51b4e9e9229495f1bce8, type: 3}
       propertyPath: m_Name
       value: RedBirdEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8784097646283919468, guid: d9f504a899db51b4e9e9229495f1bce8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8784097646283919471, guid: d9f504a899db51b4e9e9229495f1bce8, type: 3}
       propertyPath: m_RootOrder
@@ -520,11 +532,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8784097646283919471, guid: d9f504a899db51b4e9e9229495f1bce8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: 2.41
       objectReference: {fileID: 0}
     - target: {fileID: 8784097646283919471, guid: d9f504a899db51b4e9e9229495f1bce8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10
+      value: 7.19
       objectReference: {fileID: 0}
     - target: {fileID: 8784097646283919471, guid: d9f504a899db51b4e9e9229495f1bce8, type: 3}
       propertyPath: m_LocalPosition.z
