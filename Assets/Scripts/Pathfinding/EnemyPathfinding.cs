@@ -34,12 +34,12 @@ public class EnemyPathfinding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        float step = speed * Time.deltaTime;
         // Debug.Log("target pos "+target.position.x + " " + target.position.y + " " + target.position.z);
-        if (!(pathVectorList == null) && !(pathVectorList.Count == 0))
+        if (!(pathVectorList == null) && pathVectorList.Count > 0)
         {
 
-            float step = speed * Time.deltaTime;
+            
             transform.position = Vector3.MoveTowards(transform.position, pathVectorList[0], step);
             // Debug.Log("moved towards "+pathVectorList[0].x + " " + pathVectorList[0].y + " " + pathVectorList[0].z);
             if (transform.position == pathVectorList[0])
@@ -47,6 +47,10 @@ public class EnemyPathfinding : MonoBehaviour
                 // Debug.Log("Made it"+pathVectorList[0].x + " " + pathVectorList[0].y + " " + pathVectorList[0].z);
                 pathVectorList.RemoveAt(0);
             }
+        }
+        else
+        {
+            transform.position=Vector3.MoveTowards(transform.position, target.position, step);
         }
 
     }
