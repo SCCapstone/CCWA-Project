@@ -263,7 +263,7 @@ public class FloorGenerator : MonoBehaviour
             roomGenerator = new RoomGenerator(true);
         } else
         {
-            roomGenerator = new RoomGenerator(false);
+            roomGenerator = new RoomGenerator(true);
             System.Random temp = new System.Random();
             this.seed = temp.Next().ToString();
         }
