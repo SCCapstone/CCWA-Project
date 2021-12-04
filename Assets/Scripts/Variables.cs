@@ -19,5 +19,9 @@ public class Variables:ScriptableObject
     public static string floorSeed;
 
     public static string characterType;
+
+    public static Room currentRoom;
+
+    public static Floor currFloor;
     
 }
