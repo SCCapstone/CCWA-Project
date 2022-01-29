@@ -120,10 +120,10 @@ public class RoomGenerator {
         // Generate a Room object with the newly created map
 
         Location bossLocation = null;
-        Debug.Log("generating a boss room: "+bossRoom);
+        // Debug.Log("generating a boss room: "+bossRoom);
         if (bossRoom)
         {
-            Debug.Log("generating boss location");
+            // Debug.Log("generating boss location");
             bossLocation = new Location("", 0, 0);
         }
 
