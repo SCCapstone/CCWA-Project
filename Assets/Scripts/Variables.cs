@@ -23,5 +23,7 @@ public class Variables:ScriptableObject
     public static Room currentRoom;
 
     public static Floor currFloor;
+
+    public static float clock;
     
 }

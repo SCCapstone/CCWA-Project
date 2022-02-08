@@ -510,6 +510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   victory: {fileID: 129191511}
   failure: {fileID: 863184670}
+  runTime: {fileID: 647387500}
 --- !u!114 &300118257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1478,7 +1479,7 @@ GameObject:
   - component: {fileID: 1015706085}
   m_Layer: 5
   m_Name: run time
-  m_TagString: Untagged
+  m_TagString: clock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

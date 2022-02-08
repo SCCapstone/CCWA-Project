@@ -23,6 +23,7 @@ public class gameClock : MonoBehaviour
         if(timerActive)
         {  
             timer += Time.deltaTime;
+            Variables.clock = timer;
             DisplayTime();
         }
     }
