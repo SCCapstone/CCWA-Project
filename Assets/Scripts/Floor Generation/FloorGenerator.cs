@@ -269,12 +269,12 @@ public class FloorGenerator : MonoBehaviour
             this.seed = seed;
         } else
         {
-
             roomGenerator = new RoomGenerator(true);
             System.Random temp = new System.Random();
             this.seed = temp.Next().ToString();
-
-            if(!Variables.newGame)
+            Debug.Log(Variables.floorSeed);
+            FileManager fileManager = GameObject.Find("FileManager").GetComponent<FileManager>();
+            if(!Variables.newGame && fileManager.GetFileData(fileManager.CurrFile+1).CurrRun != null)
             {
                 this.seed = Variables.floorSeed;
                 var player = GameObject.FindWithTag("Player");
@@ -282,12 +282,8 @@ public class FloorGenerator : MonoBehaviour
                 character.health = Variables.playerHealth;
                 character.stamina = Variables.playerStamina;
                 floorNum = Variables.floorNum;
-            }else
-            {
-                temp = new System.Random();
-                this.seed = temp.Next().ToString();
             }
-
+            
         }
         rand = new System.Random(this.seed.GetHashCode());
         
