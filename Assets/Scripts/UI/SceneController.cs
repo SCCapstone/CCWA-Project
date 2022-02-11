@@ -5,21 +5,15 @@ using UnityEngine;
 
 public class SceneController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // make a variable to keep up with the last scnene useful for main back btn
     public void MainMenuButton()
     {
         SceneManager.LoadScene("Title Screen");
+    }
+
+    // used to navigate one scene back. Typically used for menus and the like.
+    public void BackButton() {
+        
     }
 
     public void FileSelectButton()
@@ -42,11 +36,11 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene("Achievements");
     }
 
-    public void RetryButton(){}
+    //public void RetryButton(){}
 
     public void CreditsButton()
     {
-        /*SceneManager.LoadScene("Credits")*/
+        SceneManager.LoadScene("Credits");
     }
 
     public void QuitButton()
@@ -54,8 +48,16 @@ public class SceneController : MonoBehaviour
         Application.Quit();
     }
 
-    public void NewRunButton()
+    //Not sure if needed thanks to Ian's prexisiting file buttons
+    /*public void NewRunButton()
     {
+        Variables.newGame = true;
         SceneManager.LoadScene("New Run");
     }
+
+    public void LoadGameButton() {
+        Variables.newGame = false;
+        SceneManager.LoadScene("File Select");
+    }*/
+
 }
