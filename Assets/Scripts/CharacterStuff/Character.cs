@@ -18,6 +18,8 @@ public class Character : MonoBehaviour
     public List<bool> statuses;
     public Color spriteColor;
     public SpriteRenderer sRenderer;
+    //added by Nick
+    public int keyAmt = 0;
      
     public void Awake()
     {
@@ -28,6 +30,21 @@ public class Character : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void gainAKey () {
+        keyAmt += 1;
+    }
+
+    //returns true if the a key is available to be used 
+    public bool useKey () {
+        if (keyAmt<1) {
+            return false;
+        }
+        else {
+            keyAmt -=1;
+            return true;
+        }
     }
 
     //Is the base form of attack for the character. Ready to be overriden
