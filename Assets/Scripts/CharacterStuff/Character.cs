@@ -47,6 +47,14 @@ public class Character : MonoBehaviour
         }
     }
 
+    public void increaseAttackDmg(){
+        attackDmg +=1;
+    }
+
+    public void increaseDefence(){
+        defense +=1;
+    }
+
     //Is the base form of attack for the character. Ready to be overriden
     //public virtual void Attack(BoxCollider2D collision) {}
 
