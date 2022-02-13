@@ -1513,8 +1513,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 406116234}
-        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: FileSelectButton
+        m_TargetAssemblyTypeName: SceneController, Scripts
+        m_MethodName: BackButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

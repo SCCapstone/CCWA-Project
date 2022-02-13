@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Variables:ScriptableObject
 {
@@ -24,4 +25,6 @@ public class Variables:ScriptableObject
 
     public static Floor currFloor;
     
+    //Stack of strings for back button navigation in Scene Controller file
+    public static Stack<string> menuNavStack = new Stack<string>();
 }

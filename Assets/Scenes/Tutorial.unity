@@ -1665,8 +1665,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 749687704}
-        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: NewRunButton
+        m_TargetAssemblyTypeName: SceneController, Scripts
+        m_MethodName: BackButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

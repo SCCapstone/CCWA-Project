@@ -41,6 +41,7 @@ public class FileSelectBtn : MonoBehaviour
         } else
         {
             SceneManager.LoadScene("New Run");
+            Variables.menuNavStack.Push(SceneManager.GetActiveScene().name);
         }
     }
 
