@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 8465815}
   - component: {fileID: 8465818}
   - component: {fileID: 8465817}
+  - component: {fileID: 8465819}
   m_Layer: 0
   m_Name: Floor Map
   m_TagString: Untagged
@@ -265,6 +266,9 @@ MonoBehaviour:
   health: {fileID: 5331933513703734510, guid: aa8bfc8fb4130814d8e78d852afb02c7, type: 3}
   enemy: {fileID: 1376043840}
   boss: {fileID: 1819581511}
+  player: {fileID: 0}
+  playerX: 0
+  playerY: 0
 --- !u!114 &8465818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,6 +284,22 @@ MonoBehaviour:
   numRooms: 2
   currRoomIdx: 0
   seed: 
+--- !u!19719996 &8465819
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8465813}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1 &63937048
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,7 +712,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 87931403}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -12.5, y: -12.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2033673439}
@@ -11525,6 +11545,7 @@ GameObject:
   - component: {fileID: 2033673439}
   - component: {fileID: 2033673437}
   - component: {fileID: 2033673438}
+  - component: {fileID: 2033673440}
   m_Layer: 0
   m_Name: Item Map
   m_TagString: Untagged
@@ -11632,6 +11653,22 @@ Transform:
   m_Father: {fileID: 87931404}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!19719996 &2033673440
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033673436}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1 &2036359257
 GameObject:
   m_ObjectHideFlags: 0
