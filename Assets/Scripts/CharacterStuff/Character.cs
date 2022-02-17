@@ -18,6 +18,7 @@ public class Character : MonoBehaviour
     public List<bool> statuses;
     public Color spriteColor;
     public SpriteRenderer sRenderer;
+
     //added by Nick
     public int keyAmt = 0;
      
@@ -86,6 +87,13 @@ public class Character : MonoBehaviour
     //Damages the health of the character by a amount of points
     public virtual void DamageHealth (int a) {
         health -= a;
+        StartCoroutine(damageCoroutine());
+    }
+    public IEnumerator damageCoroutine(){
+        gameObject.GetComponent<Collider2D>().enabled = false;
+        yield return new WaitForSeconds(1.5f);
+        gameObject.GetComponent<Collider2D>().enabled = true;
+        
     }
 
     //Recovers the stamina by a amount of points
