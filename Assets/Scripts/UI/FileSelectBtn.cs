@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 /*
  * Button for loading a file
@@ -26,6 +27,10 @@ public class FileSelectBtn : MonoBehaviour
         }
 
         FileData fd = fileManager.GetFileData(filenum);
+        if(fd.DateCreated == "00/00/0000")
+        {
+            fd.DateCreated = DateTime.Now.ToString("d");
+        }
         bool inRun = fd.InRun;
         Debug.Log(fd.DateCreated + " " + fd.InRun);
         if(inRun)

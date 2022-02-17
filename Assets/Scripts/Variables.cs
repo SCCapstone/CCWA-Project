@@ -7,6 +7,7 @@ public class Variables:ScriptableObject
 {
     public static bool wonGame = false;
     public static bool isPaused = false;
+    public static bool isDead = false;
 
     //File Stuff
     public static bool newGame;
