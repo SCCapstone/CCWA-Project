@@ -32,6 +32,22 @@ public class Character : MonoBehaviour
 
     }
 
+    public void ensnaredStatus(int statusTimeSec){
+        StartCoroutine(ensnaredCoroutine(statusTimeSec));
+    }
+ 
+    
+    public IEnumerator ensnaredCoroutine(int seconds){
+        float tempMoveSpeed = moveSpeed;
+        if (tempMoveSpeed>2f){
+            moveSpeed-=2;
+            StaminaDrain(2.0);
+        }
+        yield return new WaitForSeconds(seconds);
+        Debug.Log("waiting is done");
+        moveSpeed=tempMoveSpeed;
+    }
+
     public void gainAKey () {
         keyAmt += 1;
     }
@@ -115,6 +131,7 @@ public class Character : MonoBehaviour
     //Deals with the character running out of health
     //Virtual because multiple things die differently
     public virtual void Die() {} 
+
     
     
 }
