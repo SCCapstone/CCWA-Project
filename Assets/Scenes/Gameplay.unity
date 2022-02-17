@@ -1727,6 +1727,7 @@ MonoBehaviour:
   miniMap: {fileID: 284478883}
   roomTile: {fileID: 11400000, guid: 2833da4ba8d44ce4ea332e57f8bed872, type: 2}
   currRoomTile: {fileID: 11400000, guid: 8831abfc439ba6741a17566210d447ee, type: 2}
+  noRoomTile: {fileID: 11400000, guid: 88ad6ec25df3ac972945337b8a5fed16, type: 2}
 --- !u!483693784 &284478882
 TilemapRenderer:
   m_ObjectHideFlags: 0
