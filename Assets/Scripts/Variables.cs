@@ -33,6 +33,7 @@ public class Variables:ScriptableObject
     public static bool isSpeedrun;
 
     public static int difficulty;
+    public static int score;
     
     //Stack of strings for back button navigation in Scene Controller file
     public static Stack<string> menuNavStack = new Stack<string>();

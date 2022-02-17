@@ -510,7 +510,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   victory: {fileID: 129191511}
   failure: {fileID: 863184670}
-  runTime: {fileID: 647387500}
+  runTimeText: {fileID: 647387502}
+  scoreText: {fileID: 748378344}
 --- !u!114 &300118257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -958,7 +959,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Run Time: 0:00:00'
+  m_Text: Run Time
 --- !u!222 &647387503
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1037,7 +1038,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Run Time: 0:00:00'
+  m_Text: Score
 --- !u!222 &748378345
 CanvasRenderer:
   m_ObjectHideFlags: 0
