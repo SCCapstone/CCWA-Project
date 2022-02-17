@@ -37,7 +37,7 @@ public class Tutorial : MonoBehaviour
 
     void Update() {
         infoText.text = texts[iterator];
-        pageCount.text = pageCounter + "/4";
+        pageCount.text = pageCounter + "/" + texts.Length;
         ImageChange();
 
     }
