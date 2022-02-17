@@ -7,14 +7,13 @@ public class TutorialFromPause : MonoBehaviour
     public GameObject PauseOverlay;
     public GameObject TutorialOverlay;
 
-    void Start()
-    {
+    public void loadTutorial() {
+        PauseOverlay.SetActive(false);
         
-    }
+   }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public void backToPause() {
+        PauseOverlay.SetActive(true);
+        TutorialOverlay.SetActive(false);
+    } 
 }
