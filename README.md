@@ -26,6 +26,12 @@ After each time the game code is changed, the executable is created by utilizing
 
 All tests are contained in the `Assets/Tests` directory, with Unit Tests in `Tests/Unit_Tests` and Behavioral Tests in `Tests/Behavioral_Tests`.
 
+## Testing Technology
+
+We have identified the testing framework we will be using as NUnit/XUnit through the Unity Test Framework.
+
+## Running Tests
+
 Tests can be run from the root directory of this repository with the following commands:
 - To run the unit tests: `PATH/TO/UNITY_EXECUTABLE -runTests -batchmode -projectPath ./ -testResults ./TestResults/tests.xml`
 - To run the behavioral tests:  `PATH/TO/UNITY_EXECUTABLE -runTests -testPlatform PlayMode -batchmode -projectPath ./ -testResults ./TestResults/tests.xml`
@@ -35,14 +41,6 @@ In Windows, the Unity executable should be located at `"C:\Program Files\Unity\H
 The results of the tests will be saved in `TestResults/tests.xml`.
 
 Please note that the tests will take a few seconds to run.
-
-## Testing Technology
-
-We have identified the testing framework we will be using as NUnit/XUnit through the Unity Test Framework.
-
-## Running Tests
-
-We will be implementing tests in CSCE 492
 
 ## Authors
 
