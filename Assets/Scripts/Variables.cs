@@ -11,6 +11,9 @@ public class Variables:ScriptableObject
 
     //File Stuff
     public static bool newGame;
+    public static float fastest_E;
+    public static float fastest_M;
+    public static float fastest_H;
 
     //Game state Stuff
     public static bool inRun = false;
@@ -25,6 +28,11 @@ public class Variables:ScriptableObject
     public static Room currentRoom;
 
     public static Floor currFloor;
+
+    public static float clock;
+    public static bool isSpeedrun;
+
+    public static int difficulty;
     
     //Stack of strings for back button navigation in Scene Controller file
     public static Stack<string> menuNavStack = new Stack<string>();
