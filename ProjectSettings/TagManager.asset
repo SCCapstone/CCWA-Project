@@ -15,6 +15,7 @@ TagManager:
   - Enemy
   - paused
   - Boss
+  - clock
   layers:
   - Default
   - TransparentFX

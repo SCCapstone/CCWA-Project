@@ -38,7 +38,7 @@ public class WarriorBoss : WarriorEnemy
             //Save file on new floor
             FileData currentFile = fm.GetFileData(Constants.VALID_FILE_NUMS[fm.CurrFile]);
             FileData fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, currentFile.FastestTime,
-                                            currentFile.NumRuns, currentFile.NumWins++, currentFile.UnlockedAchievements,
+                                            currentFile.NumRuns, currentFile.NumWins+1, currentFile.UnlockedAchievements,
                                             false, null); //TODO get wins saved
             fm.SaveFile(Constants.VALID_FILE_NUMS[fm.CurrFile], fd);
             Variables.inRun = false;

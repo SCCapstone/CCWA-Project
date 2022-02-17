@@ -8,12 +8,15 @@ using TMPro;
 
 public class Achievements : MonoBehaviour
 {
-    public string[] achievementDescriptions = {"Achievement 1 description", "Achievement 2 description"};
+    public string[] achievementDescriptions = 
+    {"Babby's first game", 
+    "Achievement 2 description"};
 
     public Button[] allButtons, achievementButtons;
     public string[] achievementNames;
     public int currentActiveAchievementIndex;
     public TextMeshProUGUI currAchievementText;
+    public Text pageCount;
 
     public string[] nonAchievementButtonNames = new string[] {"BackBtn", "NavRightBtn", "NavLeftBtn"};
 
@@ -67,7 +70,10 @@ public class Achievements : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() {}
+    void Update() 
+    {
+        pageCount.text = currentActiveAchievementIndex + "/" + achievementDescriptions.Length;
+    }
     
     //connect this to On Click of each achievement button
     public void setActiveAchievement()
