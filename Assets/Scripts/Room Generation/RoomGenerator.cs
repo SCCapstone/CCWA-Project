@@ -65,74 +65,50 @@ public class RoomGenerator {
     // This is used as a way to populate the map before iterating to finalize the room shape
     // This method utilizes a seed, so the same Room can be generated repeatedly if needed
     // This method returns the int[,] map of the room
-    // int[,] FillRoomMap(string seed) {
-    //     string tempSeed;
-    //     if(!useSeed) {
-    //         tempSeed = Time.time.ToString();
-    //     }
-    //     else {
-    //         tempSeed = seed;
-    //     }
-    //     System.Random rand = new System.Random(tempSeed.GetHashCode());
-    //     int[,] m = new int[height,width];
-    //     float fillChance = 20.0f;
-    //     for(int i=0; i<height; i++) {
-    //         for(int j=0; j<width; j++) {
-    //             //Enclose the room with walls
-    //             if(i == 0 || i == width-1 || j == 0 || j == height-1) {
-    //                 m[i,j] = 1;
-    //             }
-    //             //Randomly add walls in the room based on a fill chance
-    //             else {
-    //                m[i,j] = (rand.Next(0,100) < fillChance) ? 1 : 0;
-    //             }
-    //         }
-    //      }
-    //      return m;
-    // }
-
-    // // This method iterates over a room and applies certain rules to change the room's shape
-    // // 
-    // int[,] IterateOverRoom(int[,] newMap) {
-    //      for(int i=0; i<height; i++) {
-    //         for(int j=0; j<width; j++) {
-    //             int numNeighbors = CalcNeighbors(i,j);
-    //             if(numNeighbors >= 2) {
-    //                 newMap[i,j] = 1;
-    //             }
-    //         }  
-    //     }
-    //     return newMap;
-    // }
-
-    int squareDistance(int x, int y) {
-        int dx = 2*x / width-1;
-        int dy = 2*y / height-1;
-        return dx*dx + dy*dy;
-    }
-
-    int[,] GenerateNoiseForRoom() {
-        float scale = Random.Range(0.0f, 20.0f);
+    int[,] FillRoomMap(string seed) {
+        string tempSeed;
+        if(!useSeed) {
+            tempSeed = Time.time.ToString();
+        }
+        else {
+            tempSeed = seed;
+        }
+        System.Random rand = new System.Random(tempSeed.GetHashCode());
+        int[,] m = new int[height,width];
+        float fillChance = 20.0f;
         for(int i=0; i<height; i++) {
             for(int j=0; j<width; j++) {
-                float perlinValue = Mathf.PerlinNoise((j/scale),(i/scale));
-                if(perlinValue > 0.6f) {
-                    map[i,j] = 1;
+                //Enclose the room with walls
+                if(i == 0 || i == width-1 || j == 0 || j == height-1) {
+                    m[i,j] = 1;
                 }
+                //Randomly add walls in the room based on a fill chance
                 else {
-                    map[i,j] = 0;
+                   m[i,j] = (rand.Next(0,100) < fillChance) ? 1 : 0;
                 }
             }
+         }
+         return m;
+    }
+
+    // This method iterates over a room and applies certain rules to change the room's shape
+    int[,] IterateOverRoom(int[,] newMap) {
+         for(int i=0; i<height; i++) {
+            for(int j=0; j<width; j++) {
+                int numNeighbors = CalcNeighbors(i,j);
+                if(numNeighbors >= 2) {
+                    newMap[i,j] = 1;
+                }
+            }  
         }
-        return map;
+        return newMap;
     }
 
     public Room GenerateRoom(string seed, int numEnemies, int numItems, bool bossRoom, string[] directions) {
         // Generate a randomly filled Room map
         // Iterate over map to create a Room
-        //int[,] newRoomMap = IterateOverRoom(FillRoomMap(seed));
-        int[,] newRoomMap = GenerateNoiseForRoom();
-        //int [,] finalMap = IterateOverRoom(newRoomMap);
+        int[,] newRoomMap = IterateOverRoom(FillRoomMap(seed));
+        int [,] finalMap = IterateOverRoom(newRoomMap);
         // Generate multiple exit locations for the room, given an array of directions
         Location[] exitLocations = GenerateMultipleExits(directions.Length, directions, newRoomMap);
         // Generate spawn locations for items
