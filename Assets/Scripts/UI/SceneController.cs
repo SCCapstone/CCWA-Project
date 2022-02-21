@@ -12,6 +12,11 @@ public class SceneController : MonoBehaviour
         Variables.menuNavStack.Clear();
         Variables.menuNavStack.Push(SceneManager.GetActiveScene().name);
         SceneManager.LoadScene("Title Screen");
+
+        //Unpausing the game if quitting from gameplay scenes
+        if (Time.timeScale == 0) {
+            Time.timeScale = 1;
+        }
     }
 
     //used to navigate one scene back. Typically used for menus and the like.
@@ -23,9 +28,6 @@ public class SceneController : MonoBehaviour
             SceneManager.LoadScene("Title Screen");
             Debug.Log("No more Scenes in button queue");
         }
-
-        
-        
     }
 
     public void FileSelectButton()
