@@ -10,10 +10,42 @@ public class GameOver : MonoBehaviour
 
     public GameObject victory;
     public GameObject failure;
+
+    public GameObject runTime;
+
+    Text RTT;
+
     // Start is called before the first frame update
     void Start()
     {
+        Variables.isDead = false;
         loadScreen(Variables.wonGame);
+
+        RTT = runTime.GetComponent<Text>();
+
+        float timer = Variables.clock;
+        int minutes = Mathf.FloorToInt(timer/60.0f);
+        int seconds = Mathf.FloorToInt(timer - minutes *60);
+
+        RTT.text = string.Format("Run Time: {0:00}:{1:00}", minutes, seconds);
+
+        //check if a new fastest time has been set
+        if (Variables.difficulty == 0)
+        {
+            if(timer < Variables.fastest_E)
+                Variables.fastest_E = timer;
+        }
+        else if(Variables.difficulty == 1)
+        {
+            if(timer < Variables.fastest_M)
+                Variables.fastest_M = timer;
+        }
+        else
+        {
+            if(timer < Variables.fastest_H)
+                Variables.fastest_H = timer;
+        }
+
     }
 
     // Update is called once per frame

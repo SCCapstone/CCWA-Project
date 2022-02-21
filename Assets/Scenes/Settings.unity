@@ -3954,6 +3954,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1236463122}
   - component: {fileID: 1236463123}
+  - component: {fileID: 1236463124}
   m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
@@ -4030,10 +4031,36 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.66
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1236463124}
+        m_TargetAssemblyTypeName: VolumeController, Scripts
+        m_MethodName: SetLevel
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1236463124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236463121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86440ad9c86e00d448b50046f9cabcbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: b47d9c8bb0887574d924c79f22319681, type: 2}
+  slider: {fileID: 1236463123}
 --- !u!1 &1260664448
 GameObject:
   m_ObjectHideFlags: 0
@@ -6285,7 +6312,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 638.78406, y: 393.00366}
+  m_AnchoredPosition: {x: 638, y: 393}
   m_SizeDelta: {x: 133.5683, y: 94.8653}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1887332785
