@@ -42,5 +42,8 @@ public class Cheats : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.PageUp)) {
             MoveToNextRoom();
         }
+        else if(Input.GetKeyDown(KeyCode.Home)) {
+            GenerateNewFloor();
+        }
     }
 }
