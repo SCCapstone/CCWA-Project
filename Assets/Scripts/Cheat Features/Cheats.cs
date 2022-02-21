@@ -10,9 +10,10 @@ public class Cheats : MonoBehaviour
         Debug.Log("Destroy Enemeies");
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         for(int i=1; i<enemies.Length; i++) {
-            Destroy(enemies[i]);
+            if(enemies[i].name == "RedBirdEnemy(Clone)") {
+                Destroy(enemies[i]);
+            }
         }
-        
     }
 
     //Page Up Key
