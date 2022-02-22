@@ -17,15 +17,13 @@ public class Cheats : MonoBehaviour
     }
 
     //Page Up Key
-    void MoveToNextRoom() {
+    void RespawnRoomEnemies() {
         Debug.Log("Next Room");
         var floorMap = GameObject.Find("Floor Map");
         FloorGenerator floorGenerator = floorMap.GetComponent<FloorGenerator>();
         RoomRenderer roomRenderer = floorMap.GetComponent<RoomRenderer>();
-        int nextIdx = floorGenerator.currRoomIdx == floorGenerator.GetCurrFloor().rooms.Length-1 ? floorGenerator.currRoomIdx : floorGenerator.currRoomIdx++;
-        Room nextRoom = floorGenerator.GetCurrFloor().rooms[nextIdx];
-        roomRenderer.setCurrentRoom(nextRoom);
-        roomRenderer.RenderRoom(nextRoom);
+        Room currRoom = floorGenerator.GetCurrRoom();
+        roomRenderer.RenderRoom(currRoom);
     }
 
     //Home key
@@ -50,7 +48,7 @@ public class Cheats : MonoBehaviour
             DisableEnemies();
         }
         else if(Input.GetKeyDown(KeyCode.PageUp)) {
-            MoveToNextRoom();
+            RespawnRoomEnemies();
         }
         else if(Input.GetKeyDown(KeyCode.Home)) {
             GenerateNewFloor();
