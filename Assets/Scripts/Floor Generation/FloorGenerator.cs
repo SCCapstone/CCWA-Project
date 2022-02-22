@@ -264,9 +264,9 @@ public class FloorGenerator : MonoBehaviour
     {
         roomGenerator = new RoomGenerator(true);
         int floorNum = 1;
-        if (!string.IsNullOrEmpty(seed))
+        if (!string.IsNullOrEmpty(Variables.floorSeed))
         {
-            this.seed = seed;
+            this.seed = Variables.floorSeed;
         } else
         {
             roomGenerator = new RoomGenerator(true);
@@ -285,6 +285,7 @@ public class FloorGenerator : MonoBehaviour
             }
             
         }
+        Variables.floorSeed = this.seed;
         rand = new System.Random(this.seed.GetHashCode());
         
         // Debug.Log(this.seed);
