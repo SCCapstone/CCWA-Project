@@ -9,6 +9,7 @@ public class TutorialFromPause : MonoBehaviour
 
     public void loadTutorial() {
         PauseOverlay.SetActive(false);
+        TutorialOverlay.SetActive(true);
         
    }
 
