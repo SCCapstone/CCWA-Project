@@ -33,11 +33,10 @@ public class Character : MonoBehaviour
 
     }
 
+    //Ensnared Status Effect
     public void ensnaredStatus(int statusTimeSec){
         StartCoroutine(ensnaredCoroutine(statusTimeSec));
     }
- 
-    
     public IEnumerator ensnaredCoroutine(int seconds){
         float tempMoveSpeed = moveSpeed;
         if (tempMoveSpeed>2f){
@@ -47,6 +46,19 @@ public class Character : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         Debug.Log("waiting is done");
         moveSpeed=tempMoveSpeed;
+    }
+
+    //Poisoned Status Effect
+    public void poisonedStatus(int statusTicks){
+        StartCoroutine(poisonedCoroutine(statusTicks));
+    }
+    public IEnumerator poisonedCoroutine(int ticks){
+        yield return new WaitForSeconds(1f);
+        for(int i=0;i<ticks;i++){
+            health -= 1;
+            yield return new WaitForSeconds(2f);
+        }
+        
     }
 
     public void gainAKey () {
