@@ -509,8 +509,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 082ea65f2ad874f30a457b03b11aa2b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  victory: {fileID: 863184670}
-  failure: {fileID: 129191511}
+  victory: {fileID: 129191511}
+  failure: {fileID: 863184670}
   runTime: {fileID: 647387500}
 --- !u!114 &300118257
 MonoBehaviour:
