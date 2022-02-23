@@ -25,8 +25,8 @@ public class FloorMap : MonoBehaviour
         int yoffset = currFloor.floorLayout.GetLength(0);
         int xoffset = currFloor.floorLayout.GetLength(1);
         FloorGenerator.printFloor(currFloor.floorLayout);
-        int minimapTop = 17;
-        int minimapRight = 32;
+        int minimapTop = 37;
+        int minimapRight = 69;
         // miniMap.SetTile(new Vector3Int(32,17,0), currRoomTile);
         for(int i=0; i<yoffset; i++) {
             for(int j=0; j<xoffset; j++) {
