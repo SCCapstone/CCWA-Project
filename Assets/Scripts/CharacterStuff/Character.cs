@@ -18,6 +18,8 @@ public class Character : MonoBehaviour
     public List<bool> statuses;
     public Color spriteColor;
     public SpriteRenderer sRenderer;
+    //added by Nick
+    public int keyAmt = 0;
      
     public void Awake()
     {
@@ -28,6 +30,45 @@ public class Character : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void ensnaredStatus(int statusTimeSec){
+        StartCoroutine(ensnaredCoroutine(statusTimeSec));
+    }
+ 
+    
+    public IEnumerator ensnaredCoroutine(int seconds){
+        float tempMoveSpeed = moveSpeed;
+        if (tempMoveSpeed>2f){
+            moveSpeed-=2;
+            StaminaDrain(2.0);
+        }
+        yield return new WaitForSeconds(seconds);
+        Debug.Log("waiting is done");
+        moveSpeed=tempMoveSpeed;
+    }
+
+    public void gainAKey () {
+        keyAmt += 1;
+    }
+
+    //returns true if the a key is available to be used 
+    public bool useKey () {
+        if (keyAmt<1) {
+            return false;
+        }
+        else {
+            keyAmt -=1;
+            return true;
+        }
+    }
+
+    public void increaseAttackDmg(){
+        attackDmg +=1;
+    }
+
+    public void increaseDefence(){
+        defense +=1;
     }
 
     //Is the base form of attack for the character. Ready to be overriden
@@ -90,6 +131,7 @@ public class Character : MonoBehaviour
     //Deals with the character running out of health
     //Virtual because multiple things die differently
     public virtual void Die() {} 
+
     
     
 }
