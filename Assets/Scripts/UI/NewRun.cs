@@ -56,6 +56,9 @@ public class NewRun : MonoBehaviour
             Variables.isSpeedrun = false;
         }
 
+        //TODO add input validation for seeds
+        Variables.floorSeed = GameObject.Find("SeedField").GetComponent<TMP_InputField>().text;
+
         Debug.Log(Variables.isSpeedrun);
         Debug.Log(Variables.difficulty);
 

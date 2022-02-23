@@ -8,10 +8,7 @@ using TMPro;
 
 public class Achievements : MonoBehaviour
 {
-    public string[] achievementDescriptions = 
-    {"Babby's first game", 
-    "Achievement 2 description"};
-
+    public string[] achievementDescriptions;
     public Button[] allButtons, achievementButtons;
     public string[] achievementNames;
     public int currentActiveAchievementIndex;
@@ -72,7 +69,7 @@ public class Achievements : MonoBehaviour
     // Update is called once per frame
     void Update() 
     {
-        pageCount.text = currentActiveAchievementIndex + "/" + achievementDescriptions.Length;
+        //pageCount.text = currentActiveAchievementIndex + "/" + achievementDescriptions.Length;
     }
     
     //connect this to On Click of each achievement button

@@ -70,12 +70,14 @@ public class SceneController : MonoBehaviour
 
     public void NewGame() {
         Variables.newGame = true;
+        Variables.floorSeed = "";
         Variables.menuNavStack.Push(SceneManager.GetActiveScene().name);
         SceneManager.LoadScene("File Select");
     }
 
     public void LoadGame() {
         Variables.newGame = false;
+        Variables.floorSeed = "";
         Variables.menuNavStack.Push(SceneManager.GetActiveScene().name);
         SceneManager.LoadScene("File Select");
     }
