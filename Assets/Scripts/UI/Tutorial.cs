@@ -31,15 +31,9 @@ public class Tutorial : MonoBehaviour
         pageCount = GetComponentInChildren<Text>();
 
         //Getting the image of the enemy
-        enemy = GameObject.FindWithTag("Enemy");
+        enemy = GameObject.FindWithTag("enemyImage");
         enemyDisplay = enemy.GetComponent<Image>();
-    }
-
-    void Update() {
-        infoText.text = texts[iterator];
-        pageCount.text = pageCounter + "/" + texts.Length;
-        ImageChange();
-
+        enemyDisplay.enabled = false;
     }
 
     public void nextBtn() {
@@ -47,6 +41,9 @@ public class Tutorial : MonoBehaviour
             ++iterator;
             ++pageCounter;
         }
+        infoText.text = texts[iterator];
+        pageCount.text = pageCounter + "/" + texts.Length;
+        ImageChange();
     }
 
     public void backBtn() {
@@ -54,6 +51,9 @@ public class Tutorial : MonoBehaviour
             --iterator;
             --pageCounter;
         } 
+        infoText.text = texts[iterator];
+        pageCount.text = pageCounter + "/" + texts.Length;
+        ImageChange();
     }
 
     public void ImageChange() {
