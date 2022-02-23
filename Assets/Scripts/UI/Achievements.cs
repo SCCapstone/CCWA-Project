@@ -8,6 +8,7 @@ using TMPro;
 
 public class Achievements : MonoBehaviour
 {
+    public string[] achievementDescriptions;
     public Button[] allButtons, achievementButtons;
     public string[] achievementNames;
     public int currentActiveAchievementIndex;
