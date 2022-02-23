@@ -11,18 +11,20 @@ public class NewRun : MonoBehaviour
     public Toggle speedrunToggle;
 
     public Toggle easy, medium, hard;
+    public GameObject player;
 
     public void selectMage() {
 
     }
 
     public void selectWarrior() {
-
+        Variables.characterType = "warrior";
+        setupRun();
     }
 
     public void selectRogue() 
     {
-        Variables.characterType = "rouge";
+        Variables.characterType = "rogue";
 
         setupRun();
 
