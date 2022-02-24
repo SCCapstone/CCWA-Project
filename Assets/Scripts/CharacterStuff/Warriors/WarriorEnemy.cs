@@ -27,33 +27,45 @@ public class WarriorEnemy : Warrior
         Debug.Log("we caressed under the wonder truck");
 
         var collision = collidedWith.collider;
-        Debug.Log(collision);
-        if (collision.tag == "Player") {
-            //Gets the instance of player
-            var playerCharacter = collision.GetComponent<RogueCharacter>();
-            
-            /*
-            Debug.Log(playerCharacter);
-            if (playerCharacter == null) {
-                
-              //  playerCharacter = collision.GetComponent<RogueCharacter>();
-            }
-            */
-            //calculating the damage done to player
-            int damage = attackDmg - playerCharacter.defense;
+        Debug.Log(collision + " this is the collision name");
+        string name = collision.name;
+        Debug.Log(name);
+        
+        switch(name) {
+            case "Rogue":
+                var rogue = collision.GetComponent<RogueCharacter>();
+                //calculating the damage done to player
+                int rDamage = attackDmg - rogue.defense;
+                //Damages the player's health via the enemy's attackDmg value
+                if (rDamage <= 0) {
+                    //Always do at least one damage to a player
+                    rogue.DamageHealth(1);
+                } else {
+                    rogue.DamageHealth(rDamage);
+                }
+                //Kills the player if their health is less 0
+                if (rogue.health <= 0) {
+                    rogue.Die();
+                }
+            break;
 
-            //Damages the player's health via the enemy's attackDmg value
-            if (damage <= 0) {
-                //Always do at least one damage to a player
-                playerCharacter.DamageHealth(1);
-            } else {
-                playerCharacter.DamageHealth(damage);
-            }
-            
-            //Kills the player if their health is less 0
-            if (playerCharacter.health <= 0) {
-                playerCharacter.Die();
+            case "Warrior":
+                var warrior = collision.GetComponent<PlayerWarrior>();
+                //calculating the damage done to player
+                int wDamage = attackDmg - warrior.defense;
+                
+                //Damages the player's health via the enemy's attackDmg value
+                if (wDamage <= 0) {
+                    //Always do at least one damage to a player
+                    warrior.DamageHealth(1);
+                } else {
+                    warrior.DamageHealth(wDamage);
+                }
+                //Kills the player if their health is less 0
+                if (warrior.health <= 0) {
+                    warrior.Die();
+                }
+            break;
             }
         }
     }
-}
