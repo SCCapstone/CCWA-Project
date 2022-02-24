@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 //This is the base class for all the characters that will be in the game
@@ -158,7 +159,30 @@ public class Character : MonoBehaviour
 
     //Deals with the character running out of health
     //Virtual because multiple things die differently
-    public virtual void Die() {} 
+    public virtual void Die() {
+        if(gameObject.CompareTag("Player"))
+        {
+            Debug.Log("PLAYER DEAD LOL GET CLAPPED");
+            if(!Variables.isDead)
+            {
+                Variables.isDead = true;
+                Variables.wonGame = false;
+                Variables.inRun = false;
+                Variables.newGame = false;
+                FileManager fm = GameObject.Find("FileManager").GetComponent<FileManager>();
+                var player = GameObject.FindWithTag("Player");
+                Character character = player.GetComponent<Character>();
+                //Save file on new floor
+                FileData currentFile = fm.GetFileData(Constants.VALID_FILE_NUMS[fm.CurrFile]);
+                FileData fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, currentFile.FastestTime,
+                                                currentFile.NumRuns+1, currentFile.NumWins, currentFile.UnlockedAchievements,
+                                                false, null); //TODO get wins saved
+                Debug.Log(currentFile.NumRuns+" "+fd.NumRuns);                                        
+                fm.SaveFile(Constants.VALID_FILE_NUMS[fm.CurrFile], fd);
+                SceneManager.LoadScene("GameOver");
+            }
+        }
+    } 
 
     
     

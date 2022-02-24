@@ -272,7 +272,6 @@ public class FloorGenerator : MonoBehaviour
             roomGenerator = new RoomGenerator(true);
             System.Random temp = new System.Random();
             this.seed = temp.Next().ToString();
-            Debug.Log(Variables.floorSeed);
             FileManager fileManager = GameObject.Find("FileManager").GetComponent<FileManager>();
             if(!Variables.newGame && fileManager.GetFileData(fileManager.CurrFile+1).CurrRun != null)
             {
@@ -287,12 +286,9 @@ public class FloorGenerator : MonoBehaviour
         }
         Variables.floorSeed = this.seed;
         rand = new System.Random(this.seed.GetHashCode());
-        
-        // Debug.Log(this.seed);
 
         RoomRenderer renderer = this.gameObject.GetComponent<RoomRenderer>();
         this.currFloor = GenerateFloor(floorNum + "" + this.seed);
-        // printFloor(this.currFloor.floorLayout);
         renderer.setCurrentRoom(this.GetCurrRoom());
         renderer.RenderRoom(this.GetCurrRoom());
     }

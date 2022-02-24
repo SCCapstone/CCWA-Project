@@ -452,7 +452,7 @@ GameObject:
   - component: {fileID: 3618620649494449887}
   - component: {fileID: 3407287002273714756}
   m_Layer: 0
-  m_Name: PlayerWarrior
+  m_Name: Warrior
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -704,6 +704,7 @@ MonoBehaviour:
   statuses: 
   spriteColor: {r: 0, g: 0, b: 0, a: 0}
   sRenderer: {fileID: 0}
+  keyAmt: 0
   berserkMax: 10
   berserkTimer: 0
   hearts: []
@@ -714,6 +715,7 @@ MonoBehaviour:
   emptystaminaBottle: {fileID: 0}
   attackTime: 0.25
   maxAttackTime: 0.25
+  pauseScreen: {fileID: 0}
 --- !u!1 &3407287002277258095
 GameObject:
   m_ObjectHideFlags: 0
