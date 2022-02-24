@@ -65,14 +65,8 @@ public class RoomGenerator {
     // This is used as a way to populate the map before iterating to finalize the room shape
     // This method utilizes a seed, so the same Room can be generated repeatedly if needed
     // This method returns the int[,] map of the room
-    int[,] FillRoomMap(string seed) {
-        string tempSeed;
-        if(!useSeed) {
-            tempSeed = Time.time.ToString();
-        }
-        else {
-            tempSeed = seed;
-        }
+    public int[,] FillRoomMap() {
+        string tempSeed = Time.time.ToString();
         System.Random rand = new System.Random(tempSeed.GetHashCode());
         int[,] m = new int[height,width];
         float fillChance = 20.0f;
@@ -92,7 +86,6 @@ public class RoomGenerator {
     }
 
     // This method iterates over a room and applies certain rules to change the room's shape
-    // 
     int[,] IterateOverRoom(int[,] newMap) {
          for(int i=0; i<height; i++) {
             for(int j=0; j<width; j++) {
@@ -108,9 +101,7 @@ public class RoomGenerator {
     public Room GenerateRoom(string seed, int numEnemies, int numItems, bool bossRoom, string[] directions) {
         // Generate a randomly filled Room map
         // Iterate over map to create a Room
-        //int[,] newRoomMap = IterateOverRoom(FillRoomMap(seed));
-        int[,] newRoomMap = IterateOverRoom(FillRoomMap(seed));
-        //int [,] finalMap = IterateOverRoom(newRoomMap);
+        int[,] newRoomMap = IterateOverRoom(FillRoomMap());
         // Generate multiple exit locations for the room, given an array of directions
         Location[] exitLocations = GenerateMultipleExits(directions.Length, directions, newRoomMap);
         // Generate spawn locations for items
@@ -120,14 +111,11 @@ public class RoomGenerator {
         // Generate a Room object with the newly created map
 
         Location bossLocation = null;
-        // Debug.Log("generating a boss room: "+bossRoom);
         if (bossRoom)
         {
-            // Debug.Log("generating boss location");
             bossLocation = new Location("", 0, 0);
         }
 
-        // Debug.Log(bossLocation.locX + " " + bossLocation.locY);
         return new Room(width, height, newRoomMap, seed, exitLocations, itemLocations, enemyLocations, bossLocation, numEnemies, numItems);
 
 
