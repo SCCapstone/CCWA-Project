@@ -15,6 +15,7 @@ public class Character : MonoBehaviour
     public bool isEnhanced = false;
     public float moveSpeed;
     public float baseMoveSpeed = 7f;
+    public bool poison =false;
     public List<bool> statuses;
     public Color spriteColor;
     public SpriteRenderer sRenderer;
@@ -40,16 +41,17 @@ public class Character : MonoBehaviour
     public IEnumerator ensnaredCoroutine(int seconds){
         float tempMoveSpeed = moveSpeed;
         if (tempMoveSpeed>2f){
-            moveSpeed-=2;
+            moveSpeed=moveSpeed/2;
             StaminaDrain(2.0);
         }
         yield return new WaitForSeconds(seconds);
-        Debug.Log("waiting is done");
         moveSpeed=tempMoveSpeed;
     }
 
     //Poisoned Status Effect
     public void poisonedStatus(int statusTicks){
+        poison=true;
+        ColorChange();
         StartCoroutine(poisonedCoroutine(statusTicks));
     }
     public IEnumerator poisonedCoroutine(int ticks){
@@ -58,7 +60,8 @@ public class Character : MonoBehaviour
             health -= 1;
             yield return new WaitForSeconds(2f);
         }
-        
+        poison = false;
+        ColorChange();
     }
 
     public void gainAKey () {
@@ -146,6 +149,11 @@ public class Character : MonoBehaviour
             spriteColor = Color.white;
             sRenderer.material.color = spriteColor;
         } 
+
+        if (poison) {
+            spriteColor = Color.green;
+            sRenderer.material.color = spriteColor;
+        }
     }
 
     //Deals with the character running out of health

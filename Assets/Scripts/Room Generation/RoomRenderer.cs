@@ -15,6 +15,7 @@ public class RoomRenderer : MonoBehaviour
     public TileBase floorTile;
     public TileBase wallTile;
     public TileBase exitTile;
+    public TileBase lockedExitTile;
     public GameObject attackUp;
     public GameObject health;
     public GameObject enemy;
