@@ -19,6 +19,7 @@ public class Character : MonoBehaviour
     public List<bool> statuses;
     public Color spriteColor;
     public SpriteRenderer sRenderer;
+
     //added by Nick
     public int keyAmt = 0;
      
@@ -33,11 +34,10 @@ public class Character : MonoBehaviour
 
     }
 
+    //Ensnared Status Effect
     public void ensnaredStatus(int statusTimeSec){
         StartCoroutine(ensnaredCoroutine(statusTimeSec));
     }
- 
-    
     public IEnumerator ensnaredCoroutine(int seconds){
         float tempMoveSpeed = moveSpeed;
         if (tempMoveSpeed>2f){
@@ -47,6 +47,19 @@ public class Character : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         Debug.Log("waiting is done");
         moveSpeed=tempMoveSpeed;
+    }
+
+    //Poisoned Status Effect
+    public void poisonedStatus(int statusTicks){
+        StartCoroutine(poisonedCoroutine(statusTicks));
+    }
+    public IEnumerator poisonedCoroutine(int ticks){
+        yield return new WaitForSeconds(1f);
+        for(int i=0;i<ticks;i++){
+            health -= 1;
+            yield return new WaitForSeconds(2f);
+        }
+        
     }
 
     public void gainAKey () {
@@ -87,6 +100,13 @@ public class Character : MonoBehaviour
     //Damages the health of the character by a amount of points
     public virtual void DamageHealth (int a) {
         health -= a;
+        StartCoroutine(damageCoroutine());
+    }
+    public IEnumerator damageCoroutine(){
+        gameObject.GetComponent<Collider2D>().enabled = false;
+        yield return new WaitForSeconds(1.5f);
+        gameObject.GetComponent<Collider2D>().enabled = true;
+        
     }
 
     //Recovers the stamina by a amount of points
