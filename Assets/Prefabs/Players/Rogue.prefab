@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 4457663262648143236}
   - component: {fileID: 5811426868279268136}
   m_Layer: 0
-  m_Name: PlayerRogueUpdated
+  m_Name: Rogue
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -450,6 +450,7 @@ MonoBehaviour:
   statuses: 
   spriteColor: {r: 0.8962264, g: 0, b: 0, a: 0}
   sRenderer: {fileID: 0}
+  keyAmt: 0
   shadowMax: 10
   shadowTimer: 0
   hearts: []
