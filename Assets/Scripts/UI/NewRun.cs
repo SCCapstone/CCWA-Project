@@ -17,15 +17,14 @@ public class NewRun : MonoBehaviour
     }
 
     public void selectWarrior() {
-
+        Variables.characterType = "warrior";
+        setupRun();
     }
 
     public void selectRogue() 
     {
-        Variables.characterType = "rouge";
-
+        Variables.characterType = "rogue";
         setupRun();
-
     }
 
     private void setupRun()
