@@ -45,7 +45,7 @@ public class PlayerWarrior : Warrior
     public float maxAttackTime = .25f; 
 
     public GameObject pauseScreen;
-    void Awake() {
+    void Start() {
         base.Awake();
         rigidB = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();

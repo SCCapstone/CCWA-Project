@@ -16,6 +16,7 @@ public class Warrior : Character
     maxStamina = 3.0;
     attackDmg = 8;
     defense = 6;
+    baseMoveSpeed = 7.0f;
     }
 
     // Update is called once per frame
