@@ -6469,6 +6469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ff9dd3370a39c4b8589a9b950cd0f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  warriorPrefab: {fileID: 96023432823924781, guid: c817e06b947734cd085227fffb33680b, type: 3}
 --- !u!1 &1136237779
 GameObject:
   m_ObjectHideFlags: 0
@@ -12546,8 +12547,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rogue
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8360813855451497803, guid: df6574b1f6ab845239ad200b40388ccd, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df6574b1f6ab845239ad200b40388ccd, type: 3}
 --- !u!1 &2107403569
 GameObject:

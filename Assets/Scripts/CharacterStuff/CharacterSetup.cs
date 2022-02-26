@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CharacterSetup : MonoBehaviour
 {
+
+    public GameObject warriorPrefab;
+
     public Character buildCharacter() {
         string characterType = Variables.characterType;
         Character newCharacter = new Character();
@@ -36,10 +39,14 @@ public class CharacterSetup : MonoBehaviour
                 // The default character is currently the rogue. In this case, do nothing.
                 break;
             case "warrior":
-                // Remove base RogueCharacter script
-                Destroy(player.gameObject.GetComponent("RogueCharacter"));
+                // Remove starting player object
+                Destroy(GameObject.FindWithTag("Player"));
                 // Add the WarriorCharacter script
-                player.gameObject.AddComponent<PlayerWarrior>();
+                warriorPrefab.AddComponent<PlayerWarrior>();
+                // Add the BoxCollider to the warrior
+                warriorPrefab.AddComponent<BoxCollider2D>();
+                // Update to the warrior sprite
+                Instantiate(warriorPrefab, new Vector3(10,10,-0.032f), Quaternion.identity);
                 break;
             // TODO implement case for mage
         }
