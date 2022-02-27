@@ -14,7 +14,7 @@ public class Character : MonoBehaviour
     public int defense;
     public string name;
     public bool isEnhanced = false;
-    public float moveSpeed;
+    public float moveSpeed = 7f;
     public float baseMoveSpeed = 7f;
     public bool poison =false;
     public List<bool> statuses;

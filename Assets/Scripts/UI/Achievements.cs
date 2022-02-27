@@ -8,105 +8,111 @@ using TMPro;
 
 public class Achievements : MonoBehaviour
 {
-    public string[] achievementDescriptions;
-    public Button[] allButtons, achievementButtons;
-    public string[] achievementNames;
+    public GameObject achievementButtonsGO;
+    public TextMeshProUGUI currAchievementText, achievementIndexer;
+    public Button[] achievementButtons;
     public int currentActiveAchievementIndex;
-    public TextMeshProUGUI currAchievementText;
-    public Text pageCount;
-
-    public string[] nonAchievementButtonNames = new string[] {"BackBtn", "NavRightBtn", "NavLeftBtn"};
 
     void Awake()
     {
-        allButtons = GetComponentsInChildren<Button>();
-        achievementButtons = new Button[allButtons.Length - nonAchievementButtonNames.Length];
+        //get all achievement buttons from GameObject
+        achievementButtons = achievementButtonsGO.GetComponentsInChildren<Button>();
 
-        //populate achievementButtons with allButtons except values in nonAchievementButtonNames
-        bool[] toCopy = new bool[allButtons.Length];
-        for(int a = 0; a < allButtons.Length; ++a)
+        //check that the correct number of achievement buttons were found
+        Debug.Log("Found " + achievementButtons.Length + " achievement buttons");
+        Debug.Log("there are " + Constants.ALL_ACHIEVEMENT_TITLES.Length + " achievement names");
+        Debug.Log("There are " + Constants.ALL_ACHIEVEMENT_DESCRIPTIONS.Length + " achievement descriptions");
+
+        if(achievementButtons.Length != Constants.ALL_ACHIEVEMENT_TITLES.Length || achievementButtons.Length != Constants.ALL_ACHIEVEMENT_DESCRIPTIONS.Length)
         {
-            toCopy[a] = true;
-            for(int b = 0; b < nonAchievementButtonNames.Length; ++b)
+            SceneManager.LoadScene("File Select");
+            Debug.Log("there was a mismatch between the number of achievement buttons and either achievement titles or descriptions");
+        }
+
+        //load current file
+        FileManager fm = GameObject.Find("FileManager").GetComponent<FileManager>();
+        FileData currentFile = fm.GetFileData(Constants.VALID_FILE_NUMS[fm.CurrFile]);
+
+        //set text of achievement buttons
+        for (int i = 0; i < achievementButtons.Length; ++i)
+        {
+            TextMeshProUGUI currText;
+            currText = achievementButtons[i].GetComponentInChildren<TextMeshProUGUI>();
+            currText.text = Constants.ALL_ACHIEVEMENT_TITLES[i];
+        }
+
+        //change colors of unlocked achievement button
+        for(int i = 0; i < currentFile.UnlockedAchievements.Length; ++i)
+        {
+            for(int c = 0; c < Constants.ALL_ACHIEVEMENT_TITLES.Length; ++c)
             {
-                if(allButtons[a].name.Equals(nonAchievementButtonNames[0]))
+                if (currentFile.UnlockedAchievements[i].Equals(Constants.ALL_ACHIEVEMENT_TITLES[c]))
                 {
-                    toCopy[a] = false;
-                    break;
+                    ColorBlock cb = achievementButtons[c].colors;
+                    cb.normalColor = new Color(0.180f, 0.741f, 0.082f, 1.0f);
+                    cb.selectedColor = new Color(0.125f, 0.478f, 0.062f, 1.0f);
+                    achievementButtons[c].colors = cb;
                 }
             }
         }
 
-        int achievementIndex = 0;
-        for(int c = 0; c < toCopy.Length; ++ c)
-        {
-            if(toCopy[c])
-            {
-                achievementButtons[achievementIndex] = allButtons[c];
-                ++achievementIndex;
-            }
-        }
-
-        //check there are the same number of entries in achivementDescriptions and achievementButtons
-        
-        //populate achievementNames list
-        achievementNames = new string[achievementButtons.Length];
-        for(int i = 0; i < achievementNames.Length; ++i)
-        {
-            achievementNames[i] = achievementButtons[i].name;
-        }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
+        //select the first achievement
         currentActiveAchievementIndex = 0;
-        achievementButtons[0].Select();
-        currAchievementText.text = achievementDescriptions[currentActiveAchievementIndex];
-        Debug.Log("set currAcheivementsText");
+        achievementButtons[currentActiveAchievementIndex].Select();
     }
 
-    // Update is called once per frame
-    void Update() 
+    //Takes you back to the main menu, idk why i can't see it in my scene editor rn
+    public void mainBackBtn()
     {
-        //pageCount.text = currentActiveAchievementIndex + "/" + achievementDescriptions.Length;
+        SceneManager.LoadScene("Settings");
     }
-    
+
     //connect this to On Click of each achievement button
     public void setActiveAchievement()
     {
         //update currentActiveAchievement
-        string justClickedName = EventSystem.current.currentSelectedGameObject.name;
-        Debug.Log(justClickedName);
-        for(int i = 0; i < achievementNames.Length; ++i)
+        GameObject justClickedBtn = EventSystem.current.currentSelectedGameObject;
+        TextMeshProUGUI btnText = justClickedBtn.GetComponentInChildren<TextMeshProUGUI>();
+
+        for(int i = 0; i < Constants.ALL_ACHIEVEMENT_TITLES.Length; ++i)
         {
-            if(justClickedName.Equals(achievementNames[i]))
+            if(btnText.text.Equals(Constants.ALL_ACHIEVEMENT_TITLES[i]))
             {
                 currentActiveAchievementIndex = i;
                 break;
             }
         }
-        currAchievementText.text = achievementDescriptions[currentActiveAchievementIndex];
     }
 
     public void decrementAchievement()
     {
         //if alrealy at leftmost achievement, don't do anything
-        if (currentActiveAchievementIndex == 0) return;
+        if (currentActiveAchievementIndex == 0) 
+        {
+            achievementButtons[currentActiveAchievementIndex].Select();
+            return;
+        }
 
-        //
         --currentActiveAchievementIndex;
         achievementButtons[currentActiveAchievementIndex].Select();
-        currAchievementText.text = achievementDescriptions[currentActiveAchievementIndex];
     }
 
     public void incrementAchievement()
     {
         //if already at rightmost achievement don't do anything
-        if (currentActiveAchievementIndex == achievementButtons.Length) return;
+        if (currentActiveAchievementIndex == achievementButtons.Length-1)
+        {
+            achievementButtons[currentActiveAchievementIndex].Select();
+            return;
+        }
 
         ++currentActiveAchievementIndex;
         achievementButtons[currentActiveAchievementIndex].Select();
-        currAchievementText.text = achievementDescriptions[currentActiveAchievementIndex];
+    }
+
+    void Update()
+    {
+        currAchievementText.text = Constants.ALL_ACHIEVEMENT_DESCRIPTIONS[currentActiveAchievementIndex];
+        achievementIndexer.text = string.Format("{0}/{1}", currentActiveAchievementIndex+1, Constants.ALL_ACHIEVEMENT_TITLES.Length);
     }
 }

@@ -59,8 +59,16 @@ public class RoomRenderer : MonoBehaviour
         }
         // Iterate again; place exit locations
         for(int i=0; i<room.exitLocations.Length; i++) {
+            System.Random rng = new System.Random();
+            int isLockedExit = rng.Next(1,20);
             Location l = room.exitLocations[i];
-            floorMap.SetTile(new Vector3Int(l.locX, l.locY,0), exitTile);
+            if (isLockedExit == 1){
+                floorMap.SetTile(new Vector3Int(l.locX, l.locY,0), lockedExitTile);
+            }
+            else{
+                floorMap.SetTile(new Vector3Int(l.locX, l.locY,0), exitTile);
+            }
+            
         }
 
         // Iterate to place items in the room
