@@ -9,6 +9,7 @@ public class WarriorEnemy : Warrior
     void Awake() {
         base.Awake();
         defense = 2;
+        DifficutyAdjust();
     }
 
     // Update is called once per frame
@@ -68,4 +69,6 @@ public class WarriorEnemy : Warrior
             break;
             }
         }
-    }
+}
+
+   

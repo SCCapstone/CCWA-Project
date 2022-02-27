@@ -17,4 +17,5 @@ public class Constants : ScriptableObject
     public static readonly int[] VALID_FILE_NUMS = {1,2,3};
     public static readonly string[] ALL_ACHIEVEMENT_TITLES = {"Babbys First Game", "Fresh Hunter"};
     public static readonly string[] ALL_ACHIEVEMENT_DESCRIPTIONS = {"Began your first game.", "Killed an enemy."};
+
     }

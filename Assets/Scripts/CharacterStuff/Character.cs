@@ -184,6 +184,26 @@ public class Character : MonoBehaviour
         }
     } 
 
-    
+//Adjusting stats with the different difficulties
+    public void DifficutyAdjust() {
+        switch(Variables.difficulty) {
+            
+            //easy
+            case 0:
+                health/=2;
+                maxHealth/=2;
+                attackDmg/=2;
+                defense/=2;
+                break;
+
+            //hard
+            case 2:
+                health*=2;
+                maxHealth*=2;
+                attackDmg*=2;
+                defense*=2;
+                break;
+        }
+    }
     
 }
