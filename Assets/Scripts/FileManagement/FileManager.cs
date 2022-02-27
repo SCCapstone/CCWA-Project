@@ -176,7 +176,7 @@ public class FileManager : MonoBehaviour
 public class FileData
 {
     //Load Global Constants
-    string[] ALL_ACHIEVEMENTS = Constants.ALL_ACHIEVEMENTS;
+    string[] ALL_ACHIEVEMENTS = Constants.ALL_ACHIEVEMENT_TITLES;
     string SAVE_DIRECTORY = Constants.SAVE_DIRECTORY;
     string SAVE_FILE_BASE_NAME = Constants.SAVE_FILE_BASE_NAME;
     int[] VALID_FILE_NUMS = Constants.VALID_FILE_NUMS;
