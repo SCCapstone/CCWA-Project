@@ -10,11 +10,15 @@ public class Pause : MonoBehaviour
     public GameObject difficultyButtons, speedRunMessage;
     public Button[] nestedButtons;
     private TextMeshProUGUI messageTxt;
+    public TextMeshProUGUI timeText;
     // Start is called before the first frame update
     void Start()
     {
+        int minutes = Mathf.FloorToInt(Variables.clock/60.0f);
+        int seconds = Mathf.FloorToInt(Variables.clock - minutes *60);
+        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        
         //if in speedrun mode disable the buttons and make their colors correct
-
         if(Variables.isSpeedrun)
         {
             difficultyButtons.active = false;
