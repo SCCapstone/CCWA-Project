@@ -40,7 +40,7 @@ public class FileDisplayer : MonoBehaviour
         totalTimeDisplay.GetComponent<UnityEngine.UI.Text>().text = "Total Time "+totalTimeStamp;
 
         GameObject fastestRunDisplay =  GameObject.Find("File"+filenum+"Btn/FastestRun");
-        string fastestRunStamp = GetTimeStamp(data.FastestTime);
+        string fastestRunStamp = GetTimeStamp(Mathf.FloorToInt(data.FastestTime));
         fastestRunDisplay.GetComponent<UnityEngine.UI.Text>().text = "Fastest Run\t\t"+fastestRunStamp;
 
         GameObject.Find("File"+filenum+"Btn/DateCreated").GetComponent<UnityEngine.UI.Text>().text = data.DateCreated;

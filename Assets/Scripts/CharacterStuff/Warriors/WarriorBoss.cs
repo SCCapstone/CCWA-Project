@@ -31,15 +31,61 @@ public class WarriorBoss : WarriorEnemy
         FileManager fm = GameObject.Find("FileManager").GetComponent<FileManager>();
         var player = GameObject.FindWithTag("Player");
         Character character = player.GetComponent<Character>();
-
+        
+        float fastest_overall = -1f; //negative number means that the run was not in speedrun mode
         if(Variables.floorNum == Constants.MAX_FLOOR_NUM-1)
         {
+            if(Variables.isSpeedrun)
+            {
+                if (Variables.difficulty == 0)
+                {
+                    //new fastest time on easy difficutly
+                    if (Variables.clock < Variables.fastest_E)
+                    {
+                        Variables.fastest_E = Variables.clock;
+                    }
+                }
+                else if (Variables.difficulty == 1)
+                {
+                    //new fastest time on medium
+                    if (Variables.clock < Variables.fastest_M)
+                    {
+                        Variables.fastest_M = Variables.clock;
+                    }
+                }
+                else
+                {
+                    //new fastest time on hard
+                    if (Variables.clock < Variables.fastest_H)
+                    {
+                        Variables.fastest_H = Variables.clock;
+                    }
+                }
+
+                //find the minimum time across all difficulties
+                fastest_overall = Mathf.Min(Variables.fastest_E, Variables.fastest_M, Variables.fastest_H);
+            }
+
             Variables.wonGame = true;
             //Save file on new floor
             FileData currentFile = fm.GetFileData(Constants.VALID_FILE_NUMS[fm.CurrFile]);
-            FileData fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, currentFile.FastestTime,
-                                            currentFile.NumRuns, currentFile.NumWins+1, currentFile.UnlockedAchievements,
-                                            false, null); //TODO get wins saved
+            FileData fd;
+            
+            //if you are in speedrun mode and set a new fastest time
+            if (fastest_overall != -1f && fastest_overall < currentFile.FastestTime)
+            {
+                 fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, fastest_overall,
+                                    currentFile.NumRuns, currentFile.NumWins+1, currentFile.UnlockedAchievements,
+                                    false, null); //TODO get wins saved
+            }
+            //if player was not in speedrun mode, did not set a fastest time, or both
+            else
+            {
+                 fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, currentFile.FastestTime,
+                                    currentFile.NumRuns, currentFile.NumWins+1, currentFile.UnlockedAchievements,
+                                    false, null); //TODO get wins saved
+            }
+           
             fm.SaveFile(Constants.VALID_FILE_NUMS[fm.CurrFile], fd);
             Variables.inRun = false;
             Variables.newGame = false;

@@ -185,7 +185,7 @@ public class FileData
     public int FileNum;
     public string DateCreated;
     public int TotalTime;
-    public int FastestTime;
+    public float FastestTime;
     public int NumRuns;
     public int NumWins;
     public string[] UnlockedAchievements;
@@ -196,7 +196,7 @@ public class FileData
     public FileData() {
         FileNum = 0;
         DateCreated = "00/00/0000";
-        FastestTime = 359999; //Fastest time of 99:59:59
+        FastestTime = 359999f; //Fastest time of 99:59:59
         NumRuns = 0;
         NumWins = 0;
         UnlockedAchievements = new string[1];
@@ -216,7 +216,7 @@ public class FileData
         }
         TotalTime = 0;
         DateCreated = "00/00/0000";
-        FastestTime = 359999; //Fastest time of 99:59:59
+        FastestTime = 359999f; //Fastest time of 99:59:59
         NumRuns = 0;
         NumWins = 0;
         UnlockedAchievements = new string[1];
@@ -225,7 +225,7 @@ public class FileData
     }
 
     //Full Constructor
-    public FileData(int filenum, string datecreated, int totaltime, int fastesttime,
+    public FileData(int filenum, string datecreated, int totaltime, float fastesttime,
                     int numruns, int numwins, string[] unlockedachievements,
                     bool inrun, GameState currrun)
     {
@@ -253,7 +253,7 @@ public class FileData
         //Checks for valid fastest time
         if(fastesttime < 0)
         {
-            FastestTime = int.MaxValue;
+            FastestTime = float.MaxValue;
         } else
         {
             FastestTime = fastesttime;
