@@ -33,7 +33,7 @@ public class WarriorEnemy : Warrior
         Debug.Log(name);
         
         switch(name) {
-            case "Rogue":
+            case "Rogue(Clone)":
                 var rogue = collision.GetComponent<RogueCharacter>();
                 //calculating the damage done to player
                 int rDamage = attackDmg - rogue.defense;
@@ -50,7 +50,7 @@ public class WarriorEnemy : Warrior
                 }
             break;
 
-            case "Warrior":
+            case "WarriorPrefab(Clone)":
                 var warrior = collision.GetComponent<PlayerWarrior>();
                 //calculating the damage done to player
                 int wDamage = attackDmg - warrior.defense;

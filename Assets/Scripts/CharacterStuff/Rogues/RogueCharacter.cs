@@ -42,9 +42,7 @@ public class RogueCharacter : Rogue
     public float attackTime = .35f;
     public float maxAttackTime = .35f;
 
-     public GameObject pauseScreen;
-
-    //ABSTRACT SOME THINGS L8R  
+    public GameObject pauseScreen; 
     void Awake() {
         base.Awake();
         rigidB = GetComponent<Rigidbody2D>();

@@ -45,7 +45,7 @@ public class PlayerWarrior : Warrior
     public float maxAttackTime = .25f; 
 
     public GameObject pauseScreen;
-    void Start() {
+    void Awake() {
         base.Awake();
         rigidB = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -60,6 +60,7 @@ public class PlayerWarrior : Warrior
     
     void Update() {
         AssignWASD();
+        
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -79,7 +80,6 @@ public class PlayerWarrior : Warrior
         }
 
         if(isEnhanced) {
-
             if (berserkTimer > 0) {
                 berserkTimer -= Time.deltaTime;
             } else {
@@ -103,6 +103,10 @@ public class PlayerWarrior : Warrior
 
         //loading the amount of stamina a player has
         loadStamina();
+
+        if(health <= 0) {
+            Die();
+        }
     }
 
     void FixedUpdate() {
@@ -228,8 +232,7 @@ public class PlayerWarrior : Warrior
     }
 
     public override void Die() {
-        Variables.wonGame = false;
-        SceneManager.LoadScene("Game Over");
+        base.Die();
     }
 
     //Pauses the game

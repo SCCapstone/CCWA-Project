@@ -6,6 +6,7 @@ public class CharacterSetup : MonoBehaviour
 {
 
     public GameObject warriorPrefab;
+    public GameObject roguePrefab;
 
     public Character buildCharacter() {
         string characterType = Variables.characterType;
@@ -29,23 +30,17 @@ public class CharacterSetup : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //Spawn Player Character based on globally set variable
         // Character newCharacter = buildCharacter();
         GameObject player = GameObject.FindWithTag("Player");
         switch(Variables.characterType) {
             case "rogue":
-                // The default character is currently the rogue. In this case, do nothing.
+                Instantiate(roguePrefab, new Vector3(10,10,-0.032f), Quaternion.identity);
                 break;
+
             case "warrior":
-                // Remove starting player object
-                Destroy(GameObject.FindWithTag("Player"));
-                // Add the WarriorCharacter script
-                warriorPrefab.AddComponent<PlayerWarrior>();
-                // Add the BoxCollider to the warrior
-                warriorPrefab.AddComponent<BoxCollider2D>();
-                // Update to the warrior sprite
                 Instantiate(warriorPrefab, new Vector3(10,10,-0.032f), Quaternion.identity);
                 break;
             // TODO implement case for mage
