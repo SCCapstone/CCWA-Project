@@ -6474,7 +6474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   warriorPrefab: {fileID: 96023432823924781, guid: c817e06b947734cd085227fffb33680b, type: 3}
-  roguePrefab: {fileID: 0}
+  roguePrefab: {fileID: 4457663262648143238, guid: 3f22809e6a064784fbaa35ce8a5846ee, type: 3}
 --- !u!1 &1136237779
 GameObject:
   m_ObjectHideFlags: 0
