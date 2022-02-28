@@ -106,6 +106,7 @@ public class RoomRenderer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        player = GameObject.FindWithTag("Player");
         if(currFloor != null) {
             for(int i=0; i<currentRoom.exitLocations.Length; i++) {
                 Location l = currentRoom.exitLocations[i];
