@@ -6379,6 +6379,7 @@ GameObject:
   - component: {fileID: 1124432653}
   - component: {fileID: 1124432656}
   - component: {fileID: 1124432657}
+  - component: {fileID: 1124432658}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6477,6 +6478,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   warriorPrefab: {fileID: 96023432823924781, guid: c817e06b947734cd085227fffb33680b, type: 3}
   roguePrefab: {fileID: 4457663262648143238, guid: 3f22809e6a064784fbaa35ce8a5846ee, type: 3}
+--- !u!114 &1124432658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124432652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49457eb612379f64ba56090142ea9439, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trackedObject: {fileID: 0}
+  updateSpeed: 3
+  trackingOffset: {x: 0, y: 0}
 --- !u!1 &1136237779
 GameObject:
   m_ObjectHideFlags: 0
