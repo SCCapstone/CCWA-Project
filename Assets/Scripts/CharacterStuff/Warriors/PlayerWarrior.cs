@@ -38,13 +38,14 @@ public class PlayerWarrior : Warrior
     //Stamina counter
     public Image[] staminaIcons;
     public GameObject staminaBottle;
-    public GameObject emptystaminaBottle;
+    public GameObject emptyStaminaBottle;
 
     //Counters for the attacking frames
     public float attackTime = .25f;
     public float maxAttackTime = .25f; 
 
     public GameObject pauseScreen;
+
     void Awake() {
         base.Awake();
         rigidB = GetComponent<Rigidbody2D>();
@@ -105,7 +106,7 @@ public class PlayerWarrior : Warrior
         loadStamina();
 
         if(health <= 0) {
-            Die();
+            base.Die();
         }
     }
 
@@ -138,7 +139,7 @@ public class PlayerWarrior : Warrior
 
     //Lets the player character attack
     public void attack() {
-        //only allows attack if stamina is above 0
+        //only allows attack if there at least two stamina jars
         if (Input.GetKeyDown("j") && stamina >= 2) {
             animator.SetBool("attacking", true);
             audioSource.Play(0);
@@ -199,7 +200,7 @@ public class PlayerWarrior : Warrior
         GameObject[] staminaHolder = GameObject.FindGameObjectsWithTag("staminaicon");
         
         staminaBottle = GameObject.FindWithTag("staminapotion");
-        emptystaminaBottle = GameObject.FindWithTag("emptypotion");
+        emptyStaminaBottle = GameObject.FindWithTag("emptypotion");
 
         //Sets the icon image array length
         staminaIcons = new Image[Convert.ToInt32(maxStamina)];
@@ -221,7 +222,7 @@ public class PlayerWarrior : Warrior
                 staminaIcons[i].sprite = staminaBottle.GetComponent<SpriteRenderer>().sprite;
             } else {
                 //Everything greater than health's value is an empty heart
-                staminaIcons[i].sprite = emptystaminaBottle.GetComponent<SpriteRenderer>().sprite;
+                staminaIcons[i].sprite = emptyStaminaBottle.GetComponent<SpriteRenderer>().sprite;
             }
         }
 
@@ -229,10 +230,6 @@ public class PlayerWarrior : Warrior
         for (int i = Convert.ToInt32(maxStamina); i < staminaHolder.Length; ++i) {
             staminaHolder[i].SetActive(false);
         }
-    }
-
-    public override void Die() {
-        base.Die();
     }
 
     //Pauses the game

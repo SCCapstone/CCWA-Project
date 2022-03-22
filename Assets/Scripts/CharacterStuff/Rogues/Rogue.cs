@@ -18,11 +18,6 @@ public class Rogue : Character
         baseMoveSpeed = 10f;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     // Allows the user to enter a stealth mode. 
     //Just disables their pathfinding scripts for the time being
