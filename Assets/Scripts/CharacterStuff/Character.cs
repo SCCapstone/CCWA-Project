@@ -29,11 +29,6 @@ public class Character : MonoBehaviour
         //freezes all characters when colliding
         gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
- 
-    void Update()
-    {
-
-    }
 
     //Ensnared Status Effect
     public void ensnaredStatus(int statusTimeSec){
@@ -105,6 +100,7 @@ public class Character : MonoBehaviour
         health -= a;
         StartCoroutine(damageCoroutine());
     }
+    
     public IEnumerator damageCoroutine(){
         gameObject.GetComponent<Collider2D>().enabled = false;
         yield return new WaitForSeconds(1.5f);
@@ -124,7 +120,7 @@ public class Character : MonoBehaviour
     //Function to periodically regenerate stamina. Implement with StartCoroutine("RegenStamina")
     public IEnumerator RegenStamina() {
         while (stamina < maxStamina) {
-            StaminaRecover(.00001f);
+            StaminaRecover(.0001f);
 
             //Delays the stamina Regeneration
             yield return new WaitForSeconds(Time.deltaTime);
@@ -138,6 +134,7 @@ public class Character : MonoBehaviour
 
     //Allows the character to attack
     public virtual void attack(){}
+
     //Toggles the character's special state if they have one
     public void ToggleEnhanced() {
         isEnhanced = !isEnhanced;
@@ -204,6 +201,5 @@ public class Character : MonoBehaviour
                 defense*=2;
                 break;
         }
-    }
-    
+    }   
 }

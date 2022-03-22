@@ -17,6 +17,9 @@ TagManager:
   - Boss
   - clock
   - enemyImage
+  - manapotion
+  - manaicon
+  - emptymanapotion
   layers:
   - Default
   - TransparentFX
