@@ -60,7 +60,7 @@ public class PlayerMage : Mage
         sRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
         pauseScreen = GameObject.FindWithTag("paused");
-        pauseScreen.SetActive(false);
+        
         moveSpeed = baseMoveSpeed;
         juiceTimer = juicedMax;
         name = "mage";
@@ -71,7 +71,6 @@ public class PlayerMage : Mage
     {
         AssignWASD();
         
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Variables.isPaused = !Variables.isPaused;
@@ -90,8 +89,8 @@ public class PlayerMage : Mage
         }
 
         if(isEnhanced) {
-            if (juicedMax > 0) {
-                juicedMax -= Time.deltaTime;
+            if (juiceTimer > 0) {
+                juiceTimer -= Time.deltaTime;
             } else {
                 //Set back to false
                 ToggleEnhanced();
@@ -118,6 +117,7 @@ public class PlayerMage : Mage
         loadStamina();
 
         //loading the amount of mana a player has
+        loadMana();
 
         if(health <= 0) {
             base.Die();
@@ -154,6 +154,7 @@ public class PlayerMage : Mage
     //Lets the player character attack
     public override void attack() {
         //only allows attack if there are at least two mana jars
+        
         if (Input.GetKeyDown("j") && mana >= 2) {
             animator.SetBool("attacking", true);
             audioSource.Play(0);
@@ -262,19 +263,19 @@ public class PlayerMage : Mage
         //Sets the icon image array length
         manaIcons = new Image[Convert.ToInt32(maxMana)];
         
-        //Looping through to get the amount of stamina icons needed for the character
+        //Looping through to get the amount of mana icons needed for the character
         for (int i = 0; i < manaIcons.Length; ++i) {
             manaIcons[i] = manaHolder[i].GetComponent<Image>();
         }
 
-        //Loading the icons in relation to max stamina 
+        //Loading the icons in relation to max mana 
         for (int i = 0; i < manaIcons.Length; ++i) {
              //Enables the amount of icons needed for max stamina
             if (i < maxMana) {
                 manaIcons[i].enabled = true;
             }
 
-            //Enables the amount of icons for current stamina
+            //Enables the amount of icons for current mana
             if (i < mana) {
                 manaIcons[i].sprite = manaBottle.GetComponent<SpriteRenderer>().sprite;
             } else {
@@ -288,6 +289,20 @@ public class PlayerMage : Mage
             manaHolder[i].SetActive(false);
         }
         
+    }
+
+    //changing the color of the mana bottles if juiced
+    public override void ColorChange() {
+        base.ColorChange();
+        if (isEnhanced) {
+            for (int i = 0; i < manaIcons.Length; ++i) {
+                manaIcons[i].color = Color.magenta;
+            }
+        } else {
+            for (int i = 0; i < manaIcons.Length; ++i) {
+                manaIcons[i].color = Color.white;
+            }
+        }
     }
 
     //Pauses the game
