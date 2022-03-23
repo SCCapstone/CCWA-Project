@@ -20,6 +20,10 @@ public class CharacterSetup : MonoBehaviour
                 newCharacter = new PlayerWarrior();
             break;
 
+            case "mage": 
+                newCharacter = new PlayerMage();
+            break;
+
             default:
                 Debug.Log("Invalid character name");
                 newCharacter = newCharacter;
@@ -43,7 +47,10 @@ public class CharacterSetup : MonoBehaviour
             case "warrior":
                 Instantiate(warriorPrefab, new Vector3(10,10,-0.032f), Quaternion.identity);
                 break;
-            // TODO implement case for mage
+
+             case "mage":
+                Instantiate(warriorPrefab, new Vector3(10,10,-0.032f), Quaternion.identity);
+                break;
         }
     }
 

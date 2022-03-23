@@ -22,9 +22,10 @@ public class Mage : Character
     public void Juiced() {
         //Setting if enhanced is true
         if(isEnhanced) {
-            mana = 5.0;
+            mana = double.PositiveInfinity;
             ColorChange();
         } else {
+            mana = maxMana;
             ColorChange();
         }
     }
