@@ -356,9 +356,11 @@ MonoBehaviour:
   isEnhanced: 0
   moveSpeed: 0
   baseMoveSpeed: 7
+  poison: 0
   statuses: 
   spriteColor: {r: 0, g: 0, b: 0, a: 0}
   sRenderer: {fileID: 0}
+  keyAmt: 0
   healthBar: {fileID: 4293950235385770687}
 --- !u!50 &8784097646283919377
 Rigidbody2D:
@@ -409,4 +411,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef799e2eb861e8440ab653b904b67266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  speed: 5
