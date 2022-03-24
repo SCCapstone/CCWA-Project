@@ -120,25 +120,25 @@ public class RoomRenderer : MonoBehaviour
                     for(int j=0; j<currFloor.rooms.Length; j++) {
                         Room newRoom = currFloor.rooms[j];
                         if(direction == "north" && Array.Exists(newRoom.exitLocations, l => l.location == "south")) {
-                            newRoom.setMap(roomGenerator.FillRoomMap());
+                            newRoom.setMap(roomGenerator.GenerateRoomWithPerlinNoise());
                             setCurrentRoom(newRoom);
                             Variables.currentRoom = newRoom;
                             RenderRoom(this.currentRoom);
                             GameObject.Find("Floor Map").GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
                         } else if(direction == "south" && Array.Exists(newRoom.exitLocations, l => l.location =="north")) {
-                            newRoom.setMap(roomGenerator.FillRoomMap());
+                            newRoom.setMap(roomGenerator.GenerateRoomWithPerlinNoise());
                             setCurrentRoom(newRoom);
                             Variables.currentRoom = newRoom;
                             RenderRoom(this.currentRoom);
                             GameObject.Find("Floor Map").GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
                         } else if(direction == "west" && Array.Exists(newRoom.exitLocations, l => l.location =="east")) {
-                            newRoom.setMap(roomGenerator.FillRoomMap());
+                            newRoom.setMap(roomGenerator.GenerateRoomWithPerlinNoise());
                             setCurrentRoom(newRoom);
                             Variables.currentRoom = newRoom;
                             RenderRoom(this.currentRoom);
                             GameObject.Find("Floor Map").GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
                         } else if(direction == "east" && Array.Exists(newRoom.exitLocations, l => l.location =="west")) {
-                            newRoom.setMap(roomGenerator.FillRoomMap());
+                            newRoom.setMap(roomGenerator.GenerateRoomWithPerlinNoise());
                             setCurrentRoom(newRoom);
                             Variables.currentRoom = newRoom;
                             RenderRoom(this.currentRoom);
