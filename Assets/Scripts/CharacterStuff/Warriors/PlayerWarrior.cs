@@ -45,6 +45,7 @@ public class PlayerWarrior : Warrior
     public float maxAttackTime = .25f; 
 
     public GameObject pauseScreen;
+    public GameObject manaBar;
 
     void Awake() {
         base.Awake();
@@ -54,6 +55,8 @@ public class PlayerWarrior : Warrior
         audioSource = GetComponent<AudioSource>();
         pauseScreen = GameObject.FindWithTag("paused");
         pauseScreen.SetActive(false);
+        manaBar = GameObject.FindWithTag("manabar");
+        manaBar.SetActive(false);
         moveSpeed = baseMoveSpeed;
         berserkTimer = berserkMax;
         name = "warrior";

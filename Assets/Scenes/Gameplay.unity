@@ -3411,7 +3411,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &508963411
 Transform:
   m_ObjectHideFlags: 0
@@ -5153,11 +5153,11 @@ GameObject:
   - component: {fileID: 812534359}
   m_Layer: 5
   m_Name: Mana
-  m_TagString: Untagged
+  m_TagString: manabar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &812534359
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6545,6 +6545,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   warriorPrefab: {fileID: 96023432823924781, guid: c817e06b947734cd085227fffb33680b, type: 3}
   roguePrefab: {fileID: 4457663262648143238, guid: 3f22809e6a064784fbaa35ce8a5846ee, type: 3}
+  magePrefab: {fileID: 3166569990477098983, guid: eb5872cdcf99a334e88ea64f27d9b88d, type: 3}
 --- !u!114 &1124432658
 MonoBehaviour:
   m_ObjectHideFlags: 0

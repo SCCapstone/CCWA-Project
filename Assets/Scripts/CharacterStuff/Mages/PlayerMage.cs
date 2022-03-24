@@ -40,6 +40,7 @@ public class PlayerMage : Mage
     public Image[] staminaIcons;
     public GameObject staminaBottle;
     public GameObject emptyStaminaBottle;
+    public GameObject staminabar;
 
     //Mana counter
     public Image [] manaIcons;
@@ -60,7 +61,10 @@ public class PlayerMage : Mage
         sRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
         pauseScreen = GameObject.FindWithTag("paused");
-        
+        pauseScreen.SetActive(false);
+        staminabar = GameObject.FindWithTag("staminabar");
+        staminabar.SetActive(false);
+        manaBar = GameObject.FindWithTag("manabar");
         moveSpeed = baseMoveSpeed;
         juiceTimer = juicedMax;
         name = "mage";
@@ -114,7 +118,7 @@ public class PlayerMage : Mage
         loadHearts();
 
         //loading the amount of stamina a player has
-        loadStamina();
+        //loadStamina();
 
         //loading the amount of mana a player has
         loadMana();
@@ -154,7 +158,7 @@ public class PlayerMage : Mage
     //Lets the player character attack
     public override void attack() {
         //only allows attack if there are at least two mana jars
-        
+
         if (Input.GetKeyDown("j") && mana >= 2) {
             animator.SetBool("attacking", true);
             audioSource.Play(0);
@@ -212,7 +216,7 @@ public class PlayerMage : Mage
     }
 
     //Loads the stamina of the character
-    public void loadStamina() {
+    /*public void loadStamina() {
         //Getting the stamina objects from the charUIcanvas
         GameObject[] staminaHolder = GameObject.FindGameObjectsWithTag("staminaicon");
         
@@ -247,7 +251,7 @@ public class PlayerMage : Mage
         for (int i = Convert.ToInt32(maxStamina); i < staminaHolder.Length; ++i) {
             staminaHolder[i].SetActive(false);
         }
-    }
+    }*/
 
     //Loads the mana of the character
     public void loadMana() {

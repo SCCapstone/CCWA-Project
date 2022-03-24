@@ -67,6 +67,24 @@ public class WarriorEnemy : Warrior
                     warrior.Die();
                 }
             break;
+
+            case "Mage(Clone)":
+                var mage = collision.GetComponent<PlayerMage>();
+                //calculating the damage done to player
+                int mDamage = attackDmg - mage.defense;
+                
+                //Damages the player's health via the enemy's attackDmg value
+                if (mDamage <= 0) {
+                    //Always do at least one damage to a player
+                    mage.DamageHealth(1);
+                } else {
+                    mage.DamageHealth(mDamage);
+                }
+                //Kills the player if their health is less 0
+                if (mage.health <= 0) {
+                    mage.Die();
+                }
+            break;
             }
         }
 }

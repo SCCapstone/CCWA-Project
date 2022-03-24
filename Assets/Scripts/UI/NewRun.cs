@@ -13,7 +13,8 @@ public class NewRun : MonoBehaviour
     public Toggle easy, medium, hard;
 
     public void selectMage() {
-
+        Variables.characterType = "mage";
+        setupRun();
     }
 
     public void selectWarrior() {
