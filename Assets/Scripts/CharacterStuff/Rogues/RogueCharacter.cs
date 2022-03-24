@@ -43,6 +43,7 @@ public class RogueCharacter : Rogue
     public float maxAttackTime = .35f;
 
     public GameObject pauseScreen;
+    public GameObject manaBar;
 
     void Awake() {
         base.Awake();
@@ -52,6 +53,8 @@ public class RogueCharacter : Rogue
         audioSource = GetComponent<AudioSource>();
         pauseScreen = GameObject.FindWithTag("paused");
         pauseScreen.SetActive(false);
+        manaBar = GameObject.FindWithTag("manabar");
+        manaBar.SetActive(false);
         moveSpeed = baseMoveSpeed;
         shadowTimer = shadowMax;
         name = "rogue";
