@@ -21,6 +21,7 @@ TagManager:
   - manaicon
   - emptymanapotion
   - manabar
+  - achievepanel
   layers:
   - Default
   - TransparentFX
