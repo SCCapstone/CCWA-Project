@@ -12,8 +12,9 @@ public class RoomGenerator {
     public static int width = Constants.mapWidth;
     public static int height = Constants.mapHeight;
 
-    public static int iterations = 5;
+    public static int iterations = 500000;
     private int[,] map = new int[height,width];
+    private int iterationCount = 5;
 
     public string seed = "";
     public bool useSeed = false;
@@ -39,69 +40,65 @@ public class RoomGenerator {
 
     // Begin room generation functions*********************************************************************************
 
-    // This method takes the coordinates of a given cell in the map and calculates how many neighbors it has.
-    // It utilizes von Neumann style neighborhoods, meaning a neighbor can exist only in a cardinal direction (not adjacent)
-    // It returns an integer, the number of neighbors the cell at [i,j] has
-
-    int CalcNeighbors(int i, int j) {
-        int walls = 0;
-        for(int x = i-1; x <= i+1; x++) {
-            for(int y = j-1; y <=j+1; y++) {
-                if(x >= 0 && x < width && y >= 0 && y < height) {
-                    if(x != i || y != j) {
-                        walls += map[i,j];
-                    }
-                }
-                else {
-                    walls++;
-                }
-            }
-        }
-        return walls;
-    }
-
-    // This method takes a width, height (int) and a seed (string)
-    // This method fills the map with random 0s and 1s
-    // This is used as a way to populate the map before iterating to finalize the room shape
-    // This method utilizes a seed, so the same Room can be generated repeatedly if needed
-    // This method returns the int[,] map of the room
-    public int[,] FillRoomMap() {
-        string tempSeed = Time.time.ToString();
-        System.Random rand = new System.Random(tempSeed.GetHashCode());
-        int[,] m = new int[height,width];
-        float fillChance = 20.0f;
+    public int[,] CreateRoomBorder(int[,] map) {
         for(int i=0; i<height; i++) {
             for(int j=0; j<width; j++) {
-                //Enclose the room with walls
                 if(i == 0 || i == width-1 || j == 0 || j == height-1) {
-                    m[i,j] = 1;
-                }
-                //Randomly add walls in the room based on a fill chance
-                else {
-                   m[i,j] = (rand.Next(0,100) < fillChance) ? 1 : 0;
+                    map[i,j] = 1;
                 }
             }
-         }
-         return m;
+        }
+        return map;
     }
 
-    // This method iterates over a room and applies certain rules to change the room's shape
-    int[,] IterateOverRoom(int[,] newMap) {
-         for(int i=0; i<height; i++) {
-            for(int j=0; j<width; j++) {
-                int numNeighbors = CalcNeighbors(i,j);
-                if(numNeighbors >= 2) {
-                    newMap[i,j] = 1;
-                }
-            }  
+    public int[,] ClearSpawns(int[,] map) {
+        for(int i=10; i<15; i++) {
+            for(int j=10; j<15; j++) {
+                map[i,j] = 0;
+            }
         }
-        return newMap;
+        for(int i=15; i<22; i++) {
+            for(int j=7; j<15; j++) {
+                if(map[i,j] != 2) {
+                    map[i,j] = 2;
+                }
+            }
+        }
+        return map;
+    }
+
+    public int[,] GenerateRoomWithPerlinNoise () {
+        float scale = Random.Range(3.0f, 5.0f);
+        // float offsetRange = Random.Range(1.00f, 100.0f);
+        for(int i=0; i<height; i++) {
+            for(int j=0; j<width; j++) {
+                float x = j/scale;
+                float y = i/scale;
+
+                float frequency = 1;
+                float amplitude = 1;
+
+                float perlinValue = Mathf.PerlinNoise(x,y);
+                for(int k=0; k<iterationCount; k++) {
+                    perlinValue += (Mathf.PerlinNoise(x * frequency, y * frequency) * amplitude);
+                    frequency = frequency * 2;
+                    amplitude = amplitude / 2;
+                }
+                Debug.Log("HERE: " + perlinValue);
+                if(perlinValue > 1.5f) {
+                    map[i,j] = 1;
+                } else {
+                    map[i,j] = 0;
+                }
+            }
+        }
+        return map;
     }
 
     public Room GenerateRoom(string seed, int numEnemies, int numItems, bool bossRoom, string[] directions) {
         // Generate a randomly filled Room map
         // Iterate over map to create a Room
-        int[,] newRoomMap = IterateOverRoom(FillRoomMap());
+        int[,] newRoomMap = ClearSpawns(CreateRoomBorder(GenerateRoomWithPerlinNoise()));
         // Generate multiple exit locations for the room, given an array of directions
         Location[] exitLocations = GenerateMultipleExits(directions.Length, directions, newRoomMap);
         // Generate spawn locations for items
