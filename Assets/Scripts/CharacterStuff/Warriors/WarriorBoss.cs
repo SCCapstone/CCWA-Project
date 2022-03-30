@@ -26,6 +26,7 @@ public class WarriorBoss : WarriorEnemy
 
     public override void Die()
     {
+        Variables.achievementTriggers[2] = true;
         Destroy(GameObject.Find("CharUICanvas/BossUI"));
 
         FileManager fm = GameObject.Find("FileManager").GetComponent<FileManager>();
@@ -42,6 +43,7 @@ public class WarriorBoss : WarriorEnemy
                     //new fastest time on easy difficutly
                     if (Variables.clock < Variables.fastest_E)
                     {
+                        Variables.achievementTriggers[4] = true;
                         Variables.fastest_E = Variables.clock;
                     }
                 }
@@ -50,6 +52,7 @@ public class WarriorBoss : WarriorEnemy
                     //new fastest time on medium
                     if (Variables.clock < Variables.fastest_M)
                     {
+                        Variables.achievementTriggers[4] = true;
                         Variables.fastest_M = Variables.clock;
                     }
                 }
@@ -58,6 +61,7 @@ public class WarriorBoss : WarriorEnemy
                     //new fastest time on hard
                     if (Variables.clock < Variables.fastest_H)
                     {
+                        Variables.achievementTriggers[4] = true;
                         Variables.fastest_H = Variables.clock;
                     }
                 }
@@ -89,6 +93,7 @@ public class WarriorBoss : WarriorEnemy
             fm.SaveFile(Constants.VALID_FILE_NUMS[fm.CurrFile], fd);
             Variables.inRun = false;
             Variables.newGame = false;
+            Variables.achievementTriggers[3] = true;
             SceneManager.LoadScene("GameOver");
         }else
         {

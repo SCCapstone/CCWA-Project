@@ -2,21 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /*Class for the player character warrior
 * ----INPUTS----- 
 * w a s d = movement
 * j = attack
-* u = SHADOW MODE
+* u = JUICED
 * esc = Pause
 *----------------
 */
-public class RogueCharacter : Rogue
+
+
+public class PlayerMage : Mage
 {
     //Timer for shadow mode and it's maximum time
-    public float shadowMax = 10f;
-    public float shadowTimer;
+    public float juicedMax = 5f;
+    public float juiceTimer;
 
     //Rigidbody for the player character and vector for movement directions
     private Rigidbody2D rigidB;
@@ -37,6 +40,12 @@ public class RogueCharacter : Rogue
     public Image[] staminaIcons;
     public GameObject staminaBottle;
     public GameObject emptyStaminaBottle;
+    public GameObject staminabar;
+
+    //Mana counter
+    public Image [] manaIcons;
+    public GameObject manaBottle;
+    public GameObject emptyManaBottle;
 
     //Counters for the attacking frames
     public float attackTime = .35f;
@@ -45,7 +54,7 @@ public class RogueCharacter : Rogue
     public GameObject pauseScreen;
     public GameObject manaBar;
 
-    void Awake() {
+    void Awake () {
         base.Awake();
         rigidB = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -53,17 +62,20 @@ public class RogueCharacter : Rogue
         audioSource = GetComponent<AudioSource>();
         pauseScreen = GameObject.FindWithTag("paused");
         pauseScreen.SetActive(false);
+        staminabar = GameObject.FindWithTag("staminabar");
+        staminabar.SetActive(false);
         manaBar = GameObject.FindWithTag("manabar");
-        manaBar.SetActive(false);
         moveSpeed = baseMoveSpeed;
-        shadowTimer = shadowMax;
-        name = "rogue";
+        juiceTimer = juicedMax;
+        name = "mage";
     }
-    
-    void Update() {
-        AssignWASD();
 
-     if (Input.GetKeyDown(KeyCode.Escape))
+    // Update is called once per frame
+    void Update()
+    {
+        AssignWASD();
+        
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Variables.isPaused = !Variables.isPaused;
             if (Variables.isPaused) {
@@ -73,23 +85,23 @@ public class RogueCharacter : Rogue
             }
         }
 
-        //Enters the player character into berserk mode
+        //Enters the player character into juiced mode
         if (Input.GetKeyDown("u")) {
             ToggleEnhanced();
-            shadowMode();
-            shadowTimer = shadowMax;
+            Juiced();
+            juiceTimer = juicedMax;
         }
 
         if(isEnhanced) {
-            if (shadowTimer > 0) {
-                shadowTimer -= Time.deltaTime;
+            if (juiceTimer > 0) {
+                juiceTimer -= Time.deltaTime;
             } else {
                 //Set back to false
                 ToggleEnhanced();
-                //Re-enable enemy pathfinding
-                shadowMode();
+                //Set back to base mana
+                Juiced();
                 //reset the timer
-                shadowTimer = shadowMax;
+                juiceTimer = juicedMax;
             }
         }
 
@@ -99,11 +111,17 @@ public class RogueCharacter : Rogue
         //Stamina regeneration
         StartCoroutine("RegenStamina");
 
+        //Mana regeneration
+        StartCoroutine("RegenMana");
+
         //loading the amount of hearts a player has
         loadHearts();
 
         //loading the amount of stamina a player has
-        loadStamina();
+        //loadStamina();
+
+        //loading the amount of mana a player has
+        loadMana();
 
         if(health <= 0) {
             base.Die();
@@ -111,7 +129,18 @@ public class RogueCharacter : Rogue
     }
 
     void FixedUpdate() {
-        Move();    
+        Move();
+    }
+
+    //Getting and setting the user inputs for movement
+    void Move() {
+        rigidB.velocity = new Vector2 (moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+
+        //updating the sprite to face the correct way when not moving by setting the idle blend tree values to last input value
+        if (Input.GetAxisRaw("Horizontal") == 1 || Input.GetAxisRaw("Horizontal") == -1 || Input.GetAxisRaw("Vertical") == 1 || Input.GetAxisRaw("Vertical") == -1) {
+            animator.SetFloat("LastHorizontal", Input.GetAxisRaw("Horizontal"));
+            animator.SetFloat("LastVertical", Input.GetAxisRaw("Vertical"));
+        }
     }
 
     //Getting and setting the user inputs for movement
@@ -126,26 +155,17 @@ public class RogueCharacter : Rogue
         animator.SetFloat("Vertical", moveDirection.y);
     }
 
-    //Function that allows the player character to move with WASD
-    void Move() {
-        rigidB.velocity = new Vector2 (moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
-
-        //updating the sprite to face the correct way when not moving by setting the idle blend tree values to last input value
-        if (Input.GetAxisRaw("Horizontal") == 1 || Input.GetAxisRaw("Horizontal") == -1 || Input.GetAxisRaw("Vertical") == 1 || Input.GetAxisRaw("Vertical") == -1) {
-            animator.SetFloat("LastHorizontal", Input.GetAxisRaw("Horizontal"));
-            animator.SetFloat("LastVertical", Input.GetAxisRaw("Vertical"));
-        }
-    }
-
     //Lets the player character attack
     public override void attack() {
-        //only allows attack if there are at least two stamina jars
-        if (Input.GetKeyDown("j") && stamina >= 2) {
+        //only allows attack if there are at least two mana jars
+
+        if (Input.GetKeyDown("j") && mana >= 2) {
             animator.SetBool("attacking", true);
             audioSource.Play(0);
             attackTime = maxAttackTime;
-            StaminaDrain(2);
+            ManaDrain(2);
 
+            //TODO may need to add bullet functionality
         }
 
         //Ends the attack animation after a short period of time
@@ -154,10 +174,10 @@ public class RogueCharacter : Rogue
             if (attackTime <= 0) {
                 animator.SetBool("attacking", false);
             }
-        } 
+        }
     }
 
-    //Loads the visual element of the health
+    //Loads the health of the character of a character
     public void loadHearts() {
         //Getting the heart objects from the charUIcanvas
         GameObject[] heartHolder = GameObject.FindGameObjectsWithTag("Hearts");
@@ -195,8 +215,8 @@ public class RogueCharacter : Rogue
         }
     }
 
-    //Loads the visual element of the stamina
-    public void loadStamina() {
+    //Loads the stamina of the character
+    /*public void loadStamina() {
         //Getting the stamina objects from the charUIcanvas
         GameObject[] staminaHolder = GameObject.FindGameObjectsWithTag("staminaicon");
         
@@ -231,6 +251,62 @@ public class RogueCharacter : Rogue
         for (int i = Convert.ToInt32(maxStamina); i < staminaHolder.Length; ++i) {
             staminaHolder[i].SetActive(false);
         }
+    }*/
+
+    //Loads the mana of the character
+    public void loadMana() {
+        //Enabling the mana bar for the mage
+        manaBar.SetActive(true);
+
+        //Getting the mana objects from the charUIcanvas
+        GameObject[] manaHolder = GameObject.FindGameObjectsWithTag("manaicon");
+        
+        manaBottle = GameObject.FindWithTag("manapotion");
+        emptyManaBottle = GameObject.FindWithTag("emptymanapotion");
+
+        //Sets the icon image array length
+        manaIcons = new Image[Convert.ToInt32(maxMana)];
+        
+        //Looping through to get the amount of mana icons needed for the character
+        for (int i = 0; i < manaIcons.Length; ++i) {
+            manaIcons[i] = manaHolder[i].GetComponent<Image>();
+        }
+
+        //Loading the icons in relation to max mana 
+        for (int i = 0; i < manaIcons.Length; ++i) {
+             //Enables the amount of icons needed for max stamina
+            if (i < maxMana) {
+                manaIcons[i].enabled = true;
+            }
+
+            //Enables the amount of icons for current mana
+            if (i < mana) {
+                manaIcons[i].sprite = manaBottle.GetComponent<SpriteRenderer>().sprite;
+            } else {
+                //Everything greater than health's value is an empty heart
+                manaIcons[i].sprite = emptyManaBottle.GetComponent<SpriteRenderer>().sprite;
+            }
+        }
+
+        //Clears any remaining icons above the max
+        for (int i = Convert.ToInt32(maxMana); i < manaHolder.Length; ++i) {
+            manaHolder[i].SetActive(false);
+        }
+        
+    }
+
+    //changing the color of the mana bottles if juiced
+    public override void ColorChange() {
+        base.ColorChange();
+        if (isEnhanced) {
+            for (int i = 0; i < manaIcons.Length; ++i) {
+                manaIcons[i].color = Color.magenta;
+            }
+        } else {
+            for (int i = 0; i < manaIcons.Length; ++i) {
+                manaIcons[i].color = Color.white;
+            }
+        }
     }
 
     //Pauses the game
@@ -241,7 +317,7 @@ public class RogueCharacter : Rogue
 
     //Resumes the game
     public void Resume() {
-        Time.timeScale = 1;
+        Time.timeScale = 0;
         pauseScreen.SetActive(false);
     }
 }

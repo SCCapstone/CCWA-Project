@@ -11,6 +11,7 @@ public class Pause : MonoBehaviour
     public Button[] nestedButtons;
     private TextMeshProUGUI messageTxt;
     public TextMeshProUGUI timeText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,29 +34,65 @@ public class Pause : MonoBehaviour
             difficultyButtons.active = true;
             speedRunMessage.active = false;
         }
-
         DisplayDifficulty();
     }
 
-    public void DisplayDifficulty() {
-        switch(Variables.difficulty) {
-            case 0:
-            nestedButtons[0].interactable = !nestedButtons[0].interactable;
-            break;
-
-            case 1:
-            nestedButtons[1].interactable = !nestedButtons[1].interactable;
-            break;
-
-            case 2:
-            nestedButtons[2].interactable = !nestedButtons[2].interactable;
-            break;
-        }
-    }    
     // Update is called once per frame
     void Update() {
         int minutes = Mathf.FloorToInt(Variables.clock/60.0f);
         int seconds = Mathf.FloorToInt(Variables.clock - minutes *60);
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        DisplayDifficulty();
+    }
+
+     /* Allows the user to see and change their difficulty mid-gameplay
+    * Easy = 0
+    * Normal = 1
+    * Hard = 2
+    */
+    public void DisplayDifficulty() {
+        var colorsNotSelected = nestedButtons[0].GetComponent<Button>().colors;
+        var colorsSelected = nestedButtons[0].GetComponent<Button>().colors;
+        colorsNotSelected.normalColor = Color.white;
+
+        switch(Variables.difficulty) {
+            case 0:
+            colorsSelected.normalColor = Color.green;
+            colorsSelected.selectedColor = Color.green;
+            nestedButtons[0].GetComponent<Button>().colors = colorsSelected;
+            nestedButtons[1].GetComponent<Button>().colors = colorsNotSelected;
+            nestedButtons[2].GetComponent<Button>().colors = colorsNotSelected;
+            break;
+
+            case 1:
+            colorsSelected.normalColor = Color.blue;
+            colorsSelected.selectedColor = Color.blue;
+            nestedButtons[0].GetComponent<Button>().colors = colorsNotSelected;
+            nestedButtons[1].GetComponent<Button>().colors = colorsSelected;
+            nestedButtons[2].GetComponent<Button>().colors = colorsNotSelected;
+            break;
+
+            case 2:
+            colorsSelected.normalColor = Color.red;
+            colorsSelected.selectedColor = Color.red;
+            nestedButtons[0].GetComponent<Button>().colors = colorsNotSelected;
+            nestedButtons[1].GetComponent<Button>().colors = colorsNotSelected;
+            nestedButtons[2].GetComponent<Button>().colors = colorsSelected;
+            break;
+        }
+    }
+    
+
+    //Functions for the click events of the buttons
+    public void SwitchToEasy() {
+        Variables.difficulty = 0;
+    }
+
+    public void SwitchToNormal() {
+        Variables.difficulty = 1;
+    }
+
+    public void SwitchToHard() {
+        Variables.difficulty = 2;
     }
 }
