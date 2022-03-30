@@ -71,8 +71,7 @@ public class RoomGenerator {
     }
 
     public int[,] GenerateRoomWithPerlinNoise () {
-        float scale = Random.Range(3.0f, 5.0f);
-        // float offsetRange = Random.Range(1.00f, 100.0f);
+        float scale = Random.Range(3.0f, 3.5f);
         for(int i=0; i<height; i++) {
             for(int j=0; j<width; j++) {
                 float x = j/scale;
@@ -87,7 +86,6 @@ public class RoomGenerator {
                     frequency = frequency * 2;
                     amplitude = amplitude / 2;
                 }
-                Debug.Log("HERE: " + perlinValue);
                 if(perlinValue > 1.5f) {
                     map[i,j] = 1;
                 } else {
