@@ -14,7 +14,7 @@ public class KnifeAttacks : MonoBehaviour
     //getting player attack
     public void getPlayerAttackVal() {
         var player = GameObject.FindWithTag("Player");
-        var playerScript = player.gameObject.GetComponent<RogueCharacter>();
+        var playerScript = player.gameObject.GetComponent<PlayerRogue>();
         attack = playerScript.attackDmg;
     }
     

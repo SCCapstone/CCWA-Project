@@ -12,12 +12,6 @@ public class WarriorEnemy : Warrior
         DifficutyAdjust();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     //Kills the enemy
     public override void Die()
     {
@@ -34,7 +28,7 @@ public class WarriorEnemy : Warrior
         
         switch(name) {
             case "Rogue(Clone)":
-                var rogue = collision.GetComponent<RogueCharacter>();
+                var rogue = collision.GetComponent<PlayerRogue>();
                 //calculating the damage done to player
                 int rDamage = attackDmg - rogue.defense;
                 //Damages the player's health via the enemy's attackDmg value
@@ -50,7 +44,7 @@ public class WarriorEnemy : Warrior
                 }
             break;
 
-            case "WarriorPrefab(Clone)":
+            case "Warrior(Clone)":
                 var warrior = collision.GetComponent<PlayerWarrior>();
                 //calculating the damage done to player
                 int wDamage = attackDmg - warrior.defense;
