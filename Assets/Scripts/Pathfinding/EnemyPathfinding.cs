@@ -12,7 +12,7 @@ public class EnemyPathfinding : MonoBehaviour
     public int speed;
 
     private Pathfinding enemyAi;
-    private List<Vector3> pathVectorList;
+    private List<Vector2> pathVectorList;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,11 +38,11 @@ public class EnemyPathfinding : MonoBehaviour
         // Debug.Log("target pos "+target.position.x + " " + target.position.y + " " + target.position.z);
         if (!(pathVectorList == null) && pathVectorList.Count > 0)
         {
-
-            
-            transform.position = Vector3.MoveTowards(transform.position, pathVectorList[0], step);
+            Vector2 moveVector = Vector2.MoveTowards(transform.position, pathVectorList[0], step);
+            Vector3 newTransform = new Vector3(moveVector.x, moveVector.y, -1);
+            transform.position = newTransform;
             // Debug.Log("moved towards "+pathVectorList[0].x + " " + pathVectorList[0].y + " " + pathVectorList[0].z);
-            if (transform.position == pathVectorList[0])
+            if (transform.position == (Vector3)pathVectorList[0])
             {
                 // Debug.Log("Made it"+pathVectorList[0].x + " " + pathVectorList[0].y + " " + pathVectorList[0].z);
                 pathVectorList.RemoveAt(0);
@@ -50,7 +50,7 @@ public class EnemyPathfinding : MonoBehaviour
         }
         else
         {
-            transform.position=Vector3.MoveTowards(transform.position, target.position, step);
+            transform.position=Vector2.MoveTowards(transform.position, target.position, step);
         }
 
     }
@@ -61,12 +61,12 @@ public class EnemyPathfinding : MonoBehaviour
         pathVectorList = null;
     }
 
-    public Vector3 GetTargetPosition()
+    public Vector2 GetTargetPosition()
     {
         Debug.Log("Position: " + target.position.x + " " + target.position.y);
         return target.position;
     }
-    public Vector3 GetPostion()
+    public Vector2 GetPostion()
     {
         return transform.position;
     }

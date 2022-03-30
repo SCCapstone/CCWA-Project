@@ -42,15 +42,15 @@ public class CharacterSetup : MonoBehaviour
         GameObject player = GameObject.FindWithTag("Player");
         switch(Variables.characterType) {
             case "rogue":
-                Instantiate(roguePrefab, new Vector3(10,10,-0.032f), Quaternion.identity);
+                Instantiate(roguePrefab, new Vector3(10,10,-1.0f), Quaternion.identity);
                 break;
 
             case "warrior":
-                Instantiate(warriorPrefab, new Vector3(10,10,-0.032f), Quaternion.identity);
+                Instantiate(warriorPrefab, new Vector3(10,10,-1.0f), Quaternion.identity);
                 break;
 
              case "mage":
-                Instantiate(magePrefab, new Vector3(10,10,-0.032f), Quaternion.identity);
+                Instantiate(magePrefab, new Vector3(10,10,-1.0f), Quaternion.identity);
                 break;
         }
     }
