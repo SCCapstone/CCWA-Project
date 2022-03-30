@@ -30,6 +30,11 @@ All tests are contained in the `Assets/Tests` directory, with Unit Tests in `Tes
 
 We have identified the testing framework we will be using as NUnit/XUnit through the Unity Test Framework.
 
+We have also implemented some cheat features to help you progress through the game easily and see different components:
+- Home Button: Regenerates a floor, including the current room layout
+- End Button: Destroys all enemies
+- Page Up Button: Respawns enemies in the room
+
 ## Running Tests
 
 Tests can be run from the root directory of this repository with the following commands:

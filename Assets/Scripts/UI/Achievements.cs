@@ -13,7 +13,7 @@ public class Achievements : MonoBehaviour
     public Button[] achievementButtons;
     public int currentActiveAchievementIndex;
 
-    void Awake()
+    async void Awake()
     {
         //get all achievement buttons from GameObject
         achievementButtons = achievementButtonsGO.GetComponentsInChildren<Button>();
@@ -44,14 +44,21 @@ public class Achievements : MonoBehaviour
         //change colors of unlocked achievement button
         for(int i = 0; i < currentFile.UnlockedAchievements.Length; ++i)
         {
-            for(int c = 0; c < Constants.ALL_ACHIEVEMENT_TITLES.Length; ++c)
+            if(currentFile.UnlockedAchievements[i] != null)
             {
-                if (currentFile.UnlockedAchievements[i].Equals(Constants.ALL_ACHIEVEMENT_TITLES[c]))
+                for(int c = 0; c < Constants.ALL_ACHIEVEMENT_TITLES.Length; ++c)
                 {
-                    ColorBlock cb = achievementButtons[c].colors;
-                    cb.normalColor = new Color(0.180f, 0.741f, 0.082f, 1.0f);
-                    cb.selectedColor = new Color(0.125f, 0.478f, 0.062f, 1.0f);
-                    achievementButtons[c].colors = cb;
+                    
+                    Debug.Log("Checking current file achievement idx "+i+": "+currentFile.UnlockedAchievements[i]);
+                    Debug.Log("Checking game achievement idx "+c+": "+Constants.ALL_ACHIEVEMENT_TITLES[c]);
+                    if (currentFile.UnlockedAchievements[i].Equals(Constants.ALL_ACHIEVEMENT_TITLES[c]))
+                    {
+                        Debug.Log("They are equal");
+                        ColorBlock cb = achievementButtons[c].colors;
+                        cb.normalColor = Constants.unlockedAchievementColor;
+                        cb.selectedColor = new Color(0.125f, 0.478f, 0.062f, 1.0f);
+                        achievementButtons[c].colors = cb;
+                    }
                 }
             }
         }

@@ -199,7 +199,8 @@ public class FileData
         FastestTime = 359999f; //Fastest time of 99:59:59
         NumRuns = 0;
         NumWins = 0;
-        UnlockedAchievements = new string[1];
+        UnlockedAchievements = new string[Constants.ALL_ACHIEVEMENT_TITLES.Length];
+        UnlockedAchievements[0] = Constants.ALL_ACHIEVEMENT_TITLES[0]; //for testing purposes only
         InRun = false;
         CurrRun = null;
     }
@@ -219,7 +220,8 @@ public class FileData
         FastestTime = 359999f; //Fastest time of 99:59:59
         NumRuns = 0;
         NumWins = 0;
-        UnlockedAchievements = new string[1];
+        UnlockedAchievements = new string[Constants.ALL_ACHIEVEMENT_TITLES.Length];
+        UnlockedAchievements[0] = Constants.ALL_ACHIEVEMENT_TITLES[0]; //for testing purposes only
         InRun = false;
         CurrRun = null;
     }
@@ -288,11 +290,17 @@ public class FileData
                 valid_achievement_idx.Add(i);
             }
         }
-        UnlockedAchievements = new string[valid_achievement_idx.Count];
-        for(int i = 0; i < valid_achievement_idx.Count; i++)
+        UnlockedAchievements = new string[Constants.ALL_ACHIEVEMENT_TITLES.Length];
+        for(int i = 0; i < UnlockedAchievements.Length; ++i)
         {
-            UnlockedAchievements[i] = unlockedachievements[valid_achievement_idx[i]];
+            UnlockedAchievements[i] = null;
         }
+        for(int i = 0; i < valid_achievement_idx.Count; ++i)
+        {
+            UnlockedAchievements[valid_achievement_idx[i]] = Constants.ALL_ACHIEVEMENT_TITLES[valid_achievement_idx[i]];
+        }
+
+        UnlockedAchievements[0] = Constants.ALL_ACHIEVEMENT_TITLES[0]; //for testing purposes only
 
         InRun = inrun;
 

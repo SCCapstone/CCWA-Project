@@ -26,6 +26,7 @@ public class Character : MonoBehaviour
      
     public void Awake()
     {
+        Variables.achievementTriggers[0] = true;
         //freezes all characters when colliding
         gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
