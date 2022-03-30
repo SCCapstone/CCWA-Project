@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /*
  * Defines the file displayer for the game
@@ -11,7 +12,6 @@ using UnityEngine;
  */
 public class FileDisplayer : MonoBehaviour
 {
-
     void Awake()
     {
         DisplayFiles();
@@ -32,7 +32,7 @@ public class FileDisplayer : MonoBehaviour
     }
 
     //Displays the data for a given file
-    void DisplayData(FileData data) //TODO display achievements
+    async void DisplayData(FileData data) //TODO display achievements
     {
         int filenum = data.FileNum;
         GameObject totalTimeDisplay =  GameObject.Find("File"+filenum+"Btn/TotalTime");
@@ -44,8 +44,20 @@ public class FileDisplayer : MonoBehaviour
         fastestRunDisplay.GetComponent<UnityEngine.UI.Text>().text = "Fastest Run\t\t"+fastestRunStamp;
 
         GameObject.Find("File"+filenum+"Btn/DateCreated").GetComponent<UnityEngine.UI.Text>().text = data.DateCreated;
-    }
 
+        for(int i = 0; i < data.UnlockedAchievements.Length; ++i)
+        {
+            if(data.UnlockedAchievements[i] != null)
+            {
+                Debug.Log("File "+filenum+" has unlocked achievement "+data.UnlockedAchievements[i]);
+
+                //change color of the appropriate game object
+                GameObject box = GameObject.Find("File"+filenum+"Btn/Achievements/Achievement"+(i+1)+"/BrownBox");
+                Debug.Log(box);
+                box.GetComponent<Image>().color = Constants.unlockedAchievementColor;
+            }
+        }
+    }
     //Converts time in seconds to a string timestamp
     string GetTimeStamp(int timeInSeconds)
     {
