@@ -713,11 +713,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8360813855451497798}
   - component: {fileID: 8360813855451497797}
-  - component: {fileID: 8360813855451497803}
   - component: {fileID: 8360813855451497792}
   - component: {fileID: 8360813855451497796}
-  - component: {fileID: 8360813855451497800}
   - component: {fileID: 1836636367138331620}
+  - component: {fileID: -6603350906848859206}
+  - component: {fileID: -1796362736966169995}
   m_Layer: 0
   m_Name: Rogue
   m_TagString: Player
@@ -794,22 +794,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &8360813855451497803
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8360813855451497802}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0009613037, y: -0.0032891855}
-  m_Size: {x: 0.11709595, y: 0.16657837}
-  m_Direction: 0
 --- !u!50 &8360813855451497792
 Rigidbody2D:
   serializedVersion: 4
@@ -850,44 +834,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8360813855451497800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8360813855451497802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bb6ff9080a9b10478b19fb451747bfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 6
-  stamina: 0
-  maxStamina: 6
-  attackDmg: 0
-  defense: 0
-  name: 
-  isEnhanced: 0
-  moveSpeed: 0
-  baseMoveSpeed: 7
-  poison: 0
-  statuses: 
-  spriteColor: {r: 0.8962264, g: 0, b: 0, a: 0}
-  sRenderer: {fileID: 0}
-  keyAmt: 0
-  shadowMax: 10
-  shadowTimer: 0
-  hearts: []
-  redHeart: {fileID: 0}
-  blackHeart: {fileID: 0}
-  staminaIcons: []
-  staminaBottle: {fileID: 0}
-  emptystaminaBottle: {fileID: 0}
-  attackTime: 0.25
-  maxAttackTime: 0.25
-  pauseScreen: {fileID: 0}
 --- !u!82 &1836636367138331620
 AudioSource:
   m_ObjectHideFlags: 0
@@ -984,6 +930,71 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-6603350906848859206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8360813855451497802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d737db9e01be1d4aabb737ac46d84f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 6
+  stamina: 0
+  maxStamina: 6
+  attackDmg: 0
+  defense: 0
+  name: 
+  isEnhanced: 0
+  moveSpeed: 7
+  baseMoveSpeed: 7
+  poison: 0
+  statuses: 
+  spriteColor: {r: 0, g: 0, b: 0, a: 0}
+  sRenderer: {fileID: 0}
+  keyAmt: 0
+  shadowMax: 10
+  shadowTimer: 0
+  hearts: []
+  redHeart: {fileID: 0}
+  blackHeart: {fileID: 0}
+  staminaIcons: []
+  staminaBottle: {fileID: 0}
+  emptyStaminaBottle: {fileID: 0}
+  attackTime: 0.35
+  maxAttackTime: 0.35
+  pauseScreen: {fileID: 0}
+  manaBar: {fileID: 0}
+--- !u!61 &-1796362736966169995
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8360813855451497802}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.6666667, y: 0.6666667}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.6666667, y: 0.6666667}
+  m_EdgeRadius: 0
 --- !u!1 &8360813855454524514
 GameObject:
   m_ObjectHideFlags: 0
