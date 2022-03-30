@@ -52,9 +52,12 @@ public class RoomGenerator {
     }
 
     public int[,] ClearSpawns(int[,] map) {
-        for(int i=10; i<15; i++) {
+        for(int i=15; i<24; i++) {
             for(int j=10; j<15; j++) {
+                if(map[i,j] != 2) {
                 map[i,j] = 0;
+                    
+                }
             }
         }
         for(int i=15; i<22; i++) {
@@ -138,8 +141,11 @@ public class RoomGenerator {
             for(int j=10; j<width-10; j++) {
                 if(map[i,j] == 0 && tempEnemyCounter < numEnemies) {
                     if(Random.Range(1,10) >= 1) {
-                        newEnemyLocations[tempEnemyCounter] = new Location("", i, j);
-                        tempEnemyCounter++;
+                        if(map[i,j] == 0) {
+                            newEnemyLocations[tempEnemyCounter] = new Location("", i, j);
+                            tempEnemyCounter++;
+                        }
+                        
                     }
                 }
             }
