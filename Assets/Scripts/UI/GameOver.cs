@@ -15,6 +15,11 @@ public class GameOver : MonoBehaviour
 
     Text RTT;
 
+    public void NewGame() {
+        Variables.newGame = true;
+        SceneManager.LoadScene("File Select");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
