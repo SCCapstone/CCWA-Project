@@ -51,10 +51,17 @@ public class RoomGenerator {
         return map;
     }
 
-    public int[,] ClearPlayerSpawn(int[,] map) {
+    public int[,] ClearSpawns(int[,] map) {
         for(int i=10; i<15; i++) {
             for(int j=10; j<15; j++) {
                 map[i,j] = 0;
+            }
+        }
+        for(int i=15; i<22; i++) {
+            for(int j=7; j<15; j++) {
+                if(map[i,j] != 2) {
+                    map[i,j] = 2;
+                }
             }
         }
         return map;
@@ -91,7 +98,7 @@ public class RoomGenerator {
     public Room GenerateRoom(string seed, int numEnemies, int numItems, bool bossRoom, string[] directions) {
         // Generate a randomly filled Room map
         // Iterate over map to create a Room
-        int[,] newRoomMap = ClearPlayerSpawn(CreateRoomBorder(GenerateRoomWithPerlinNoise()));
+        int[,] newRoomMap = ClearSpawns(CreateRoomBorder(GenerateRoomWithPerlinNoise()));
         // Generate multiple exit locations for the room, given an array of directions
         Location[] exitLocations = GenerateMultipleExits(directions.Length, directions, newRoomMap);
         // Generate spawn locations for items
