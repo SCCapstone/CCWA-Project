@@ -71,8 +71,7 @@ public class RoomGenerator {
     }
 
     public int[,] GenerateRoomWithPerlinNoise () {
-        float scale = Random.Range(3.0f, 5.0f);
-        // float offsetRange = Random.Range(1.00f, 100.0f);
+        float scale = Random.Range(3.0f, 3.5f);
         for(int i=0; i<height; i++) {
             for(int j=0; j<width; j++) {
                 float x = j/scale;
@@ -87,7 +86,6 @@ public class RoomGenerator {
                     frequency = frequency * 2;
                     amplitude = amplitude / 2;
                 }
-                Debug.Log("HERE: " + perlinValue);
                 if(perlinValue > 1.5f) {
                     map[i,j] = 1;
                 } else {
@@ -185,9 +183,7 @@ public class RoomGenerator {
                     for(int i = height- 3; i>height-7; i--) {
                         for(int j=10; j<width-10; j++) {
                             if(map[i,j] == 0) {
-                                if(Random.Range(1,10) < 9) {
                                     return new Location(direction, i, j);
-                                }
                             }
                         }
                     }
@@ -196,9 +192,7 @@ public class RoomGenerator {
                     for(int i = 3; i<7; i++) {
                         for(int j=10; j<width-10; j++) {
                             if(map[i,j] == 0) {
-                                if(Random.Range(1,10) < 9) {
                                     return new Location(direction, i, j);
-                                }
                             }
                         }
                     }
@@ -207,9 +201,7 @@ public class RoomGenerator {
                     for(int i = 10; i<height-10; i++) {
                         for(int j=3; j<7; j++) {
                             if(map[i,j] == 0) {
-                                if(Random.Range(1,10) < 9) {
                                     return new Location(direction, i, j);
-                                }
                             }
                         }
                     }
@@ -218,10 +210,7 @@ public class RoomGenerator {
                     for(int i = 10; i<height-10; i++) {
                         for(int j=width-3; j>width-7; j--) {
                             if(map[i,j] == 0) {
-                                if(Random.Range(1,10) < 9) {
-                                    return new Location(direction, i, j);
-                                    
-                                }
+                                    return new Location(direction, i, j); 
                             }
                         }
                     }

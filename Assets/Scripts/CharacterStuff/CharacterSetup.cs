@@ -14,7 +14,7 @@ public class CharacterSetup : MonoBehaviour
         Character newCharacter = new Character();
         switch (characterType) {
             case "rogue": 
-                newCharacter = new RogueCharacter();
+                newCharacter = new PlayerRogue();
             break;
 
             case "warrior":

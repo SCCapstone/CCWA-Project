@@ -402,17 +402,13 @@ GameObject:
   m_Component:
   - component: {fileID: 96023432823924769}
   - component: {fileID: 96023432823924770}
-  - component: {fileID: 96023432823924780}
   - component: {fileID: 96023432823924775}
   - component: {fileID: 96023432823924771}
   - component: {fileID: 2029951329056814261}
   - component: {fileID: 96023432823924782}
-  - component: {fileID: 307229776362354828}
   - component: {fileID: 8041312701893672299}
-  - component: {fileID: -7235580664840753050}
-  - component: {fileID: -6625823356858230152}
   m_Layer: 0
-  m_Name: WarriorPrefab
+  m_Name: Warrior
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -487,22 +483,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &96023432823924780
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 96023432823924781}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0009613037, y: -0.0032891855}
-  m_Size: {x: 0.11709595, y: 0.16657837}
-  m_Direction: 0
 --- !u!50 &96023432823924775
 Rigidbody2D:
   serializedVersion: 4
@@ -673,113 +653,12 @@ MonoBehaviour:
   blackHeart: {fileID: 0}
   staminaIcons: []
   staminaBottle: {fileID: 0}
-  emptystaminaBottle: {fileID: 0}
+  emptyStaminaBottle: {fileID: 0}
   attackTime: 0.25
   maxAttackTime: 0.25
   pauseScreen: {fileID: 0}
---- !u!114 &307229776362354828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 96023432823924781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 932e49b826e28f14e959ac0fa5f96603, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 6
-  stamina: 0
-  maxStamina: 6
-  attackDmg: 0
-  defense: 0
-  name: 
-  isEnhanced: 0
-  moveSpeed: 7
-  baseMoveSpeed: 7
-  poison: 0
-  statuses: 
-  spriteColor: {r: 0, g: 0, b: 0, a: 0}
-  sRenderer: {fileID: 0}
-  keyAmt: 0
-  berserkMax: 10
-  berserkTimer: 0
-  hearts: []
-  redHeart: {fileID: 0}
-  blackHeart: {fileID: 0}
-  staminaIcons: []
-  staminaBottle: {fileID: 0}
-  emptystaminaBottle: {fileID: 0}
-  attackTime: 0.25
-  maxAttackTime: 0.25
-  pauseScreen: {fileID: 0}
+  manaBar: {fileID: 0}
 --- !u!61 &8041312701893672299
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 96023432823924781}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.6666667, y: 0.6666667}
-    newSize: {x: 0.16, y: 0.16}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.6666667, y: 0.6666667}
-  m_EdgeRadius: 0
---- !u!114 &-7235580664840753050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 96023432823924781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 932e49b826e28f14e959ac0fa5f96603, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 6
-  stamina: 0
-  maxStamina: 6
-  attackDmg: 0
-  defense: 0
-  name: 
-  isEnhanced: 0
-  moveSpeed: 7
-  baseMoveSpeed: 7
-  poison: 0
-  statuses: 
-  spriteColor: {r: 0, g: 0, b: 0, a: 0}
-  sRenderer: {fileID: 0}
-  keyAmt: 0
-  berserkMax: 10
-  berserkTimer: 0
-  hearts: []
-  redHeart: {fileID: 0}
-  blackHeart: {fileID: 0}
-  staminaIcons: []
-  staminaBottle: {fileID: 0}
-  emptystaminaBottle: {fileID: 0}
-  attackTime: 0.25
-  maxAttackTime: 0.25
-  pauseScreen: {fileID: 0}
---- !u!61 &-6625823356858230152
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

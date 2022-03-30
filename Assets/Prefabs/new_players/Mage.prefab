@@ -42,11 +42,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3166569990477098987}
   - component: {fileID: 3166569990477098984}
-  - component: {fileID: 3166569990477098982}
   - component: {fileID: 3166569990477098989}
   - component: {fileID: 3166569990477098985}
   - component: {fileID: 5083282283302842697}
   - component: {fileID: 3166569990477098008}
+  - component: {fileID: 3391575989407600357}
   m_Layer: 0
   m_Name: Mage
   m_TagString: Player
@@ -123,22 +123,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &3166569990477098982
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3166569990477098983}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0009613037, y: -0.0032891855}
-  m_Size: {x: 0.11709595, y: 0.16657837}
-  m_Direction: 0
 --- !u!50 &3166569990477098989
 Rigidbody2D:
   serializedVersion: 4
@@ -312,6 +296,7 @@ MonoBehaviour:
   staminaIcons: []
   staminaBottle: {fileID: 0}
   emptyStaminaBottle: {fileID: 0}
+  staminabar: {fileID: 0}
   manaIcons: []
   manaBottle: {fileID: 0}
   emptyManaBottle: {fileID: 0}
@@ -319,6 +304,33 @@ MonoBehaviour:
   maxAttackTime: 0.35
   pauseScreen: {fileID: 0}
   manaBar: {fileID: 0}
+  bullet: {fileID: 0}
+--- !u!61 &3391575989407600357
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3166569990477098983}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.6666667, y: 0.6666667}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.6666667, y: 0.6666667}
+  m_EdgeRadius: 0
 --- !u!1 &3166569990495266323
 GameObject:
   m_ObjectHideFlags: 0
