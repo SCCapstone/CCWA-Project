@@ -63,7 +63,7 @@ public class RoomGenerator {
         for(int i=15; i<22; i++) {
             for(int j=7; j<15; j++) {
                 if(map[i,j] != 2) {
-                    map[i,j] = 2;
+                    map[i,j] = 0;
                 }
             }
         }
