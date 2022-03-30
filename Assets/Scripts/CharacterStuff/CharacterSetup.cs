@@ -7,6 +7,7 @@ public class CharacterSetup : MonoBehaviour
 
     public GameObject warriorPrefab;
     public GameObject roguePrefab;
+    public GameObject magePrefab;
 
     public Character buildCharacter() {
         string characterType = Variables.characterType;
@@ -18,6 +19,10 @@ public class CharacterSetup : MonoBehaviour
 
             case "warrior":
                 newCharacter = new PlayerWarrior();
+            break;
+
+            case "mage": 
+                newCharacter = new PlayerMage();
             break;
 
             default:
@@ -43,13 +48,10 @@ public class CharacterSetup : MonoBehaviour
             case "warrior":
                 Instantiate(warriorPrefab, new Vector3(10,10,-0.032f), Quaternion.identity);
                 break;
-            // TODO implement case for mage
-        }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+             case "mage":
+                Instantiate(magePrefab, new Vector3(10,10,-0.032f), Quaternion.identity);
+                break;
+        }
     }
 }

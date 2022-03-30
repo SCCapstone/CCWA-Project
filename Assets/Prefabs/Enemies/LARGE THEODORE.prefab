@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 7500739741726487087}
   - component: {fileID: 7500739741726487084}
   m_Layer: 0
-  m_Name: BossBirdEnemy
+  m_Name: LARGE THEODORE
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

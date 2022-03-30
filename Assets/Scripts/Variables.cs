@@ -33,6 +33,8 @@ public class Variables:ScriptableObject
     public static bool isSpeedrun;
 
     public static int difficulty;
+
+    public static bool[] achievementTriggers = new bool[5];
     
     //Stack of strings for back button navigation in Scene Controller file
     public static Stack<string> menuNavStack = new Stack<string>();
