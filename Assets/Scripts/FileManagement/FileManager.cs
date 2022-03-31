@@ -200,7 +200,7 @@ public class FileData
         NumRuns = 0;
         NumWins = 0;
         UnlockedAchievements = new string[Constants.ALL_ACHIEVEMENT_TITLES.Length];
-        UnlockedAchievements[0] = Constants.ALL_ACHIEVEMENT_TITLES[0]; //for testing purposes only
+        // UnlockedAchievements[0] = Constants.ALL_ACHIEVEMENT_TITLES[0]; //for testing purposes only
         InRun = false;
         CurrRun = null;
     }
@@ -221,7 +221,7 @@ public class FileData
         NumRuns = 0;
         NumWins = 0;
         UnlockedAchievements = new string[Constants.ALL_ACHIEVEMENT_TITLES.Length];
-        UnlockedAchievements[0] = Constants.ALL_ACHIEVEMENT_TITLES[0]; //for testing purposes only
+        // UnlockedAchievements[0] = Constants.ALL_ACHIEVEMENT_TITLES[0]; //for testing purposes only
         InRun = false;
         CurrRun = null;
     }
@@ -300,7 +300,7 @@ public class FileData
             UnlockedAchievements[valid_achievement_idx[i]] = Constants.ALL_ACHIEVEMENT_TITLES[valid_achievement_idx[i]];
         }
 
-        UnlockedAchievements[0] = Constants.ALL_ACHIEVEMENT_TITLES[0]; //for testing purposes only
+        // UnlockedAchievements[0] = Constants.ALL_ACHIEVEMENT_TITLES[0]; //for testing purposes only
 
         InRun = inrun;
 

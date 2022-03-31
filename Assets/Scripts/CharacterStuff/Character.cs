@@ -172,8 +172,9 @@ public class Character : MonoBehaviour
                 Character character = player.GetComponent<Character>();
                 //Save file on new floor
                 FileData currentFile = fm.GetFileData(Constants.VALID_FILE_NUMS[fm.CurrFile]);
+                int runs = currentFile.NumRuns+1;
                 FileData fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, currentFile.FastestTime,
-                                                currentFile.NumRuns+1, currentFile.NumWins, currentFile.UnlockedAchievements,
+                                                runs, currentFile.NumWins, currentFile.UnlockedAchievements,
                                                 false, null); //TODO get wins saved
                 Debug.Log(currentFile.NumRuns+" "+fd.NumRuns);                                        
                 fm.SaveFile(Constants.VALID_FILE_NUMS[fm.CurrFile], fd);

@@ -11,9 +11,9 @@ public class Variables:ScriptableObject
 
     //File Stuff
     public static bool newGame;
-    public static float fastest_E;
-    public static float fastest_M;
-    public static float fastest_H;
+    public static float fastest_E = 359999;
+    public static float fastest_M = 359999;
+    public static float fastest_H = 359999;
 
     //Game state Stuff
     public static bool inRun = false;

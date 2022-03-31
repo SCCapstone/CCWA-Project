@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AchievementPanel : MonoBehaviour
 {
@@ -15,20 +16,20 @@ public class AchievementPanel : MonoBehaviour
     public bool ach03Trigger = false;
     public bool ach04Trigger = false;
     public bool ach05Trigger = false;
+
+    private FileManager fm;
+
+    void Start()
+    {
+        fm = GameObject.Find("FileManager").GetComponent<FileManager>();
+    }
+
     // Update is called once per frame
 
     void Update()
     {
-        // FileManager fm = GameObject.Find("FileManager").GetComponent<FileManager>();
-        // var player = GameObject.FindWithTag("Player");
-        // Character character = player.GetComponent<Character>();
-        // //Save file on new floor
-        // FileData currentFile = fm.GetFileData(Constants.VALID_FILE_NUMS[fm.CurrFile]);
-        // FileData fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, currentFile.FastestTime,
-        //                                 currentFile.NumRuns+1, currentFile.NumWins, currentFile.UnlockedAchievements,
-        //                                 false, null); //TODO get wins saved
-        // Debug.Log(currentFile.NumRuns+" "+fd.NumRuns);                                        
-        // fm.SaveFile(Constants.VALID_FILE_NUMS[fm.CurrFile], fd);
+        //Save file on new floor
+        FileData currentFile = fm.GetFileData(Constants.VALID_FILE_NUMS[fm.CurrFile]);
 
         ach01Trigger = Variables.achievementTriggers[0];
         ach02Trigger = Variables.achievementTriggers[1];
@@ -36,23 +37,23 @@ public class AchievementPanel : MonoBehaviour
         ach04Trigger = Variables.achievementTriggers[3];
         ach05Trigger = Variables.achievementTriggers[4];
 
-        if(ach01Trigger)
+        if(ach01Trigger && currentFile.UnlockedAchievements[0] == null)
         {
             StartCoroutine(Achieve01());
         }
-        if(ach02Trigger)
+        if(ach02Trigger && currentFile.UnlockedAchievements[1] == null)
         {
             StartCoroutine(Achieve02());
         }
-        if(ach03Trigger)
+        if(ach03Trigger && currentFile.UnlockedAchievements[2] == null)
         {
             StartCoroutine(Achieve03());
         }
-        if(ach04Trigger)
+        if(ach04Trigger && currentFile.UnlockedAchievements[3] == null && SceneManager.GetActiveScene().name == "GameOver")
         {
             StartCoroutine(Achieve04());
         }
-        if(ach04Trigger)
+        if(ach05Trigger && currentFile.UnlockedAchievements[4] == null && SceneManager.GetActiveScene().name == "GameOver")
         {
             StartCoroutine(Achieve05());
         }
@@ -63,6 +64,14 @@ public class AchievementPanel : MonoBehaviour
         title.GetComponent<TMPro.TextMeshProUGUI>().text = Constants.ALL_ACHIEVEMENT_TITLES[0];
         description.GetComponent<TMPro.TextMeshProUGUI>().text = Constants.ALL_ACHIEVEMENT_DESCRIPTIONS[0];
         panel.SetActive(true);
+
+        FileData currentFile = fm.GetFileData(Constants.VALID_FILE_NUMS[fm.CurrFile]);
+        currentFile.UnlockedAchievements[0] = Constants.ALL_ACHIEVEMENT_TITLES[0];
+        FileData fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, currentFile.FastestTime,
+                                        currentFile.NumRuns, currentFile.NumWins, currentFile.UnlockedAchievements,
+                                        false, null);                           
+        fm.SaveFile(Constants.VALID_FILE_NUMS[fm.CurrFile], fd);
+
         yield return new WaitForSeconds(3);
         panel.SetActive(false);
         Variables.achievementTriggers[0] = false;
@@ -74,6 +83,14 @@ public class AchievementPanel : MonoBehaviour
         title.GetComponent<TMPro.TextMeshProUGUI>().text = Constants.ALL_ACHIEVEMENT_TITLES[1];
         description.GetComponent<TMPro.TextMeshProUGUI>().text = Constants.ALL_ACHIEVEMENT_DESCRIPTIONS[1];
         panel.SetActive(true);
+
+        FileData currentFile = fm.GetFileData(Constants.VALID_FILE_NUMS[fm.CurrFile]);
+        currentFile.UnlockedAchievements[1] = Constants.ALL_ACHIEVEMENT_TITLES[1];
+        FileData fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, currentFile.FastestTime,
+                                        currentFile.NumRuns, currentFile.NumWins, currentFile.UnlockedAchievements,
+                                        false, null);                           
+        fm.SaveFile(Constants.VALID_FILE_NUMS[fm.CurrFile], fd);
+
         yield return new WaitForSeconds(3);
         panel.SetActive(false);
         Variables.achievementTriggers[1] = false;
@@ -85,6 +102,14 @@ public class AchievementPanel : MonoBehaviour
         title.GetComponent<TMPro.TextMeshProUGUI>().text = Constants.ALL_ACHIEVEMENT_TITLES[2];
         description.GetComponent<TMPro.TextMeshProUGUI>().text = Constants.ALL_ACHIEVEMENT_DESCRIPTIONS[2];
         panel.SetActive(true);
+
+        FileData currentFile = fm.GetFileData(Constants.VALID_FILE_NUMS[fm.CurrFile]);
+        currentFile.UnlockedAchievements[2] = Constants.ALL_ACHIEVEMENT_TITLES[2];
+        FileData fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, currentFile.FastestTime,
+                                        currentFile.NumRuns, currentFile.NumWins, currentFile.UnlockedAchievements,
+                                        false, null);                           
+        fm.SaveFile(Constants.VALID_FILE_NUMS[fm.CurrFile], fd);
+
         yield return new WaitForSeconds(3);
         panel.SetActive(false);
         Variables.achievementTriggers[2] = false;
@@ -96,6 +121,14 @@ public class AchievementPanel : MonoBehaviour
         title.GetComponent<TMPro.TextMeshProUGUI>().text = Constants.ALL_ACHIEVEMENT_TITLES[3];
         description.GetComponent<TMPro.TextMeshProUGUI>().text = Constants.ALL_ACHIEVEMENT_DESCRIPTIONS[3];
         panel.SetActive(true);
+
+        FileData currentFile = fm.GetFileData(Constants.VALID_FILE_NUMS[fm.CurrFile]);
+        currentFile.UnlockedAchievements[3] = Constants.ALL_ACHIEVEMENT_TITLES[3];
+        FileData fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, currentFile.FastestTime,
+                                        currentFile.NumRuns, currentFile.NumWins, currentFile.UnlockedAchievements,
+                                        false, null);                           
+        fm.SaveFile(Constants.VALID_FILE_NUMS[fm.CurrFile], fd);
+
         yield return new WaitForSeconds(3);
         panel.SetActive(false);
         Variables.achievementTriggers[3] = false;
@@ -107,6 +140,14 @@ public class AchievementPanel : MonoBehaviour
         title2.GetComponent<TMPro.TextMeshProUGUI>().text = Constants.ALL_ACHIEVEMENT_TITLES[4];
         description2.GetComponent<TMPro.TextMeshProUGUI>().text = Constants.ALL_ACHIEVEMENT_DESCRIPTIONS[4];
         panel2.SetActive(true);
+
+        FileData currentFile = fm.GetFileData(Constants.VALID_FILE_NUMS[fm.CurrFile]);
+        currentFile.UnlockedAchievements[4] = Constants.ALL_ACHIEVEMENT_TITLES[4];
+        FileData fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, currentFile.FastestTime,
+                                        currentFile.NumRuns, currentFile.NumWins, currentFile.UnlockedAchievements,
+                                        false, null);                           
+        fm.SaveFile(Constants.VALID_FILE_NUMS[fm.CurrFile], fd);
+
         yield return new WaitForSeconds(3);
         panel2.SetActive(false);
         Variables.achievementTriggers[4] = false;
