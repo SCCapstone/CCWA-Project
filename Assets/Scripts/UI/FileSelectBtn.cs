@@ -21,10 +21,6 @@ public class FileSelectBtn : MonoBehaviour
         GameObject fileSelect = GameObject.Find("FileSelect");
         FileManager fileManager = GameObject.Find("FileManager").GetComponent<FileManager>();
         bool success = fileManager.LoadFile(filenum);
-        if(success)
-        {
-            Debug.Log("Successfully loaded file "+filenum);
-        }
 
         FileData fd = fileManager.GetFileData(filenum);
         if(fd.DateCreated == "00/00/0000")
@@ -32,7 +28,6 @@ public class FileSelectBtn : MonoBehaviour
             fd.DateCreated = DateTime.Now.ToString("d");
         }
         bool inRun = fd.InRun;
-        Debug.Log(fd.DateCreated + " " + fd.InRun);
         if(inRun)
         {
             //TODO load gameplay with stored run

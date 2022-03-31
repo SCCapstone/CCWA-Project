@@ -26,14 +26,12 @@ public class SceneController : MonoBehaviour
             SceneManager.LoadScene(Variables.menuNavStack.Pop());
         } else {
             SceneManager.LoadScene("Title Screen");
-            Debug.Log("No more Scenes in button queue");
         }
     }
 
     public void FileSelectButton()
     {
         Variables.menuNavStack.Push(SceneManager.GetActiveScene().name);
-        Debug.Log(Variables.menuNavStack.Peek());
         SceneManager.LoadScene("New Run");
     }
 

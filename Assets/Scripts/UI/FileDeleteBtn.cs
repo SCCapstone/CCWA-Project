@@ -20,10 +20,6 @@ public class FileDeleteBtn : MonoBehaviour
         GameObject fileSelect = GameObject.Find("FileSelect");
         FileManager fileManager = GameObject.Find("FileManager").GetComponent<FileManager>();
         bool success = fileManager.DeleteFile(filenum);
-        if(success)
-        {
-            Debug.Log("Successfully deleted file "+filenum);
-        }
 
         FileDisplayer fileDisplayer = fileSelect.GetComponent<FileDisplayer>();
         fileDisplayer.DisplayFiles();

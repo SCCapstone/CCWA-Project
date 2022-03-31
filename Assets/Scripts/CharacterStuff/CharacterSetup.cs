@@ -26,7 +26,6 @@ public class CharacterSetup : MonoBehaviour
             break;
 
             default:
-                Debug.Log("Invalid character name");
                 newCharacter = newCharacter;
             break;
             // TODO implement mage character

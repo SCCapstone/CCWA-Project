@@ -65,7 +65,6 @@ public class WarriorBoss : WarriorEnemy
 
                 //find the minimum time across all difficulties
                 fastest_overall = Mathf.Min(Variables.fastest_E, Variables.fastest_M, Variables.fastest_H);
-                Debug.Log(Variables.clock + " " + Variables.fastest_E + " " + Variables.fastest_M + " " + Variables.fastest_H + " really epic");
             }
 
             Variables.wonGame = true;
