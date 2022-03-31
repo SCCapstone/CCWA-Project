@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 /*Class for the player character warrior
 * ----INPUTS----- 
 * w a s d = movement
@@ -40,6 +41,7 @@ public class PlayerMage : Mage
     public GameObject staminaBottle;
     public GameObject emptyStaminaBottle;
     public GameObject staminabar;
+    public GameObject MageProjectile;
 
     //Mana counter
     public Image [] manaIcons;
@@ -52,8 +54,6 @@ public class PlayerMage : Mage
 
     public GameObject pauseScreen;
     public GameObject manaBar;
-
-    public GameObject bullet;
     void Awake () {
         base.Awake();
         rigidB = GetComponent<Rigidbody2D>();
@@ -164,11 +164,7 @@ public class PlayerMage : Mage
             animator.SetBool("attacking", true);
             audioSource.Play(0);
             attackTime = maxAttackTime;
-<<<<<<< HEAD
             ShootBullet(characterLoc);
-=======
-            ShootBullet();
->>>>>>> c096ecc1565af4dd05d854f0523c9eabed7ea2a0
             ManaDrain(2);
 
             //TODO may need to add bullet functionality
@@ -318,7 +314,7 @@ public class PlayerMage : Mage
     //Whatever me an Nick need to do in order to shoot bullets ig
     public void ShootBullet(Vector2 characterLoc) {
         Vector3 dir = new Vector2(animator.GetFloat("LastHorizontal"), animator.GetFloat("LastVertical"));
-
+        Instantiate(MageProjectile,gameObject.transform.position , Quaternion.identity).GetComponent<MageProjectile>().Setup(dir);
     }
 
     //Pauses the game

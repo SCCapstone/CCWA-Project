@@ -17,7 +17,7 @@ public class MageProjectile : MonoBehaviour
    
     private void Update()
     {
-        float moveSpeed = 100f;
+        float moveSpeed = 50f;
         transform.position += shootDir * moveSpeed* Time.deltaTime ;
     }
     

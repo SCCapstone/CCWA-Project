@@ -111,7 +111,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 78d03ce1d36c540d5a183e4b042d3afb, type: 3}
   m_Color: {r: 0.919147, g: 1, b: 0, a: 1}
   m_FlipX: 0
@@ -297,6 +297,7 @@ MonoBehaviour:
   staminaBottle: {fileID: 0}
   emptyStaminaBottle: {fileID: 0}
   staminabar: {fileID: 0}
+  MageProjectile: {fileID: 2262067761997709158, guid: 3e028a4fe7787c849b7f2ca98e9f7e87, type: 3}
   manaIcons: []
   manaBottle: {fileID: 0}
   emptyManaBottle: {fileID: 0}
@@ -304,7 +305,6 @@ MonoBehaviour:
   maxAttackTime: 0.35
   pauseScreen: {fileID: 0}
   manaBar: {fileID: 0}
-  bullet: {fileID: 0}
 --- !u!61 &3391575989407600357
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public transform MageProjectile;
 
 public class BulletManager : MonoBehaviour
-{
-    instantiate 
+{/*
+    public GameObject MageProjectile;
+    public static void Shoot(Vector3 dir){
+        Instantiate(MageProjectile, , Quaternion.identity);
+    }
+    */
 }
