@@ -24,6 +24,7 @@ public class Variables:ScriptableObject
     public static string floorSeed;
 
     public static string characterType;
+    public static Color skinColor = Color.clear;
 
     public static Room currentRoom;
 
