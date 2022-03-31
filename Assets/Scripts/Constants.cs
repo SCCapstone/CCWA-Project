@@ -18,6 +18,16 @@ public class Constants : ScriptableObject
     public static readonly string[] ALL_ACHIEVEMENT_TITLES = {"Babbys First Game", "Fresh Hunter", "Master Hunter", "Winner", "Speedster"};
     public static readonly string[] ALL_ACHIEVEMENT_DESCRIPTIONS = {"Began your first game.", "Killed an enemy.", "Killed a boss.", "Won your first game.", "Set your first successful speedrun time."};
 
+    public static readonly Color[] UNLOCKABLE_SKIN_COLORS = {new Color(0.662f, 0.878f, 0.121f, 1.0f), 
+                                                             new Color(0.121f, 0.870f, 0.878f, 1.0f), 
+                                                             new Color(0.682f, 0.121f, 0.878f, 1.0f), 
+                                                             new Color(0.878f, 0.121f, 0.270f, 1.0f), 
+                                                             new Color(0.937f, 0.662f, 0.717f, 1.0f)};
+
+    public static readonly Color WARRIOR_SKIN_COLOR = new Color(0f, 1f, 0.9085407f, 1.0f);
+    public static readonly Color ROUGE_SKIN_COLOR = Color.white;
+    public static readonly Color MAGE_SKIN_COLOR = new Color(0f, 1f, 0f, 1f);
+    public static readonly Color BACKGROUND_COLOR = new Color(0.6509804f, 0.4313726f, 0f, 1.0f);
     public static readonly Color unlockedAchievementColor = new Color(0.180f, 0.741f, 0.082f, 1.0f);
 
     }
