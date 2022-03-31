@@ -164,11 +164,7 @@ public class PlayerMage : Mage
             animator.SetBool("attacking", true);
             audioSource.Play(0);
             attackTime = maxAttackTime;
-<<<<<<< HEAD
             ShootBullet(characterLoc);
-=======
-            ShootBullet();
->>>>>>> c096ecc1565af4dd05d854f0523c9eabed7ea2a0
             ManaDrain(2);
 
             //TODO may need to add bullet functionality
