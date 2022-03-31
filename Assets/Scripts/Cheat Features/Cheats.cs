@@ -9,10 +9,8 @@ public class Cheats : MonoBehaviour
     void DisableEnemies() {
         Debug.Log("Destroy Enemeies");
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        for(int i=1; i<enemies.Length; i++) {
-            if(enemies[i].name == "RedBirdEnemy(Clone)") {
-                Destroy(enemies[i]);
-            }
+        for(int i=0; i<enemies.Length; i++) {
+            Destroy(enemies[i]);
         }
     }
 

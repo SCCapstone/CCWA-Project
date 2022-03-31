@@ -9,13 +9,13 @@ public class PathfindingGrid {
     private int height;
     private float cellSize;
     private PathNode[,] PathfindingGridArray;
-    private Vector3 originPosition;
+    private Vector2 originPosition;
 
 
     private int[,] map;
 
     //the PathfindingGrid is constructed with the width and height of the PathfindingGrid in mind, the position of the origin is also set
-    public PathfindingGrid(int width, int height, float cellSize, Vector3 originPosition)
+    public PathfindingGrid(int width, int height, float cellSize, Vector2 originPosition)
     {
         GameObject fm = GameObject.Find("Grid/Floor Map");
         RoomRenderer rr = fm.GetComponent<RoomRenderer>();
@@ -66,14 +66,14 @@ public class PathfindingGrid {
     
 
     // gets the world postion of from the x y as a vector 3
-    private Vector3 GetWorldPosition (int x, int y)
+    private Vector2 GetWorldPosition (int x, int y)
     {
-        return new Vector3(x, y) * cellSize+ originPosition;
+        return new Vector2(x, y) * cellSize+ originPosition;
     }
     
 
     //gets the x y coordinantes from a vector 3
-    public void GetXY(Vector3 worldPosition, out int x, out int y)
+    public void GetXY(Vector2 worldPosition, out int x, out int y)
     {
         x = Mathf.FloorToInt((worldPosition - originPosition).x/ cellSize);
         y = Mathf.FloorToInt((worldPosition - originPosition).y / cellSize);
@@ -89,7 +89,7 @@ public class PathfindingGrid {
     }
 
     //Sets the value of a cell by its world position
-    public void SetNode(Vector3 worldPosition, PathNode value)
+    public void SetNode(Vector2 worldPosition, PathNode value)
     {
         int x, y;
         GetXY(worldPosition, out x, out y);
@@ -107,7 +107,7 @@ public class PathfindingGrid {
         }
     }
 
-    public PathNode GetNode(Vector3 worldPosition)
+    public PathNode GetNode(Vector2 worldPosition)
     {
         int x, y;
         GetXY(worldPosition, out x, out y);

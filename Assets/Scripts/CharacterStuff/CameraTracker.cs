@@ -21,7 +21,7 @@ public class CameraTracker : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate() {
+    void Update() {
         transform.position = Vector3.MoveTowards(transform.position,
             trackedObject.position + offset, updateSpeed * Time.deltaTime);
     }
