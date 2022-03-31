@@ -31,6 +31,11 @@ public class Character : MonoBehaviour
         gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
+    //slowed status effect only used on enemies
+    public void slowedStatus(float amountSlowed){
+        moveSpeed-=amountSlowed;
+    }
+
     //Ensnared Status Effect
     public void ensnaredStatus(int statusTimeSec){
         StartCoroutine(ensnaredCoroutine(statusTimeSec));

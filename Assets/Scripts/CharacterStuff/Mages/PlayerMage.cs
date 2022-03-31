@@ -276,7 +276,7 @@ public class PlayerMage : Mage
     //Whatever me an Nick need to do in order to shoot bullets ig
     public void ShootBullet(Vector2 characterLoc) {
         Vector3 dir = new Vector2(animator.GetFloat("LastHorizontal"), animator.GetFloat("LastVertical"));
-        Instantiate(MageProjectile,gameObject.transform.position , Quaternion.identity).GetComponent<MageProjectile>().Setup(dir);
+        Instantiate(MageProjectile,gameObject.transform.position , Quaternion.identity).GetComponent<MageProjectile>().Setup(dir, attackDmg);
     }
 
     //Pauses the game
