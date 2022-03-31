@@ -14,7 +14,7 @@ public class Pathfinding
 
     public Pathfinding(int width, int height)
     {
-        grid = new PathfindingGrid(width, height, 1f, Vector3.zero);
+        grid = new PathfindingGrid(width, height, 1f, Vector2.zero);
     }
 
     // <params>  are the XY coordinates of both the end goal and the start
@@ -83,9 +83,9 @@ public class Pathfinding
         return null;
     }
 
-    // <params> vector3 of both the start and end position
+    // <params> Vector2 of both the start and end position
     // <returns>  list of path nodes that are in order from start to finish
-    public List<Vector3> FindPath(Vector3 startWorldPosition, Vector3 endWorldPosition)
+    public List<Vector2> FindPath(Vector2 startWorldPosition, Vector2 endWorldPosition)
     {
         grid.GetXY(startWorldPosition, out int startX, out int startY);
         grid.GetXY(endWorldPosition, out int endX, out int endY);
@@ -96,10 +96,10 @@ public class Pathfinding
             return null;
         } else
         {
-            List<Vector3> vectorPath = new List<Vector3>();
+            List<Vector2> vectorPath = new List<Vector2>();
             foreach (PathNode pathNode in path)
             {
-                vectorPath.Add(new Vector3(pathNode.x, pathNode.y));
+                vectorPath.Add(new Vector2(pathNode.x, pathNode.y));
             }
             return vectorPath;
         }
