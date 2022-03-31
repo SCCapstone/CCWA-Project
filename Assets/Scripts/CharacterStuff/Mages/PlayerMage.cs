@@ -217,44 +217,6 @@ public class PlayerMage : Mage
         }
     }
 
-    //Loads the stamina of the character
-    /*public void loadStamina() {
-        //Getting the stamina objects from the charUIcanvas
-        GameObject[] staminaHolder = GameObject.FindGameObjectsWithTag("staminaicon");
-        
-        staminaBottle = GameObject.FindWithTag("staminapotion");
-        emptyStaminaBottle = GameObject.FindWithTag("emptypotion");
-
-        //Sets the icon image array length
-        staminaIcons = new Image[Convert.ToInt32(maxStamina)];
-        
-        //Looping through to get the amount of stamina icons needed for the character
-        for (int i = 0; i < staminaIcons.Length; ++i) {
-            staminaIcons[i] = staminaHolder[i].GetComponent<Image>();
-        }
-
-        //Loading the icons in relation to max stamina 
-        for (int i = 0; i < staminaIcons.Length; ++i) {
-             //Enables the amount of icons needed for max stamina
-            if (i < maxStamina) {
-                staminaIcons[i].enabled = true;
-            }
-
-            //Enables the amount of icons for current stamina
-            if (i < stamina) {
-                staminaIcons[i].sprite = staminaBottle.GetComponent<SpriteRenderer>().sprite;
-            } else {
-                //Everything greater than health's value is an empty heart
-                staminaIcons[i].sprite = emptyStaminaBottle.GetComponent<SpriteRenderer>().sprite;
-            }
-        }
-
-        //Clears any remaining icons above the max
-        for (int i = Convert.ToInt32(maxStamina); i < staminaHolder.Length; ++i) {
-            staminaHolder[i].SetActive(false);
-        }
-    }*/
-
     //Loads the mana of the character
     public void loadMana() {
         //Enabling the mana bar for the mage
