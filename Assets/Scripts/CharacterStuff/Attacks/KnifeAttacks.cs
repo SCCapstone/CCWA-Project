@@ -20,7 +20,6 @@ public class KnifeAttacks : MonoBehaviour
     
      //Calculates the damage for the attack. MUST BE ON SWORD HIT [DIRECTION] HITBOX
     public void OnTriggerEnter2D(Collider2D collision) {
-        //Debug.Log("we touched under the wonder truck");
         if (collision.tag == "Enemy" || collision.tag == "Boss") {
             //Gets the instance of the enemy or boss 
             var enemy = collision.GetComponent<WarriorEnemy>();

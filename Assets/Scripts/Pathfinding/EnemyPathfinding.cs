@@ -35,16 +35,13 @@ public class EnemyPathfinding : MonoBehaviour
     void Update()
     {
         float step = speed * Time.deltaTime;
-        // Debug.Log("target pos "+target.position.x + " " + target.position.y + " " + target.position.z);
         if (!(pathVectorList == null) && pathVectorList.Count > 0)
         {
             Vector2 moveVector = Vector2.MoveTowards(transform.position, pathVectorList[0], step);
             Vector3 newTransform = new Vector3(moveVector.x, moveVector.y, -1);
             transform.position = newTransform;
-            // Debug.Log("moved towards "+pathVectorList[0].x + " " + pathVectorList[0].y + " " + pathVectorList[0].z);
             if (transform.position == (Vector3)pathVectorList[0])
             {
-                // Debug.Log("Made it"+pathVectorList[0].x + " " + pathVectorList[0].y + " " + pathVectorList[0].z);
                 pathVectorList.RemoveAt(0);
             }
         }
@@ -63,7 +60,6 @@ public class EnemyPathfinding : MonoBehaviour
 
     public Vector2 GetTargetPosition()
     {
-        Debug.Log("Position: " + target.position.x + " " + target.position.y);
         return target.position;
     }
     public Vector2 GetPostion()

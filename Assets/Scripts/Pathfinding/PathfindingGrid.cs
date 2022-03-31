@@ -20,12 +20,6 @@ public class PathfindingGrid {
         GameObject fm = GameObject.Find("Grid/Floor Map");
         RoomRenderer rr = fm.GetComponent<RoomRenderer>();
         Room cr = rr.currentRoom;
-        // while(cr is null)
-        // {
-        //     cr = rr.currentRoom;
-        //     Debug.Log("say something im giving up on you");
-        // }
-        // Debug.Log(cr is null);
         map = cr.getMap();
         this.width = width;
         this.height = height;

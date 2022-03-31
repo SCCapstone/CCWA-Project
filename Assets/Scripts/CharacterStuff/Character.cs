@@ -160,7 +160,6 @@ public class Character : MonoBehaviour
     public virtual void Die() {
         if(gameObject.CompareTag("Player"))
         {
-            Debug.Log("PLAYER DEAD LOL GET CLAPPED");
             if(!Variables.isDead)
             {
                 Variables.isDead = true;
@@ -176,7 +175,6 @@ public class Character : MonoBehaviour
                 FileData fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, currentFile.FastestTime,
                                                 runs, currentFile.NumWins, currentFile.UnlockedAchievements,
                                                 false, null); //TODO get wins saved
-                Debug.Log(currentFile.NumRuns+" "+fd.NumRuns);                                        
                 fm.SaveFile(Constants.VALID_FILE_NUMS[fm.CurrFile], fd);
                 SceneManager.LoadScene("GameOver");
             }

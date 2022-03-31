@@ -19,14 +19,10 @@ public class Achievements : MonoBehaviour
         achievementButtons = achievementButtonsGO.GetComponentsInChildren<Button>();
 
         //check that the correct number of achievement buttons were found
-        Debug.Log("Found " + achievementButtons.Length + " achievement buttons");
-        Debug.Log("there are " + Constants.ALL_ACHIEVEMENT_TITLES.Length + " achievement names");
-        Debug.Log("There are " + Constants.ALL_ACHIEVEMENT_DESCRIPTIONS.Length + " achievement descriptions");
 
         if(achievementButtons.Length != Constants.ALL_ACHIEVEMENT_TITLES.Length || achievementButtons.Length != Constants.ALL_ACHIEVEMENT_DESCRIPTIONS.Length)
         {
             SceneManager.LoadScene("File Select");
-            Debug.Log("there was a mismatch between the number of achievement buttons and either achievement titles or descriptions");
         }
 
         //load current file
@@ -49,11 +45,8 @@ public class Achievements : MonoBehaviour
                 for(int c = 0; c < Constants.ALL_ACHIEVEMENT_TITLES.Length; ++c)
                 {
                     
-                    Debug.Log("Checking current file achievement idx "+i+": "+currentFile.UnlockedAchievements[i]);
-                    Debug.Log("Checking game achievement idx "+c+": "+Constants.ALL_ACHIEVEMENT_TITLES[c]);
                     if (currentFile.UnlockedAchievements[i].Equals(Constants.ALL_ACHIEVEMENT_TITLES[c]))
                     {
-                        Debug.Log("They are equal");
                         ColorBlock cb = achievementButtons[c].colors;
                         cb.normalColor = Constants.unlockedAchievementColor;
                         cb.selectedColor = new Color(0.125f, 0.478f, 0.062f, 1.0f);

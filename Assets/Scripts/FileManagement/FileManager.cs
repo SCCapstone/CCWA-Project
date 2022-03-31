@@ -95,8 +95,6 @@ public class FileManager : MonoBehaviour
             return true; //TODO return successful file load
         } else
         {
-            Debug.Log("Invalid file number: " + filenum + 
-                ". File not loaded. Valid file numbers are: "+valid_nums);
             return false;
         }
     }
@@ -112,8 +110,6 @@ public class FileManager : MonoBehaviour
             return Files[fn].ConvertToYAML();
         } else
         {
-            Debug.Log("Invalid file number: " + filenum + 
-                ". File not saved. Valid file numbers are: "+valid_nums);
             return false;
         }
     }
@@ -127,8 +123,6 @@ public class FileManager : MonoBehaviour
             return SaveFile(filenum, new FileData(filenum)); //Returns successful delete
         } else
         {
-            Debug.Log("Invalid file number: " + filenum + 
-                ". File not deleted. Valid file numbers are: "+valid_nums);
             return false;
         }
     }
@@ -143,8 +137,6 @@ public class FileManager : MonoBehaviour
             return Files[fn]; //Returns the file data
         } else
         {
-            Debug.Log("Invalid file number: " + filenum + 
-                ". File not returned. Valid file numbers are: "+valid_nums);
             return null;
         }
     }

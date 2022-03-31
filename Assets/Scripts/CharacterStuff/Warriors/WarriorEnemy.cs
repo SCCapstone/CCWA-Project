@@ -20,12 +20,8 @@ public class WarriorEnemy : Warrior
     }
 
     public void OnCollisionEnter2D(Collision2D collidedWith) {
-        Debug.Log("we caressed under the wonder truck");
-
         var collision = collidedWith.collider;
-        Debug.Log(collision + " this is the collision name");
         string name = collision.name;
-        Debug.Log(name);
         
         switch(name) {
             case "Rogue(Clone)":
