@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class MageProjectile : MonoBehaviour
 {
+   
     private Vector3 shootDir;
     // Start is called before the first frame update
-    public void Setup(Vector3 shootDir)
+    public void Setup(Vector2 shootDir)
     {
         this.shootDir = shootDir;
         Destroy(gameObject, 5f);

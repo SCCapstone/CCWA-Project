@@ -160,10 +160,11 @@ public class PlayerMage : Mage
         //only allows attack if there are at least two mana jars
 
         if (Input.GetKeyDown("j") && mana >= 2) {
+            Vector2 characterLoc=gameObject.transform.position;
             animator.SetBool("attacking", true);
             audioSource.Play(0);
             attackTime = maxAttackTime;
-            ShootBullet;
+            ShootBullet(characterLoc);
             ManaDrain(2);
 
             //TODO may need to add bullet functionality
@@ -311,8 +312,9 @@ public class PlayerMage : Mage
     }
 
     //Whatever me an Nick need to do in order to shoot bullets ig
-    public void ShootBullet() {
-        //Do stuff
+    public void ShootBullet(Vector2 characterLoc) {
+        Vector3 dir = new Vector2(animator.GetFloat("LastHorizontal"), animator.GetFloat("LastVertical"));
+
     }
 
     //Pauses the game
