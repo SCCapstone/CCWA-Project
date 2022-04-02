@@ -1,21 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreText : MonoBehaviour
 {
-    public GameObject score;
+    public Text scoreUI;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        score.GetComponent<UnityEngine.UI.Text>().text = score.ToString();
+        scoreUI.GetComponent<UnityEngine.UI.Text>().text ="Score: "+Variables.score;
     }
 
-    /*
+  
     // Update is called once per frame
     void Update()
     {
-        
+        scoreUI.GetComponent<UnityEngine.UI.Text>().text ="Score: "+Variables.score;
     }
-    */
 }
