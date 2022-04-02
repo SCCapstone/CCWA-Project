@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27eafab6d9045c34ea344fbdeaddd451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numRooms: 3
+  numRooms: 5
   currRoomIdx: 0
   seed: 
 --- !u!1 &63937048
@@ -11866,7 +11866,7 @@ Grid:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1792140461}
   m_Enabled: 1
-  m_CellSize: {x: 0.5, y: 0.5, z: 0}
+  m_CellSize: {x: 0.0625, y: 0.0625, z: 0}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
