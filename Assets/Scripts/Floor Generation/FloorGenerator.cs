@@ -225,6 +225,7 @@ public class FloorGenerator : MonoBehaviour
 			}
             lineString += "\n";
 		}
+        Debug.Log(lineString);
 	}
 
     public static void printFloor(int[,] floorLayout)
@@ -238,6 +239,7 @@ public class FloorGenerator : MonoBehaviour
 			}
 			lineString+="\n";
 		}
+        Debug.Log(lineString);
 	}
 
     public Floor GetCurrFloor()
