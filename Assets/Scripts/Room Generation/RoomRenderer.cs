@@ -107,25 +107,6 @@ public class RoomRenderer : MonoBehaviour
     }
 
     // Update is called once per frame
-
-    // void Update() {
-    //     player = GameObject.FindWithTag("Player");
-    //     if(currFloor != null) {
-    //         for(int i=0; i<currentRoom.exitLocations.Length; i++) {
-    //             Location l =  currentRoom.exitLocations[i];
-    //             int pX = Math.Abs((int)Math.Floor(player.transform.position.x));
-    //             int py = Math.Abs((int)Math.Floor(player.transform.position.y));
-    //             if(pX==l.locX && pY == l.locY) {
-    //                 string direction = l.location;
-    //                 for(int j=0; j<Variables.currFloor.Length; j++) {
-
-    //                 }
-    //             }
-    //         }
-    //     }
-
-    // }
-
     void Update()
     {
         player = GameObject.FindWithTag("Player");
