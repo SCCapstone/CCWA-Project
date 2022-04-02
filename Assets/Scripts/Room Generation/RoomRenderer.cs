@@ -102,11 +102,30 @@ public class RoomRenderer : MonoBehaviour
 
         player.GetComponent<SpriteRenderer>().color = Variables.skinColor;
 
-        currFloor = Variables.currFloor;
-        roomGenerator = new RoomGenerator(true);
+        this.currFloor = Variables.currFloor;
+        this.roomGenerator = new RoomGenerator(true);
     }
 
     // Update is called once per frame
+
+    // void Update() {
+    //     player = GameObject.FindWithTag("Player");
+    //     if(currFloor != null) {
+    //         for(int i=0; i<currentRoom.exitLocations.Length; i++) {
+    //             Location l =  currentRoom.exitLocations[i];
+    //             int pX = Math.Abs((int)Math.Floor(player.transform.position.x));
+    //             int py = Math.Abs((int)Math.Floor(player.transform.position.y));
+    //             if(pX==l.locX && pY == l.locY) {
+    //                 string direction = l.location;
+    //                 for(int j=0; j<Variables.currFloor.Length; j++) {
+
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    // }
+
     void Update()
     {
         player = GameObject.FindWithTag("Player");
@@ -122,33 +141,34 @@ public class RoomRenderer : MonoBehaviour
                     string direction = l.location;
                     for(int j=0; j<currFloor.rooms.Length; j++) {
                         Room newRoom = currFloor.rooms[j];
+                        Debug.Log("HERESEED: " + newRoom.seed);
                         if(direction == "north" && Array.Exists(newRoom.exitLocations, l => l.location == "south")) {
-                            newRoom.setMap(roomGenerator.GenerateRoomWithPerlinNoise());
+                            newRoom.setMap(roomGenerator.GenerateRoomMap());
                             setCurrentRoom(newRoom);
                             Variables.currentRoom = newRoom;
-                            RenderRoom(this.currentRoom);
-                            GameObject.Find("Floor Map").GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
+                            RenderRoom(newRoom);
+                            floorMap.GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
                             player.transform.position = new Vector3(10,10,-0.32f);
                         } else if(direction == "south" && Array.Exists(newRoom.exitLocations, l => l.location =="north")) {
-                            newRoom.setMap(roomGenerator.GenerateRoomWithPerlinNoise());
+                            newRoom.setMap(roomGenerator.GenerateRoomMap());
                             setCurrentRoom(newRoom);
                             Variables.currentRoom = newRoom;
-                            RenderRoom(this.currentRoom);
-                            GameObject.Find("Floor Map").GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
+                            RenderRoom(newRoom);
+                            floorMap.GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
                             player.transform.position = new Vector3(10,10,-0.32f);
                         } else if(direction == "west" && Array.Exists(newRoom.exitLocations, l => l.location =="east")) {
-                            newRoom.setMap(roomGenerator.GenerateRoomWithPerlinNoise());
+                            newRoom.setMap(roomGenerator.GenerateRoomMap());
                             setCurrentRoom(newRoom);
                             Variables.currentRoom = newRoom;
-                            RenderRoom(this.currentRoom);
-                            GameObject.Find("Floor Map").GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
+                            RenderRoom(newRoom);
+                            floorMap.GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
                             player.transform.position = new Vector3(10,10,-0.32f);
                         } else if(direction == "east" && Array.Exists(newRoom.exitLocations, l => l.location =="west")) {
-                            newRoom.setMap(roomGenerator.GenerateRoomWithPerlinNoise());
+                            newRoom.setMap(roomGenerator.GenerateRoomMap());
                             setCurrentRoom(newRoom);
                             Variables.currentRoom = newRoom;
-                            RenderRoom(this.currentRoom);
-                            GameObject.Find("Floor Map").GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
+                            RenderRoom(newRoom);
+                            floorMap.GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
                             player.transform.position = new Vector3(10,10,-0.32f);
                         }
                     }
