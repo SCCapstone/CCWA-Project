@@ -8,6 +8,8 @@ public class Cheats : MonoBehaviour
     //End Key
     void DisableEnemies() {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject boss = GameObject.FindWithTag("Boss");
+        Destroy(boss);
         for(int i=0; i<enemies.Length; i++) {
             Destroy(enemies[i]);
         }
