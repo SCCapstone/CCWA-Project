@@ -7,7 +7,6 @@ public class Cheats : MonoBehaviour
 {
     //End Key
     void DisableEnemies() {
-        Debug.Log("Destroy Enemeies");
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         for(int i=0; i<enemies.Length; i++) {
             Destroy(enemies[i]);
@@ -34,7 +33,6 @@ public class Cheats : MonoBehaviour
 
     //Page Up Key
     void RespawnRoomEnemies() {
-        Debug.Log("Next Room");
         var floorMap = GameObject.Find("Floor Map");
         FloorGenerator floorGenerator = floorMap.GetComponent<FloorGenerator>();
         RoomRenderer roomRenderer = floorMap.GetComponent<RoomRenderer>();
@@ -44,7 +42,6 @@ public class Cheats : MonoBehaviour
 
     //Home key
     void GenerateNewFloor() {
-        Debug.Log("New Floor");
         DisableEnemies();
         var floorMap = GameObject.Find("Floor Map");
         FloorGenerator floorGenerator = floorMap.GetComponent<FloorGenerator>();

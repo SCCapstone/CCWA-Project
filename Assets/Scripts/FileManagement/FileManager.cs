@@ -95,8 +95,6 @@ public class FileManager : MonoBehaviour
             return true; //TODO return successful file load
         } else
         {
-            Debug.Log("Invalid file number: " + filenum + 
-                ". File not loaded. Valid file numbers are: "+valid_nums);
             return false;
         }
     }
@@ -112,8 +110,6 @@ public class FileManager : MonoBehaviour
             return Files[fn].ConvertToYAML();
         } else
         {
-            Debug.Log("Invalid file number: " + filenum + 
-                ". File not saved. Valid file numbers are: "+valid_nums);
             return false;
         }
     }
@@ -127,8 +123,6 @@ public class FileManager : MonoBehaviour
             return SaveFile(filenum, new FileData(filenum)); //Returns successful delete
         } else
         {
-            Debug.Log("Invalid file number: " + filenum + 
-                ". File not deleted. Valid file numbers are: "+valid_nums);
             return false;
         }
     }
@@ -143,8 +137,6 @@ public class FileManager : MonoBehaviour
             return Files[fn]; //Returns the file data
         } else
         {
-            Debug.Log("Invalid file number: " + filenum + 
-                ". File not returned. Valid file numbers are: "+valid_nums);
             return null;
         }
     }
@@ -200,7 +192,7 @@ public class FileData
         NumRuns = 0;
         NumWins = 0;
         UnlockedAchievements = new string[Constants.ALL_ACHIEVEMENT_TITLES.Length];
-        UnlockedAchievements[0] = Constants.ALL_ACHIEVEMENT_TITLES[0]; //for testing purposes only
+        // UnlockedAchievements[0] = Constants.ALL_ACHIEVEMENT_TITLES[0]; //for testing purposes only
         InRun = false;
         CurrRun = null;
     }
@@ -221,7 +213,7 @@ public class FileData
         NumRuns = 0;
         NumWins = 0;
         UnlockedAchievements = new string[Constants.ALL_ACHIEVEMENT_TITLES.Length];
-        UnlockedAchievements[0] = Constants.ALL_ACHIEVEMENT_TITLES[0]; //for testing purposes only
+        // UnlockedAchievements[0] = Constants.ALL_ACHIEVEMENT_TITLES[0]; //for testing purposes only
         InRun = false;
         CurrRun = null;
     }
@@ -300,7 +292,7 @@ public class FileData
             UnlockedAchievements[valid_achievement_idx[i]] = Constants.ALL_ACHIEVEMENT_TITLES[valid_achievement_idx[i]];
         }
 
-        UnlockedAchievements[0] = Constants.ALL_ACHIEVEMENT_TITLES[0]; //for testing purposes only
+        // UnlockedAchievements[0] = Constants.ALL_ACHIEVEMENT_TITLES[0]; //for testing purposes only
 
         InRun = inrun;
 

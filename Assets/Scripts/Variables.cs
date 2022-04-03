@@ -12,9 +12,9 @@ public class Variables:ScriptableObject
 
     //File Stuff
     public static bool newGame;
-    public static float fastest_E;
-    public static float fastest_M;
-    public static float fastest_H;
+    public static float fastest_E = 359999;
+    public static float fastest_M = 359999;
+    public static float fastest_H = 359999;
 
     //Game state Stuff
     public static bool inRun = false;
@@ -25,6 +25,7 @@ public class Variables:ScriptableObject
     public static string floorSeed;
 
     public static string characterType;
+    public static Color skinColor = Color.clear;
 
     public static Room currentRoom;
 
@@ -34,6 +35,7 @@ public class Variables:ScriptableObject
     public static bool isSpeedrun;
 
     public static int difficulty;
+    public static int score;
 
     public static bool[] achievementTriggers = new bool[5];
     

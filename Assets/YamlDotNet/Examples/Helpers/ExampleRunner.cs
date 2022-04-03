@@ -91,7 +91,6 @@ namespace YamlDotNet.Samples.Helpers {
                                 helper.WriteLine("{0} - {1}", sa.DisplayName, sa.Description);
                                 var testObject = t.GetConstructor(new Type[] { typeof(StringTestOutputHelper) }).Invoke(new object[] { helper });
                                 mi.Invoke(testObject, new object[] {});
-                                Debug.Log(helper.ToString());
                                 helper.Clear();
                                 skipMethods = true;
                                 break;

@@ -49,11 +49,8 @@ public class FileDisplayer : MonoBehaviour
         {
             if(data.UnlockedAchievements[i] != null)
             {
-                Debug.Log("File "+filenum+" has unlocked achievement "+data.UnlockedAchievements[i]);
-
                 //change color of the appropriate game object
                 GameObject box = GameObject.Find("File"+filenum+"Btn/Achievements/Achievement"+(i+1)+"/BrownBox");
-                Debug.Log(box);
                 box.GetComponent<Image>().color = Constants.unlockedAchievementColor;
             }
         }

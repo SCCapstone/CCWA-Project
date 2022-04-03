@@ -31,6 +31,11 @@ public class Character : MonoBehaviour
         gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
+    //slowed status effect only used on enemies
+    public void slowedStatus(float amountSlowed){
+        moveSpeed-=amountSlowed;
+    }
+
     //Ensnared Status Effect
     public void ensnaredStatus(int statusTimeSec){
         StartCoroutine(ensnaredCoroutine(statusTimeSec));
@@ -160,7 +165,6 @@ public class Character : MonoBehaviour
     public virtual void Die() {
         if(gameObject.CompareTag("Player"))
         {
-            Debug.Log("PLAYER DEAD LOL GET CLAPPED");
             if(!Variables.isDead)
             {
                 Variables.isDead = true;
@@ -172,10 +176,10 @@ public class Character : MonoBehaviour
                 Character character = player.GetComponent<Character>();
                 //Save file on new floor
                 FileData currentFile = fm.GetFileData(Constants.VALID_FILE_NUMS[fm.CurrFile]);
+                int runs = currentFile.NumRuns+1;
                 FileData fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, currentFile.FastestTime,
-                                                currentFile.NumRuns+1, currentFile.NumWins, currentFile.UnlockedAchievements,
+                                                runs, currentFile.NumWins, currentFile.UnlockedAchievements,
                                                 false, null); //TODO get wins saved
-                Debug.Log(currentFile.NumRuns+" "+fd.NumRuns);                                        
                 fm.SaveFile(Constants.VALID_FILE_NUMS[fm.CurrFile], fd);
                 SceneManager.LoadScene("GameOver");
             }

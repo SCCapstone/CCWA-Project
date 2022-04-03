@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 /*Class for the player character warrior
 * ----INPUTS----- 
 * w a s d = movement
@@ -40,6 +41,7 @@ public class PlayerMage : Mage
     public GameObject staminaBottle;
     public GameObject emptyStaminaBottle;
     public GameObject staminabar;
+    public GameObject MageProjectile;
 
     //Mana counter
     public Image [] manaIcons;
@@ -52,8 +54,6 @@ public class PlayerMage : Mage
 
     public GameObject pauseScreen;
     public GameObject manaBar;
-
-    public GameObject bullet;
     void Awake () {
         base.Awake();
         rigidB = GetComponent<Rigidbody2D>();
@@ -160,10 +160,11 @@ public class PlayerMage : Mage
         //only allows attack if there are at least two mana jars
 
         if (Input.GetKeyDown("j") && mana >= 2) {
+            Vector2 characterLoc=gameObject.transform.position;
             animator.SetBool("attacking", true);
             audioSource.Play(0);
             attackTime = maxAttackTime;
-            ShootBullet();
+            ShootBullet(characterLoc);
             ManaDrain(2);
 
             //TODO may need to add bullet functionality
@@ -215,44 +216,6 @@ public class PlayerMage : Mage
             heartHolder[i].SetActive(false);
         }
     }
-
-    //Loads the stamina of the character
-    /*public void loadStamina() {
-        //Getting the stamina objects from the charUIcanvas
-        GameObject[] staminaHolder = GameObject.FindGameObjectsWithTag("staminaicon");
-        
-        staminaBottle = GameObject.FindWithTag("staminapotion");
-        emptyStaminaBottle = GameObject.FindWithTag("emptypotion");
-
-        //Sets the icon image array length
-        staminaIcons = new Image[Convert.ToInt32(maxStamina)];
-        
-        //Looping through to get the amount of stamina icons needed for the character
-        for (int i = 0; i < staminaIcons.Length; ++i) {
-            staminaIcons[i] = staminaHolder[i].GetComponent<Image>();
-        }
-
-        //Loading the icons in relation to max stamina 
-        for (int i = 0; i < staminaIcons.Length; ++i) {
-             //Enables the amount of icons needed for max stamina
-            if (i < maxStamina) {
-                staminaIcons[i].enabled = true;
-            }
-
-            //Enables the amount of icons for current stamina
-            if (i < stamina) {
-                staminaIcons[i].sprite = staminaBottle.GetComponent<SpriteRenderer>().sprite;
-            } else {
-                //Everything greater than health's value is an empty heart
-                staminaIcons[i].sprite = emptyStaminaBottle.GetComponent<SpriteRenderer>().sprite;
-            }
-        }
-
-        //Clears any remaining icons above the max
-        for (int i = Convert.ToInt32(maxStamina); i < staminaHolder.Length; ++i) {
-            staminaHolder[i].SetActive(false);
-        }
-    }*/
 
     //Loads the mana of the character
     public void loadMana() {
@@ -311,8 +274,9 @@ public class PlayerMage : Mage
     }
 
     //Whatever me an Nick need to do in order to shoot bullets ig
-    public void ShootBullet() {
-        //Do stuff
+    public void ShootBullet(Vector2 characterLoc) {
+        Vector3 dir = new Vector2(animator.GetFloat("LastHorizontal"), animator.GetFloat("LastVertical"));
+        Instantiate(MageProjectile,gameObject.transform.position , Quaternion.identity).GetComponent<MageProjectile>().Setup(dir, attackDmg);
     }
 
     //Pauses the game

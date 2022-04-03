@@ -16,6 +16,7 @@ public class Mage : Character
         maxMana = 5.0;
         defense = 4;
         baseMoveSpeed = 10.0f;
+        attackDmg = 12;
     }
 
     //Allows the mage to cast with no mana cost for a set period of time

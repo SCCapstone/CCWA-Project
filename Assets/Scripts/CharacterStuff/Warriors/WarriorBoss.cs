@@ -43,7 +43,6 @@ public class WarriorBoss : WarriorEnemy
                     //new fastest time on easy difficutly
                     if (Variables.clock < Variables.fastest_E)
                     {
-                        Variables.achievementTriggers[4] = true;
                         Variables.fastest_E = Variables.clock;
                     }
                 }
@@ -52,7 +51,6 @@ public class WarriorBoss : WarriorEnemy
                     //new fastest time on medium
                     if (Variables.clock < Variables.fastest_M)
                     {
-                        Variables.achievementTriggers[4] = true;
                         Variables.fastest_M = Variables.clock;
                     }
                 }
@@ -61,7 +59,6 @@ public class WarriorBoss : WarriorEnemy
                     //new fastest time on hard
                     if (Variables.clock < Variables.fastest_H)
                     {
-                        Variables.achievementTriggers[4] = true;
                         Variables.fastest_H = Variables.clock;
                     }
                 }
@@ -74,19 +71,22 @@ public class WarriorBoss : WarriorEnemy
             //Save file on new floor
             FileData currentFile = fm.GetFileData(Constants.VALID_FILE_NUMS[fm.CurrFile]);
             FileData fd;
+            int runs = currentFile.NumRuns + 1;
+            int wins = currentFile.NumWins + 1;
             
             //if you are in speedrun mode and set a new fastest time
             if (fastest_overall != -1f && fastest_overall < currentFile.FastestTime)
             {
-                 fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, fastest_overall,
-                                    currentFile.NumRuns, currentFile.NumWins+1, currentFile.UnlockedAchievements,
+                Variables.achievementTriggers[4] = true;
+                fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, fastest_overall,
+                                    runs, wins, currentFile.UnlockedAchievements,
                                     false, null); //TODO get wins saved
             }
             //if player was not in speedrun mode, did not set a fastest time, or both
             else
             {
-                 fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, currentFile.FastestTime,
-                                    currentFile.NumRuns, currentFile.NumWins+1, currentFile.UnlockedAchievements,
+                fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, currentFile.FastestTime,
+                                    runs, wins, currentFile.UnlockedAchievements,
                                     false, null); //TODO get wins saved
             }
            
