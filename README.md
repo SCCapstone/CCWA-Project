@@ -34,6 +34,8 @@ We have also implemented some cheat features to help you progress through the ga
 - Home Button: Regenerates a floor, including the current room layout
 - End Button: Destroys all enemies
 - Page Up Button: Respawns enemies in the room
+- Page Down Button: Toggle Player Invincibility
+- Zero Button: Heals the Player
 
 ## Running Tests
 

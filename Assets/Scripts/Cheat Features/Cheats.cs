@@ -13,6 +13,26 @@ public class Cheats : MonoBehaviour
         }
     }
 
+    // Zero Key
+    void HealPlayer() {
+        var player = GameObject.FindWithTag("Player");
+        Character character = player.GetComponent<Character>();
+        character.health = 8;
+    }
+
+    // Page Down Key
+    void MakePLayerInvincible() {
+        var player = GameObject.FindWithTag("Player");
+        Character character = player.GetComponent<Character>();
+        if(Variables.isInvincible = false) {
+            character.health = 10000;
+            Variables.isInvincible = true;
+        } else {
+            character.health = 8;
+            Variables.isInvincible = false;
+        }
+    }
+
     //Page Up Key
     void RespawnRoomEnemies() {
         var floorMap = GameObject.Find("Floor Map");
@@ -47,6 +67,12 @@ public class Cheats : MonoBehaviour
         }
         else if(Input.GetKeyDown(KeyCode.Home)) {
             GenerateNewFloor();
+        }
+        else if(Input.GetKeyDown(KeyCode.PageDown)) {
+            MakePLayerInvincible();
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha0)) {
+            HealPlayer();
         }
     }
 }
