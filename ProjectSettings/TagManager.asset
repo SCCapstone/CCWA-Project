@@ -23,6 +23,12 @@ TagManager:
   - manabar
   - staminabar
   - achievepanel
+  - currenthealth
+  - maxhealth
+  - currentstamina
+  - maxstamina
+  - currentmana
+  - maxmana
   layers:
   - Default
   - TransparentFX
