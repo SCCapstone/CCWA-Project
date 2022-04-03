@@ -48,6 +48,7 @@ public class RoomGenerator {
                 }
             }
         }
+        this.map = map;
         return map;
     }
 
@@ -60,13 +61,14 @@ public class RoomGenerator {
                 }
             }
         }
-        for(int i=15; i<22; i++) {
+        for(int i=7; i<15; i++) {
             for(int j=7; j<15; j++) {
                 if(map[i,j] != 2) {
                     map[i,j] = 0;
                 }
             }
         }
+        this.map = map;
         return map;
     }
 
@@ -74,8 +76,8 @@ public class RoomGenerator {
         float scale = Random.Range(3.0f, 3.5f);
         for(int i=0; i<height; i++) {
             for(int j=0; j<width; j++) {
-                float x = j/scale;
-                float y = i/scale;
+                float x = j/scale * Random.Range(1,5) + Random.Range(1,100);
+                float y = i/scale * Random.Range(1,5) + Random.Range(1,100);
 
                 float frequency = 1;
                 float amplitude = 1;
@@ -86,20 +88,25 @@ public class RoomGenerator {
                     frequency = frequency * 2;
                     amplitude = amplitude / 2;
                 }
-                if(perlinValue > 1.5f) {
+                if(perlinValue > 1.6f) {
                     map[i,j] = 1;
                 } else {
                     map[i,j] = 0;
                 }
             }
         }
+        this.map = map;
         return map;
+    }
+
+    public int[,] GenerateRoomMap() {
+        return ClearSpawns(CreateRoomBorder(GenerateRoomWithPerlinNoise()));
     }
 
     public Room GenerateRoom(string seed, int numEnemies, int numItems, bool bossRoom, string[] directions) {
         // Generate a randomly filled Room map
         // Iterate over map to create a Room
-        int[,] newRoomMap = ClearSpawns(CreateRoomBorder(GenerateRoomWithPerlinNoise()));
+        int[,] newRoomMap = GenerateRoomMap();
         // Generate multiple exit locations for the room, given an array of directions
         Location[] exitLocations = GenerateMultipleExits(directions.Length, directions, newRoomMap);
         // Generate spawn locations for items
@@ -111,7 +118,7 @@ public class RoomGenerator {
         Location bossLocation = null;
         if (bossRoom)
         {
-            bossLocation = new Location("", 0, 0);
+            bossLocation = new Location("", 15, 15);
         }
 
         return new Room(width, height, newRoomMap, seed, exitLocations, itemLocations, enemyLocations, bossLocation, numEnemies, numItems);

@@ -261,7 +261,7 @@ MonoBehaviour:
   floorTile: {fileID: 11400000, guid: ecb9f2eddc717444fa3d4b284af13e13, type: 2}
   wallTile: {fileID: 11400000, guid: f6339619c52ae144d9a0b668f7507b17, type: 2}
   exitTile: {fileID: 11400000, guid: 799d2081e6cd32a4b8d75dbdb5759b05, type: 2}
-  lockedExitTile: {fileID: 0}
+  lockedExitTile: {fileID: 11400000, guid: 900233be9b5b1da428888f21caa10ad3, type: 2}
   attackUp: {fileID: 5633774304611363470, guid: f800cb7e4cd02184593e1f3bbc9311c5, type: 3}
   health: {fileID: 5331933513703734510, guid: aa8bfc8fb4130814d8e78d852afb02c7, type: 3}
   enemy: {fileID: 8784097646283919468, guid: d9f504a899db51b4e9e9229495f1bce8, type: 3}
