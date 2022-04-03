@@ -13,12 +13,14 @@ public class Cheats : MonoBehaviour
         }
     }
 
+    // Zero Key
     void HealPlayer() {
         var player = GameObject.FindWithTag("Player");
         Character character = player.GetComponent<Character>();
         character.health = 8;
     }
 
+    // Page Down Key
     void MakePLayerInvincible() {
         var player = GameObject.FindWithTag("Player");
         Character character = player.GetComponent<Character>();
