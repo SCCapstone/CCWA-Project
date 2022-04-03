@@ -29,9 +29,8 @@ public class RogueCharacter : Rogue
     private AudioSource audioSource;
 
     //Heart counter
-    public Image[] hearts;
-    public GameObject redHeart;
-    public GameObject blackHeart;
+    public Text textCurrHealth;
+    public Text textMaxHealth;
 
     //Stamina counter
     public Image[] staminaIcons;
@@ -51,10 +50,10 @@ public class RogueCharacter : Rogue
         animator = GetComponent<Animator>();
         sRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
-        pauseScreen = GameObject.FindWithTag("paused");
-        pauseScreen.SetActive(false);
-        manaBar = GameObject.FindWithTag("manabar");
-        manaBar.SetActive(false);
+        //pauseScreen = GameObject.FindWithTag("paused");
+        //pauseScreen.SetActive(false);
+        //manaBar = GameObject.FindWithTag("manabar");
+        //manaBar.SetActive(false);
         moveSpeed = baseMoveSpeed;
         shadowTimer = shadowMax;
         name = "rogue";
@@ -159,40 +158,14 @@ public class RogueCharacter : Rogue
 
     //Loads the visual element of the health
     public void loadHearts() {
-        //Getting the heart objects from the charUIcanvas
-        GameObject[] heartHolder = GameObject.FindGameObjectsWithTag("Hearts");
-        redHeart = GameObject.FindWithTag("redheart");
-        blackHeart = GameObject.FindWithTag("blackheart");
+        Debug.Log("Hellow");
+        Debug.Log(GameObject.FindGameObjectsWithTag("currentHealth"));
+        //GameObject text1 = GameObject.FindGameObjectsWithTag("currentHealth");
+        //textCurrHealth = text1.GetComponent<Text>();
+        //textMaxHealth = GameObject.FindGameObjectsWithTag("maxHealth").GetComponent<Text>();
 
-        //sets the heart image array length
-        hearts = new Image[maxHealth];
-        
-        //looping through to get the amount of hearts needed for the character
-        for (int i = 0; i < hearts.Length; ++i) {
-            hearts[i] = heartHolder[i].GetComponent<Image>();
-        }
-
-        //loading the hearts in relation to max health
-        for (int i = 0; i < hearts.Length; ++i) {   
-
-            //Enables the amount of hearts needed for max health
-            if (i < maxHealth) {
-                hearts[i].enabled = true;
-            }
-
-            //Enables the amount of hearts for current health
-            if (i < health) {
-                hearts[i].sprite = redHeart.GetComponent<SpriteRenderer>().sprite;
-            } else {
-                //Everything greater than health's value is an empty heart
-                hearts[i].sprite = blackHeart.GetComponent<SpriteRenderer>().sprite;
-            }
-        }
-
-        //clears any remaining hearts after the max
-        for (int i = maxHealth; i < heartHolder.Length; ++i) {
-            heartHolder[i].SetActive(false);
-        }
+        //textCurrHealth.text = health.ToString();
+        //textMaxHealth.text = "/" + textMaxHealth.ToString();
     }
 
     //Loads the visual element of the stamina

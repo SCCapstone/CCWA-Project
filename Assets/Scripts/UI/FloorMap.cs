@@ -22,69 +22,29 @@ public class FloorMap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currFloor = floorGenerator.GetCurrFloor();
-        FloorGenerator.printFloor(currFloor.floorLayout);
         int yoffset = currFloor.floorLayout.GetLength(0);
         int xoffset = currFloor.floorLayout.GetLength(1);
-        int minimapTop = 296;
-        int minimapRight = 552;
-        Room[] rooms = currFloor.rooms;
-        int roomHeight = rooms[0].height;
-        int roomWidth = rooms[0].width;
-
-        // Figures out the floor layout
+        FloorGenerator.printFloor(currFloor.floorLayout);
+        int minimapTop = 37;
+        int minimapRight = 69;
+        // miniMap.SetTile(new Vector3Int(32,17,0), currRoomTile);
         for(int i=0; i<yoffset; i++) {
             for(int j=0; j<xoffset; j++) {
-                // Figures out the room layout
-                int roomNum = currFloor.floorLayout[i,j];
-                if(roomNum > 0)
+                int room = currFloor.floorLayout[i,j];
+                if(room > 0)
                 {
-                    for(int l=0; l<roomHeight; l++) {
-                        for(int m=0; m<roomWidth; m++) {
-                            int xval = (minimapRight-((xoffset)*roomWidth))+j*roomWidth+l;
-                            int yval = (minimapTop-(yoffset)*roomHeight)-(i*roomHeight)+m;
-                            if(rooms[roomNum-1].map[l,m] == 0) {
-                                miniMap.SetTile(new Vector3Int(xval,yval,0), noRoomTile);
-                            } else
-                            {
-                                if(roomNum-1==floorGenerator.currRoomIdx)
-                                {
-                                    miniMap.SetTile(new Vector3Int(xval,yval,0), currRoomTile);
-                                } else {
-                                    miniMap.SetTile(new Vector3Int(xval,yval,0), roomTile);
-                                }
-                            }
-                        }
+                    if(room == floorGenerator.currRoomIdx+1)
+                    {
+                        miniMap.SetTile(new Vector3Int((minimapRight-(xoffset-1))+j,minimapTop-i,0), currRoomTile);
+                    } else
+                    {
+                        miniMap.SetTile(new Vector3Int((minimapRight-(xoffset-1))+j,minimapTop-i,0), roomTile);
                     }
-                    // if(roomNum == floorGenerator.currRoomIdx+1)
-                    // {
-                    //     miniMap.SetTile(new Vector3Int((minimapRight-(xoffset-1))+j,minimapTop-i,0), currRoomTile);
-                    // } else
-                    // {
-                    //     miniMap.SetTile(new Vector3Int((minimapRight-(xoffset-1))+j,minimapTop-i,0), roomTile);
-                    // }
+                } else
+                {
+                   miniMap.SetTile(new Vector3Int((minimapRight-(xoffset-1))+j,minimapTop-i,0), noRoomTile); 
                 }
             }
         }
-        // for(int i=0;i<floorGenerator.numRooms;i++)
-        // {
-        //     for(int l=0; l<roomHeight; l++) {
-        //         for(int m=0; m<roomWidth; m++) {
-        //             int xval = i*roomWidth+l;
-        //             int yval = m;
-        //             if(rooms[i].map[l,m] == 0) {
-        //                 miniMap.SetTile(new Vector3Int(xval,yval,0), noRoomTile);
-        //             } else
-        //             {
-        //                 if(i==floorGenerator.currRoomIdx)
-        //                 {
-        //                     miniMap.SetTile(new Vector3Int(xval,yval,0), currRoomTile);
-        //                 } else {
-        //                     miniMap.SetTile(new Vector3Int(xval,yval,0), roomTile);
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
     }
 }

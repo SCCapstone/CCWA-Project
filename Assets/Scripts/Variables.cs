@@ -34,7 +34,6 @@ public class Variables:ScriptableObject
     public static bool isSpeedrun;
 
     public static int difficulty;
-    public static int score;
 
     public static bool[] achievementTriggers = new bool[5];
     

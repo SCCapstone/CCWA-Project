@@ -11,8 +11,9 @@ public class GameOver : MonoBehaviour
     public GameObject victory;
     public GameObject failure;
 
-    public Text runTimeText;
-    public Text scoreText;
+    public GameObject runTime;
+
+    Text RTT;
 
     public void NewGame() {
         Variables.newGame = true;
@@ -25,12 +26,13 @@ public class GameOver : MonoBehaviour
         Variables.isDead = false;
         loadScreen(Variables.wonGame);
 
+        RTT = runTime.GetComponent<Text>();
+
         float timer = Variables.clock;
         int minutes = Mathf.FloorToInt(timer/60.0f);
         int seconds = Mathf.FloorToInt(timer - minutes *60);
 
-        runTimeText.text = string.Format("Run Time: {0:00}:{1:00}", minutes, seconds);
-        scoreText.text = string.Format("Score: {0:0000}", Variables.score);
+        RTT.text = string.Format("Run Time: {0:00}:{1:00}", minutes, seconds);
 
         //check if a new fastest time has been set
         if (Variables.difficulty == 0)

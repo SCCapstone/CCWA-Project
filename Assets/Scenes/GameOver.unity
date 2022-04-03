@@ -513,8 +513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   victory: {fileID: 129191511}
   failure: {fileID: 863184670}
-  runTimeText: {fileID: 647387502}
-  scoreText: {fileID: 748378344}
+  runTime: {fileID: 647387500}
 --- !u!114 &300118257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1136,7 +1135,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Run Time
+  m_Text: 
 --- !u!222 &647387503
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1216,7 +1215,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Score
+  m_Text: Score = 0
 --- !u!222 &748378345
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1237,7 +1236,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c5de0a22652f18418a5144e9c059716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: {fileID: 0}
 --- !u!1 &826312717
 GameObject:
   m_ObjectHideFlags: 0
