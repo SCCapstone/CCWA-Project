@@ -84,7 +84,7 @@ public class RoomRenderer : MonoBehaviour
             }
         }
         //Iterate to generate enemy spawns
-        for(int i=0; i<room.enemyLocations.Length; i++) {
+        for(int i=0; i<room.numEnemies; i++) {
             Location l = room.enemyLocations[i];
             Instantiate(enemy, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
         }
