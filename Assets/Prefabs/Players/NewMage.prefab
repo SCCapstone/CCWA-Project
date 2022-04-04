@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4402053750284105471}
   - component: {fileID: 4176976871427332092}
   m_Layer: 0
-  m_Name: Mage
+  m_Name: NewMage
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -291,7 +291,7 @@ MonoBehaviour:
   textMaxMana: {fileID: 0}
   manaBar: {fileID: 0}
   manaBottle: {fileID: 0}
-  MageProjectile: {fileID: 2262067761997709158, guid: f7e7ded18c70a2d47a395485cb2380bd, type: 3}
+  MageProjectile: {fileID: 2262067761997709158, guid: caaedcf85dc9507409d6ff96129b8045, type: 3}
   attackTime: 0.35
   maxAttackTime: 0.35
   pauseScreen: {fileID: 0}
