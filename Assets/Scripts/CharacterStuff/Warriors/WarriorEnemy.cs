@@ -16,6 +16,7 @@ public class WarriorEnemy : Warrior
     public override void Die()
     {
         Variables.achievementTriggers[1] = true;
+        Variables.score += 10;
         Destroy(gameObject);
     }
 

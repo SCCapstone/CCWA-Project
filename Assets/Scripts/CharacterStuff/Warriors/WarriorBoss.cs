@@ -26,6 +26,7 @@ public class WarriorBoss : WarriorEnemy
 
     public override void Die()
     {
+        Variables.score += 40;
         Variables.achievementTriggers[2] = true;
         Destroy(GameObject.Find("CharUICanvas/BossUI"));
 

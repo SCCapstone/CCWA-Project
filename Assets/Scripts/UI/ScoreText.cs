@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ScoreText : MonoBehaviour
 {
-    public GameObject score;
+    public GameObject scoreText;
     // Start is called before the first frame update
     void Start()
     {
-        score.GetComponent<UnityEngine.UI.Text>().text = score.ToString();
+        scoreText.GetComponent<UnityEngine.UI.Text>().text = "Score: " + Variables.score.ToString();
     }
 
     /*
