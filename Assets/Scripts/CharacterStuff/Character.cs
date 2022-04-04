@@ -107,11 +107,16 @@ public class Character : MonoBehaviour
         StartCoroutine(damageCoroutine());
     }
     
+    //Invulnerability after being hit
     public IEnumerator damageCoroutine(){
         gameObject.GetComponent<Collider2D>().enabled = false;
+        spriteColor = Color.black;
+        sRenderer.material.color = spriteColor;
+
         yield return new WaitForSeconds(1.5f);
         gameObject.GetComponent<Collider2D>().enabled = true;
-        
+        spriteColor = Color.white;
+        sRenderer.material.color = spriteColor;
     }
 
     //Recovers the stamina by a amount of points

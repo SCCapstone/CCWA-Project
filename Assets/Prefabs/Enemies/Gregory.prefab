@@ -356,7 +356,7 @@ MonoBehaviour:
   name: 
   isEnhanced: 0
   moveSpeed: 0
-  baseMoveSpeed: 4
+  baseMoveSpeed: 2
   poison: 0
   statuses: 
   spriteColor: {r: 0, g: 0, b: 0, a: 0}
@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef799e2eb861e8440ab653b904b67266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 2
 --- !u!61 &-1201973990207376397
 BoxCollider2D:
   m_ObjectHideFlags: 0

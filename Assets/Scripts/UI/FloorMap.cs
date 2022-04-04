@@ -23,7 +23,7 @@ public class FloorMap : MonoBehaviour
     void Update()
     {
         currFloor = floorGenerator.GetCurrFloor();
-        FloorGenerator.printFloor(currFloor.floorLayout);
+        // FloorGenerator.printFloor(currFloor.floorLayout);
         int yoffset = currFloor.floorLayout.GetLength(0);
         int xoffset = currFloor.floorLayout.GetLength(1);
         int minimapTop = 296;

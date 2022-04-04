@@ -122,7 +122,6 @@ public class RoomRenderer : MonoBehaviour
                     string direction = l.location;
                     for(int j=0; j<currFloor.rooms.Length; j++) {
                         Room newRoom = currFloor.rooms[j];
-                        Debug.Log("HERESEED: " + newRoom.seed);
                         if(direction == "north" && Array.Exists(newRoom.exitLocations, l => l.location == "south")) {
                             newRoom.setMap(roomGenerator.GenerateRoomMap());
                             setCurrentRoom(newRoom);

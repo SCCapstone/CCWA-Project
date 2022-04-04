@@ -19,8 +19,7 @@ public class EnemyPathfinding : MonoBehaviour
         enemyAi = new Pathfinding(WidthOfGrid, HeightOfGrid);
         pathVectorList = null;
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        InvokeRepeating("Chasing", 2.0f, 0.3f);
-
+        InvokeRepeating("Chasing", float.PositiveInfinity, 0.3f);
     }
 
     void Chasing()
@@ -28,7 +27,7 @@ public class EnemyPathfinding : MonoBehaviour
 
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 
-        pathVectorList = enemyAi.FindPath(GetPostion(), GetTargetPosition());
+        pathVectorList = enemyAi.FindPath(transform.position, target.position);
     }
 
     // Update is called once per frame
@@ -47,23 +46,15 @@ public class EnemyPathfinding : MonoBehaviour
         }
         else
         {
-            transform.position=Vector2.MoveTowards(transform.position, target.position, step);
+            Vector2 moveVector = Vector2.MoveTowards(transform.position, target.position, step);
+            Vector3 newTransform = new Vector3(moveVector.x, moveVector.y, -1);
+            transform.position = newTransform;
         }
-
     }
 
 
     private void StopMoving()
     {
         pathVectorList = null;
-    }
-
-    public Vector2 GetTargetPosition()
-    {
-        return target.position;
-    }
-    public Vector2 GetPostion()
-    {
-        return transform.position;
     }
 }

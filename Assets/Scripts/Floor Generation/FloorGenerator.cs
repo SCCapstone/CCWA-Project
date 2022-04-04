@@ -209,7 +209,6 @@ public class FloorGenerator : MonoBehaviour
         
         //Makes the floor with the room and layout
         Floor floor = new Floor(seed, floorLayout, rooms);
-        Debug.Log("HERE: " + rooms);
         Variables.currFloor = floor;
         return floor;
     }
