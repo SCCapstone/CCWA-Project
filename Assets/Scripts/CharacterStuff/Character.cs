@@ -182,7 +182,8 @@ public class Character : MonoBehaviour
                 //Save file on new floor
                 FileData currentFile = fm.GetFileData(Constants.VALID_FILE_NUMS[fm.CurrFile]);
                 int runs = currentFile.NumRuns+1;
-                FileData fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, currentFile.FastestTime,
+                int newTotalTime = currentFile.TotalTime + Mathf.FloorToInt(Variables.clock);
+                FileData fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, newTotalTime, currentFile.FastestTime,
                                                 runs, currentFile.NumWins, currentFile.UnlockedAchievements,
                                                 false, null); //TODO get wins saved
                 fm.SaveFile(Constants.VALID_FILE_NUMS[fm.CurrFile], fd);
