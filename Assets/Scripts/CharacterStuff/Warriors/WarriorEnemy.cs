@@ -23,7 +23,6 @@ public class WarriorEnemy : Warrior
     public void OnCollisionEnter2D(Collision2D collidedWith) {
         var collision = collidedWith.collider;
         string name = collision.name;
-        
         switch(name) {
             case "Rogue(Clone)":
                 var rogue = collision.GetComponent<PlayerRogue>();
@@ -78,6 +77,10 @@ public class WarriorEnemy : Warrior
                 }
             break;
             }
+        }
+
+        public override void DamageHealth(int a) {
+            health -=a;
         }
 }
 
