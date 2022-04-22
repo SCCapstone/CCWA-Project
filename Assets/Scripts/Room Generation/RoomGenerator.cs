@@ -95,7 +95,6 @@ public class RoomGenerator {
                 }
             }
         }
-        this.map = map;
         return map;
     }
 
