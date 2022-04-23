@@ -181,6 +181,12 @@ public class FloorGenerator : MonoBehaviour
     
     public Floor GenerateFloor(string seed)
     {
+        // We need to ensure that the seed is at least 5 characters long in 
+        // a consistent way. So, if the length is less than 5, make the seed
+        // a repeated string of itself.
+        if(seed.Length < 5) {
+            seed = seed+seed+seed;
+        }
         int[,] floorLayout = GenerateFloorLayout(seed);
         string[,] exitsLayout = GetRoomExits(floorLayout);
         
@@ -200,7 +206,17 @@ public class FloorGenerator : MonoBehaviour
                     {
                         bossRoom = true;
                     }
-                    rooms[floorLayout[i,j]-1] = roomGenerator.GenerateRoom(seed,numEnemies,numItems,bossRoom,directions);
+                    // If we pass the same seed to each call of GenerateRoom
+                    // we will end up with 5-6 of the same room. So,
+                    // we generate a new seed substring based on the loop index
+                    // that is used to generate the room.
+                    string newSeed = "";
+                    if(j > seed.Length) {
+                        newSeed = seed.Substring(0);
+                    } else {
+                        newSeed = seed.Substring(j);
+                    }
+                    rooms[floorLayout[i,j]-1] = roomGenerator.GenerateRoom(newSeed,numEnemies,numItems,bossRoom,directions);
                 }
             }
         }

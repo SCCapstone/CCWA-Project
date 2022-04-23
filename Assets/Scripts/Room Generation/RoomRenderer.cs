@@ -123,28 +123,23 @@ public class RoomRenderer : MonoBehaviour
                     for(int j=0; j<currFloor.rooms.Length; j++) {
                         Room newRoom = currFloor.rooms[j];
                         if(direction == "north" && Array.Exists(newRoom.exitLocations, l => l.location == "south")) {
-                            newRoom.setMap(roomGenerator.GenerateRoomMap());
                             setCurrentRoom(newRoom);
                             Variables.currentRoom = newRoom;
                             RenderRoom(newRoom);
                             floorMap.GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
                             player.transform.position = new Vector3(10,10,-0.32f);
                         } else if(direction == "south" && Array.Exists(newRoom.exitLocations, l => l.location =="north")) {
-                            newRoom.setMap(roomGenerator.GenerateRoomMap());
                             setCurrentRoom(newRoom);
                             Variables.currentRoom = newRoom;
                             RenderRoom(newRoom);
                             floorMap.GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
                             player.transform.position = new Vector3(10,10,-0.32f);
                         } else if(direction == "west" && Array.Exists(newRoom.exitLocations, l => l.location =="east")) {
-                            newRoom.setMap(roomGenerator.GenerateRoomMap());
                             setCurrentRoom(newRoom);
                             Variables.currentRoom = newRoom;
                             RenderRoom(newRoom);
                             floorMap.GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
                             player.transform.position = new Vector3(10,10,-0.32f);
-                        } else if(direction == "east" && Array.Exists(newRoom.exitLocations, l => l.location =="west")) {
-                            newRoom.setMap(roomGenerator.GenerateRoomMap());
                             setCurrentRoom(newRoom);
                             Variables.currentRoom = newRoom;
                             RenderRoom(newRoom);
