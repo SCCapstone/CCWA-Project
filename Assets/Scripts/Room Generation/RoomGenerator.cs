@@ -75,12 +75,12 @@ public class RoomGenerator {
     public int[,] GenerateRoomWithPerlinNoise (string seed) {
         System.Random rand = new System.Random(seed.GetHashCode());
         int n = rand.Next();
-        Vector2 offset = new Vector2(n*2, n+3);
+        Vector2 offset = new Vector2(n*rand.Next(), n+rand.Next());
         int[,] map = new int[25,25];
         for(int i=0; i<height; i++) {
             for(int j=0; j<width; j++) {
-                float x = ((j/2.0f * n) + (n + offset.x)) / n;
-                float y = ((i/2.0f * n) + (n + offset.y)) / n;
+                float x = ((j/1.8f * n) + (n + offset.x)) / n;
+                float y = ((i/1.8f * n) + (n + offset.y)) / n;
                 float perlinValue = Mathf.PerlinNoise(x,y);
                 if(perlinValue > 0.65f) {
                     map[i,j] = 1;

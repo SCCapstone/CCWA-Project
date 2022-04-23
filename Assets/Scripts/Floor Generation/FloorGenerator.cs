@@ -208,13 +208,12 @@ public class FloorGenerator : MonoBehaviour
                     }
                     // If we pass the same seed to each call of GenerateRoom
                     // we will end up with 5-6 of the same room. So,
-                    // we generate a new seed substring based on the loop index
-                    // that is used to generate the room.
+                    // we generate a new seed substring based on the number of enemies
                     string newSeed = "";
                     if(j > seed.Length) {
                         newSeed = seed.Substring(0);
                     } else {
-                        newSeed = seed.Substring(j);
+                        newSeed = seed.Substring(numEnemies);
                     }
                     rooms[floorLayout[i,j]-1] = roomGenerator.GenerateRoom(newSeed,numEnemies,numItems,bossRoom,directions);
                 }
@@ -286,8 +285,8 @@ public class FloorGenerator : MonoBehaviour
         } else
         {
             roomGenerator = new RoomGenerator(true);
-            System.Random temp = new System.Random();
-            this.seed = temp.Next().ToString();
+            // If there is no seed, pick some entirely random number
+            this.seed = Random.Range(1, 100000000).ToString();
             FileManager fileManager = GameObject.Find("FileManager").GetComponent<FileManager>();
             if(!Variables.newGame && fileManager.GetFileData(fileManager.CurrFile+1).CurrRun != null)
             {
