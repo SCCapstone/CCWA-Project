@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ScoreText : MonoBehaviour
 {
     public Text scoreUI;
+    public GameObject scoreText;
     // Start is called before the first frame update
     void Awake()
     {

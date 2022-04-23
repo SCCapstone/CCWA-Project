@@ -32,28 +32,25 @@ public class PlayerMage : Mage
     private AudioSource audioSource;
 
     //Heart counter
-    public Image[] hearts;
-    public GameObject redHeart;
-    public GameObject blackHeart;
+    public Text textCurrHealth;
+    public Text textMaxHealth;
 
-    //Stamina counter
-    public Image[] staminaIcons;
-    public GameObject staminaBottle;
-    public GameObject emptyStaminaBottle;
+    //Stamina bar to disable the UI for it
     public GameObject staminabar;
-    public GameObject MageProjectile;
 
     //Mana counter
-    public Image [] manaIcons;
-    public GameObject manaBottle;
-    public GameObject emptyManaBottle;
+    public Text textCurrMana;
+    public Text textMaxMana;
+    public GameObject manaBar;
+    public Image manaBottle;
+    public GameObject MageProjectile;
 
     //Counters for the attacking frames
     public float attackTime = .35f;
     public float maxAttackTime = .35f;
 
     public GameObject pauseScreen;
-    public GameObject manaBar;
+    
     void Awake () {
         base.Awake();
         rigidB = GetComponent<Rigidbody2D>();
@@ -181,99 +178,57 @@ public class PlayerMage : Mage
 
     //Loads the health of the character of a character
     public void loadHearts() {
-        //Getting the heart objects from the charUIcanvas
-        GameObject[] heartHolder = GameObject.FindGameObjectsWithTag("Hearts");
-        redHeart = GameObject.FindWithTag("redheart");
-        blackHeart = GameObject.FindWithTag("blackheart");
+        GameObject text1 = GameObject.FindWithTag("currenthealth");
+        textCurrHealth = text1.GetComponent<Text>();
+        GameObject text2 = GameObject.FindWithTag("maxhealth");
+        textMaxHealth = text2.GetComponent<Text>();
 
-        //sets the heart image array length
-        hearts = new Image[maxHealth];
-        
-        //looping through to get the amount of hearts needed for the character
-        for (int i = 0; i < hearts.Length; ++i) {
-            hearts[i] = heartHolder[i].GetComponent<Image>();
-        }
-
-        //loading the hearts in relation to max health
-        for (int i = 0; i < hearts.Length; ++i) {   
-
-            //Enables the amount of hearts needed for max health
-            if (i < maxHealth) {
-                hearts[i].enabled = true;
-            }
-
-            //Enables the amount of hearts for current health
-            if (i < health) {
-                hearts[i].sprite = redHeart.GetComponent<SpriteRenderer>().sprite;
-            } else {
-                //Everything greater than health's value is an empty heart
-                hearts[i].sprite = blackHeart.GetComponent<SpriteRenderer>().sprite;
-            }
-        }
-
-        //clears any remaining hearts after the max
-        for (int i = maxHealth; i < heartHolder.Length; ++i) {
-            heartHolder[i].SetActive(false);
-        }
+        textCurrHealth.text = health.ToString();
+        textMaxHealth.text = "/ "+maxHealth.ToString();
     }
 
     //Loads the mana of the character
     public void loadMana() {
         //Enabling the mana bar for the mage
         manaBar.SetActive(true);
+        GameObject text1 = GameObject.FindWithTag("currentmana");
+        textCurrMana = text1.GetComponent<Text>();
+        GameObject text2 = GameObject.FindWithTag("maxmana");
+        textMaxMana = text2.GetComponent<Text>();
 
-        //Getting the mana objects from the charUIcanvas
-        GameObject[] manaHolder = GameObject.FindGameObjectsWithTag("manaicon");
-        
-        manaBottle = GameObject.FindWithTag("manapotion");
-        emptyManaBottle = GameObject.FindWithTag("emptymanapotion");
-
-        //Sets the icon image array length
-        manaIcons = new Image[Convert.ToInt32(maxMana)];
-        
-        //Looping through to get the amount of mana icons needed for the character
-        for (int i = 0; i < manaIcons.Length; ++i) {
-            manaIcons[i] = manaHolder[i].GetComponent<Image>();
-        }
-
-        //Loading the icons in relation to max mana 
-        for (int i = 0; i < manaIcons.Length; ++i) {
-             //Enables the amount of icons needed for max stamina
-            if (i < maxMana) {
-                manaIcons[i].enabled = true;
-            }
-
-            //Enables the amount of icons for current mana
-            if (i < mana) {
-                manaIcons[i].sprite = manaBottle.GetComponent<SpriteRenderer>().sprite;
-            } else {
-                //Everything greater than health's value is an empty heart
-                manaIcons[i].sprite = emptyManaBottle.GetComponent<SpriteRenderer>().sprite;
-            }
-        }
-
-        //Clears any remaining icons above the max
-        for (int i = Convert.ToInt32(maxMana); i < manaHolder.Length; ++i) {
-            manaHolder[i].SetActive(false);
-        }
+        int manaAsInt = Convert.ToInt32(mana);
+        textCurrMana.text = manaAsInt.ToString();
+        textCurrMana.color = Color.cyan;
+        textMaxMana.text = "/ "+maxMana.ToString();
         
     }
 
-    //changing the color of the mana bottles if juiced
+    //Changing the color of the mana bottles if juiced
     public override void ColorChange() {
         base.ColorChange();
+        GameObject bottle = GameObject.FindWithTag("manaicon");
+        GameObject text1 = GameObject.FindWithTag("currentmana");
+        GameObject text2 = GameObject.FindWithTag("maxmana");
+
+        manaBottle = bottle.GetComponent<Image>();
+        textCurrMana = text1.GetComponent<Text>();
+        textMaxMana = text2.GetComponent<Text>();
+
         if (isEnhanced) {
-            for (int i = 0; i < manaIcons.Length; ++i) {
-                manaIcons[i].color = Color.magenta;
-            }
+            manaBottle.color = Color.magenta;
+            textCurrMana.text = "∞";
+            textMaxMana.text = "";
+            textCurrMana.color = Color.magenta;
+            textMaxMana.color = Color.magenta;
         } else {
-            for (int i = 0; i < manaIcons.Length; ++i) {
-                manaIcons[i].color = Color.white;
-            }
+            manaBottle.color = Color.white;
+            textCurrMana.color = Color.cyan;
+            textMaxMana.color = Color.white
+            ;
         }
     }
 
-    //Whatever me an Nick need to do in order to shoot bullets ig
+    //Shoots bullets
     public void ShootBullet(Vector2 characterLoc) {
         Vector3 dir = new Vector2(animator.GetFloat("LastHorizontal"), animator.GetFloat("LastVertical"));
         Instantiate(MageProjectile,gameObject.transform.position , Quaternion.identity).GetComponent<MageProjectile>().Setup(dir, attackDmg);
@@ -287,7 +242,7 @@ public class PlayerMage : Mage
 
     //Resumes the game
     public void Resume() {
-        Time.timeScale = 0;
+        Time.timeScale = 1;
         pauseScreen.SetActive(false);
     }
 }

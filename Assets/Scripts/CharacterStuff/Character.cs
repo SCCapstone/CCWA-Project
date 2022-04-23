@@ -107,11 +107,16 @@ public class Character : MonoBehaviour
         StartCoroutine(damageCoroutine());
     }
     
+    //Invulnerability after being hit
     public IEnumerator damageCoroutine(){
         gameObject.GetComponent<Collider2D>().enabled = false;
+        spriteColor = Color.black;
+        sRenderer.material.color = spriteColor;
+
         yield return new WaitForSeconds(1.5f);
         gameObject.GetComponent<Collider2D>().enabled = true;
-        
+        spriteColor = Color.white;
+        sRenderer.material.color = spriteColor;
     }
 
     //Recovers the stamina by a amount of points
@@ -177,7 +182,8 @@ public class Character : MonoBehaviour
                 //Save file on new floor
                 FileData currentFile = fm.GetFileData(Constants.VALID_FILE_NUMS[fm.CurrFile]);
                 int runs = currentFile.NumRuns+1;
-                FileData fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, currentFile.FastestTime,
+                int newTotalTime = currentFile.TotalTime + Mathf.FloorToInt(Variables.clock);
+                FileData fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, newTotalTime, currentFile.FastestTime,
                                                 runs, currentFile.NumWins, currentFile.UnlockedAchievements,
                                                 false, null); //TODO get wins saved
                 fm.SaveFile(Constants.VALID_FILE_NUMS[fm.CurrFile], fd);

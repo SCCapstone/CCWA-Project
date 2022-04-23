@@ -84,7 +84,7 @@ public class RoomRenderer : MonoBehaviour
             }
         }
         //Iterate to generate enemy spawns
-        for(int i=0; i<room.enemyLocations.Length; i++) {
+        for(int i=0; i<room.numEnemies; i++) {
             Location l = room.enemyLocations[i];
             Instantiate(enemy, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
         }
@@ -102,8 +102,8 @@ public class RoomRenderer : MonoBehaviour
 
         player.GetComponent<SpriteRenderer>().color = Variables.skinColor;
 
-        currFloor = Variables.currFloor;
-        roomGenerator = new RoomGenerator(true);
+        this.currFloor = Variables.currFloor;
+        this.roomGenerator = new RoomGenerator(true);
     }
 
     // Update is called once per frame
@@ -123,32 +123,32 @@ public class RoomRenderer : MonoBehaviour
                     for(int j=0; j<currFloor.rooms.Length; j++) {
                         Room newRoom = currFloor.rooms[j];
                         if(direction == "north" && Array.Exists(newRoom.exitLocations, l => l.location == "south")) {
-                            newRoom.setMap(roomGenerator.GenerateRoomWithPerlinNoise());
+                            newRoom.setMap(roomGenerator.GenerateRoomMap());
                             setCurrentRoom(newRoom);
                             Variables.currentRoom = newRoom;
-                            RenderRoom(this.currentRoom);
-                            GameObject.Find("Floor Map").GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
+                            RenderRoom(newRoom);
+                            floorMap.GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
                             player.transform.position = new Vector3(10,10,-0.32f);
                         } else if(direction == "south" && Array.Exists(newRoom.exitLocations, l => l.location =="north")) {
-                            newRoom.setMap(roomGenerator.GenerateRoomWithPerlinNoise());
+                            newRoom.setMap(roomGenerator.GenerateRoomMap());
                             setCurrentRoom(newRoom);
                             Variables.currentRoom = newRoom;
-                            RenderRoom(this.currentRoom);
-                            GameObject.Find("Floor Map").GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
+                            RenderRoom(newRoom);
+                            floorMap.GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
                             player.transform.position = new Vector3(10,10,-0.32f);
                         } else if(direction == "west" && Array.Exists(newRoom.exitLocations, l => l.location =="east")) {
-                            newRoom.setMap(roomGenerator.GenerateRoomWithPerlinNoise());
+                            newRoom.setMap(roomGenerator.GenerateRoomMap());
                             setCurrentRoom(newRoom);
                             Variables.currentRoom = newRoom;
-                            RenderRoom(this.currentRoom);
-                            GameObject.Find("Floor Map").GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
+                            RenderRoom(newRoom);
+                            floorMap.GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
                             player.transform.position = new Vector3(10,10,-0.32f);
                         } else if(direction == "east" && Array.Exists(newRoom.exitLocations, l => l.location =="west")) {
-                            newRoom.setMap(roomGenerator.GenerateRoomWithPerlinNoise());
+                            newRoom.setMap(roomGenerator.GenerateRoomMap());
                             setCurrentRoom(newRoom);
                             Variables.currentRoom = newRoom;
-                            RenderRoom(this.currentRoom);
-                            GameObject.Find("Floor Map").GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
+                            RenderRoom(newRoom);
+                            floorMap.GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
                             player.transform.position = new Vector3(10,10,-0.32f);
                         }
                     }

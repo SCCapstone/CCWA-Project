@@ -8,8 +8,30 @@ public class Cheats : MonoBehaviour
     //End Key
     void DisableEnemies() {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject boss = GameObject.FindWithTag("Boss");
+        Destroy(boss);
         for(int i=0; i<enemies.Length; i++) {
             Destroy(enemies[i]);
+        }
+    }
+
+    // Zero Key
+    void HealPlayer() {
+        var player = GameObject.FindWithTag("Player");
+        Character character = player.GetComponent<Character>();
+        character.health = 8;
+    }
+
+    // Page Down Key
+    void MakePLayerInvincible() {
+        var player = GameObject.FindWithTag("Player");
+        Character character = player.GetComponent<Character>();
+        if(Variables.isInvincible = false) {
+            character.health = 10000;
+            Variables.isInvincible = true;
+        } else {
+            character.health = 8;
+            Variables.isInvincible = false;
         }
     }
 
@@ -47,6 +69,12 @@ public class Cheats : MonoBehaviour
         }
         else if(Input.GetKeyDown(KeyCode.Home)) {
             GenerateNewFloor();
+        }
+        else if(Input.GetKeyDown(KeyCode.PageDown)) {
+            MakePLayerInvincible();
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha0)) {
+            HealPlayer();
         }
     }
 }

@@ -14,9 +14,15 @@ public class MageProjectile : MonoBehaviour
         this.attack=attackDmg;
         this.shootDir = shootDir;
         wallMap = GameObject.Find("Wall Map");
+        StartCoroutine(noRecoil());
         Destroy(gameObject, 5f);
+        
     }
-
+    public IEnumerator noRecoil(){
+        gameObject.GetComponent<Collider2D>().enabled = false;
+        yield return new WaitForSeconds(0.02f);
+        gameObject.GetComponent<Collider2D>().enabled = true;
+    }
    
    
     private void Update()
