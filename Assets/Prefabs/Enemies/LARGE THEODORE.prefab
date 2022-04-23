@@ -241,6 +241,7 @@ GameObject:
   - component: {fileID: 7500739741726487086}
   - component: {fileID: 7500739741726487087}
   - component: {fileID: 7500739741726487084}
+  - component: {fileID: -4826753657737421874}
   m_Layer: 0
   m_Name: LARGE THEODORE
   m_TagString: Boss
@@ -392,7 +393,22 @@ MonoBehaviour:
   isEnhanced: 0
   moveSpeed: 0
   baseMoveSpeed: 7
+  poison: 0
   statuses: 
   spriteColor: {r: 0, g: 0, b: 0, a: 0}
   sRenderer: {fileID: 0}
+  keyAmt: 0
   healthBar: {fileID: 7500739740145299277}
+--- !u!114 &-4826753657737421874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7500739741726487082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef799e2eb861e8440ab653b904b67266, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
