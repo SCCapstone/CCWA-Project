@@ -20,6 +20,7 @@ public class Character : MonoBehaviour
     public List<bool> statuses;
     public Color spriteColor;
     public SpriteRenderer sRenderer;
+    bool damageCoroutineRunning = false;
 
     //added by Nick
     public int keyAmt = 0;
@@ -103,18 +104,20 @@ public class Character : MonoBehaviour
 
     //Damages the health of the character by a amount of points
     public virtual void DamageHealth (int a) {
-        health -= a;
+        if(!damageCoroutineRunning) {
+            health -= a;
+        }
         StartCoroutine(damageCoroutine());
     }
     
     //Invulnerability after being hit
     public IEnumerator damageCoroutine(){
-        gameObject.GetComponent<Collider2D>().enabled = false;
+        damageCoroutineRunning = true;
         spriteColor = Color.black;
         sRenderer.material.color = spriteColor;
 
         yield return new WaitForSeconds(1.5f);
-        gameObject.GetComponent<Collider2D>().enabled = true;
+        damageCoroutineRunning = false;
         spriteColor = Color.white;
         sRenderer.material.color = spriteColor;
     }
