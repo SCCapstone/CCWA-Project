@@ -10,7 +10,7 @@ public class LocationClassTests
    public void ConstructDefaultLocationTEst() {
        Location defaultLocation = new Location();
        Assert.IsNotNull(defaultLocation);
-       Assert.AreEqual(defaultLcoation.location, "");
+       Assert.AreEqual(defaultLocation.location, "");
        Assert.AreEqual(defaultLocation.locX, 0);
        Assert.AreEqual(defaultLocation.locY, 0);
    }
@@ -18,7 +18,7 @@ public class LocationClassTests
    [Test]
    public void ConstructParameterizedLocationTest() {
        Location parameterizedLocation = new Location("north", 14, 18);
-       Assert.IsNotNull(parameterizedLcoation);
+       Assert.IsNotNull(parameterizedLocation);
        Assert.AreEqual(parameterizedLocation.location, "north");
        Assert.AreEqual(parameterizedLocation.locX, 14);
        Assert.AreEqual(parameterizedLocation.locY, 18);

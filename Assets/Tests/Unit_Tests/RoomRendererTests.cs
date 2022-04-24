@@ -21,14 +21,14 @@ public class RoomRendererTests
 
     [Test]
     public void RenderRoomTest() {
-        Assert.IsNotNull(rr.floorMap);
-        Assert.IsNotNull(rr.wallMap);
-        Assert.IsNotNull(rr.itemMap);
-        Assert.IsNotNull(rr.floorTile);
-        Assert.IsNotNull(rr.wallTile);
-        Assert.IsNotNull(rr.exitTile);
-        Assert.IsNotNull(rr.lockedExitTile);
+        // Tilemaps and Tilebases must be set in the
+        // unity editor. They will always be null until 
+        // the game is played.
+        Assert.IsNotNull(rr.currentRoom);
         Assert.IsNotNull(rr.currFloor);
+        Assert.IsNotNull(rr.roomGenerator);
+        Assert.IsNotNull(rr.playerX);
+        Assert.IsNotNull(rr.playerY);
     }
 
 }

@@ -41,24 +41,6 @@ public class RoomGeneratorTests
     }
 
     [Test]
-    public void ClearSpawnsTest() {
-        int[,] testMap = rg.GenerateRoomWithPerlinNoise("test");
-        int[,] clearedSpawnsMap = rg.ClearSpawns(testMap);
-        Assert.IsNotNull(testMap);
-        Assert.IsNotNull(clearedSpawnsMap);
-        Assert.AreNotEqual(testMap, clearedSpawnsMap);
-    }
-
-    [Test]
-    public void CreateRoomBorderTest() {
-        int[,] testMap = rg.GenerateRoomWithPerlinNoise("test");
-        int [,] borderedMap = rg.CreateRoomBorder(testMap);
-        Assert.IsNotNull(testMap);
-        Assert.IsNotNull(borderedMap);
-        Assert.AreNotEqual(testMap, borderedMap);
-    }
-
-    [Test]
     public void RoomGeneratorConstructorTest() {
         RoomGenerator roomFromConstructor = new RoomGenerator(true);
         Assert.IsNotNull(roomFromConstructor);
