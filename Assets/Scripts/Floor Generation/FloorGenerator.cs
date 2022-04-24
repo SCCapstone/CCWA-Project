@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //TODO Add documentation
 public class FloorGenerator : MonoBehaviour
@@ -276,7 +277,11 @@ public class FloorGenerator : MonoBehaviour
 
     // Start is called before the first frame update
     void Awake()
-    {
+    {   
+        if(this.numRooms == 0)
+        {
+            this.numRooms = 10;
+        }
         roomGenerator = new RoomGenerator(true);
         int floorNum = 1;
         if (!string.IsNullOrEmpty(Variables.floorSeed))
@@ -301,10 +306,13 @@ public class FloorGenerator : MonoBehaviour
         }
         Variables.floorSeed = this.seed;
         rand = new System.Random(this.seed.GetHashCode());
-
-        RoomRenderer renderer = this.gameObject.GetComponent<RoomRenderer>();
         this.currFloor = GenerateFloor(floorNum + "" + this.seed);
-        renderer.setCurrentRoom(this.GetCurrRoom());
-        renderer.RenderRoom(this.GetCurrRoom());
+
+        if(SceneManager.GetActiveScene().name == "Gameplay")
+        {
+            RoomRenderer renderer = this.gameObject.GetComponent<RoomRenderer>();            
+            renderer.setCurrentRoom(this.GetCurrRoom());
+            renderer.RenderRoom(this.GetCurrRoom());
+        }
     }
 }

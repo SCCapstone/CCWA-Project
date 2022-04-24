@@ -1,16 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2022-01-30 21:42:43Z" end-time="2022-01-30 21:42:43Z" duration="0.0455982">
-  <test-suite type="TestSuite" id="1007" name="New Unity Project" fullname="New Unity Project" runstate="Runnable" testcasecount="1" result="Passed" start-time="2022-01-30 21:42:43Z" end-time="2022-01-30 21:42:43Z" duration="0.045598" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+<test-run id="2" testcasecount="3" result="Failed(Child)" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2022-04-24 20:45:06Z" end-time="2022-04-24 20:45:06Z" duration="0.0488682">
+  <test-suite type="TestSuite" id="1011" name="Charlie and Charlindas Wacky Adventure" fullname="Charlie and Charlindas Wacky Adventure" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2022-04-24 20:45:06Z" end-time="2022-04-24 20:45:06Z" duration="0.048868" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0">
     <properties />
-    <test-suite type="Assembly" id="1010" name="Unit_Tests.dll" fullname="C:/Users/18439/Bootymeat/Library/ScriptAssemblies/Unit_Tests.dll" runstate="Runnable" testcasecount="1" result="Passed" start-time="2022-01-30 21:42:43Z" end-time="2022-01-30 21:42:43Z" duration="0.032788" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1018" name="Unit_Tests.dll" fullname="E:/School/Spring 2022/CSCE 492/Bootymeat/Library/ScriptAssemblies/Unit_Tests.dll" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2022-04-24 20:45:06Z" end-time="2022-04-24 20:45:06Z" duration="0.040170" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0">
       <properties>
-        <property name="_PID" value="2220" />
+        <property name="_PID" value="11732" />
         <property name="_APPDOMAIN" value="Unity Child Domain" />
         <property name="platform" value="EditMode" />
       </properties>
-      <test-suite type="TestFixture" id="1008" name="RoomGeneratorTests" fullname="RoomGeneratorTests" classname="RoomGeneratorTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2022-01-30 21:42:43Z" end-time="2022-01-30 21:42:43Z" duration="0.031596" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1012" name="FloorGeneratorTests" fullname="FloorGeneratorTests" classname="FloorGeneratorTests" runstate="Runnable" testcasecount="1" result="Failed" site="Child" start-time="2022-04-24 20:45:06Z" end-time="2022-04-24 20:45:06Z" duration="0.023370" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
         <properties />
-        <test-case id="1009" name="GenerateRoomTest" fullname="RoomGeneratorTests.GenerateRoomTest" methodname="GenerateRoomTest" classname="RoomGeneratorTests" runstate="Runnable" seed="161456729" result="Passed" start-time="2022-01-30 21:42:43Z" end-time="2022-01-30 21:42:43Z" duration="0.018862" asserts="0">
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1013" name="GenerateFloorTest" fullname="FloorGeneratorTests.GenerateFloorTest" methodname="GenerateFloorTest" classname="FloorGeneratorTests" runstate="Runnable" seed="472147465" result="Failed" label="Error" start-time="2022-04-24 20:45:06Z" end-time="2022-04-24 20:45:06Z" duration="0.009634" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[System.NullReferenceException : Object reference not set to an instance of an object]]></message>
+            <stack-trace><![CDATA[  at FloorGenerator.GenerateFloorLayout (System.String seed) [0x0001f] in E:\School\Spring 2022\CSCE 492\Bootymeat\Assets\Scripts\Floor Generation\FloorGenerator.cs:31 
+  at FloorGenerator.GenerateFloor (System.String seed) [0x00013] in E:\School\Spring 2022\CSCE 492\Bootymeat\Assets\Scripts\Floor Generation\FloorGenerator.cs:190 
+  at FloorGenerator.NewFloor (System.Int32 floorNum) [0x00000] in E:\School\Spring 2022\CSCE 492\Bootymeat\Assets\Scripts\Floor Generation\FloorGenerator.cs:271 
+  at FloorGeneratorTests.GenerateFloorTest () [0x00021] in E:\School\Spring 2022\CSCE 492\Bootymeat\Assets\Tests\Unit_Tests\FloorGeneratorTests.cs:18 
+  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)
+  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00032] in <695d1cc93cca45069c528c15c9fdd749>:0 ]]></stack-trace>
+          </failure>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1014" name="MainMenuButtons" fullname="MainMenuButtons" classname="MainMenuButtons" runstate="Runnable" testcasecount="1" result="Failed" site="Child" start-time="2022-04-24 20:45:06Z" end-time="2022-04-24 20:45:06Z" duration="0.001039" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1015" name="NewGame" fullname="MainMenuButtons.NewGame" methodname="NewGame" classname="MainMenuButtons" runstate="Runnable" seed="2000730170" result="Failed" label="Error" start-time="2022-04-24 20:45:06Z" end-time="2022-04-24 20:45:06Z" duration="0.000385" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[System.NullReferenceException : Object reference not set to an instance of an object]]></message>
+            <stack-trace><![CDATA[  at MainMenuButtons.NewGame () [0x00005] in E:\School\Spring 2022\CSCE 492\Bootymeat\Assets\Tests\Unit_Tests\MainMenuButtons.cs:21 
+  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)
+  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00032] in <695d1cc93cca45069c528c15c9fdd749>:0 ]]></stack-trace>
+          </failure>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1016" name="RoomGeneratorTests" fullname="RoomGeneratorTests" classname="RoomGeneratorTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2022-04-24 20:45:06Z" end-time="2022-04-24 20:45:06Z" duration="0.014662" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1017" name="GenerateRoomTest" fullname="RoomGeneratorTests.GenerateRoomTest" methodname="GenerateRoomTest" classname="RoomGeneratorTests" runstate="Runnable" seed="963078716" result="Passed" start-time="2022-04-24 20:45:06Z" end-time="2022-04-24 20:45:06Z" duration="0.011268" asserts="0">
           <properties />
         </test-case>
       </test-suite>
