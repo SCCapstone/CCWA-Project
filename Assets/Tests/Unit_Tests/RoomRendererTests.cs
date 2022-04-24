@@ -28,7 +28,7 @@ public class RoomRendererTests
         Assert.IsNotNull(rr.wallTile);
         Assert.IsNotNull(rr.exitTile);
         Assert.IsNotNull(rr.lockedExitTile);
-        assert.IsNotNull(rr.currFloor);
+        Assert.IsNotNull(rr.currFloor);
     }
 
 }
