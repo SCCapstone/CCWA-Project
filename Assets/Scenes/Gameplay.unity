@@ -267,6 +267,8 @@ MonoBehaviour:
   health: {fileID: 5331933513703734510, guid: aa8bfc8fb4130814d8e78d852afb02c7, type: 3}
   key: {fileID: 1439817913903555113, guid: 7f84dc0c0edd87449870be8e007083e5, type: 3}
   chest: {fileID: 9200657389165878055, guid: 609896f41cde32d42aa77d1a7e3e2e85, type: 3}
+  bearTrap: {fileID: 2070916091638037082, guid: e50c95cf966f68448a9590e42433e0b9, type: 3}
+  poisonTrap: {fileID: 7088193480866011825, guid: d71d9e60f4b2e5f4499c97f96497213d, type: 3}
   enemy: {fileID: 8784097646283919468, guid: d9f504a899db51b4e9e9229495f1bce8, type: 3}
   boss: {fileID: 7500739741726487082, guid: 05b7c721fd78a0546a1f51507955b62b, type: 3}
   player: {fileID: 0}
