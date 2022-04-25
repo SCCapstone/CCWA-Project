@@ -95,8 +95,10 @@ public class PlayerWarrior : Warrior
             }
         }
 
-        //Allows the user to attack
-        attack();
+        //Allows the user to attack, only if there at least two stamina jars
+        if (Input.GetKeyDown("j") && stamina >= 2) {
+            attack();
+        }
 
         //Stamina regeneration
         StartCoroutine("RegenStamina");
@@ -141,15 +143,11 @@ public class PlayerWarrior : Warrior
 
     //Lets the player character attack
     public void attack() {
-        //only allows attack if there at least two stamina jars
-        if (Input.GetKeyDown("j") && stamina >= 2) {
-            animator.SetBool("attacking", true);
-            audioSource.Play(0);
-            attackTime = maxAttackTime;
-            StaminaDrain(2);
-
-        }
-
+        animator.SetBool("attacking", true);
+        audioSource.Play(0);
+        attackTime = maxAttackTime;
+        StaminaDrain(2);
+        
         //Ends the attack animation after a short period of time
         if (animator.GetBool("attacking")) {
             attackTime -= Time.deltaTime;
