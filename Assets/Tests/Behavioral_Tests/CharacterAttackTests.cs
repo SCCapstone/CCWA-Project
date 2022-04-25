@@ -7,7 +7,7 @@ using UnityEngine.TestTools;
 public class CharacterAttackTests
 {
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
+    /*// A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
     // `yield return null;` to skip a frame.
     [UnityTest]
     public IEnumerator CharacterAttackTestsWithEnumeratorPasses()
@@ -16,4 +16,5 @@ public class CharacterAttackTests
         
     }
     
+
 }
