@@ -40,8 +40,8 @@ We have also implemented some cheat features to help you progress through the ga
 ## Running Tests
 
 Tests can be run from the root directory of this repository with the following commands:
-- To run the unit tests: `PATH/TO/UNITY_EXECUTABLE -runTests -batchmode -projectPath ./ -testResults ./TestResults/tests.xml`
-- To run the behavioral tests:  `PATH/TO/UNITY_EXECUTABLE -runTests -testPlatform PlayMode -batchmode -projectPath ./ -testResults ./TestResults/tests.xml`
+- To run the unit tests: `PATH/TO/UNITY_EXECUTABLE -runTests -batchmode -projectPath ./ -testResults ./TestResults/unittests.xml`
+- To run the behavioral tests:  `PATH/TO/UNITY_EXECUTABLE -runTests -testPlatform PlayMode -batchmode -projectPath ./ -testResults ./TestResults/behavioraltests.xml`
 
 In Windows, the Unity executable should be located at `"C:\Program Files\Unity\Hub\Editor\2020.3.19f1\Editor\Unity.exe"`
 
