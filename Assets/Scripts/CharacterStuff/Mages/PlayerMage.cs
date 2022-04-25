@@ -104,7 +104,9 @@ public class PlayerMage : Mage
         }
 
         //Allows the user to attack
-        attack();
+        if (Input.GetKeyDown("j")) {
+            attack();
+        }
 
         //Stamina regeneration
         StartCoroutine("RegenStamina");
@@ -157,7 +159,7 @@ public class PlayerMage : Mage
     public override void attack() {
         //only allows attack if there are at least two mana jars
 
-        if (Input.GetKeyDown("j") && mana >= 2) {
+        if (mana >= 2) {
             Vector2 characterLoc=gameObject.transform.position;
             animator.SetBool("attacking", true);
             audioSource.Play(0);
