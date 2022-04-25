@@ -94,7 +94,7 @@ public class PlayerMage : Mage
                 juiceTimer -= Time.deltaTime;
             } else {
                 //Set back to false
-                ToggleEnhanced();
+                isEnhanced=false;
                 //Set back to base mana
                 Juiced();
                 //reset the timer

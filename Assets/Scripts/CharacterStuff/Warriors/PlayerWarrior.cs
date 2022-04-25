@@ -86,7 +86,7 @@ public class PlayerWarrior : Warrior
                 berserkTimer -= Time.deltaTime;
             } else {
                 //Set back to false
-                ToggleEnhanced();
+                isEnhanced=false;
                 //Set back to base stats
                 Berserk();
                 //reset the timer

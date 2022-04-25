@@ -83,7 +83,7 @@ public class PlayerRogue : Rogue
                 shadowTimer -= Time.deltaTime;
             } else {
                 //Set back to false
-                ToggleEnhanced();
+                isEnhanced=false;
                 //Re-enable enemy pathfinding
                 shadowMode();
                 //reset the timer

@@ -20,6 +20,7 @@ public class Character : MonoBehaviour
     public List<bool> statuses;
     public Color spriteColor;
     public SpriteRenderer sRenderer;
+    public bool enhancedReady =true;
 
     //added by Nick
     public int keyAmt = 0;
@@ -148,9 +149,19 @@ public class Character : MonoBehaviour
 
     //Toggles the character's special state if they have one
     public void ToggleEnhanced() {
-        isEnhanced = !isEnhanced;
+        //isEnhanced = !isEnhanced;
+        if (enhancedReady && !isEnhanced){
+            isEnhanced =  true;
+            StartCoroutine(enhancedCooldown());
+        }
     }
-
+    
+    public IEnumerator enhancedCooldown(){
+        enhancedReady = false;
+        yield return new WaitForSeconds(13);
+        enhancedReady = true;
+    }
+    
     //changes the color of a sprite for status effects
     public virtual void ColorChange() {
 
