@@ -17,43 +17,60 @@ public class FloorGeneratorTests {
         return fg;
     }
 
+    public void CleanScene()
+    {
+        foreach (GameObject o in UnityEngine.Object.FindObjectsOfType<GameObject>()) {
+            GameObject.Destroy(o);
+        }
+    }
+
     // Floor Generation Tests
     [UnityTest]
     public IEnumerator GenerateFloorSeedTest()
     {
-        Floor f1 = GetTestFloorGenerator("test").GetCurrFloor();   
+        FloorGenerator fg = GetTestFloorGenerator("test");
+        Floor f1 = fg.GetCurrFloor();
         Assert.AreEqual("1test",f1.seed);
         yield return new WaitForSeconds(0f);
+        CleanScene();
     }
 
     [UnityTest]
     public IEnumerator GenerateFloorShortSeedTest()
     {
-        Floor f1 = GetTestFloorGenerator("f").GetCurrFloor();   
+        FloorGenerator fg = GetTestFloorGenerator("f");
+        Floor f1 = fg.GetCurrFloor();  
         Assert.AreEqual("1f1f1f",f1.seed);
         yield return new WaitForSeconds(0f);
+        CleanScene();
     }
 
     [UnityTest]
     public IEnumerator GenerateFloorNumRoomsTest()
     {
-        Floor f1 = GetTestFloorGenerator("test").GetCurrFloor();
+        FloorGenerator fg = GetTestFloorGenerator("test");
+        Floor f1 = fg.GetCurrFloor();
         Assert.AreEqual(10,f1.rooms.Length);
         yield return new WaitForSeconds(0f);
+        CleanScene();
     }
 
     [UnityTest]
     public IEnumerator GenerateFloorLayoutSizeTest()
     {
-        Floor f1 = GetTestFloorGenerator("test").GetCurrFloor();
+        FloorGenerator fg = GetTestFloorGenerator("test");
+        Floor f1 = fg.GetCurrFloor();
         Assert.That(f1.floorLayout.Length, Is.GreaterThan(9));
         yield return new WaitForSeconds(0f);
+        CleanScene();
     }
 
     [UnityTest]
     public IEnumerator GenerateFloorLayoutValuesTest()
     {
-        int[,] layout = GetTestFloorGenerator("test").GetCurrFloor().floorLayout;
+        FloorGenerator fg = GetTestFloorGenerator("test");
+        Floor f1 = fg.GetCurrFloor();
+        int[,] layout = f1.floorLayout;
         bool correctLayout = true;
         for(int i = 0; i<layout.GetLength(0);i++)
         {
@@ -68,6 +85,7 @@ public class FloorGeneratorTests {
         }
         Assert.That(correctLayout);
         yield return new WaitForSeconds(0f);
+        CleanScene();
     }
 
     // GetDirectionsFromExitString Tests
@@ -78,6 +96,7 @@ public class FloorGeneratorTests {
         string[] test = {"north","east","west","south"};
         Assert.AreEqual(fg.GetDirectionsFromExitString("news"), test);
         yield return new WaitForSeconds(0f);
+        CleanScene();
     }
 
     [UnityTest]
@@ -87,6 +106,7 @@ public class FloorGeneratorTests {
         string[] test = {"north","east","west","south",null,null,null,"east",null};
         Assert.AreEqual(fg.GetDirectionsFromExitString("newspaper"), test);
         yield return new WaitForSeconds(0f);
+        CleanScene();
     }
 
     // GetRoomExits Tests
@@ -98,5 +118,6 @@ public class FloorGeneratorTests {
         string[,] test = {{"es","w"},{"n","0"}};
         Assert.AreEqual(fg.GetRoomExits(layout), test);
         yield return new WaitForSeconds(0f);
+        CleanScene();
     }
 }
