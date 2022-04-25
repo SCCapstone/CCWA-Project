@@ -16,7 +16,7 @@ public class CharacterAttackTests
         yield return new WaitForSeconds(0.2f);
         Assert.IsNotNull(test);
         
-    }
+    }*/
     
 
 }
