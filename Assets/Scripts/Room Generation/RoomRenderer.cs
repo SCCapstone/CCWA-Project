@@ -29,6 +29,7 @@ public class RoomRenderer : MonoBehaviour
     public int playerY = 0;
     public Floor currFloor = new Floor();
     public RoomGenerator roomGenerator = new RoomGenerator(true);
+    bool hasLockedTile = false;
 
     // End Variables***************************************************************************************************
 
@@ -71,6 +72,7 @@ public class RoomRenderer : MonoBehaviour
             Location l = room.exitLocations[i];
             if (isLockedExit == 1){
                 floorMap.SetTile(new Vector3Int(l.locX, l.locY,0), lockedExitTile);
+                hasLockedTile = true;
             }
             else{
                 floorMap.SetTile(new Vector3Int(l.locX, l.locY,0), exitTile);
@@ -87,13 +89,12 @@ public class RoomRenderer : MonoBehaviour
                 }
                 else if (i%4 ==0) {  //attack up
                     Instantiate(attackUp, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
-                } else if (i%3 == 0) {
-                    Instantiate(key, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
                 } else if (i%2 == 0) {
                     Instantiate(defenseUp, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
                 } else {
                     Instantiate(chest, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
                 }
+                Instantiate(key, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
             }
         }
         //Iterate to generate enemy spawns
