@@ -9,9 +9,9 @@ public class RoomRenderer : MonoBehaviour
 {
 
     // Begin Variables*************************************************************************************************
-    public Tilemap floorMap;
-    public Tilemap wallMap;
-    public Tilemap itemMap;
+    public Tilemap floorMap = new Tilemap();
+    public Tilemap wallMap = new Tilemap();
+    public Tilemap itemMap = new Tilemap();
     public TileBase floorTile;
     public TileBase wallTile;
     public TileBase exitTile;
@@ -23,12 +23,12 @@ public class RoomRenderer : MonoBehaviour
     public GameObject chest;
     public GameObject enemy;
     public GameObject boss;
-    public Room currentRoom;
+    public Room currentRoom = new Room();
     public GameObject player;
-    public int playerX;
-    public int playerY;
-    public Floor currFloor;
-    private RoomGenerator roomGenerator;
+    public int playerX = 0;
+    public int playerY = 0;
+    public Floor currFloor = new Floor();
+    public RoomGenerator roomGenerator = new RoomGenerator(true);
 
     // End Variables***************************************************************************************************
 
