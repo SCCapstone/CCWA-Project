@@ -100,6 +100,14 @@ public class PlayerWarrior : Warrior
             attack();
         }
 
+        //Ends the attack animation after a short period of time
+        if (animator.GetBool("attacking")) {
+            attackTime -= Time.deltaTime;
+            if (attackTime <= 0) {
+                animator.SetBool("attacking", false);
+            }
+        } 
+
         //Stamina regeneration
         StartCoroutine("RegenStamina");
 
@@ -147,14 +155,8 @@ public class PlayerWarrior : Warrior
         audioSource.Play(0);
         attackTime = maxAttackTime;
         StaminaDrain(2);
+
         
-        //Ends the attack animation after a short period of time
-        if (animator.GetBool("attacking")) {
-            attackTime -= Time.deltaTime;
-            if (attackTime <= 0) {
-                animator.SetBool("attacking", false);
-            }
-        } 
     }
 
     //Loads the health of the character re  of a character
