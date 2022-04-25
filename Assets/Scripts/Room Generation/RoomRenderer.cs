@@ -20,6 +20,7 @@ public class RoomRenderer : MonoBehaviour
     public GameObject defenseUp;
     public GameObject health;
     public GameObject key;
+    public GameObject chest;
     public GameObject enemy;
     public GameObject boss;
     public Room currentRoom;
@@ -44,7 +45,11 @@ public class RoomRenderer : MonoBehaviour
         // Clear the tilemap of any leftover tiles
         floorMap.ClearAllTiles();
         wallMap.ClearAllTiles();
-        itemMap.ClearAllTiles();
+        // Clear all item game objects
+        GameObject[] items = GameObject.FindGameObjectsWithTag("Pickup");
+        for(int i=0; i<items.Length; i++) {
+            Destroy(items[i]);
+        }
         // Iterate over the map; place walls and floors
         for(int i=0; i<room.height; i++) {
             for(int j=0; j<room.width; j++) {
@@ -62,7 +67,7 @@ public class RoomRenderer : MonoBehaviour
         // Iterate again; place exit locations
         for(int i=0; i<room.exitLocations.Length; i++) {
             System.Random rng = new System.Random();
-            int isLockedExit = rng.Next(1,2);
+            int isLockedExit = rng.Next(1,20);
             Location l = room.exitLocations[i];
             if (isLockedExit == 1){
                 floorMap.SetTile(new Vector3Int(l.locX, l.locY,0), lockedExitTile);
@@ -77,15 +82,17 @@ public class RoomRenderer : MonoBehaviour
         for(int i=0; i<room.itemLocations.Length; i++) {
             Location l = room.itemLocations[i];
             if(room.map[l.locX, l.locY] != 1) {
-                if(i%4 == 0) {  //health
+                if(i%5 == 0) {  //health
                     Instantiate(health, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
                 }
-                else if (i%3 ==0) {  //attack up
+                else if (i%4 ==0) {  //attack up
                     Instantiate(attackUp, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
-                } else if (i%2 == 0) {
+                } else if (i%3 == 0) {
                     Instantiate(key, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
-                } else {
+                } else if (i%2 == 0) {
                     Instantiate(defenseUp, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
+                } else {
+                    Instantiate(chest, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
                 }
             }
         }
@@ -149,6 +156,7 @@ public class RoomRenderer : MonoBehaviour
                                 RenderRoom(newRoom);
                                 floorMap.GetComponent<FloorGenerator>().currRoomIdx = Array.IndexOf(currFloor.rooms,newRoom);
                                 player.transform.position = new Vector3(10,10,-0.32f);
+                            } else if(direction == "east" && Array.Exists(newRoom.exitLocations, l => l.location =="west")) {
                                 setCurrentRoom(newRoom);
                                 Variables.currentRoom = newRoom;
                                 RenderRoom(newRoom);
