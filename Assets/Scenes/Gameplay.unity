@@ -262,8 +262,11 @@ MonoBehaviour:
   wallTile: {fileID: 11400000, guid: f6339619c52ae144d9a0b668f7507b17, type: 2}
   exitTile: {fileID: 11400000, guid: 799d2081e6cd32a4b8d75dbdb5759b05, type: 2}
   lockedExitTile: {fileID: 11400000, guid: 900233be9b5b1da428888f21caa10ad3, type: 2}
-  attackUp: {fileID: 5633774304611363470, guid: f800cb7e4cd02184593e1f3bbc9311c5, type: 3}
+  attackUp: {fileID: 6627064157394393476, guid: 4fdccf5ff5e627548bd788de1f1b4068, type: 3}
+  defenseUp: {fileID: 5260430923768068518, guid: 5ab8540e972f00348bf28ac0360bc940, type: 3}
   health: {fileID: 5331933513703734510, guid: aa8bfc8fb4130814d8e78d852afb02c7, type: 3}
+  key: {fileID: 1439817913903555113, guid: 7f84dc0c0edd87449870be8e007083e5, type: 3}
+  chest: {fileID: 9200657389165878055, guid: 609896f41cde32d42aa77d1a7e3e2e85, type: 3}
   enemy: {fileID: 8784097646283919468, guid: d9f504a899db51b4e9e9229495f1bce8, type: 3}
   boss: {fileID: 7500739741726487082, guid: 05b7c721fd78a0546a1f51507955b62b, type: 3}
   player: {fileID: 0}
