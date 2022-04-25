@@ -45,7 +45,7 @@ Tests can be run from the root directory of this repository with the following c
 
 In Windows, the Unity executable should be located at `"C:\Program Files\Unity\Hub\Editor\2020.3.19f1\Editor\Unity.exe"`
 
-The results of the tests will be saved in `TestResults/tests.xml`.
+The results of the tests will be saved in `TestResults/unittests.xml` and `TestResults/behavioraltests.xml`.
 
 Please note that the tests will take a few seconds to run.
 
