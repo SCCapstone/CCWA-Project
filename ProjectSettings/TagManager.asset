@@ -23,6 +23,14 @@ TagManager:
   - manabar
   - staminabar
   - achievepanel
+  - currentstamina
+  - currentmana
+  - maxstamina
+  - maxmana
+  - currenthealth
+  - maxhealth
+  - Pickup
+  - Floor Map
   layers:
   - Default
   - TransparentFX

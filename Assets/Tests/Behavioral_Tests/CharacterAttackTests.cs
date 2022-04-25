@@ -13,6 +13,8 @@ public class CharacterAttackTests
     public IEnumerator CharacterAttackTestsWithEnumeratorPasses()
     {
         GameObject test = GameObject.Instantiate(new GameObject());
+        yield return new WaitForSeconds(0.2f);
+        Assert.IsNotNull(test);
         
     }
 }
