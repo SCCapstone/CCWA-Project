@@ -97,6 +97,14 @@ public class PlayerRogue : Rogue
             attack();
         }
 
+        //Ends the attack animation after a short period of time
+        if (animator.GetBool("attacking")) {
+            attackTime -= Time.deltaTime;
+            if (attackTime <= 0) {
+                animator.SetBool("attacking", false);
+            }
+        } 
+
         //Stamina regeneration
         StartCoroutine("RegenStamina");
 
@@ -144,14 +152,6 @@ public class PlayerRogue : Rogue
         audioSource.Play(0);
         attackTime = maxAttackTime;
         StaminaDrain(2);
-        
-        //Ends the attack animation after a short period of time
-        if (animator.GetBool("attacking")) {
-            attackTime -= Time.deltaTime;
-            if (attackTime <= 0) {
-                animator.SetBool("attacking", false);
-            }
-        } 
     }
 
     //Loads the visual element of the health
