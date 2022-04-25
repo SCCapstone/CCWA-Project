@@ -20,11 +20,8 @@ public class Character : MonoBehaviour
     public List<bool> statuses;
     public Color spriteColor;
     public SpriteRenderer sRenderer;
-<<<<<<< HEAD
     public bool enhancedReady =true;
-=======
     bool damageCoroutineRunning = false;
->>>>>>> 27176dbe551caf2f6681f9d600c73239d6e652bc
 
     //added by Nick
     public int keyAmt = 0;
