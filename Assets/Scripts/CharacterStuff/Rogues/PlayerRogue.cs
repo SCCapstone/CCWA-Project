@@ -27,6 +27,7 @@ public class PlayerRogue : Rogue
 
     //Audio Source for sound effects
     private AudioSource audioSource;
+    public AudioSource characterVoice;
 
     //Heart counter
     public Text textCurrHealth;
@@ -91,8 +92,10 @@ public class PlayerRogue : Rogue
             }
         }
 
-        //Allows the user to attack
-        attack();
+        //Allows the user to attack, only if there at least two stamina jars
+        if (Input.GetKeyDown("j") && stamina >= 2) {
+            attack();
+        }
 
         //Stamina regeneration
         StartCoroutine("RegenStamina");
@@ -136,16 +139,12 @@ public class PlayerRogue : Rogue
     }
 
     //Lets the player character attack
-    public override void attack() {
-        //only allows attack if there are at least two stamina jars
-        if (Input.GetKeyDown("j") && stamina >= 2) {
-            animator.SetBool("attacking", true);
-            audioSource.Play(0);
-            attackTime = maxAttackTime;
-            StaminaDrain(2);
-
-        }
-
+    public void attack() {
+        animator.SetBool("attacking", true);
+        audioSource.Play(0);
+        attackTime = maxAttackTime;
+        StaminaDrain(2);
+        
         //Ends the attack animation after a short period of time
         if (animator.GetBool("attacking")) {
             attackTime -= Time.deltaTime;
@@ -176,6 +175,12 @@ public class PlayerRogue : Rogue
         int staminaAsInt = Convert.ToInt32(stamina);
         textCurrStamina.text = staminaAsInt.ToString();
         textMaxStamina.text = "/"+maxStamina.ToString();
+    }
+
+    //Is called by enemy scripts to play damage sfx when the player collides with a damaging object
+    public override void DamageHealth(int a) {
+        base.DamageHealth(a);
+        characterVoice.Play(0);
     }
 
     //Pauses the game
