@@ -21,6 +21,8 @@ public class RoomRenderer : MonoBehaviour
     public GameObject health;
     public GameObject key;
     public GameObject chest;
+    public GameObject bearTrap;
+    public GameObject poisonTrap;
     public GameObject enemy;
     public GameObject boss;
     public Room currentRoom = new Room();
@@ -91,10 +93,16 @@ public class RoomRenderer : MonoBehaviour
                     Instantiate(attackUp, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
                 } else if (i%2 == 0) {
                     Instantiate(defenseUp, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
-                } else {
+                    Instantiate(poisonTrap, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
+                } else if(i%3 == 0) {
                     Instantiate(chest, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
+                    Instantiate(bearTrap, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
                 }
-                Instantiate(key, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
+
+                else {
+                    Instantiate(key, new Vector3(l.locX, l.locY, -1), Quaternion.identity);
+                }
+                
             }
         }
         //Iterate to generate enemy spawns

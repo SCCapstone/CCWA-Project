@@ -162,25 +162,11 @@ public class RoomGenerator {
     // Has a unit test
     public Location[] GenerateLootSpawns(int numItems) {
         Location[] newItemLocations = new Location[numItems];
-        int tempItemCounter = 0;
-        for(int i = height-6; i>height-15; i--) {
-            if(tempItemCounter >= numItems) {
-                this.itemLocations = newItemLocations;
-                return newItemLocations;
-            }
-            for(int j=10; j<width-10; j++) {
-                if(map[i,j] == 0 && tempItemCounter < numItems) {
-                    if(Random.Range(1,100) >= 25) {
-                        newItemLocations[tempItemCounter] = new Location("", i, j);
-                        tempItemCounter++;
-                    }
-                   
-                }
-            }
+        for(int i=0; i<numItems; i++) {
+            newItemLocations[i] = new Location("", Random.Range(3,20), Random.Range(3,20));
         }
         this.itemLocations = newItemLocations;
         return newItemLocations;
-
     }
 
     // This method generates a single exit location in a room
