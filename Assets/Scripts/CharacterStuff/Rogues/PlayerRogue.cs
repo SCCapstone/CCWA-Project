@@ -27,6 +27,7 @@ public class PlayerRogue : Rogue
 
     //Audio Source for sound effects
     private AudioSource audioSource;
+    public AudioSource characterVoice;
 
     //Heart counter
     public Text textCurrHealth;
@@ -176,6 +177,12 @@ public class PlayerRogue : Rogue
         int staminaAsInt = Convert.ToInt32(stamina);
         textCurrStamina.text = staminaAsInt.ToString();
         textMaxStamina.text = "/"+maxStamina.ToString();
+    }
+
+    //Is called by enemy scripts to play damage sfx when the player collides with a damaging object
+    public override void DamageHealth(int a) {
+        base.DamageHealth(a);
+        characterVoice.Play(0);
     }
 
     //Pauses the game

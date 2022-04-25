@@ -30,6 +30,7 @@ public class PlayerMage : Mage
 
     //Audio Source for sound effects
     private AudioSource audioSource;
+    public AudioSource characterVoice;
 
     //Heart counter
     public Text textCurrHealth;
@@ -232,6 +233,12 @@ public class PlayerMage : Mage
     public void ShootBullet(Vector2 characterLoc) {
         Vector3 dir = new Vector2(animator.GetFloat("LastHorizontal"), animator.GetFloat("LastVertical"));
         Instantiate(MageProjectile,gameObject.transform.position , Quaternion.identity).GetComponent<MageProjectile>().Setup(dir, attackDmg);
+    }
+
+    //Is called by enemy scripts to play damage sfx when the player collides with a damaging object
+    public override void DamageHealth(int a) {
+        base.DamageHealth(a);
+        characterVoice.Play(0);
     }
 
     //Pauses the game
