@@ -65,3 +65,6 @@ crashlytics-build.properties
 
 #User settings file that always needs to be stashed
 /UserSettings/
+
+#Test results files
+/TestResults/*.xml

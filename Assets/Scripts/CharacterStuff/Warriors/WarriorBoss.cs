@@ -74,19 +74,20 @@ public class WarriorBoss : WarriorEnemy
             FileData fd;
             int runs = currentFile.NumRuns + 1;
             int wins = currentFile.NumWins + 1;
+            int newTotalTime = currentFile.TotalTime + Mathf.FloorToInt(Variables.clock);
             
             //if you are in speedrun mode and set a new fastest time
             if (fastest_overall != -1f && fastest_overall < currentFile.FastestTime)
             {
                 Variables.achievementTriggers[4] = true;
-                fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, fastest_overall,
+                fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, newTotalTime, fastest_overall,
                                     runs, wins, currentFile.UnlockedAchievements,
                                     false, null); //TODO get wins saved
             }
             //if player was not in speedrun mode, did not set a fastest time, or both
             else
             {
-                fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, currentFile.FastestTime,
+                fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, newTotalTime, currentFile.FastestTime,
                                     runs, wins, currentFile.UnlockedAchievements,
                                     false, null); //TODO get wins saved
             }

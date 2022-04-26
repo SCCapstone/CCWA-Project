@@ -30,6 +30,7 @@ public class PlayerMage : Mage
 
     //Audio Source for sound effects
     private AudioSource audioSource;
+    public AudioSource characterVoice;
 
     //Heart counter
     public Text textCurrHealth;
@@ -94,7 +95,7 @@ public class PlayerMage : Mage
                 juiceTimer -= Time.deltaTime;
             } else {
                 //Set back to false
-                ToggleEnhanced();
+                isEnhanced=false;
                 //Set back to base mana
                 Juiced();
                 //reset the timer
@@ -103,7 +104,9 @@ public class PlayerMage : Mage
         }
 
         //Allows the user to attack
-        attack();
+        if (Input.GetKeyDown("j")) {
+            attack();
+        }
 
         //Stamina regeneration
         StartCoroutine("RegenStamina");
@@ -156,7 +159,7 @@ public class PlayerMage : Mage
     public override void attack() {
         //only allows attack if there are at least two mana jars
 
-        if (Input.GetKeyDown("j") && mana >= 2) {
+        if (mana >= 2) {
             Vector2 characterLoc=gameObject.transform.position;
             animator.SetBool("attacking", true);
             audioSource.Play(0);
@@ -232,6 +235,12 @@ public class PlayerMage : Mage
     public void ShootBullet(Vector2 characterLoc) {
         Vector3 dir = new Vector2(animator.GetFloat("LastHorizontal"), animator.GetFloat("LastVertical"));
         Instantiate(MageProjectile,gameObject.transform.position , Quaternion.identity).GetComponent<MageProjectile>().Setup(dir, attackDmg);
+    }
+
+    //Is called by enemy scripts to play damage sfx when the player collides with a damaging object
+    public override void DamageHealth(int a) {
+        base.DamageHealth(a);
+        characterVoice.Play(0);
     }
 
     //Pauses the game

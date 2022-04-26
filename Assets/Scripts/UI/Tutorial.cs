@@ -13,7 +13,7 @@ public class Tutorial : MonoBehaviour
     private string[] texts = {
     "Charlie and Charlinda's Whacky Adventure is a top down 2d action game that focuses around Charlie's adventure into \n the fabled bird cave! Though he has been warned, he enters the dungeon in hopes of achieving glory fighting these whacky lookin beasts!",
     "You can move Charlie with the following arrow keys shown at the bottom, or the WASD keys during gameplay.",
-    "J = Attack \nU = Special Ability \nESC = Pause. \nUse the mouse in menus.",
+    "J = Attack \nU = Special Ability \nESC = Pause/Unpause. \nUse the mouse in menus.",
     "Head to brown doors in each room to navigate to the next room! There will be many traps and enemies to harm you on your way. If your health ever reaches zero... GAME OVER!",
     "This is a basic enemy. He will chase you and hurt you if he touches you.",
     "This is the first boss. He has more health and will be harder to defeat. If you can manage it, you'll be able to move to the next floor!",

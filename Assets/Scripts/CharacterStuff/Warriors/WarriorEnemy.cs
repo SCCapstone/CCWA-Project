@@ -23,10 +23,10 @@ public class WarriorEnemy : Warrior
     public void OnCollisionEnter2D(Collision2D collidedWith) {
         var collision = collidedWith.collider;
         string name = collision.name;
-        
         switch(name) {
             case "Rogue(Clone)":
                 var rogue = collision.GetComponent<PlayerRogue>();
+               
                 //calculating the damage done to player
                 int rDamage = attackDmg - rogue.defense;
                 //Damages the player's health via the enemy's attackDmg value
@@ -44,6 +44,7 @@ public class WarriorEnemy : Warrior
 
             case "Warrior(Clone)":
                 var warrior = collision.GetComponent<PlayerWarrior>();
+                
                 //calculating the damage done to player
                 int wDamage = attackDmg - warrior.defense;
                 
@@ -62,6 +63,7 @@ public class WarriorEnemy : Warrior
 
             case "Mage(Clone)":
                 var mage = collision.GetComponent<PlayerMage>();
+                
                 //calculating the damage done to player
                 int mDamage = attackDmg - mage.defense;
                 
@@ -78,6 +80,10 @@ public class WarriorEnemy : Warrior
                 }
             break;
             }
+        }
+
+        public override void DamageHealth(int a) {
+            health -=a;
         }
 }
 

@@ -27,6 +27,7 @@ public class PlayerRogue : Rogue
 
     //Audio Source for sound effects
     private AudioSource audioSource;
+    public AudioSource characterVoice;
 
     //Heart counter
     public Text textCurrHealth;
@@ -83,7 +84,7 @@ public class PlayerRogue : Rogue
                 shadowTimer -= Time.deltaTime;
             } else {
                 //Set back to false
-                ToggleEnhanced();
+                isEnhanced=false;
                 //Re-enable enemy pathfinding
                 shadowMode();
                 //reset the timer
@@ -91,8 +92,18 @@ public class PlayerRogue : Rogue
             }
         }
 
-        //Allows the user to attack
-        attack();
+        //Allows the user to attack, only if there at least two stamina jars
+        if (Input.GetKeyDown("j") && stamina >= 2) {
+            attack();
+        }
+
+        //Ends the attack animation after a short period of time
+        if (animator.GetBool("attacking")) {
+            attackTime -= Time.deltaTime;
+            if (attackTime <= 0) {
+                animator.SetBool("attacking", false);
+            }
+        } 
 
         //Stamina regeneration
         StartCoroutine("RegenStamina");
@@ -136,23 +147,11 @@ public class PlayerRogue : Rogue
     }
 
     //Lets the player character attack
-    public override void attack() {
-        //only allows attack if there are at least two stamina jars
-        if (Input.GetKeyDown("j") && stamina >= 2) {
-            animator.SetBool("attacking", true);
-            audioSource.Play(0);
-            attackTime = maxAttackTime;
-            StaminaDrain(2);
-
-        }
-
-        //Ends the attack animation after a short period of time
-        if (animator.GetBool("attacking")) {
-            attackTime -= Time.deltaTime;
-            if (attackTime <= 0) {
-                animator.SetBool("attacking", false);
-            }
-        } 
+    public void attack() {
+        animator.SetBool("attacking", true);
+        audioSource.Play(0);
+        attackTime = maxAttackTime;
+        StaminaDrain(2);
     }
 
     //Loads the visual element of the health
@@ -176,6 +175,12 @@ public class PlayerRogue : Rogue
         int staminaAsInt = Convert.ToInt32(stamina);
         textCurrStamina.text = staminaAsInt.ToString();
         textMaxStamina.text = "/"+maxStamina.ToString();
+    }
+
+    //Is called by enemy scripts to play damage sfx when the player collides with a damaging object
+    public override void DamageHealth(int a) {
+        base.DamageHealth(a);
+        characterVoice.Play(0);
     }
 
     //Pauses the game

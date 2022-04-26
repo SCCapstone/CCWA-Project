@@ -20,6 +20,8 @@ public class Character : MonoBehaviour
     public List<bool> statuses;
     public Color spriteColor;
     public SpriteRenderer sRenderer;
+    public bool enhancedReady =true;
+    bool damageCoroutineRunning = false;
 
     //added by Nick
     public int keyAmt = 0;
@@ -103,18 +105,20 @@ public class Character : MonoBehaviour
 
     //Damages the health of the character by a amount of points
     public virtual void DamageHealth (int a) {
-        health -= a;
+        if(!damageCoroutineRunning) {
+            health -= a;
+        }
         StartCoroutine(damageCoroutine());
     }
     
     //Invulnerability after being hit
     public IEnumerator damageCoroutine(){
-        gameObject.GetComponent<Collider2D>().enabled = false;
+        damageCoroutineRunning = true;
         spriteColor = Color.black;
         sRenderer.material.color = spriteColor;
 
         yield return new WaitForSeconds(1.5f);
-        gameObject.GetComponent<Collider2D>().enabled = true;
+        damageCoroutineRunning = false;
         spriteColor = Color.white;
         sRenderer.material.color = spriteColor;
     }
@@ -148,9 +152,19 @@ public class Character : MonoBehaviour
 
     //Toggles the character's special state if they have one
     public void ToggleEnhanced() {
-        isEnhanced = !isEnhanced;
+        //isEnhanced = !isEnhanced;
+        if (enhancedReady && !isEnhanced){
+            isEnhanced =  true;
+            StartCoroutine(enhancedCooldown());
+        }
     }
-
+    
+    public IEnumerator enhancedCooldown(){
+        enhancedReady = false;
+        yield return new WaitForSeconds(13);
+        enhancedReady = true;
+    }
+    
     //changes the color of a sprite for status effects
     public virtual void ColorChange() {
 
@@ -182,7 +196,8 @@ public class Character : MonoBehaviour
                 //Save file on new floor
                 FileData currentFile = fm.GetFileData(Constants.VALID_FILE_NUMS[fm.CurrFile]);
                 int runs = currentFile.NumRuns+1;
-                FileData fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, currentFile.TotalTime, currentFile.FastestTime,
+                int newTotalTime = currentFile.TotalTime + Mathf.FloorToInt(Variables.clock);
+                FileData fd = new FileData(Constants.VALID_FILE_NUMS[fm.CurrFile], currentFile.DateCreated, newTotalTime, currentFile.FastestTime,
                                                 runs, currentFile.NumWins, currentFile.UnlockedAchievements,
                                                 false, null); //TODO get wins saved
                 fm.SaveFile(Constants.VALID_FILE_NUMS[fm.CurrFile], fd);

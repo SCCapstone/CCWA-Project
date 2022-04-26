@@ -11,8 +11,10 @@ public class HealthKit : MonoBehaviour
 
         if (collided.CompareTag("Player"))
         {
-            collided.GetComponent<Character>().HealHealth(100);
-            Destroy(this.gameObject);
+            if (collided.GetComponent<Character>().health < collided.GetComponent<Character>().maxHealth) {
+                collided.GetComponent<Character>().HealHealth(100);
+                Destroy(this.gameObject);
+            }
         }
     }
 
